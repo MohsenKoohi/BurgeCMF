@@ -1,0 +1,30 @@
+input.req 
+{
+	background-image:url(../images/ast-16px.png);	
+}
+
+.sc-details .parts div.short-term 
+{
+	border: 2px solid #090;
+}
+
+.sc-details .parts div.long-term
+{
+	border:2px solid #ba0;
+}
+
+.images-part .home_image_cbox
+{
+	width:17%;
+	margin:1%;
+}
+
+div#general.tab table tr td
+{
+	width: 45%;
+}
+
+div#general.tab div.short-term
+{
+	max-width:417px;
+}

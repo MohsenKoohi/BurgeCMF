@@ -1,0 +1,16 @@
+Note that $CI is your CI instance which can be grabbed by &get_instance() , or if you are in your controller just use $this instead of $CI
+
+
+-- Logging
+$CI->logger->emergency/alert/critical/error/warning/notic/info/debug($message, $context=array());
+
+
+-- Language
+$CI->language->get(); 							// returns the selected language
+$CI->language->get_default_language();
+$CI->language->get_languages();
+
+
+-- Controller
+-Each controller should extend Burge_CMF_Controller not CI_Controller
+$CI->user returns the User object related to the admin user logged and has access to current page
