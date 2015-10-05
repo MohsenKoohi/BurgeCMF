@@ -343,7 +343,7 @@ function verify_captcha($val)
 {
 	$CI=&get_instance();
 	$captcha=$CI->session->flashdata("captcha");
-	if(!$captcha || ($captcha !== $val))
+	if(!$captcha || (strtolower($captcha) !== strtolower($val)))
 		return FALSE;
 
 	return TRUE;
