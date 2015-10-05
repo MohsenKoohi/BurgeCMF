@@ -83,6 +83,7 @@ class Burge_CMF_Controller extends CI_Controller{
 					break;
 				}
 			}
+			
 		return $ret;
 	}
 

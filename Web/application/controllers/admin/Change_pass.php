@@ -24,7 +24,7 @@ class Change_pass extends Burge_CMF_Controller {
 					$new_pass=$this->input->post("new_pass");
 
 					$this->load->model("user_manager_model");
-					if($this->user_manager_model->change_user_pass($prev_pass,$new_pass))
+					if($this->user_manager_model->change_logged_user_pass($prev_pass,$new_pass))
 					{
 						$message=$this->lang->line("success_password_change");
 					}

@@ -48,7 +48,8 @@ if(ENVIRONMENT==='development')
 $route[ADMIN_URL_FOLDER]						=ADMIN_CONTROLLER_FOLDER."/dashboard";
 $route[ADMIN_URL_FOLDER."/dashboard"]		=ADMIN_CONTROLLER_FOLDER."/dashboard";
 $route[ADMIN_URL_FOLDER."/login"]			=ADMIN_CONTROLLER_FOLDER."/login";
-$route[ADMIN_URL_FOLDER."/change_pass"]			=ADMIN_CONTROLLER_FOLDER."/change_pass";
+$route[ADMIN_URL_FOLDER."/change_pass"]	=ADMIN_CONTROLLER_FOLDER."/change_pass";
+$route[ADMIN_URL_FOLDER."/user"]				=ADMIN_CONTROLLER_FOLDER."/users";
 
 
 $route[urlencode('ثبت')]="register";

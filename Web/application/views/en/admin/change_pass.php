@@ -16,7 +16,7 @@
 					<input class="ltr full-width" type="password" name="repeat_pass"/>
 				</div>
 			
-				<div class="12 columns">				
+				<div class="col12 columns">				
 					<input class="full-width button-primary" type="submit"  value="{change_text}" />
 				</div>
 			</form>

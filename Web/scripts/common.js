@@ -22,8 +22,20 @@ $(function()
   setupMovingHeader();
   $(window).on('resize',setupMovingHeader);
 
+  changeGraphicalCheckBoxes();
+
 });
 
+function changeGraphicalCheckBoxes()
+{
+  if(!($.browser.msie && (parseInt($.browser.version) < 10)))
+    $("input[type=checkbox].graphical").each(function(index,el)
+    {
+      var html=$(el).clone().wrapAll('<div>').parent().html();
+      var html='<div class="checkbox-holder">'+html+'<label><i></i></label></div>';
+      $(el).replaceWith(html);
+    });
+}
     
 function setupMovingHeader()
 {
@@ -61,6 +73,7 @@ function setupMovingHeader()
   jWin.unbind("scroll");
  
   $(".main").css("min-height",winHeight);
+  $(".main").outerHeight("auto");
   $(".side-menu").css("min-height","auto");
   $(".side-menu").outerHeight("auto");
 
@@ -94,9 +107,6 @@ function setupMovingHeader()
       $(".main").outerHeight(Math.max(sm_h,m_h));
     },5);
   }
-    
-  
-
 
   jWin.trigger("scroll");
 

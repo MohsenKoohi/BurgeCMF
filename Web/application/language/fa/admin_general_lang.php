@@ -1,3 +1,5 @@
 <?php 
 
-$lang['']="";
+$lang['submit']="ثبت";
+$lang['email']="پست الکترونیک";
+$lang['delete']="حذف";

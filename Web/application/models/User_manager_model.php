@@ -29,6 +29,16 @@ class User_Manager_model extends CI_Model
 		return $this->user_info;
 	}
 
+	public function get_all_users_info()
+	{
+		$this->db->select(array("user_id","user_email"));
+		$this->db->from("user");
+		$this->db->order_by("user_id","DESC");
+		$results=$this->db->get();
+
+		return $results->result_array();
+	}
+
 	public function add_if_not_exist($email,$pass)
 	{
 		$result=$this->db->get_where("user",array("user_email"=>$email));
@@ -49,38 +59,51 @@ class User_Manager_model extends CI_Model
 		return FALSE;
 	}
 
-	public function change_user_pass($prev_pass,$new_pass)
+	public function delete_user($user_id,$user_email)
+	{
+		$this->db->where(array("user_id"=>$user_id,"user_email"=>$user_email));
+		$this->db->delete("user");
+		$this->logger->info("[delete_user] [email:".$user_email."] [done] [result:1]");
+		return FALSE;
+	}
+
+	public function change_logged_user_pass($prev_pass,$new_pass)
 	{	
 		$email=$this->get_logged_user_email();
 
 		$result=$this->db->get_where("user",array("user_email"=>$email));
 		if($result->num_rows() != 1)
 		{
-			$this->logger->info("[change_user_pass] [email:".$email."] [incorrect_email] [result:0]");
+			$this->logger->info("[change_logged_user_pass] [email:".$email."] [incorrect_email] [result:0]");
 			return FALSE;
 		}
 
 		$row=$result->row();				
 		if($row->user_pass !== $this->getPass($prev_pass, $row->user_salt))
 		{
-			$this->logger->info("[change_user_pass] [email:".$email."] [incorrect_pass] [result:0]");
+			$this->logger->info("[change_logged_user_pass] [email:".$email."] [incorrect_pass] [result:0]");
 			return FALSE;
 		}
 
+		return $this->change_user_pass($email,$new_pass);
+	}
+
+	public function change_user_pass($user_email,$new_pass)
+	{
 		$salt=random_string("alnum",32);
 		$this->db->set("user_pass", $this->getPass($new_pass,$salt));
 		$this->db->set("user_salt", $salt);
-		$this->db->where("user_email",$email);
+		$this->db->where("user_email",$user_email);
 		$this->db->limit(1);
 		$this->db->update('user');
 
 		if(!$this->db->affected_rows())
 		{
-			$this->logger->info("[change_user_pass] [email:".$email."] [incorrect_email] [result:0]");
+			$this->logger->info("[change_user_pass] [email:".$user_email."] [incorrect_email] [result:0]");
 			return FALSE;
 		}
 
-		$this->logger->info("[change_user_pass] [email:".$email."] [done] [result:1]");
+		$this->logger->info("[change_user_pass] [email:".$user_email."] [done] [result:1]");
 		return TRUE;		
 	}
 
