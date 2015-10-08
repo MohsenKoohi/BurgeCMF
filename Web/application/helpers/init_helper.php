@@ -22,6 +22,7 @@ function &get_links()
 		,'admin_change_pass'		=> ADMIN_SURL_LANG."/change_pass"
 		,'admin_access'			=> ADMIN_SURL_LANG."/access"
 		,'admin_user'				=> ADMIN_SURL_LANG."/user"
+		,'admin_module'			=> ADMIN_SURL_LANG."/module"
 
 	);
 	

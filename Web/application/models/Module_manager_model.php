@@ -8,7 +8,19 @@ class Module_Manager_model extends CI_Model
 		return;
 	}
 
-	//this method adds a module to 
+	public function get_all_modules_info($lang)
+	{
+		$this->db->select("module.module_id, module_name");
+		$this->db->from("module_name");
+		$this->db->join("module","module.module_id = module_name.module_id","left");
+		$this->db->where("module_name.lang",$lang);
+		$this->db->order_by("module.sort_order","ASC");
+		$results=$this->db->get();
+
+		return $results->result_array();
+	}
+
+	//this method adds a module to the framework
 	public function add_module($module)
 	{
 		$result=$this->db->get_where("module",array("module_id"=>$module));
@@ -24,6 +36,7 @@ class Module_Manager_model extends CI_Model
 		return $result;
 	}
 
+	//adds the name of a module in a language
 	public function add_module_name($module_id,$lang,$name)
 	{
 		$sql=$this->db->insert_string("module_name",array("module_id"=>$module_id,"lang"=>$lang,"module_name"=>$name));
