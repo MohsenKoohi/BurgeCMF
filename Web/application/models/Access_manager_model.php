@@ -25,7 +25,7 @@ class Access_Manager_model extends CI_Model
 
 		$this->db->insert_batch("access",$batch);
 
-		$this->logger->info("[add_access] [user_id:".$user_id."] [modules:".implode(",", $modules)."] [result:1]");
+		$this->logger->info("[add_user_access] [user_id:".$user_id."] [modules:".implode(",", $modules)."] [result:1]");
 
 		return TRUE;
 	}
@@ -34,7 +34,37 @@ class Access_Manager_model extends CI_Model
 	{
 		$this->db->delete("access",array("user_id"=>$user_id));
 
-		$this->logger->info("[delete_access] [user_id:".$user_id."] [modules:all] [result:1]");
+		$this->logger->info("[delete_user_access] [user_id:".$user_id."] [modules:all] [result:1]");
+
+		return;
+	}
+
+	public function set_allowed_users_for_module($module_id,$users)
+	{
+		$this->unset_module_access($module_id);
+
+		if(!$users || !sizeof($users))
+			return;
+
+		$batch=array();
+		foreach ($users as $user_id)
+			$batch[]=array(
+				"user_id"=>$user_id
+				,"module_id"=>$module_id
+				);
+
+		$this->db->insert_batch("access",$batch);
+
+		$this->logger->info("[add_module_access] [module_id:".$module_id."] [users:".implode(",", $users)."] [result:1]");
+
+		return TRUE;
+	}
+
+	public function unset_module_access($module_id)
+	{
+		$this->db->delete("access",array("module_id"=>$module_id));
+
+		$this->logger->info("[delete_module_access] [module_id:".$module_id."] [users:all] [result:1]");
 
 		return;
 	}
