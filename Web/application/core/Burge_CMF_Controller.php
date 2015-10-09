@@ -56,7 +56,7 @@ class Burge_CMF_Controller extends CI_Controller{
 
 		//loading side menu items
 		$this->load->model("module_manager_model");
-		$this->data['side_menu_modules']=$this->module_manager_model->get_user_modules_names($this->user);
+		$this->data['side_menu_modules']=$this->module_manager_model->get_user_modules_names($this->user->get_id());
 		
 	
 		$this->load->library('parser');

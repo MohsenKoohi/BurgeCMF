@@ -9,23 +9,34 @@ class Access_Manager_model extends CI_Model
 	}
 
 	//this method adds access to an array of modules for a user
-	public function set_allowed_modules_for_user($modules,&$user)
+	public function set_allowed_modules_for_user($user_id,$modules)
 	{
+		$this->unset_user_access($user_id);
 
-		$this->db->delete("access",array("user_id",$user->get_id()));
+		if(!$modules || !sizeof($modules))
+			return;
 
 		$batch=array();
 		foreach ($modules as $module)
 			$batch[]=array(
-				"user_id"=>$user->get_id()
+				"user_id"=>$user_id
 				,"module_id"=>$module
 				);
 
 		$this->db->insert_batch("access",$batch);
 
-		$this->logger->info("[add_access] [user_email:".$user->get_email()."] [modules:".implode(",", $modules)."] [result:1]");
+		$this->logger->info("[add_access] [user_id:".$user_id."] [modules:".implode(",", $modules)."] [result:1]");
 
 		return TRUE;
+	}
+
+	public function unset_user_access($user_id)
+	{
+		$this->db->delete("access",array("user_id"=>$user_id));
+
+		$this->logger->info("[delete_access] [user_id:".$user_id."] [modules:all] [result:1]");
+
+		return;
 	}
 
 	//checks if a user has access to a module
@@ -60,13 +71,13 @@ class Access_Manager_model extends CI_Model
 	}
 
 	//returns an array of all modules a user has access to
-	public function get_user_modules(&$user)
+	public function get_user_modules($user_id)
 	{
 		$ret=array();
-		if(!$user)
+		if(!$user_id)
 			return $ret;
 
-		$result=$this->db->get_where("access",array("user_id"=>$user->get_id()));
+		$result=$this->db->get_where("access",array("user_id"=>$user_id));
 		foreach($result->result_array() as $row)
 			$ret[]=$row["module_id"];
 

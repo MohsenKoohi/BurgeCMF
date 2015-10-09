@@ -63,8 +63,12 @@ class User_Manager_model extends CI_Model
 	{
 		$this->db->where(array("user_id"=>$user_id,"user_email"=>$user_email));
 		$this->db->delete("user");
+
+		$this->load->model("access_manager_model");
+		$this->access_manager_model->unset_user_access($user_id);
+
 		$this->logger->info("[delete_user] [email:".$user_email."] [done] [result:1]");
-		return FALSE;
+		return;
 	}
 
 	public function change_logged_user_pass($prev_pass,$new_pass)

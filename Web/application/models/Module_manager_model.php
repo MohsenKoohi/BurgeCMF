@@ -48,10 +48,10 @@ class Module_Manager_model extends CI_Model
 	}
 
 	//returns an array of modules a user has access to, and their links
-	public function get_user_modules_names(&$user,$lang="")
+	public function get_user_modules_names($user_id,$lang="")
 	{
 		$ret=array();
-		if(!$user)
+		if(!$user_id)
 			return $ret;
 
 		if(!$lang)
@@ -61,7 +61,7 @@ class Module_Manager_model extends CI_Model
 		}
 	
 		$this->load->model("access_manager_model");
-		$modules=$this->access_manager_model->get_user_modules($user);
+		$modules=$this->access_manager_model->get_user_modules($user_id);
 
 		$this->db->select("*");
 		$this->db->from("module_name");
