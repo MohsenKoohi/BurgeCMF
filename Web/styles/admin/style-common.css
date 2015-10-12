@@ -605,7 +605,7 @@ body.rtl .even-odd-bg > div
   height: 100%;
   position: relative;
   display: block;
-  top:5px;
+  //top:5px;
 }
 
 .checkbox-holder input {
