@@ -19,19 +19,3 @@ your_address/admin/install
 
 6) Enjoy using your app;
 
-
-//////////////////////////
-Resources we have used:
-CI
-KLogger
-Skeleton
-
-
-
-/////////////////
-Properties:
-- Multi-language 
-- Needs minimum changes to be customized for your customer
-- Tracking all activites of the user 
-- Differentiate direction (rtl, ltr) from language in GUI
-- Responsive GUI
