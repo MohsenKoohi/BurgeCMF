@@ -1,14 +1,21 @@
 <div class="main">
 	<style type="text/css">
-		label.url
+		body.ltr label.url
 		{
-			margin:0 20px;
+			margin-right:20px;
+		}
+
+		body.rtl label.url
+		{
+			margin-left: 20px;
 		}
 
 		.row.even-odd-bg span
 		{
-			font-size: .9em;
+			font-size: .8em;
+			color:#555;
 		}
+
 	</style>
 	<div class="container">
 		<h1>{visiting_counter_text}</h1>
@@ -19,7 +26,7 @@
 					<div class="one column">
 						<label><?php echo $i++;?></label>
 					</div>
-					<div class="two columns">
+					<div class="five columns">
 						<span>{url_text}</span>
 						<label class="ltr eng url"><?php echo $counter['url'];?></label>
 					</div>
