@@ -13,9 +13,9 @@ class Setup extends CI_Controller {
 	public function install()
 	{	
 		$user_pass="badmin";
-		$initial_modules=array("dashboard","module","user","access","change_pass");
-		$module_names_fa=array("داشبورد","ماژول‌ها","کاربران","سطح دسترسی","تغییر رمز");
-		$module_names_en=array("Dashboard","Modules","Users","Access Levels","Chage Password");
+		$initial_modules=array("dashboard","module","user","access","hit_counter","change_pass");
+		$module_names_fa=array("داشبورد","ماژول‌ها","کاربران","سطح دسترسی","تعداد مشاهده","تغییر رمز");
+		$module_names_en=array("Dashboard","Modules","Users","Access Levels","Visiting Counter","Chage Password");
 
 		$this->logger->info("[admin/setup/install]");
 
@@ -82,6 +82,18 @@ class Setup extends CI_Controller {
 
 		$this->load->model("access_manager_model");
 		$this->access_manager_model->set_allowed_modules_for_user($user->get_id(),$initial_modules);
+
+		$hit_counter_table=$this->db->dbprefix('hit_counter'); 
+		$this->db->query(
+			"CREATE TABLE IF NOT EXISTS $hit_counter_table (
+				`ht_url` varchar(1000) NOT NULL,
+				`ht_url_md5` char(16) NOT NULL,
+				`ht_year` char(4) NOT NULL,
+				`ht_month` char(2) NOT NULL,
+				`ht_count` bigint DEFAULT 1,
+				PRIMARY KEY (ht_url_md5, ht_year, ht_month)	
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8"
+		);
 
 		echo "Username: $user_pass<br>Pass: $user_pass<br>";
 

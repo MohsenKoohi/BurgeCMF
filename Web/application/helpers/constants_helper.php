@@ -18,7 +18,11 @@ define("ADMIN_URL_FOLDER","admin");
 define("ADMIN_CONTROLLER_FOLDER","admin");
 
 //define("CALENDAR_TYPE","GEORGIAN");
+//define("DATE_FUNCTION","date");
+
 define("CALENDAR_TYPE","JALALI");
+define("DATE_FUNCTION","jdate");
+
 
 //session expiration for admin users in seconds
 define("USER_SESSION_EXPIRATION",30*60);

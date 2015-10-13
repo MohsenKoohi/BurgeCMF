@@ -10,6 +10,7 @@ class Burge_CMF_Controller extends CI_Controller{
 	protected $all_langs;
 
 	protected $data;
+	protected $in_admin_env=FALSE;
 
 	public function __construct()
 	{
@@ -35,17 +36,33 @@ class Burge_CMF_Controller extends CI_Controller{
 
 			//Now we are sure the user has been logged
 			//Do every general work here
-			$this->selected_lang=Language::get();
-			$this->default_lang=Language::get_default_language();
-			$this->all_langs=Language::get_languages();
+			
+			$this->in_admin_env=TRUE;
+		}
 
+		$this->selected_lang=Language::get();
+		$this->default_lang=Language::get_default_language();
+		$this->all_langs=Language::get_languages();
+
+
+		if($this->in_admin_env)
+		{
+			//setting initial common data for the admin env
 			$this->lang->load('admin_general',$this->selected_lang);	
 
 			$this->data=get_initialized_data();	
-
 			$this->data['user_logged_in']=TRUE;
 		}
+		else
+		{
+			//since we are in customer env, we should count this hit
 
+			$this->load->model("hit_counter_model");
+			$this->hit_counter_model->count($parts);
+
+		}
+		
+		return;
 	}
 
 	protected function send_admin_output($view_file)
