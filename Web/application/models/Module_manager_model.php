@@ -21,14 +21,21 @@ class Module_Manager_model extends CI_Model
 	}
 
 	//this method adds a module to the framework
-	public function add_module($module)
+	public function add_module($module,$model_name,$sort_order)
 	{
 		$result=$this->db->get_where("module",array("module_id"=>$module));
 		if($result->num_rows())
 			$result=FALSE;
 		else
 		{
-			$this->db->insert("module",array("module_id"=>$module));
+			$this->db->insert(
+				"module",
+				array(
+					"module_id"		=>$module
+					,"model_name"	=>$model_name
+					,"sort_order"	=>$sort_order	
+				)
+			);
 			$result=TRUE;
 		}
 		$this->logger->info("[add_module] [module_id:$module] [result:$result]");
@@ -73,12 +80,28 @@ class Module_Manager_model extends CI_Model
 
 		foreach ($results->result_array() as $row)
 			$ret[]=array(
-				"name"=>$row['module_name']
+				"id"=>$row['module_id']
+				,"model"=>$row['model_name']
+				,"name"=>$row['module_name']
 				,"link"=>get_link("admin_".$row['module_id'])
 			);
 
 		return $ret;
 	}
 
-
+	public function get_dashbord_info()
+	{
+		$CI=& get_instance();
+		$lang=$CI->language->get();
+		$CI->lang->load('admin_module',$lang);		
+		
+		$data=array();
+		$data['modules']=$this->get_all_modules_info($lang);
+		$data['total_text']=$CI->lang->line("total");
+		
+		$CI->load->library('parser');
+		$ret=$CI->parser->parse($CI->get_admin_view_file("module_dashboard"),$data,TRUE);
+		
+		return $ret;		
+	}
 }

@@ -19,8 +19,6 @@
 	</style>
 	<div class="container">
 		<h1>{visiting_counter_text}</h1>
-
-		<div class="container">
 			<?php $i=1;foreach($counters_info as $counter) {?>
 				<div class="row even-odd-bg" >
 					<div class="one column">
@@ -44,7 +42,5 @@
 					</div>
 				</div>
 			<?php } ?>
-		</div>
-
 	</div>
 </div>

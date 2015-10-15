@@ -1,5 +1,5 @@
 <?php
-class Hit_counter_model extends CI_Model
+class Hit_Counter_model extends CI_Model
 {
 	private $home_del="#home";
 	private $hit_counter_table_name="hit_counter";
@@ -69,5 +69,28 @@ class Hit_counter_model extends CI_Model
 		
 		return $result->result_array();
 	}
+
+	public function get_dashbord_info()
+	{
+		$CI=& get_instance();
+		$lang=$CI->language->get();
+		$CI->lang->load('admin_hit_counter',$lang);		
+		
+		$data=array();
+		$data['month_text']=$CI->lang->line("monthly_visit");
+		$data['year_text']=$CI->lang->line("yearly_visit");
+		$data['total_text']=$CI->lang->line("total_visit");
+
+		$counts=$this->get_all_counts();
+		$data['total_count']=$counts[0]['total_count'];
+		$data['year_count']=$counts[0]['year_count'];
+		$data['month_count']=$counts[0]['month_count'];
+		
+		$CI->load->library('parser');
+		$ret=$CI->parser->parse($CI->get_admin_view_file("hit_counter_dashboard"),$data,TRUE);
+		
+		return $ret;		
+	}
+
 
 }

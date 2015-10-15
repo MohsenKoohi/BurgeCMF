@@ -739,3 +739,39 @@ body.rtl .checkbox-holder input:checked ~ label i:before
 	margin-top: 20px;
 	border-radius: 5px;
 }
+.dash-ul
+{
+	list-style-type:none;
+}
+
+.dash-ul li:before
+{
+	content: '—';
+	font-size: .7em;
+}
+
+body.rtl .dash-ul li:before
+{
+	margin-left:10px;
+}
+
+body.ltr .dash-ul li:before
+{
+	margin-right:10px;
+}
+
+.container.dashboard h4
+{
+	margin-bottom:10px;
+}
+
+.hov-col-changed
+{
+	color:#C63672;
+	transition: color, .6s;
+}
+.hov-col-changed:hover
+{
+	color:#0C7B77;
+	transition: color, .6s;
+}

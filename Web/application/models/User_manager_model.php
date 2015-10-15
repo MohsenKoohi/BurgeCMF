@@ -222,4 +222,20 @@ class User_Manager_model extends CI_Model
 	{
 		return md5(md5($pass).$salt);
 	}
+
+	public function get_dashbord_info()
+	{
+		$CI=& get_instance();
+		$lang=$CI->language->get();
+		$CI->lang->load('admin_user',$lang);		
+		
+		$data=array();
+		$data['users']=$this->get_all_users_info();
+		$data['total_text']=$CI->lang->line("total");
+		
+		$CI->load->library('parser');
+		$ret=$CI->parser->parse($CI->get_admin_view_file("user_dashboard"),$data,TRUE);
+		
+		return $ret;		
+	}
 }

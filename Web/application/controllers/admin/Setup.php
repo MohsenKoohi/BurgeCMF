@@ -14,7 +14,8 @@ class Setup extends CI_Controller {
 	{	
 		$user_pass="badmin";
 		$initial_modules=array("dashboard","module","user","access","hit_counter","change_pass");
-		$module_names_fa=array("داشبورد","ماژول‌ها","کاربران","سطح دسترسی","تعداد مشاهده","تغییر رمز");
+		$module_models=array("","module_manager","user_manager","access_manager","hit_counter","");
+		$module_names_fa=array("داشبورد","ماژول‌ها","کاربران","سطح دسترسی","تعداد بازدید","تغییر رمز");
 		$module_names_en=array("Dashboard","Modules","Users","Access Levels","Visiting Counter","Chage Password");
 
 		$this->logger->info("[admin/setup/install]");
@@ -48,12 +49,14 @@ class Setup extends CI_Controller {
 			"CREATE TABLE IF NOT EXISTS $module_table (
 				`module_id` char(50) NOT NULL
 				,`sort_order` int(20) DEFAULT 0
+				,`model_name` char(100)
 				,PRIMARY KEY (module_id)	
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8"
 		);
 		$this->load->model("module_manager_model");
+		$i=0;
 		foreach ($initial_modules as $module) 
-			$this->module_manager_model->add_module($module);
+			$this->module_manager_model->add_module($module,$module_models[$i],$i++);
 
 		$module_name_table=$this->db->dbprefix('module_name'); 
 		$this->db->query(
@@ -116,6 +119,9 @@ class Setup extends CI_Controller {
 		$this->db->query("DROP TABLE IF EXISTS $table_name");
 
 		$table_name=$this->db->dbprefix('access'); 
+		$this->db->query("DROP TABLE IF EXISTS $table_name");
+
+		$table_name=$this->db->dbprefix('hit_counter'); 
 		$this->db->query("DROP TABLE IF EXISTS $table_name");
 
 		echo "Done";

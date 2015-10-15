@@ -9,6 +9,38 @@ class Dashboard extends Burge_CMF_Controller {
 
 	public function index()
 	{	
+
+		$this->load->model("user_manager_model");
+		$this->load->model("module_manager_model");
+		$user_info=& $this->user_manager_model->get_user_info();
+
+		$this->data['modules']=array();
+
+		$modules=$this->module_manager_model->get_user_modules_names($user_info->get_id());
+		foreach ($modules as $module)
+		{
+			$name=$module['name'];
+			$link=$module['link'];
+			$id=$module['id'];
+			$model_name=$module['model'];
+			if(!$model_name)
+				continue;
+			$this->load->model($model_name."_model");
+			$model=$this->{$model_name."_model"};
+
+			if(!method_exists($model, "get_dashbord_info"))
+				continue;
+
+			$text=$model->{"get_dashbord_info"}();
+
+			$this->data['modules'][]=array(
+				"id"		=>$id
+				,"name"	=>$name
+				,"link"	=>$link
+				,"text"	=>$text
+			);
+		}
+
 		$this->lang->load('admin_dashboard',$this->selected_lang);		
 		
 		$this->data['lang_pages']=get_lang_pages(get_link("admin_dashboard",TRUE));
