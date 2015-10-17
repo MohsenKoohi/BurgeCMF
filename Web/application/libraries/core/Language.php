@@ -1,5 +1,9 @@
 <?php
 
+//It's true that Language class is a Manager,
+//but since we want to call it before every initialization,
+//it can't be depend on CI_Model.
+//Thus we don't put it on models folder as a manager./core ;)
 class Language
 {
 	static public $languages=NULL;

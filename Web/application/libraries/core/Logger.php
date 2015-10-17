@@ -1,5 +1,9 @@
 <?php
 
+//This file is almost KLogger and its dependency classes
+//With log manager model which we combined in KLogger's constructor
+//May be we should separate KLogger and Log manager
+
 class LogLevel
 {
     const EMERGENCY = 'emergency';
