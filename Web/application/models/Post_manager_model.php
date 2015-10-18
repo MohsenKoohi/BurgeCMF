@@ -5,7 +5,6 @@ class Post_manager_model extends CI_Model
 	{
 		parent::__construct();
 
-		
 		return;
 	}
 
