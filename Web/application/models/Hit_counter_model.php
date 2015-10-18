@@ -1,5 +1,5 @@
 <?php
-class Hit_Counter_model extends CI_Model
+class Hit_counter_model extends CI_Model
 {
 	private $home_del="#home";
 	private $hit_counter_table_name="hit_counter";

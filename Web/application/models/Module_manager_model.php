@@ -1,5 +1,5 @@
 <?php
-class Module_Manager_model extends CI_Model
+class Module_manager_model extends CI_Model
 {
 	public function __construct()
 	{

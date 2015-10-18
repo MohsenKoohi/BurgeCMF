@@ -13,10 +13,10 @@ class Setup extends CI_Controller {
 	public function install()
 	{	
 		$user_pass="badmin";
-		$initial_modules=array("dashboard","module","user","access","hit_counter","change_pass");
-		$module_models=array("","module_manager","user_manager","access_manager","hit_counter","");
-		$module_names_fa=array("داشبورد","ماژول‌ها","کاربران","سطح دسترسی","تعداد بازدید","تغییر رمز");
-		$module_names_en=array("Dashboard","Modules","Users","Access Levels","Visiting Counter","Chage Password");
+		$initial_modules=array("dashboard","post","module","user","access","hit_counter","change_pass");
+		$module_models=array("","post_manager","module_manager","user_manager","access_manager","hit_counter","");
+		$module_names_fa=array("داشبورد","پست‌ها","ماژول‌ها","کاربران","سطح دسترسی","تعداد بازدید","تغییر رمز");
+		$module_names_en=array("Dashboard","Posts","Modules","Users","Access Levels","Visiting Counter","Chage Password");
 
 		$this->logger->info("[admin/setup/install]");
 
@@ -43,6 +43,9 @@ class Setup extends CI_Controller {
 		$this->load->model("user_manager_model");
 		$this->user_manager_model->add_if_not_exist($user_pass,$user_pass);
 		$user=new User($user_pass);
+
+		echo "Username: $user_pass<br>Pass: $user_pass<br>";
+		echo "<h2>Login <a href='".get_link("admin_login")."'>here</a>.</h2>";
 
 		$module_table=$this->db->dbprefix('module'); 
 		$this->db->query(
@@ -98,9 +101,18 @@ class Setup extends CI_Controller {
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8"
 		);
 
-		echo "Username: $user_pass<br>Pass: $user_pass<br>";
+		$post_table=$this->db->dbprefix('post'); 
+		$this->db->query(
+			"CREATE TABLE IF NOT EXISTS $hit_counter_table (
+				`ht_url` varchar(1000) NOT NULL,
+				`ht_url_md5` char(16) NOT NULL,
+				`ht_year` char(4) NOT NULL,
+				`ht_month` char(2) NOT NULL,
+				`ht_count` bigint DEFAULT 1,
+				PRIMARY KEY (ht_url_md5, ht_year, ht_month)	
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8"
+		);
 
-		echo "<h2>Login <a href='".get_link("admin_login")."'>here</a>.</h2>";
 		return;
 	}
 
@@ -109,21 +121,13 @@ class Setup extends CI_Controller {
 		$this->logger->info("[ admin/setup/uninstall ]");
 		echo "<h1>Uninstalling Burge CMF</h1>";
 
-		$table_name=$this->db->dbprefix('user'); 
-		$this->db->query("DROP TABLE IF EXISTS $table_name");
-
-		$table_name=$this->db->dbprefix('module'); 
-		$this->db->query("DROP TABLE IF EXISTS $table_name");
-
-		$table_name=$this->db->dbprefix('module_name'); 
-		$this->db->query("DROP TABLE IF EXISTS $table_name");
-
-		$table_name=$this->db->dbprefix('access'); 
-		$this->db->query("DROP TABLE IF EXISTS $table_name");
-
-		$table_name=$this->db->dbprefix('hit_counter'); 
-		$this->db->query("DROP TABLE IF EXISTS $table_name");
-
+		$table_names=array("user","module","module_name","access","hit_counter","post");
+		foreach($table_names as $tn)
+		{
+			$table_name=$this->db->dbprefix($tn); 
+			$this->db->query("DROP TABLE IF EXISTS $table_name");	
+		}
+		
 		echo "Done";
 
 		return;

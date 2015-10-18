@@ -11,7 +11,7 @@
 	.main .container .module
 	{
 		width:calc(33.33% - 10px);
-		margin:0;
+		margin:0 0 15px 0px;
 	}
 
 }

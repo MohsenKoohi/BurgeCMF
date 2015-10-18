@@ -1,5 +1,5 @@
 <?php
-class User_Manager_model extends CI_Model
+class User_manager_model extends CI_Model
 {
 	private $user_info=NULL;
 	private $user_info_initialized=FALSE;
