@@ -8,6 +8,31 @@ class Access_manager_model extends CI_Model
 		return;
 	}
 
+	public function install()
+	{
+		$access_table=$this->db->dbprefix('access'); 
+		$this->db->query(
+			"CREATE TABLE IF NOT EXISTS $access_table (
+				`user_id` int NOT NULL,
+				`module_id` char(50) NOT NULL,
+				PRIMARY KEY (user_id , module_id)	
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8"
+		);
+
+		$this->load->model("module_manager_model");
+
+		$this->module_manager_model->add_module("access","access_manager");
+		$this->module_manager_model->add_module_name("access","fa","سطح دسترسی");
+		$this->module_manager_model->add_module_name("access","en","Access Levels");
+
+		return;
+	}
+
+	public function uninstall()
+	{
+		return;
+	}
+
 	//this method adds access to an array of modules for a user
 	public function set_allowed_modules_for_user($user_id,$modules)
 	{

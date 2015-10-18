@@ -13,6 +13,38 @@ class User_manager_model extends CI_Model
 		return;
 	}
 
+	public function install()
+	{
+		$user_table=$this->db->dbprefix('user'); 
+		$this->db->query(
+			"CREATE TABLE IF NOT EXISTS $user_table (
+				`user_id` int AUTO_INCREMENT NOT NULL,
+				`user_email` char(100) NOT NULL UNIQUE,
+				`user_pass` char(32) DEFAULT NULL,
+				`user_salt` char(32) NOT NULL,
+				PRIMARY KEY (user_id)	
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8"
+		);
+
+		$this->load->model("module_manager_model");
+
+		$this->module_manager_model->add_module("user","user_manager");
+		$this->module_manager_model->add_module_name("user","fa","کاربران");
+		$this->module_manager_model->add_module_name("user","en","Users");
+
+		//we have a pseudo module ;)
+		$this->module_manager_model->add_module("change_pass","");
+		$this->module_manager_model->add_module_name("change_pass","fa","تغییر رمز");
+		$this->module_manager_model->add_module_name("change_pass","en","Change Password");
+
+		return;
+	}
+
+	public function uninstall()
+	{
+		return;
+	}
+
 	//returns info of the logged user 
 	public function &get_user_info()
 	{

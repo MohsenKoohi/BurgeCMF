@@ -8,6 +8,76 @@ class Module_manager_model extends CI_Model
 		return;
 	}
 
+	public function install()
+	{
+		$module_table=$this->db->dbprefix('module'); 
+		$this->db->query(
+			"CREATE TABLE IF NOT EXISTS $module_table (
+				`module_id` char(50) NOT NULL
+				,`sort_order` int DEFAULT 0
+				,`model_name` char(100)
+				,PRIMARY KEY (module_id)	
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8"
+		);
+
+		$module_name_table=$this->db->dbprefix('module_name'); 
+		$this->db->query(
+			"CREATE TABLE IF NOT EXISTS $module_name_table (
+				`module_id` char(50) NOT NULL,
+				`lang` char(2) NOT NULL,
+				`module_name` char(100) NOT NULL,
+				PRIMARY KEY (module_id, lang)	
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8"
+		);
+
+		$this->add_module("module","module_manager");
+		$this->add_module_name("module","fa","ماژول‌ها");
+		$this->add_module_name("module","en","Modules");
+
+		//we have a pseudo module here ;)
+		$this->add_module("dashboard","");
+		$this->add_module_name("dashboard","fa","داشبورد");
+		$this->add_module_name("dashboard","en","Dashboard");
+
+		return;
+	}
+
+	public function uninstall()
+	{
+
+		return;
+	}
+
+	public function install_module($module_model_name)
+	{
+		$this->logger->info("[install_module] [module_model:$module_model_name] [result:1]");
+		
+		$this->load->model($module_model_name."_model");
+		$model=$this->{$module_model_name."_model"};
+		
+		if(!method_exists($model, "install"))
+			return;
+
+		$model->{"install"}();
+
+		return;
+	}
+
+	public function uninstall_module($module_model_name)
+	{
+		$this->logger->info("[uninstall_module] [module_model:$module_model_name] [result:1]");
+		
+		$this->load->model($module_model_name."_model");
+		$model=$this->{$module_model_name."_model"};
+		
+		if(!method_exists($model, "uninstall"))
+			return;
+
+		$model->{"uninstall"}();
+
+		return;
+	}		
+
 	public function get_all_modules_info($lang)
 	{
 		$this->db->select("module.module_id, module_name");
@@ -20,8 +90,9 @@ class Module_manager_model extends CI_Model
 		return $results->result_array();
 	}
 
+
 	//this method adds a module to the framework
-	public function add_module($module,$model_name,$sort_order)
+	public function add_module($module,$model_name,$sort_order=1)
 	{
 		$result=$this->db->get_where("module",array("module_id"=>$module));
 		if($result->num_rows())
@@ -33,7 +104,7 @@ class Module_manager_model extends CI_Model
 				array(
 					"module_id"		=>$module
 					,"model_name"	=>$model_name
-					,"sort_order"	=>$sort_order	
+					,"sort_order"	=>(int)$sort_order	
 				)
 			);
 			$result=TRUE;

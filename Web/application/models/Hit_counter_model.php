@@ -18,6 +18,35 @@ class Hit_counter_model extends CI_Model
 		return;
 	}
 
+	public function install()
+	{
+		$hit_counter_table=$this->db->dbprefix('hit_counter'); 
+		$this->db->query(
+			"CREATE TABLE IF NOT EXISTS $hit_counter_table (
+				`ht_url` varchar(1000) NOT NULL,
+				`ht_url_md5` char(16) NOT NULL,
+				`ht_year` char(4) NOT NULL,
+				`ht_month` char(2) NOT NULL,
+				`ht_count` bigint DEFAULT 1,
+				PRIMARY KEY (ht_url_md5, ht_year, ht_month)	
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8"
+		);
+
+		$this->load->model("module_manager_model");
+
+		$this->module_manager_model->add_module("hit_counter","hit_counter");
+		$this->module_manager_model->add_module_name("hit_counter","fa","تعداد بازدید");
+		$this->module_manager_model->add_module_name("hit_counter","en","Visiting Counters");
+
+		return;
+	}
+
+	public function uninstall()
+	{
+	
+		return;
+	}
+
 	public function count($parts)
 	{
 		if($parts[sizeof($parts)-1])
