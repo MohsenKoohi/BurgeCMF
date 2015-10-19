@@ -53,6 +53,7 @@ $route[ADMIN_URL_FOLDER."/user"]				=ADMIN_CONTROLLER_FOLDER."/users";
 $route[ADMIN_URL_FOLDER."/access"]			=ADMIN_CONTROLLER_FOLDER."/access";
 $route[ADMIN_URL_FOLDER."/module"]			=ADMIN_CONTROLLER_FOLDER."/module";
 $route[ADMIN_URL_FOLDER."/hit_counter"]	=ADMIN_CONTROLLER_FOLDER."/hit_counter";
+$route[ADMIN_URL_FOLDER."/logout"]			=ADMIN_CONTROLLER_FOLDER."/logout";
 
 
 $route[urlencode('ثبت')]="register";

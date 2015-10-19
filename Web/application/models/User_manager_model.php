@@ -37,6 +37,11 @@ class User_manager_model extends CI_Model
 		$this->module_manager_model->add_module_name("change_pass","fa","تغییر رمز");
 		$this->module_manager_model->add_module_name("change_pass","en","Change Password");
 
+		//we have another pseudo module ;)
+		$this->module_manager_model->add_module("logout","");
+		$this->module_manager_model->add_module_name("logout","fa","خروج");
+		$this->module_manager_model->add_module_name("logout","en","Logout");
+
 		return;
 	}
 
