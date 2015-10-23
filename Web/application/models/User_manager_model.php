@@ -29,18 +29,34 @@ class User_manager_model extends CI_Model
 		$this->load->model("module_manager_model");
 
 		$this->module_manager_model->add_module("user","user_manager");
-		$this->module_manager_model->add_module_name("user","fa","کاربران");
-		$this->module_manager_model->add_module_name("user","en","Users");
+		$CI=& get_instance();
+		foreach($CI->language->get_languages() as $lang => $value)
+		{
+			$CI->lang->load('modules',$lang);
+			$name=$CI->lang->line("user");
+			$this->module_manager_model->add_module_name("user",$lang,$name);
+		}
+		
 
 		//we have a pseudo module ;)
 		$this->module_manager_model->add_module("change_pass","");
-		$this->module_manager_model->add_module_name("change_pass","fa","تغییر رمز");
-		$this->module_manager_model->add_module_name("change_pass","en","Change Password");
+		$CI=& get_instance();
+		foreach($CI->language->get_languages() as $lang => $value)
+		{
+			$CI->lang->load('modules',$lang);
+			$name=$CI->lang->line("change_pass");
+			$this->module_manager_model->add_module_name("change_pass",$lang,$name);
+		}
 
 		//we have another pseudo module ;)
 		$this->module_manager_model->add_module("logout","");
-		$this->module_manager_model->add_module_name("logout","fa","خروج");
-		$this->module_manager_model->add_module_name("logout","en","Logout");
+		$CI=& get_instance();
+		foreach($CI->language->get_languages() as $lang => $value)
+		{
+			$CI->lang->load('modules',$lang);
+			$name=$CI->lang->line("logout");
+			$this->module_manager_model->add_module_name("logout",$lang,$name);
+		}
 
 		return;
 	}

@@ -31,13 +31,24 @@ class Module_manager_model extends CI_Model
 		);
 
 		$this->add_module("module","module_manager");
-		$this->add_module_name("module","fa","ماژول‌ها");
-		$this->add_module_name("module","en","Modules");
+		$CI=& get_instance();
+		foreach($CI->language->get_languages() as $lang => $value)
+		{
+			$CI->lang->load('modules',$lang);
+			$name=$CI->lang->line("module");
+			$this->module_manager_model->add_module_name("module",$lang,$name);
+		}
 
 		//we have a pseudo module here ;)
 		$this->add_module("dashboard","");
-		$this->add_module_name("dashboard","fa","داشبورد");
-		$this->add_module_name("dashboard","en","Dashboard");
+
+		$CI=& get_instance();
+		foreach($CI->language->get_languages() as $lang => $value)
+		{
+			$CI->lang->load('modules',$lang);
+			$name=$CI->lang->line("dashboard");
+			$this->module_manager_model->add_module_name("dashboard",$lang,$name);
+		}
 
 		return;
 	}

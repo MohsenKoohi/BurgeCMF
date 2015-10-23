@@ -41,9 +41,14 @@ class Post_manager_model extends CI_Model
 		$this->load->model("module_manager_model");
 
 		$this->module_manager_model->add_module("post","post_manager");
-		$this->module_manager_model->add_module_name("post","fa","پست‌ها");
-		$this->module_manager_model->add_module_name("post","en","Posts");
-
+		$CI=& get_instance();
+		foreach($CI->language->get_languages() as $lang => $value)
+		{
+			$CI->lang->load('modules',$lang);
+			$name=$CI->lang->line("post");
+			$this->module_manager_model->add_module_name("post",$lang,$name);
+		}
+		
 		return;
 	}
 

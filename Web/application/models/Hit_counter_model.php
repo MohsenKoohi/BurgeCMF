@@ -35,9 +35,15 @@ class Hit_counter_model extends CI_Model
 		$this->load->model("module_manager_model");
 
 		$this->module_manager_model->add_module("hit_counter","hit_counter");
-		$this->module_manager_model->add_module_name("hit_counter","fa","تعداد بازدید");
-		$this->module_manager_model->add_module_name("hit_counter","en","Visiting Counters");
 
+		$CI=& get_instance();
+		foreach($CI->language->get_languages() as $lang => $value)
+		{
+			$CI->lang->load('modules',$lang);
+			$name=$CI->lang->line("hit_counter");
+			$this->module_manager_model->add_module_name("hit_counter",$lang,$name);
+		}
+		
 		return;
 	}
 

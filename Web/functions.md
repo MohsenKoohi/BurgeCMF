@@ -6,9 +6,10 @@ $CI->logger->emergency/alert/critical/error/warning/notic/info/debug($message, $
 
 
 -- Language
-$CI->language->get(); 							// returns the selected language
-$CI->language->get_default_language();
-$CI->language->get_languages();
+- $CI->language->get(); 							// returns the selected language
+- $CI->language->get_default_language();
+- $CI->language->get_languages();
+- BurgeCMF now supports Persian, and English languages, if you want add a new language, you just need to add a directory to the language directory and translate files from Persian or English to your new language.
 
 
 -- Controller

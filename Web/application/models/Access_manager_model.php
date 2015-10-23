@@ -22,9 +22,15 @@ class Access_manager_model extends CI_Model
 		$this->load->model("module_manager_model");
 
 		$this->module_manager_model->add_module("access","access_manager");
-		$this->module_manager_model->add_module_name("access","fa","سطح دسترسی");
-		$this->module_manager_model->add_module_name("access","en","Access Levels");
 
+		$CI=& get_instance();
+		foreach($CI->language->get_languages() as $lang => $value)
+		{
+			$CI->lang->load('modules',$lang);
+			$name=$CI->lang->line("access");
+			$this->module_manager_model->add_module_name("access",$lang,$name);
+		}
+		
 		return;
 	}
 
