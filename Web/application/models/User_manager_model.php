@@ -29,34 +29,16 @@ class User_manager_model extends CI_Model
 		$this->load->model("module_manager_model");
 
 		$this->module_manager_model->add_module("user","user_manager");
-		$CI=& get_instance();
-		foreach($CI->language->get_languages() as $lang => $value)
-		{
-			$CI->lang->load('modules',$lang);
-			$name=$CI->lang->line("user");
-			$this->module_manager_model->add_module_name("user",$lang,$name);
-		}
+		$this->module_manager_model->add_module_names_from_lang_file("user");
 		
 
 		//we have a pseudo module ;)
 		$this->module_manager_model->add_module("change_pass","");
-		$CI=& get_instance();
-		foreach($CI->language->get_languages() as $lang => $value)
-		{
-			$CI->lang->load('modules',$lang);
-			$name=$CI->lang->line("change_pass");
-			$this->module_manager_model->add_module_name("change_pass",$lang,$name);
-		}
+		$this->module_manager_model->add_module_names_from_lang_file("change_pass");
 
 		//we have another pseudo module ;)
 		$this->module_manager_model->add_module("logout","");
-		$CI=& get_instance();
-		foreach($CI->language->get_languages() as $lang => $value)
-		{
-			$CI->lang->load('modules',$lang);
-			$name=$CI->lang->line("logout");
-			$this->module_manager_model->add_module_name("logout",$lang,$name);
-		}
+		$this->module_manager_model->add_module_names_from_lang_file("logout");
 
 		return;
 	}

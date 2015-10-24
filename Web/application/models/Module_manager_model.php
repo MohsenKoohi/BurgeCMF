@@ -31,24 +31,11 @@ class Module_manager_model extends CI_Model
 		);
 
 		$this->add_module("module","module_manager");
-		$CI=& get_instance();
-		foreach($CI->language->get_languages() as $lang => $value)
-		{
-			$CI->lang->load('modules',$lang);
-			$name=$CI->lang->line("module");
-			$this->module_manager_model->add_module_name("module",$lang,$name);
-		}
-
+		$this->add_module_names_from_lang_file("module");
+		
 		//we have a pseudo module here ;)
 		$this->add_module("dashboard","");
-
-		$CI=& get_instance();
-		foreach($CI->language->get_languages() as $lang => $value)
-		{
-			$CI->lang->load('modules',$lang);
-			$name=$CI->lang->line("dashboard");
-			$this->module_manager_model->add_module_name("dashboard",$lang,$name);
-		}
+		$this->add_module_names_from_lang_file("dashboard");
 
 		return;
 	}
@@ -134,6 +121,22 @@ class Module_manager_model extends CI_Model
 		$this->logger->info("[add_module_name] [module_id:$module_id] [lang:$lang] [name:$name] [result:1]");
 
 		return TRUE;
+	}
+
+	//Searchs for the module_id index in each $lang/modules_lang.php file and add the name of module
+	//It is usefull for initial modules which we don't want to change all modules files
+	//after adding a new lang
+	public function add_module_names_from_lang_file($module_id)
+	{
+		$CI=& get_instance();
+		foreach($CI->language->get_languages() as $lang => $value)
+		{
+			$CI->lang->load('modules',$lang);
+			$name=$CI->lang->line($module_id);
+			$this->add_module_name($module_id,$lang,$name);
+		}
+
+		return;
 	}
 
 	//returns an array of modules a user has access to, and their links
