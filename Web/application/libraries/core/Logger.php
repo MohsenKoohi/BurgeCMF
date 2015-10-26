@@ -325,7 +325,7 @@ class Logger extends AbstractLogger
         LogLevel::DEBUG     => 7
     );
 
-    private $date_function="date";
+    private $date_function=DATE_FUNCTION;
 
     /**
      * This holds the file handle for this instance's log file
@@ -366,9 +366,6 @@ class Logger extends AbstractLogger
             $CI=&get_instance();
             $CI->logger=&$this;
         }
-
-        if(CALENDAR_TYPE === "JALALI")
-            $this->date_function="jdate";
 
         $this->logLevelThreshold = $logLevelThreshold;
         $this->options = array_merge($this->options, $options);

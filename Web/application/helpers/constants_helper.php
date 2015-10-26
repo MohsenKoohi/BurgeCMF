@@ -14,14 +14,21 @@ function LANGUAGES()
 	);
 }
 
+//functions used for each language to convert timestamp to datetime 
+function LANGUAGE_DATETIME_FUNCTIONS()
+{
+	return array(
+		"fa"=>"jdate"
+		,"en"=>"date"
+	);
+}
+
 define("ADMIN_URL_FOLDER","admin");
 define("ADMIN_CONTROLLER_FOLDER","admin");
 
-//define("CALENDAR_TYPE","GEORGIAN");
-//define("DATE_FUNCTION","date");
+//define("DATE_FUNCTION","jdate");
+define("DATE_FUNCTION","date");
 
-define("CALENDAR_TYPE","JALALI");
-define("DATE_FUNCTION","jdate");
 
 define("DEFAULT_TIMEZONE","Asia/Tehran");
 
