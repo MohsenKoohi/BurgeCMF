@@ -1,6 +1,7 @@
 /* 
-blue #0C7B77
+green-blue #0C7B77
 pink #C63672
+darkblue #014083
 */
 
 *
@@ -579,6 +580,11 @@ input[type="file"] > input[type="button"]::-moz-focus-inner
 .even-odd-bg:nth-child(2n + 2)
 {
 	background-color: #bbb;
+}
+
+.even-odd-bg:hover, .even-odd-bg:focus, .even-odd-bg:active
+{
+	box-shadow: 2px 2px 2px #555,-2px -2px 2px #555;
 }
 
 body.ltr .even-odd-bg > div

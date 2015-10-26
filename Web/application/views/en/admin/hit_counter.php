@@ -13,7 +13,7 @@
 		.row.even-odd-bg span
 		{
 			font-size: .8em;
-			color:#555;
+			//color:#555;
 		}
 
 	</style>

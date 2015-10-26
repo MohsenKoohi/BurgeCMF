@@ -10,7 +10,7 @@
 					<div class="three columns"><label>{user_name_text}</label></div>
 					<div class="three columns">
 						<select class="full-width ltr eng" name="user_id">
-							<option value="">{select_text} ...</option>
+							<option value="">{select_text}</option>
 							<?php 
 								foreach ($users_info as $user)
 								{
@@ -47,7 +47,7 @@
 					<div class="three columns"><label>{module_name_text}</label></div>
 					<div class="three columns">
 						<select class="full-width" name="module_id">
-							<option value="">{select_text} ...</option>
+							<option value="">{select_text}</option>
 							<?php 
 								foreach ($modules_info as $mod)
 								{

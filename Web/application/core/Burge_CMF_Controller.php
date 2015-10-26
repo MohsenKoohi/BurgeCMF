@@ -59,7 +59,6 @@ class Burge_CMF_Controller extends CI_Controller{
 
 			$this->load->model("hit_counter_model");
 			$this->hit_counter_model->count($parts);
-
 		}
 		
 		return;

@@ -5,7 +5,7 @@ Copyright(C)2011, Reza Gholampanahi , http://jdf.scr.ir
 version 2.55 :: 1391/08/24 = 1433/12/18 = 2012/11/15 */
 
 /*	F	*/
-function jdate($format,$timestamp='',$none='',$time_zone='Asia/Tehran',$tr_num='en'){
+function jdate($format,$timestamp='',$none='',$time_zone=DEFAULT_TIMEZONE,$tr_num='en'){
 
  $T_sec=0;/* <= رفع خطاي زمان سرور ، با اعداد '+' و '-' بر حسب ثانيه */
 
@@ -212,7 +212,7 @@ function jdate($format,$timestamp='',$none='',$time_zone='Asia/Tehran',$tr_num='
 }
 
 /*	F	*/
-function jstrftime($format,$timestamp='',$none='',$time_zone='Asia/Tehran',$tr_num='fa'){
+function jstrftime($format,$timestamp='',$none='',$time_zone=DEFAULT_TIMEZONE,$tr_num='fa'){
 
  $T_sec=0;/* <= رفع خطاي زمان سرور ، با اعداد '+' و '-' بر حسب ثانيه */
 
@@ -440,7 +440,7 @@ function jmktime($h='',$m='',$s='',$jm='',$jd='',$jy='',$is_dst=-1){
 }
 
 /*	F	*/
-function jgetdate($timestamp='',$none='',$tz='Asia/Tehran',$tn='en'){
+function jgetdate($timestamp='',$none='',$tz=DEFAULT_TIMEZONE,$tn='en'){
  $ts=($timestamp=='')?time():tr_num($timestamp);
  $jdate=explode('_',jdate('F_G_i_j_l_n_s_w_Y_z',$ts,'',$tz,$tn));
  return array(
@@ -597,3 +597,16 @@ function jalali_to_gregorian($j_y,$j_m,$j_d,$mod=''){
 }
 
 /* [ jdf.php ] version 2.55 ?> Download new version from [ http://jdf.scr.ir ] */
+
+
+
+//added by Me;
+function formatted_jalali_to_georgian($dt)
+{
+	list($d,$t)=explode(" ", $dt);
+	list($y,$m,$d)=explode("/",$d);
+	list($y,$m,$d)=jalali_to_gregorian($y,$m,$d);
+
+	return sprintf("%04d/%02d/%02d",$y,$m,$d)." ".$t;
+
+}

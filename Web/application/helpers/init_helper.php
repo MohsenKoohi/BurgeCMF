@@ -25,6 +25,7 @@ function &get_links()
 		,'admin_user'				=> ADMIN_SURL_LANG."/user"
 		,'admin_module'			=> ADMIN_SURL_LANG."/module"
 		,'admin_hit_counter'		=> ADMIN_SURL_LANG."/hit_counter"
+		,'admin_post'				=> ADMIN_SURL_LANG."/post"
 
 
 	);

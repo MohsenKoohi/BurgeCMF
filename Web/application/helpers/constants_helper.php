@@ -23,6 +23,8 @@ define("ADMIN_CONTROLLER_FOLDER","admin");
 define("CALENDAR_TYPE","JALALI");
 define("DATE_FUNCTION","jdate");
 
+define("DEFAULT_TIMEZONE","Asia/Tehran");
+
 
 //session expiration for admin users in seconds
 define("USER_SESSION_EXPIRATION",30*60);
