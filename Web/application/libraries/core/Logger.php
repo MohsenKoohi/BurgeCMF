@@ -397,7 +397,7 @@ class Logger extends AbstractLogger
         $this->info(
             "[new_visit]"
             ." [ip:".$_SERVER['REMOTE_ADDR']."]"
-            ." [ua:".$_SERVER['HTTP_USER_AGENT']."]"
+            .(isset($_SERVER['HTTP_USER_AGENT'])?" [ua:".$_SERVER['HTTP_USER_AGENT']."]":"")
             ." [url:".$CI->uri->uri_string."]"
             .(isset($_SERVER['HTTP_REFERER'])?" [referer:".$_SERVER['HTTP_REFERER']."]":"")
         );
