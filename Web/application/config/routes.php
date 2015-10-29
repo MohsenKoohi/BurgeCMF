@@ -41,21 +41,21 @@ $route['default_controller'] = "home";
 
 if(ENVIRONMENT==='development')
 {
-	$route[ADMIN_URL_FOLDER.'/install']		=ADMIN_CONTROLLER_FOLDER."/setup/install";
-	$route[ADMIN_URL_FOLDER.'/uninstall']	=ADMIN_CONTROLLER_FOLDER."/setup/uninstall";
+	$route[ADMIN_URL_FOLDER.'/install']		="setup/install";
+	$route[ADMIN_URL_FOLDER.'/uninstall']	="setup/uninstall";
 }
 
-$route[ADMIN_URL_FOLDER]						=ADMIN_CONTROLLER_FOLDER."/dashboard";
-$route[ADMIN_URL_FOLDER."/dashboard"]		=ADMIN_CONTROLLER_FOLDER."/dashboard";
-$route[ADMIN_URL_FOLDER."/user"]				=ADMIN_CONTROLLER_FOLDER."/users";
-$route[ADMIN_URL_FOLDER."/login"]			=ADMIN_CONTROLLER_FOLDER."/login";
-$route[ADMIN_URL_FOLDER."/change_pass"]	=ADMIN_CONTROLLER_FOLDER."/change_pass";
-$route[ADMIN_URL_FOLDER."/logout"]			=ADMIN_CONTROLLER_FOLDER."/logout";
-$route[ADMIN_URL_FOLDER."/access"]			=ADMIN_CONTROLLER_FOLDER."/access";
-$route[ADMIN_URL_FOLDER."/module"]			=ADMIN_CONTROLLER_FOLDER."/module";
-$route[ADMIN_URL_FOLDER."/hit_counter"]	=ADMIN_CONTROLLER_FOLDER."/hit_counter";
+$route[ADMIN_URL_FOLDER]						="dashboard";
+$route[ADMIN_URL_FOLDER."/dashboard"]		="dashboard";
+$route[ADMIN_URL_FOLDER."/user"]				="users";
+$route[ADMIN_URL_FOLDER."/login"]			="login";
+$route[ADMIN_URL_FOLDER."/change_pass"]	="change_pass";
+$route[ADMIN_URL_FOLDER."/logout"]			="logout";
+$route[ADMIN_URL_FOLDER."/access"]			="access";
+$route[ADMIN_URL_FOLDER."/module"]			="module";
+$route[ADMIN_URL_FOLDER."/hit_counter"]	="hit_counter";
 
-$route[ADMIN_URL_FOLDER."/post"]			=ADMIN_CONTROLLER_FOLDER."/post";
+$route[ADMIN_URL_FOLDER."/post"]			="post";
 
 
 $route[urlencode('ثبت')]="register";

@@ -24,7 +24,6 @@ function LANGUAGE_DATETIME_FUNCTIONS()
 }
 
 define("ADMIN_URL_FOLDER","admin");
-define("ADMIN_CONTROLLER_FOLDER","admin");
 
 //define("DATE_FUNCTION","jdate");
 define("DATE_FUNCTION","date");
