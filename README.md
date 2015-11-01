@@ -14,6 +14,3 @@ Resources we have used:
 - Colorbox
 - Jquery
 - Jquery UI
-
-
-
