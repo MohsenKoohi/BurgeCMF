@@ -10,12 +10,17 @@ CREATE TABLE IF NOT EXISTS `burge_cmf_sessions` (
 	KEY `ci_sessions_timestamp` (`timestamp`)
 ) 
 
-3) install the Burge CMF:
+3) Configuration:
+	a) Set database name, username, and password
+	b) Set 'VISITOR_TRACKING_COOKIE_NAME','TRACKING_ENCRYPTION_KEY','TRACKING_IV'
+	
+
+4) install the Burge CMF:
 your_address/admin/install
 
-4) Enjoy developing;
+5) Enjoy developing;
 
-5) After developing , change ENVIRONMENT constant to 'production';
+6) After developing , change ENVIRONMENT constant to 'production';
 
-6) Enjoy using your app;
+7) Enjoy using your app;
 

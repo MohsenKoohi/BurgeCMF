@@ -25,8 +25,8 @@ function LANGUAGE_DATETIME_FUNCTIONS()
 
 define("ADMIN_URL_FOLDER","admin");
 
-//define("DATE_FUNCTION","jdate");
-define("DATE_FUNCTION","date");
+define("DATE_FUNCTION","jdate");
+//define("DATE_FUNCTION","date");
 
 
 define("DEFAULT_TIMEZONE","Asia/Tehran");
