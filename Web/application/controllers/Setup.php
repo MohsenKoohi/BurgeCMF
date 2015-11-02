@@ -19,22 +19,28 @@ class Setup extends CI_Controller {
 		$result=TRUE;
 
 		foreach($dirs as $dir)
-			if(file_exists($dir))
-			{
-				if(is_writable($dir))
+		{
+			$result=$this->make_dir_and_check_permission($dir);
+			switch ($result) {
+				case 2:
 					echo "Okay, ".$dir." exists and is writable<br>";
-				else
-				{
-					echo "Error, ".$dir." isn't writable, please check the permission<br>";
+					break;
+				
+				case 1:
+					echo "Okay, ".$dir." made and is writable<br>";
+					break;
+
+				case -1:
+					echo "Error, ".$dir." exists but isn't writable, please check the permission<br>";
 					$result=FALSE;
-				}	
-			}
-			else
-				if(!@mkdir($dir,0777))
-				{
+					break;
+
+				case -2:
 					echo "Error, ".$dir." can't be created, please check the permission of its parent<br>";
 					$result=FALSE;
-				}
+					break;	
+			}
+		}
 
 		if(!$result)
 		{
@@ -98,4 +104,26 @@ class Setup extends CI_Controller {
 
 		return;
 	}
+
+	//returns 2=> exists and writable
+	//returns 1=> made and writable
+	//returns -1=> exists and not writable
+	//returns -2=> doesn't not exist and can't be made
+
+	private function make_dir_and_check_permission($dir)
+	{
+		if(file_exists($dir))
+		{
+			if(is_writable($dir))
+				return 2;
+			else
+				return -1;
+		}
+		else
+			if(!@mkdir($dir,0777))
+				return -2;
+			
+		return 1;
+	}
+
 }

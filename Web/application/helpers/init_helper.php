@@ -203,48 +203,6 @@ function rial_to_toman($value)
 	return $ret;
 }
 
-function burge_cmf_send_mail($receiver,$subject,$content)
-{
-	$CI=&get_instance();
-	$CI->load->library("email");
-	$CI->email->initialize(array(
-		"protocol"=>"smtp",
-		"smtp_host"=>"mail.lonex.com",
-		"smtp_port"=>2525,
-		"smtp_user"=>"admin@yeotagh.com",
-		"smtp_pass"=>"j4788dxS3m4N32zS=32>2zagg)",
-		"mailtype"=>"html"
-		));
-	
-	$CI->email->from('admin@yeotagh.com', 'یه اتاق');
-	$CI->email->to($receiver);
-	$CI->email->bcc('admin@yeotagh.com');
-	$CI->email->subject($subject);
-	$CI->email->message('
-		<!DOCTYPE html>
-		<html dir="rtl" lang="fa">
-		<head>
-			<meta charset="UTF-8" />
-		</head>
-		<body style="direction:rtl;font-family:b koodak, koodak, OnLineKoodak, b mitra, mitra, tahoma;">
-		  <div style=";height:150px;display:block;text-align:center;direction:rtl;">
-		  	 <a title="یه‌اتاق" alt="یه‌اتاق" href="'.HOME_URL.'"><img src="'.IMAGES_URL.'/yo-logo-bg-2.png"  style="" ></a>
-		    <a title="یه‌اتاق" alt="یه‌اتاق" href="'.HOME_URL.'"><img src="'.IMAGES_URL.'/yo-logo-v2-bg-2.png"  style=""></a>		    
-		  </div>
-
-		  <div class="main" style="direction:rtl;font-size:1.3em;direction:rtl;font-family:b koodak, koodak, b mitra, mitra, tahoma;text-align:justify;line-height:1.8em;background:white;min-height:200px">'
-		  .$content.'
-		  </div>		 
-		  <br>
-		  <div style="direction:rtl;text-align:center;font-family:b koodak, koodak, b mitra, mitra, tahoma;display:block;font-size:.9em;color:darkgreen;">سفر، یک زندگی جدید، هرچند کوتاه</div> 
-		</body>
-		</html>');
-
-	$CI->email->send();
-
-	return;
-}
-
 function bprint_r($var)
 {
 	if(!isset($var))
@@ -564,4 +522,26 @@ function create_captcha($data = '', $img_path = '', $img_url = '', $font_path = 
 	ImageDestroy($im);
 
 	return array('word' => $word, 'time' => $now, 'image' => $img, 'filename' => $img_filename);
+}
+
+//returns 2=> exists and writable
+//returns 1=> made and writable
+//returns -1=> exists and not writable
+//returns -2=> doesn't not exist and can't be made
+
+function make_dir_and_check_permission($dir)
+{
+	if(file_exists($dir))
+	{
+		if(is_writable($dir))
+			return 2;
+		else
+			return -1;
+	}
+	else
+		if(!@mkdir($dir,0777))
+			return -2;
+		
+
+	return 1;
 }
