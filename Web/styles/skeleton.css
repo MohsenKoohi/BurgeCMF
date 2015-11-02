@@ -107,6 +107,11 @@ body.rtl .column,body.rtl .columns
   {
     margin-right:4.161616%;
   }
+
+   body.ltr .half-col-margin
+  {
+    margin-left:4.161616%;
+  }
 }
 
 .width-400
