@@ -4,10 +4,45 @@ class Setup extends CI_Controller {
 
 	function __construct()
 	{
+		//check directories permssion
+		$this->check_directories_permission();
+
 		parent::__construct();
 
 		if(ENVIRONMENT!=='development')
 			redirect(get_link("admin_no_access"));
+	}
+
+	function check_directories_permission()
+	{
+		$dirs=array(LOG_DIR, CAPTCHA_DIR);
+		$result=TRUE;
+
+		foreach($dirs as $dir)
+			if(file_exists($dir))
+			{
+				if(is_writable($dir))
+					echo "Okay, ".$dir." exists and is writable<br>";
+				else
+				{
+					echo "Error, ".$dir." isn't writable, please check the permission<br>";
+					$result=FALSE;
+				}	
+			}
+			else
+				if(!@mkdir($dir,0777))
+				{
+					echo "Error, ".$dir." can't be created, please check the permission of its parent<br>";
+					$result=FALSE;
+				}
+
+		if(!$result)
+		{
+			echo "<h2>Please check the errors, and try again.";
+			exit;
+		}
+
+		return;
 	}
 
 	public function install()
@@ -42,6 +77,7 @@ class Setup extends CI_Controller {
 			$modules[]=$md['module_id'];
 		$this->load->model("access_manager_model");
 		$this->access_manager_model->set_allowed_modules_for_user($user->get_id(),$modules);
+
 
 		return;
 	}
