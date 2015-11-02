@@ -35,11 +35,11 @@
 			<?php echo form_open(get_link("admin_user"),array()); ?>
 				<input type="hidden" name="post_type" value="add_user" />	
 				<div class="row even-odd-bg" >
-					<div class="three columns one-col-margin">
+					<div class="three columns half-col-margin">
 						<label>{email_text}</label>
 						<input type="text" name="email" class="ltr eng" />
 					</div>
-					<div class="three columns one-col-margin">
+					<div class="three columns half-col-margin">
 						<label>{password_text}</label>
 						<input type="password" name="password" class="ltr eng"/>
 					</div>
