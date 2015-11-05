@@ -253,7 +253,9 @@ class User_manager_model extends CI_Model
 
 	public function set_user_logged_out()
 	{
-		$this->log_manager_model->info("USER_LOGOUT",array());
+		$this->log_manager_model->info("USER_LOGOUT",array(
+			"user_email"=>$this->session->userdata(SESSION_VARS_PREFIX."user_email")
+		));
 
 		$this->session->unset_userdata(SESSION_VARS_PREFIX."user_logged_in");
 		$this->session->unset_userdata(SESSION_VARS_PREFIX."user_email");
@@ -272,7 +274,6 @@ class User_manager_model extends CI_Model
 
 	public function has_user_logged_in()
 	{
-
 		if($this->session->userdata(SESSION_VARS_PREFIX."user_logged_in") !== 'true')
 			return FALSE;
 

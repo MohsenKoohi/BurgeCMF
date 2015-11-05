@@ -373,6 +373,8 @@ class Logger extends AbstractLogger
 
             $CI=&get_instance();
             unset($CI->logger);
+
+            return;
         }
 
         $this->logLevelThreshold = $logLevelThreshold;
@@ -579,16 +581,54 @@ class Logger extends AbstractLogger
                 $message = str_replace('{'.$part.'}', $value, $message);
             }
 
+            if ($this->options['appendContext'] && ! empty($context)) {
+                $message .= PHP_EOL.$this->indent($this->contextToString($context));
+            }
+
+
         } else {
-            $message = "[{$this->getVisitorId()}] [{$this->getTimestamp()}] [{$level}] {$message}";
+            //$message = "[{$this->getVisitorId()}] [{$this->getTimestamp()}] [{$level}] {$message}";
+            $message=$this->Burge_CMF_get_message($level,$message,$context);
         }
 
-        if ($this->options['appendContext'] && ! empty($context)) {
-            $message .= PHP_EOL.$this->indent($this->contextToString($context));
-        }
-
+       
         return $message.PHP_EOL;
 
+    }
+
+    //added by Burge CMF
+    private function Burge_CMF_get_message($level,$message,$context)
+    {
+        $ret='{';
+        $ret.='"visitor_id":"'.$this->getVisitorId().'"';
+        $ret.=',"timestamp":"'.$this->getTimestamp().'"';
+        $ret.=',"level":"'.strtoupper($level).'"';
+        $ret.=',"event_id":"'.$context['event_id'].'"';
+        $ret.=',"event_name":"'.$context['event_name'].'"';
+        if($message !== $context['event_name'])
+            $ret.=',"declared_event_name":"'.$this->clear_text($message).'"';
+
+        foreach ($context as $key => $value)
+        {
+            if(("event_id" === $key)  || ("event_name" === $key))
+                continue;
+            
+            $ret.=',"'.$this->clear_index($key).'":"'.$this->clear_value($value).'"';
+        }
+
+        $ret.='}';
+
+        return $ret;
+    }
+
+    private function clear_index($text)
+    {
+        return preg_replace("/\s+/", "_", trim($text));
+    }
+
+    private function clear_value($text)
+    {
+        return preg_replace("/\s+/", " ", trim($text));   
     }
 
     /**

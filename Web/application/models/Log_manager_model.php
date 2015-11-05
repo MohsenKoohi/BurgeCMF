@@ -7,6 +7,16 @@
 class Log_manager_model extends CI_Model
 {
 	private $logger;
+
+	private $log_dir=LOG_DIR;
+	private $log_prefix=LOGS_PREFIX;
+	private $date_function=DATE_FUNCTION;
+	private $log_extension="txt";
+
+	private $today_day;
+	private $today_month;
+	private $today_year;
+
 	private $event_types=array(
 		"UNKOWN"						=>0
 		,"NEW_VISIT"				=>1
@@ -35,14 +45,52 @@ class Log_manager_model extends CI_Model
 	{
 		parent::__construct();
 
-		$this->load->library("core/logger");
+		$date_function=$this->date_function;
 
-		$this->logger=new Logger();
+		list($y,$m,$d)=explode("-", $date_function("Y-m-d"));
+		$this->today_year=$y;
+		$this->today_month=$m;
+		$this->today_day=$d;
 
-		$CI=&get_instance();
+		$this->initialize_logger();
       
-      //log this visit  
-      $event_props=array(
+      $this->log_this_visit();
+
+      return;
+   }
+
+   private function initialize_logger()
+   {
+   	$this->load->library("core/logger");
+		
+   	$options=array(
+			'extension'      => 'txt',
+			'dateFormat'     => 'Y/m/d H:i:s',
+			'filename'       => $this->get_today_log_file_name(),
+			'prefix'         => '',
+			'logFormat'      => FALSE,
+			'appendContext'  => TRUE,
+    	);
+   	
+		$this->logger=new Logger($this->log_dir,LogLevel::DEBUG,$options);
+
+   	//$this->options['prefix'].$date_function('Y-m-d').'.'.$this->options['extension'];
+   }
+
+   private function get_today_log_file_name()
+   {
+   	return $this->get_log_file_name($this->today_year,$this->today_month,$this->today_day);
+   }
+
+   private function get_log_file_name($y,$m,$d)
+   {
+   	return $this->log_prefix.$y."-".$m."-".$d.".".$this->log_extension;
+   }
+
+   private function log_this_visit()
+   {
+   	$CI=&get_instance();
+     	$event_props=array(
       	"ip"			=> $_SERVER['REMOTE_ADDR']
       	,"url"		=> $CI->uri->uri_string
       );
@@ -137,8 +185,15 @@ class Log_manager_model extends CI_Model
 		if(!isset($this->event_types[$event_type]))
 			$event_type="UNKOWN";
 
-		$context["event_type_text"]=$message;
-		$context["event_type"]=$this->event_types[$event_type];
+		$context["event_name"]=$message;
+		$context["event_id"]=$this->event_types[$event_type];
+
+		$CI=&get_instance();
+		if(isset($CI->in_admin_env) && $CI->in_admin_env)
+		{
+			$context["active_user_id"]=$CI->user->get_id();
+			$context["active_user_email"]=$CI->user->get_email();
+		}
 
 		$this->logger->log($level,$event_type,$context);
 	}

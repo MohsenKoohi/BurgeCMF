@@ -10,7 +10,7 @@ class Burge_CMF_Controller extends CI_Controller{
 	protected $all_langs;
 
 	protected $data;
-	protected $in_admin_env=FALSE;
+	public $in_admin_env=FALSE;
 
 	public function __construct()
 	{
