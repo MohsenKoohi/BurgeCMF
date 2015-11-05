@@ -570,6 +570,7 @@ input[type="file"] > input[type="button"]::-moz-focus-inner
 {
 	padding:10px;
 	border-radius: 5px;
+	transition: font-size .1s;
 }
 
 .even-odd-bg:nth-child(2n + 1)
@@ -585,6 +586,8 @@ input[type="file"] > input[type="button"]::-moz-focus-inner
 .even-odd-bg:hover, .even-odd-bg:focus, .even-odd-bg:active
 {
 	box-shadow: 2px 2px 2px #555,-2px -2px 2px #555;
+	font-size:1.1em;
+	transition: font-size .1s;
 }
 
 body.ltr .even-odd-bg > div

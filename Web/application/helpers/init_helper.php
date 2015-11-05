@@ -26,6 +26,7 @@ function &get_links()
 		,'admin_module'			=> ADMIN_SURL_LANG."/module"
 		,'admin_hit_counter'		=> ADMIN_SURL_LANG."/hit_counter"
 		,'admin_post'				=> ADMIN_SURL_LANG."/post"
+		,'admin_log'				=> ADMIN_SURL_LANG."/log"
 
 
 	);

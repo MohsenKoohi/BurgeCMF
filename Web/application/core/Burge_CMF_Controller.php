@@ -55,7 +55,7 @@ class Burge_CMF_Controller extends CI_Controller{
 		}
 		else
 		{
-			//since we are in customer env, we should count this hit
+			//since we are in customer env., we should count this hit
 
 			$this->load->model("hit_counter_model");
 			$this->hit_counter_model->count($parts);

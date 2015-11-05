@@ -74,7 +74,37 @@ class Log_manager_model extends CI_Model
    	
 		$this->logger=new Logger($this->log_dir,LogLevel::DEBUG,$options);
 
-   	//$this->options['prefix'].$date_function('Y-m-d').'.'.$this->options['extension'];
+		return;
+   }
+
+   public function get_today_logs($start,$len)
+   {
+   	return $this->get_logs_of_a_day($this->today_year,$this->today_month,$this->today_day,$start,$len);
+   }
+
+   public function get_logs_of_a_day($y,$m,$d,$start,$len)
+   {
+   	$file_path=$this->get_log_file_path($y,$m,$d);
+   	$result=array();
+   	
+   	if(file_exists($file_path))
+   	{
+   		$content=file_get_contents($file_path);
+   		$content=str_replace(PHP_EOL, ",", trim($content));
+   		$res=json_decode("[".$content."]");
+
+   		$count=0;
+   		for($i=sizeof($res)-1-$start;($i>=0) && ($count<$len);$i--,$count++)
+   			$result[]=$res[$i];
+   	}
+
+   	return $result;
+   }
+
+   private function get_log_file_path($y,$m,$d)
+   {
+   	$filename=$this->get_log_file_name($y,$m,$d);
+   	return $this->log_dir."/".$filename;
    }
 
    private function get_today_log_file_name()
@@ -95,7 +125,7 @@ class Log_manager_model extends CI_Model
       	,"url"		=> $CI->uri->uri_string
       );
       if(isset($_SERVER['HTTP_USER_AGENT']))
-      	$event_props["ua"]=$_SERVER['HTTP_USER_AGENT'];
+      	$event_props["user_agent"]=$_SERVER['HTTP_USER_AGENT'];
       if(isset($_SERVER['HTTP_REFERER']))
       	$event_props["referer"]=$_SERVER['HTTP_REFERER'];
 
