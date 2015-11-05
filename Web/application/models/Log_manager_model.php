@@ -151,17 +151,15 @@ class Log_manager_model extends CI_Model
 
 	public function get_dashbord_info()
 	{
-		return "";
 		$CI=& get_instance();
 		$lang=$CI->language->get();
-		$CI->lang->load('admin_user',$lang);		
+		$CI->lang->load('admin_log',$lang);		
 		
 		$data=array();
-		$data['users']=$this->get_all_users_info();
-		$data['total_text']=$CI->lang->line("total");
+		$data['logs']=$this->get_today_logs(2,8);
 		
 		$CI->load->library('parser');
-		$ret=$CI->parser->parse($CI->get_admin_view_file("user_dashboard"),$data,TRUE);
+		$ret=$CI->parser->parse($CI->get_admin_view_file("log_dashboard"),$data,TRUE);
 		
 		return $ret;		
 	}
