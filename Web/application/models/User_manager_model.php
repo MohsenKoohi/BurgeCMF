@@ -79,7 +79,10 @@ class User_manager_model extends CI_Model
 		$result=$this->db->get_where("user",array("user_email"=>$email));
 		if($result->num_rows() == 1)
 		{
-			$this->logger->info("[add_user] [email:".$email."] [repeated] [result:0]");
+			$this->log_manager_model->info("USER_ADD",array(
+			"user_email"=>$email
+			,"result"=>FALSE
+			));
 			return TRUE;
 		}
 
@@ -90,7 +93,14 @@ class User_manager_model extends CI_Model
 			"user_salt"=>$salt
 		));
 
-		$this->logger->info("[add_user] [email:".$email."] [done] [result:1]");
+		$user_id=$this->db->insert_id();
+
+		$this->log_manager_model->info("USER_ADD",array(
+			"user_email"=>$email
+			,"user_id"=>$user_id
+			,"result"=>TRUE
+		));
+
 		return FALSE;
 	}
 
@@ -102,7 +112,12 @@ class User_manager_model extends CI_Model
 		$this->load->model("access_manager_model");
 		$this->access_manager_model->unset_user_access($user_id);
 
-		$this->logger->info("[delete_user] [email:".$user_email."] [done] [result:1]");
+		
+		$this->log_manager_model->info("USER_DELETE",array(
+			"user_id"=>$user_id
+			,"user_email"=>$user_email		
+		));
+
 		return;
 	}
 
@@ -113,14 +128,24 @@ class User_manager_model extends CI_Model
 		$result=$this->db->get_where("user",array("user_email"=>$email));
 		if($result->num_rows() != 1)
 		{
-			$this->logger->info("[change_logged_user_pass] [email:".$email."] [incorrect_email] [result:0]");
+			$this->log_manager_model->info("USER_CHANGE_PASS",array(
+				"user_email"=>$email
+				,"desc"=>"incorrect_email"
+				,"result"=>FALSE
+			));
+
 			return FALSE;
 		}
 
 		$row=$result->row();				
 		if($row->user_pass !== $this->getPass($prev_pass, $row->user_salt))
 		{
-			$this->logger->info("[change_logged_user_pass] [email:".$email."] [incorrect_pass] [result:0]");
+			$this->log_manager_model->info("USER_CHANGE_PASS",array(
+				"user_email"=>$email
+				,"desc"=>"incorrect_pass"
+				,"result"=>FALSE
+			));
+
 			return FALSE;
 		}
 
@@ -138,11 +163,18 @@ class User_manager_model extends CI_Model
 
 		if(!$this->db->affected_rows())
 		{
-			$this->logger->info("[change_user_pass] [email:".$user_email."] [incorrect_email] [result:0]");
+			$this->log_manager_model->info("USER_CHANGE_PASS",array(
+				"user_email"=>$user_email
+				,"desc"=>"incorrect_email"
+				,"result"=>FALSE
+			));
 			return FALSE;
 		}
 
-		$this->logger->info("[change_user_pass] [email:".$user_email."] [done] [result:1]");
+		$this->log_manager_model->info("USER_CHANGE_PASS",array(
+				"user_email"=>$user_email
+				,"result"=>TRUE
+		));
 		return TRUE;		
 	}
 
@@ -151,8 +183,12 @@ class User_manager_model extends CI_Model
 		$result=$this->db->get_where("user",array("user_email"=>$email));
 		if($result->num_rows() != 1)
 		{
-			$this->logger->info("[login_user] [email:".$email."] [incorrect_email] [result:0]");
-			return false;
+			$this->log_manager_model->info("USER_LOGIN",array(
+				"user_email"=>$email
+				,"desc"=>"incorrect_email"
+				,"result"=>FALSE
+			));
+			return FALSE;
 		}
 
 		$row=$result->row();		
@@ -160,12 +196,22 @@ class User_manager_model extends CI_Model
 		if($row->user_pass === $this->getPass($pass, $row->user_salt))
 		{
 			$this->set_user_logged_in($email);
-			$this->logger->info("[login_user] [email:".$email."] [done] [result:1]");
-			return true;
+
+			$this->log_manager_model->info("USER_LOGIN",array(
+				"user_email"=>$email
+				,"result"=>TRUE
+			));
+
+			return TRUE;
 		}
 
-		$this->logger->info("[login_user] [email:".$email."] [incorrect_pass] [result:0]");
-		return false;
+		$this->log_manager_model->info("USER_LOGIN",array(
+				"user_email"=>$email
+				,"desc"=>"incorrect_pass"
+				,"result"=>FALSE
+			));
+
+		return TRUE;
 	}
 
 	public function login_openid($email,$openid_server)
@@ -173,7 +219,13 @@ class User_manager_model extends CI_Model
 		$result=$this->db->get_where("user",array("user_email"=>$email));
 		if($result->num_rows() != 1)
 		{
-			$this->logger->info("[login_user] [openid:".$openid_server."] [email:".$email."] [incorrect_email] [result:0]");
+			$this->log_manager_model->info("USER_LOGIN",array(
+				"user_email"=>$email
+				,"openid"=>$openid_server
+				,"desc"=>"incorrect_email"
+				,"result"=>FALSE
+			));
+
 			return false;
 		}
 
@@ -181,31 +233,13 @@ class User_manager_model extends CI_Model
 		
 		$this->set_user_logged_in($email);
 
-		$this->logger->info("[login_user] [openid:".$openid_server."] [email:".$email."] [done] [result:1]");
+		$this->log_manager_model->info("USER_LOGIN",array(
+			"user_email"=>$email
+			,"openid"=>$openid_server
+			,"result"=>TRUE
+		));
 		
 		return true;
-	}
-
-	public function set_password($email,$pass="")
-	{
-		if(!$pass)
-			$pass=random_string("alnum",7);
-		$salt=random_string("alnum",32);
-
-		$this->db->set("user_pass", $this->getPass($pass,$salt));
-		$this->db->set("user_salt", $salt);
-		$this->db->where("user_email",$email);
-		$this->db->limit(1);
-		$this->db->update('user');
-
-		if(!$this->db->affected_rows())
-		{
-			$this->logger->info("[new_pass] [email:".$email."] [incorrect_email] [result:0]");
-			return FALSE;
-		}
-			
-		$this->logger->info("[new_pass] [email:".$email."] [done] [result:1]");
-		return $pass;
 	}
 
 	private function set_user_logged_in($email)
@@ -219,7 +253,7 @@ class User_manager_model extends CI_Model
 
 	public function set_user_logged_out()
 	{
-		$this->logger->info("[user_logged_out] [done]");
+		$this->log_manager_model->info("USER_LOGOUT",array());
 
 		$this->session->unset_userdata(SESSION_VARS_PREFIX."user_logged_in");
 		$this->session->unset_userdata(SESSION_VARS_PREFIX."user_email");

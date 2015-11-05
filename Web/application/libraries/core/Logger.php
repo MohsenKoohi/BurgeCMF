@@ -360,11 +360,19 @@ class Logger extends AbstractLogger
      */
     public function __construct($logDirectory=null, $logLevelThreshold = LogLevel::DEBUG, array $options = array())
     {
+    
         if(!$logDirectory)
         {
             $logDirectory=LOG_DIR;
+            
+            //we don't want people to access logger directly
+            //they should call $CI->log_manager_model
+            //one of our criticisms to CI is this work of 
+            //1)auto initialization of classes when it loads them
+            //2)and then assigning it to the $CI instance as a property
+
             $CI=&get_instance();
-            $CI->logger=&$this;
+            unset($CI->logger);
         }
 
         $this->logLevelThreshold = $logLevelThreshold;
@@ -391,16 +399,6 @@ class Logger extends AbstractLogger
         }
 
         $this->initializeVisitorId();
-
-        $CI=&get_instance();
-        
-        $this->info(
-            "[new_visit]"
-            ." [ip:".$_SERVER['REMOTE_ADDR']."]"
-            .(isset($_SERVER['HTTP_USER_AGENT'])?" [ua:".$_SERVER['HTTP_USER_AGENT']."]":"")
-            ." [url:".$CI->uri->uri_string."]"
-            .(isset($_SERVER['HTTP_REFERER'])?" [referer:".$_SERVER['HTTP_REFERER']."]":"")
-        );
 
         return;
     }

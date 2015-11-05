@@ -49,7 +49,10 @@ class Access_manager_model extends CI_Model
 
 		$this->db->insert_batch("access",$batch);
 
-		$this->logger->info("[add_user_access] [user_id:".$user_id."] [modules:".implode(",", $modules)."] [result:1]");
+		$this->log_manager_model->info("ACCESS_ALLOW_USER",array(
+			"modules"=>implode(",", $modules),
+			"for_user"=>$user_id
+		));
 
 		return TRUE;
 	}
@@ -58,7 +61,9 @@ class Access_manager_model extends CI_Model
 	{
 		$this->db->delete("access",array("user_id"=>$user_id));
 
-		$this->logger->info("[delete_user_access] [user_id:".$user_id."] [modules:all] [result:1]");
+		$this->log_manager_model->info("ACCESS_UNSET_USER",array(
+			"for_user"=>$user_id
+		));
 
 		return;
 	}
@@ -79,7 +84,10 @@ class Access_manager_model extends CI_Model
 
 		$this->db->insert_batch("access",$batch);
 
-		$this->logger->info("[add_module_access] [module_id:".$module_id."] [users:".implode(",", $users)."] [result:1]");
+		$this->log_manager_model->info("ACCESS_ALLOW_USER",array(
+			"for_user_ids"=>implode(",", $users)
+			,"module_id"=>$module_id
+		));
 
 		return TRUE;
 	}
@@ -88,7 +96,9 @@ class Access_manager_model extends CI_Model
 	{
 		$this->db->delete("access",array("module_id"=>$module_id));
 
-		$this->logger->info("[delete_module_access] [module_id:".$module_id."] [users:all] [result:1]");
+		$this->log_manager_model->info("ACCESS_UNSET_MODULE",array(
+			"module_id"=>$module_id
+		));
 
 		return;
 	}
@@ -96,30 +106,31 @@ class Access_manager_model extends CI_Model
 	//checks if a user has access to a module
 	public function check_access($module,&$user)
 	{
-		$report="[check_access] [to:$module]";
+		$log_context=array("module"=>$module);
 		$result=FALSE;
 
 		if($user)
 		{
-			$report.=" [logged_in:yes]";
+			$log_context['user_id']=$user->get_id();
 			
 			//check access to module
 			$query_result=$this->db->get_where("access",array("user_id"=>$user->get_id(),"module_id"=>$module));
 			if($query_result->num_rows() == 1)
 			{
-				$report.=" [email:".$user->get_email()."]";
-				$report.=" [has_access:yes]";				
+				$log_context['user_email']=$user->get_email();
+				$log_context['has_access']=TRUE;
+
 				$result=TRUE;
 			}
 			else
-				$report.=" [has_access:no]";
+				$log_context['has_access']=FALSE;
 		}
 		else
-			$report.=" [logged_in:no]";
+			$log_context['user_id']=-1;
 
-		$report.=" [result:".(int)$result."]";
+		$log_context['result']=$result;
 
-		$this->logger->info($report);
+		$this->log_manager_model->info("ACCESS_CHECK",$log_context);
 		
 		return $result;
 	}

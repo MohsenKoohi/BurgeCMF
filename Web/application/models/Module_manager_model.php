@@ -48,7 +48,7 @@ class Module_manager_model extends CI_Model
 
 	public function install_module($module_model_name)
 	{
-		$this->logger->info("[install_module] [module_model:$module_model_name] [result:1]");
+		$this->log_manager_model->info("MODULE_INSTALL",array("module"=>$module_model_name));
 		
 		$this->load->model($module_model_name."_model");
 		$model=$this->{$module_model_name."_model"};
@@ -63,8 +63,8 @@ class Module_manager_model extends CI_Model
 
 	public function uninstall_module($module_model_name)
 	{
-		$this->logger->info("[uninstall_module] [module_model:$module_model_name] [result:1]");
-		
+		$this->log_manager_model->info("MODULE_UNINSTALL",array("module"=>$module_model_name));
+
 		$this->load->model($module_model_name."_model");
 		$model=$this->{$module_model_name."_model"};
 		
@@ -107,7 +107,10 @@ class Module_manager_model extends CI_Model
 			);
 			$result=TRUE;
 		}
-		$this->logger->info("[add_module] [module_id:$module] [result:$result]");
+		
+		$this->log_manager_model->info("MODULE_ADD",
+			array("module_id"=>$module)
+		);
 
 		return $result;
 	}
@@ -118,7 +121,12 @@ class Module_manager_model extends CI_Model
 		$sql=$this->db->insert_string("module_name",array("module_id"=>$module_id,"lang"=>$lang,"module_name"=>$name));
 		$sql.='  ON DUPLICATE KEY UPDATE module_name = '.$this->db->escape($name);
 		$this->db->query($sql);
-		$this->logger->info("[add_module_name] [module_id:$module_id] [lang:$lang] [name:$name] [result:1]");
+
+		$this->log_manager_model->info("MODULE_ADD_NAME",array(
+			"module_id"=>$module_id
+			,"lang"=>$lang
+			,"name"=>$name
+		));
 
 		return TRUE;
 	}
