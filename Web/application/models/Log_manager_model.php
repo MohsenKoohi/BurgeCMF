@@ -62,6 +62,14 @@ class Log_manager_model extends CI_Model
    private function initialize_logger()
    {
    	$this->load->library("core/logger");
+   	
+   	//we don't want people to access logger directly
+      //they should call $CI->log_manager_model
+      //one of our criticisms to CI is this work of 
+      //1)auto initialization of classes when it loads them
+      //2)and then assigning it to the $CI instance as a property
+   	$CI=&get_instance();
+   	unset($CI->logger);
 		
    	$options=array(
 			'extension'      => 'txt',
