@@ -606,7 +606,7 @@ class Logger extends AbstractLogger
         $ret.=',"event_id":"'.$context['event_id'].'"';
         $ret.=',"event_name":"'.$context['event_name'].'"';
         if($message !== $context['event_name'])
-            $ret.=',"declared_event_name":"'.$this->clear_text($message).'"';
+            $ret.=',"declared_event_name":"'.$this->clear_value($message).'"';
 
         foreach ($context as $key => $value)
         {
