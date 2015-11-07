@@ -81,7 +81,7 @@ class User_manager_model extends CI_Model
 		{
 			$this->log_manager_model->info("USER_ADD",array(
 			"user_email"=>$email
-			,"result"=>FALSE
+			,"result"=>0
 			));
 			return TRUE;
 		}
@@ -98,7 +98,7 @@ class User_manager_model extends CI_Model
 		$this->log_manager_model->info("USER_ADD",array(
 			"user_email"=>$email
 			,"user_id"=>$user_id
-			,"result"=>TRUE
+			,"result"=>1
 		));
 
 		return FALSE;
@@ -131,7 +131,7 @@ class User_manager_model extends CI_Model
 			$this->log_manager_model->info("USER_CHANGE_PASS",array(
 				"user_email"=>$email
 				,"desc"=>"incorrect_email"
-				,"result"=>FALSE
+				,"result"=>0
 			));
 
 			return FALSE;
@@ -143,11 +143,17 @@ class User_manager_model extends CI_Model
 			$this->log_manager_model->info("USER_CHANGE_PASS",array(
 				"user_email"=>$email
 				,"desc"=>"incorrect_pass"
-				,"result"=>FALSE
+				,"result"=>0
 			));
 
 			return FALSE;
 		}
+
+		$this->log_manager_model->info("USER_CHANGE_PASS",array(
+			"user_email"=>$email
+			,"desc"=>"changed"
+			,"result"=>1
+		));
 
 		return $this->change_user_pass($email,$new_pass);
 	}
@@ -166,14 +172,14 @@ class User_manager_model extends CI_Model
 			$this->log_manager_model->info("USER_CHANGE_PASS",array(
 				"user_email"=>$user_email
 				,"desc"=>"incorrect_email"
-				,"result"=>FALSE
+				,"result"=>0
 			));
 			return FALSE;
 		}
 
 		$this->log_manager_model->info("USER_CHANGE_PASS",array(
 				"user_email"=>$user_email
-				,"result"=>TRUE
+				,"result"=>1
 		));
 		return TRUE;		
 	}
@@ -186,7 +192,7 @@ class User_manager_model extends CI_Model
 			$this->log_manager_model->info("USER_LOGIN",array(
 				"user_email"=>$email
 				,"desc"=>"incorrect_email"
-				,"result"=>FALSE
+				,"result"=>0
 			));
 			return FALSE;
 		}
@@ -199,7 +205,7 @@ class User_manager_model extends CI_Model
 
 			$this->log_manager_model->info("USER_LOGIN",array(
 				"user_email"=>$email
-				,"result"=>TRUE
+				,"result"=>1
 			));
 
 			return TRUE;
@@ -208,7 +214,7 @@ class User_manager_model extends CI_Model
 		$this->log_manager_model->info("USER_LOGIN",array(
 				"user_email"=>$email
 				,"desc"=>"incorrect_pass"
-				,"result"=>FALSE
+				,"result"=>0
 			));
 
 		return TRUE;
@@ -223,10 +229,10 @@ class User_manager_model extends CI_Model
 				"user_email"=>$email
 				,"openid"=>$openid_server
 				,"desc"=>"incorrect_email"
-				,"result"=>FALSE
+				,"result"=>0
 			));
 
-			return false;
+			return FALSE;
 		}
 
 		$row=$result->row();		
@@ -236,10 +242,10 @@ class User_manager_model extends CI_Model
 		$this->log_manager_model->info("USER_LOGIN",array(
 			"user_email"=>$email
 			,"openid"=>$openid_server
-			,"result"=>TRUE
+			,"result"=>1
 		));
 		
-		return true;
+		return TRUE;
 	}
 
 	private function set_user_logged_in($email)

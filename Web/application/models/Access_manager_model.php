@@ -128,7 +128,7 @@ class Access_manager_model extends CI_Model
 		else
 			$log_context['user_id']=-1;
 
-		$log_context['result']=$result;
+		$log_context['result']=(int)$result;
 
 		$this->log_manager_model->info("ACCESS_CHECK",$log_context);
 		
