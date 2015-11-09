@@ -8,4 +8,4 @@ $lang['access']="سطح دسترسی";
 $lang['hit_counter']="تعداد بازدید";
 $lang['dashboard']="داشبورد";
 $lang['post']="پست‌ها";
-$lang['log']="لیست رویدادها";
+$lang['log']="فعالیت‌ها";
