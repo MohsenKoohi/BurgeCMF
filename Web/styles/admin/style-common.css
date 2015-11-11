@@ -615,6 +615,12 @@ input[type="file"] > input[type="button"]::-moz-focus-inner
 	transition: font-size .1s;
 }
 
+.row.even-odd-bg .button-primary.sub-primary
+{
+	font-size: 1.1em;
+	padding:0;
+}
+
 .even-odd-bg label
 {
 	font-size:.9em;
