@@ -12,11 +12,11 @@
 							<label>{email_text}</label>
 							<?php echo $user['user_email'];?>
 						</div>
-						<div class="three columns">
+						<div class="three columns half-col-margin">
 							<label>{new_password_text}</label>
-							<input name="pass_user_id_<?php echo $user['user_id']?>" type="password" class="ltr eng"/>
+							<input name="pass_user_id_<?php echo $user['user_id']?>" type="password" class="ltr eng full-width"/>
 						</div>
-						<div class="three columns">
+						<div class="three columns half-col-margin">
 							<label>{delete_text} </label>
 							<input name="delete_user_id_<?php echo $user['user_id']?>" type="checkbox" class="graphical" />
 						</div>
@@ -35,13 +35,13 @@
 			<?php echo form_open(get_link("admin_user"),array()); ?>
 				<input type="hidden" name="post_type" value="add_user" />	
 				<div class="row even-odd-bg" >
-					<div class="three columns half-col-margin">
+					<div class="three columns">
 						<label>{email_text}</label>
-						<input type="text" name="email" class="ltr eng" />
+						<input type="text" name="email" class="ltr eng full-width" />
 					</div>
 					<div class="three columns half-col-margin">
 						<label>{password_text}</label>
-						<input type="password" name="password" class="ltr eng"/>
+						<input type="password" name="password" class="ltr eng full-width"/>
 					</div>
 				</div>
 				<div class="row">
