@@ -50,7 +50,7 @@ class Access_manager_model extends CI_Model
 		$this->db->insert_batch("access",$batch);
 
 		$this->log_manager_model->info("ACCESS_ALLOW_USER",array(
-			"modules"=>implode(",", $modules),
+			"modules"=>implode(" , ", $modules),
 			"for_user"=>$user_id
 		));
 
@@ -85,7 +85,7 @@ class Access_manager_model extends CI_Model
 		$this->db->insert_batch("access",$batch);
 
 		$this->log_manager_model->info("ACCESS_ALLOW_USER",array(
-			"for_user_ids"=>implode(",", $users)
+			"for_user_ids"=>implode(" , ", $users)
 			,"module_id"=>$module_id
 		));
 
@@ -147,6 +147,17 @@ class Access_manager_model extends CI_Model
 			$ret[]=$row["module_id"];
 
 		return $ret;
+	}
+
+	public function get_users_have_access_to_module($module_id)
+	{	
+		$this->db->select("user.user_email,user.user_id");
+		$this->db->from("user");
+		$this->db->join("access","user.user_id = access.user_id","left");
+		$this->db->where(array("module_id"=>$module_id));
+		$result=$this->db->get();
+		
+		return $result->result_array();
 	}
 
 }
