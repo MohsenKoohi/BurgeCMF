@@ -553,8 +553,8 @@ function select_allowed_elements($cand ,$main_indexes)
 {
 	$result=array();
 	foreach ($main_indexes as $index) 
-	if(isset($can[$index]))
-		$result[$index]=$can[$index];
+		if(isset($cand[$index]))
+			$result[$index]=$cand[$index];
 
 	return $result;
 }
