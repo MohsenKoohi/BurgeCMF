@@ -546,3 +546,15 @@ function make_dir_and_check_permission($dir)
 
 	return 1;
 }
+
+//selects indexes and values from the $cand arrya
+//for indexes that are in $main_indexes
+function select_allowed_elements($cand ,$main_indexes)
+{
+	$result=array();
+	foreach ($main_indexes as $index) 
+	if(isset($can[$index]))
+		$result[$index]=$can[$index];
+
+	return $result;
+}
