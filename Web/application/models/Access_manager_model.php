@@ -155,6 +155,7 @@ class Access_manager_model extends CI_Model
 		$this->db->from("user");
 		$this->db->join("access","user.user_id = access.user_id","left");
 		$this->db->where(array("module_id"=>$module_id));
+		$this->db->order_by("access.user_id desc");
 		$result=$this->db->get();
 		
 		return $result->result_array();
