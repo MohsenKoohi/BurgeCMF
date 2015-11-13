@@ -168,7 +168,7 @@ class Module_manager_model extends CI_Model
 		$this->db->join("module","module.module_id = module_name.module_id","left");
 		$this->db->where("module_name.lang",$lang);
 		$this->db->where_in("module_name.module_id",$modules);
-		$this->db->order_by("module.sort_order","ASC");
+		$this->db->order_by("module.sort_order ASC, module.module_id ASC");
 		$results=$this->db->get();
 
 		foreach ($results->result_array() as $row)
