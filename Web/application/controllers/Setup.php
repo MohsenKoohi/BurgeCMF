@@ -64,8 +64,16 @@ class Setup extends CI_Controller {
 		$this->module_manager_model->install_module("module_manager");
 		
 		$this->module_manager_model->install_module("user_manager");
+		
 		$this->load->model("user_manager_model");
-		$this->user_manager_model->add_if_not_exist($user_pass,$user_pass);
+		$props=array(
+			"user_name"=>$user_pass
+			,"user_email"=>$user_pass
+			,"user_pass"=>$user_pass
+			,"user_code"=>10
+		);
+		$this->user_manager_model->add_if_not_exist($props);
+		
 		$user=new User($user_pass);
 		echo "Username: $user_pass<br>Pass: $user_pass<br>";
 		echo "<h2>Login <a href='".get_link("admin_login")."'>here</a>.</h2>";

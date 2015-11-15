@@ -1,4 +1,4 @@
 <?php 
 
-$lang['log']="لیست رویدادها";
-$lang['toaday_last_logs']="آخرین رویدادهای امروز";
+$lang['log']="لیست فعالیت‌ها";
+$lang['toaday_last_logs']="آخرین فعالیت‌های امروز";

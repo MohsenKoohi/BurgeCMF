@@ -5,7 +5,8 @@ class User
 	private $CI;
 	private $user_email=NULL;
 	private $user_id=-1;
-
+	private $user_name=NULL;
+	private $user_code=NULL;
 	//you can asssing more fields here
 	//and then load from db
 
@@ -32,6 +33,8 @@ class User
 
 		$this->user_id=$info->user_id;
 		$this->user_email=$info->user_email;
+		$this->user_name=$info->user_name;
+		$this->user_code=$info->user_code;
 
 		return TRUE;
 	}
@@ -46,4 +49,13 @@ class User
 		return $this->user_id;
 	}
 
+	public function get_name()
+	{
+		return $this->user_name;
+	}
+
+	public function get_code()
+	{
+		return $this->user_code;
+	}
 }

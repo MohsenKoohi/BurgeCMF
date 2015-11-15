@@ -7,7 +7,8 @@ $lang['new_password']="New password";
 $lang['add_user']="Add a user";
 $lang['add']="Add";
 $lang['total']="Total";
-
+$lang['name']="Name";
+$lang['code']="Code";
 
 $lang['added_successfully']="New user added successfully.";
 $lang['repeated_email']="This email has been added previously.";

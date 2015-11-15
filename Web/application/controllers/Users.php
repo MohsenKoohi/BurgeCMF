@@ -38,12 +38,19 @@ class Users extends Burge_CMF_Controller {
 	{
 		$user_email=$this->input->post("email");
 		$user_pass=$this->input->post("password");
+		$user_code=$this->input->post("code");
+		$user_name=$this->input->post("name");
 
 		if(!$user_pass || !$user_email)
 			$this->data['message']=$this->lang->line("fill_all_fields");
 		else
 		{
-			$res=$this->user_manager_model->add_if_not_exist($user_email,$user_pass);
+			$res=$this->user_manager_model->add_if_not_exist(array(
+				"user_name"=>$user_name
+				,"user_email"=>$user_email
+				,"user_code"=>$user_code
+				,"user_pass"=>$user_pass
+			));
 			if(!$res)
 				$this->data['message']=$this->lang->line("added_successfully");
 			else
@@ -80,6 +87,18 @@ class Users extends Burge_CMF_Controller {
 			{
 				$this->user_manager_model->change_user_pass($user['user_email'],$post_pass);
 				$res=TRUE;		
+			}
+
+			//name and code changes
+			$name=$this->input->post("name_user_id_".$uid);
+			$code=$this->input->post("code_user_id_".$uid);
+			if($name && $code)
+			{
+				$this->user_manager_model->change_user_props($uid,array(
+					"user_name"=>$name
+					,"user_code"=>$code
+				));
+				$res=TRUE;
 			}
 			
 		}

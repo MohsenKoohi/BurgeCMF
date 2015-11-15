@@ -117,7 +117,10 @@ class Access_manager_model extends CI_Model
 			$query_result=$this->db->get_where("access",array("user_id"=>$user->get_id(),"module_id"=>$module));
 			if($query_result->num_rows() == 1)
 			{
-				$log_context['user_email']=$user->get_email();
+				//$log_context['user_email']=$user->get_email();
+				$log_context['user_name']=$user->get_name();
+				$log_context['user_code']=$user->get_code();
+
 				$log_context['has_access']=TRUE;
 
 				$result=TRUE;

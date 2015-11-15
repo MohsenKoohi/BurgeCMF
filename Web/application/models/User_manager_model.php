@@ -3,6 +3,9 @@ class User_manager_model extends CI_Model
 {
 	private $user_info=NULL;
 	private $user_info_initialized=FALSE;
+	private $user_props_can_be_written=array("user_email","user_name","user_code","user_pass");
+	private $user_props_can_be_read=array("user_id","user_email","user_name","user_code","user_pass");
+	private $user_props_can_be_modified_directly=array("user_name","user_code");
 
 	public function __construct()
 	{
@@ -20,6 +23,8 @@ class User_manager_model extends CI_Model
 			"CREATE TABLE IF NOT EXISTS $user_table (
 				`user_id` int AUTO_INCREMENT NOT NULL,
 				`user_email` char(100) NOT NULL UNIQUE,
+				`user_name` char(100),
+				`user_code` char(20),
 				`user_pass` char(32) DEFAULT NULL,
 				`user_salt` char(32) NOT NULL,
 				PRIMARY KEY (user_id)	
@@ -66,7 +71,7 @@ class User_manager_model extends CI_Model
 
 	public function get_all_users_info()
 	{
-		$this->db->select(array("user_id","user_email"));
+		$this->db->select($this->user_props_can_be_read);
 		$this->db->from("user");
 		$this->db->order_by("user_id","DESC");
 		$results=$this->db->get();
@@ -74,8 +79,12 @@ class User_manager_model extends CI_Model
 		return $results->result_array();
 	}
 
-	public function add_if_not_exist($email,$pass)
+	public function add_if_not_exist($user_props)
 	{
+		$props=select_allowed_elements($user_props,$this->user_props_can_be_written);
+
+		$email=$props['user_email'];
+
 		$result=$this->db->get_where("user",array("user_email"=>$email));
 		if($result->num_rows() == 1)
 		{
@@ -87,25 +96,28 @@ class User_manager_model extends CI_Model
 		}
 
 		$salt=random_string("alnum",32);
-		$this->db->insert("user",array(
-			"user_email"=>$email,
-			"user_pass"=>$this->getPass($pass,$salt),
-			"user_salt"=>$salt
-		));
+		$props['user_salt']=$salt;
+		$props['user_pass']=$this->getPass($props['user_pass'],$salt);
+		$this->db->insert("user",$props);
 
-		$user_id=$this->db->insert_id();
+		$props['user_id']=$this->db->insert_id();
+		$props['result']=1;
+		unset($props['user_pass'],$props['user_salt']);
 
-		$this->log_manager_model->info("USER_ADD",array(
-			"user_email"=>$email
-			,"user_id"=>$user_id
-			,"result"=>1
-		));
+		$this->log_manager_model->info("USER_ADD",$props);
 
 		return FALSE;
 	}
 
 	public function delete_user($user_id,$user_email)
 	{
+		//there is a note here
+		//when you delete a user, if he has been logged into the system befor his deletion
+		//he can continue to modify system.
+		//yes, it could be, but now we have an access manager,
+		//who checks all accesses and after deletion,
+		//even previous pages can't post new info to the system.
+
 		$this->db->where(array("user_id"=>$user_id,"user_email"=>$user_email));
 		$this->db->delete("user");
 
@@ -157,6 +169,23 @@ class User_manager_model extends CI_Model
 
 		return $this->change_user_pass($email,$new_pass);
 	}
+
+	public function change_user_props($user_id,$user_props)
+	{
+		$props=select_allowed_elements($user_props,$this->user_props_can_be_modified_directly);
+		
+		$this->db->set($props);
+		$this->db->where("user_id",$user_id);
+		$this->db->limit(1);
+		$this->db->update('user');
+
+		$props['user_id']=$user_id;
+		
+		$this->log_manager_model->info("USER_CHANGE_PROPS",$props);
+
+		return TRUE;		
+	}
+
 
 	public function change_user_pass($user_email,$new_pass)
 	{

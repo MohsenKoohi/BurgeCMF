@@ -39,6 +39,7 @@ class Log_manager_model extends CI_Model
 		,"USER_CHANGE_PASS"		=>403
 		,"USER_LOGIN"				=>404
 		,"USER_LOGOUT"				=>405
+		,"USER_CHANGE_PROPS"		=>406
 		);
 
 	public function __construct()
@@ -228,7 +229,9 @@ class Log_manager_model extends CI_Model
 		if(isset($CI->in_admin_env) && $CI->in_admin_env)
 		{
 			$context["active_user_id"]=$CI->user->get_id();
-			$context["active_user_email"]=$CI->user->get_email();
+			//$context["active_user_code"]=$CI->user->get_id();
+			$context["active_user_name"]=$CI->user->get_id();
+			//$context["active_user_email"]=$CI->user->get_email();
 		}
 
 		$this->logger->log($level,$event_type,$context);
