@@ -558,3 +558,16 @@ function select_allowed_elements($cand ,$main_indexes)
 
 	return $result;
 }
+
+function delete_prefix_of_indexes($props,$prefix)
+{
+	$new_props=array();
+
+	foreach($props as $index => $value)
+	{
+		$new_index=preg_replace("/^".$prefix."/", "", $index);
+		$new_props[$new_index]=$props[$index];
+	}
+
+	return $new_props;
+}
