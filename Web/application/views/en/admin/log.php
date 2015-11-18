@@ -29,7 +29,7 @@
 		<div class="container separated">
 			<h2>{toaday_last_logs_text}</h2>
 			<?php $i=1;foreach($logs as $log) { ?>
-				<div class="row even-odd-bg" >
+				<div class="row even-odd-bg" style="display:flex;flex-wrap:wrap">
 					<div class="three columns">
 						<label>#<?php echo $i++;?></label>
 					</div>
