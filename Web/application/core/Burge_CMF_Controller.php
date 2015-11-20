@@ -60,7 +60,14 @@ class Burge_CMF_Controller extends CI_Controller{
 			$this->load->model("hit_counter_model");
 			$this->hit_counter_model->count($parts);
 
+			$this->lang->load('customer_general',$this->selected_lang);	
+
 			$this->data=get_initialized_data(TRUE);	
+
+			$this->data['header_title']=$this->lang->line("header_title");
+			$this->data['header_description']=$this->lang->line("header_description");
+			$this->data['header_keywords']=$this->lang->line("header_keywords");
+
 		}
 		
 		return;

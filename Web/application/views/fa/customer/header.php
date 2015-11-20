@@ -2,8 +2,8 @@
 <html dir="rtl" lang="fa">
 <head>
 	<meta charset="UTF-8" />
+  <meta name="keywords" content="{header_keywords}"/>
 	<meta name="description" content="{header_description}"/>
-	<meta name="keywords" content="{header_keywords}"/>
   <meta name="viewport" content="width=device-width,initial-scale=1, user-scalable=yes">
 	<title>{header_title}</title>
   <link rel="canonical" href="{header_canonical_url}"/>
