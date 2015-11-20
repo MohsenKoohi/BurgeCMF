@@ -33,8 +33,8 @@
   <div class="header">
 
     <div class="logo">
-      <a href="{admin_surl}" class="logo-img"><img src="{images_url}/logo-notext.png"/></a>
-      <a href="{admin_surl}" class="logo-text"><img src="{images_url}/logo-text-fa.png" /></a>
+      <a href="<?php echo get_link('admin_surl');?>" class="logo-img"><img src="{images_url}/logo-notext.png"/></a>
+      <a href="<?php echo get_link('admin_surl');?>" class="logo-text"><img src="{images_url}/logo-text-fa.png" /></a>
     </div>
     
     <div class="top-menu">  
