@@ -7,6 +7,15 @@
   <meta name="viewport" content="width=device-width,initial-scale=1, user-scalable=yes">
   <title>{header_title}</title>
   <link rel="canonical" href="{header_canonical_url}"/>
+  <?php if(isset($lang_pages) && sizeof($lang_pages)>1) 
+      foreach($lang_pages as $lp)
+      {
+        $abbr=$lp['lang_abbr'];
+        $link=$lp['link'];
+        echo '<link rel="alternate" hreflang="'.$abbr.'" href="'.$link.'" />'."\n";
+      }
+  ?>
+  
   <link rel="shortcut icon" href="{images_url}/favicon.png"/> 
 
   <link rel="stylesheet" type="text/css" href="{styles_url}/jquery-ui.min.css" />
