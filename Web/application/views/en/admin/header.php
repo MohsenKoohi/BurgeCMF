@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1, user-scalable=yes">
 	<title>{header_title}</title>
   <link rel="canonical" href="{header_canonical_url}"/>
-	<link rel="shortcut icon" href="{images_url}/logo.png"/> 
+	<link rel="shortcut icon" href="{images_url}/favicon.png"/> 
 
   <link rel="stylesheet" type="text/css" href="{styles_url}/jquery-ui.min.css" />
   <link rel="stylesheet" type="text/css" href="{styles_url}/colorbox.css" />
