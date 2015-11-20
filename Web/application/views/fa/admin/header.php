@@ -23,7 +23,7 @@
     <script src="{scripts_url}/jquery-1.11.1.min.js"></script>
   <![endif]-->  
   <script src="{scripts_url}/jquery-ui.min.js"></script>
-  <script src="{scripts_url}/common.js"></script>
+  <script src="{scripts_url}/admin_common.js"></script>
   <script src="{scripts_url}/colorbox.js"></script>
   <script src="{scripts_url}/scripts.js"></script>
 

@@ -12,8 +12,8 @@
   <link rel="stylesheet" type="text/css" href="{styles_url}/jquery-ui.min.css" />
   <link rel="stylesheet" type="text/css" href="{styles_url}/colorbox.css" />
   <link rel="stylesheet" type="text/css" href="{styles_url}/skeleton.css" />  
-  <link rel="stylesheet" type="text/css" href="{styles_url}/admin/style-common.css" />
-  <link rel="stylesheet" type="text/css" href="{styles_url}/admin/style-rtl.css" />  
+  <link rel="stylesheet" type="text/css" href="{styles_url}/customer/style-common.css" />
+  <link rel="stylesheet" type="text/css" href="{styles_url}/customer/style-rtl.css" />  
   
   <!--[if ! lte IE 8]>-->
     <script src="{scripts_url}/jquery-2.1.3.min.js"></script>
@@ -23,10 +23,12 @@
     <script src="{scripts_url}/jquery-1.11.1.min.js"></script>
   <![endif]-->  
   <script src="{scripts_url}/jquery-ui.min.js"></script>
-  <script src="{scripts_url}/common.js"></script>
+  <script src="{scripts_url}/customer_common.js"></script>
   <script src="{scripts_url}/colorbox.js"></script>
   <script src="{scripts_url}/scripts.js"></script>
-
+  <!--[if lte IE 9]>
+    <link rel="stylesheet" type="text/css" href="{styles_url}/style-ie.css" />
+  <![endif]-->
   
 </head>
 <body class="rtl" style="height:100%;">
@@ -44,7 +46,7 @@
             <a  href=""></a>
           </li>
         -->
-        <?php if(sizeof($lang_pages)>1) { ?>
+        <?php if(isset($lang_pages) && sizeof($lang_pages)>1) { ?>
           <li class="has-sub lang-li">
             <a class="lang"></a>
             <ul>
@@ -68,7 +70,7 @@
     ?>
 
     <div>
-      <?php if(isset($user_logged_in) && $user_logged_in) { ?>
+      <?php if(isset($side_menu_modules)) { ?>
         <div class="side-menu">
           <div class="mobile">
             <img src="{images_url}/logo-text-fa.png"/>

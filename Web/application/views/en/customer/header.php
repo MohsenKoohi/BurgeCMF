@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html dir="ltr" lang="en">
+<html dir="rtl" lang="en">
 <head>
-	<meta charset="UTF-8" />
-	<meta name="description" content="{header_description}"/>
-	<meta name="keywords" content="{header_keywords}"/>
+  <meta charset="UTF-8" />
+  <meta name="description" content="{header_description}"/>
+  <meta name="keywords" content="{header_keywords}"/>
   <meta name="viewport" content="width=device-width,initial-scale=1, user-scalable=yes">
-	<title>{header_title}</title>
+  <title>{header_title}</title>
   <link rel="canonical" href="{header_canonical_url}"/>
-	<link rel="shortcut icon" href="{images_url}/favicon.png"/> 
+  <link rel="shortcut icon" href="{images_url}/favicon.png"/> 
 
   <link rel="stylesheet" type="text/css" href="{styles_url}/jquery-ui.min.css" />
   <link rel="stylesheet" type="text/css" href="{styles_url}/colorbox.css" />
   <link rel="stylesheet" type="text/css" href="{styles_url}/skeleton.css" />  
-  <link rel="stylesheet" type="text/css" href="{styles_url}/admin/style-common.css" />
-  <link rel="stylesheet" type="text/css" href="{styles_url}/admin/style-ltr.css" />  
+  <link rel="stylesheet" type="text/css" href="{styles_url}/customer/style-common.css" />
+  <link rel="stylesheet" type="text/css" href="{styles_url}/customer/style-ltr.css" />  
   
   <!--[if ! lte IE 8]>-->
     <script src="{scripts_url}/jquery-2.1.3.min.js"></script>
@@ -23,18 +23,20 @@
     <script src="{scripts_url}/jquery-1.11.1.min.js"></script>
   <![endif]-->  
   <script src="{scripts_url}/jquery-ui.min.js"></script>
-  <script src="{scripts_url}/common.js"></script>
+  <script src="{scripts_url}/customer_common.js"></script>
   <script src="{scripts_url}/colorbox.js"></script>
   <script src="{scripts_url}/scripts.js"></script>
-
+  <!--[if lte IE 9]>
+    <link rel="stylesheet" type="text/css" href="{styles_url}/style-ie.css" />
+  <![endif]-->
   
 </head>
 <body class="ltr" style="height:100%;">
   <div class="header">
 
     <div class="logo">
-      <a href="{admin_surl}" class="logo-img"><img src="{images_url}/logo-notext.png"></a>
-      <a href="{admin_surl}" class="logo-text"><img src="{images_url}/logo-text.png"></a>
+      <a href="{admin_surl}" class="logo-img"><img src="{images_url}/logo-notext.png"/></a>
+      <a href="{admin_surl}" class="logo-text"><img src="{images_url}/logo-text.png" /></a>
     </div>
     
     <div class="top-menu">  
@@ -44,7 +46,7 @@
             <a  href=""></a>
           </li>
         -->
-        <?php if(sizeof($lang_pages)>1) { ?>
+        <?php if(isset($lang_pages) && sizeof($lang_pages)>1) { ?>
           <li class="has-sub lang-li">
             <a class="lang"></a>
             <ul>
@@ -68,10 +70,10 @@
     ?>
 
     <div>
-      <?php if(isset($user_logged_in) && $user_logged_in) { ?>
+      <?php if(isset($side_menu_modules)) { ?>
         <div class="side-menu">
           <div class="mobile">
-            <img src="{images_url}/logo-text.png"/>
+            <img src="{images_url}/logo-text-fa.png"/>
             <div class="click">
               <div></div>
               <div></div>
@@ -79,7 +81,7 @@
               <div></div>
             </div>
           </div>
-          <ul>
+           <ul>
             <?php 
               if(isset($side_menu_modules))
                 foreach ($side_menu_modules as $mod) 
