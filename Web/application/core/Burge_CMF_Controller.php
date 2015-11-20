@@ -50,7 +50,7 @@ class Burge_CMF_Controller extends CI_Controller{
 			//setting initial common data for the admin env
 			$this->lang->load('admin_general',$this->selected_lang);	
 
-			$this->data=get_initialized_data();	
+			$this->data=get_initialized_data(FALSE);
 			$this->data['user_logged_in']=TRUE;
 		}
 		else
@@ -59,6 +59,8 @@ class Burge_CMF_Controller extends CI_Controller{
 
 			$this->load->model("hit_counter_model");
 			$this->hit_counter_model->count($parts);
+
+			$this->data=get_initialized_data(TRUE);	
 		}
 		
 		return;
@@ -92,6 +94,39 @@ class Burge_CMF_Controller extends CI_Controller{
 			foreach($this->all_langs as $lang=>$value)
 			{
 			 	$path=$lang."/admin/".$file_name;
+				if(file_exists($view_folder.$path.".php"))
+				{
+					$ret=$path;
+					break;
+				}
+			}
+			
+		return $ret;
+	}
+
+	protected function send_customer_output($view_file)
+	{
+		foreach($this->lang->language as $index => $val)
+			$this->data[$index."_text"]=$val;
+
+		$this->load->library('parser');
+		$this->parser->parse($this->get_customer_view_file("header"),$this->data);
+		$this->parser->parse($this->get_customer_view_file($view_file),$this->data);
+		$this->parser->parse($this->get_customer_view_file("footer"),$this->data);			
+	}
+
+	public function get_customer_view_file($file_name)
+	{
+		$ret="";
+		$view_folder=APPPATH."views/";
+		
+		$path=$this->selected_lang."/customer/".$file_name;
+		if(file_exists($view_folder.$path.".php"))
+		 	$ret=$path;
+		else
+			foreach($this->all_langs as $lang=>$value)
+			{
+			 	$path=$lang."/customer/".$file_name;
 				if(file_exists($view_folder.$path.".php"))
 				{
 					$ret=$path;

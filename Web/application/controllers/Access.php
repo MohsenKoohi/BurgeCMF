@@ -19,9 +19,6 @@ class Access extends Burge_CMF_Controller {
 		$this->data['users_info']=$this->user_manager_model->get_all_users_info();
 		$this->data['modules_info']=$this->module_manager_model->get_all_modules_info($this->selected_lang);
 		
-		$this->data['selected_user_id']="";
-		$this->data['selected_module_id']="";		
-
 		if($this->input->post())
 		{
 			$this->lang->load('error',$this->selected_lang);
@@ -32,6 +29,9 @@ class Access extends Burge_CMF_Controller {
 			if($this->input->post('post_type') === "module_access")
 				$this->change_module_access();			
 		}
+
+		$this->data['selected_user_id']=$this->session->flashdata('selected_user_id');
+		$this->data['selected_module_id']=$this->session->flashdata('selected_module_id');
 
 		$this->data['access_info']=array();
 		foreach($this->data['users_info'] as $user)
@@ -54,11 +54,12 @@ class Access extends Burge_CMF_Controller {
 		$user_id=(int)$this->input->post("user_id");
 		if(!$user_id)
 		{
-			$this->data['message']=$this->lang->line("select_user");
+			set_message($this->lang->line("select_user"));
+			redirect(get_link("admin_access"));
 			return;
 		}
 
-		$this->data['selected_user_id']=$user_id;
+		$this->session->set_flashdata('selected_user_id',$user_id);
 
 		$modules=array();
 		foreach($this->data['modules_info'] as $mod)
@@ -72,7 +73,8 @@ class Access extends Burge_CMF_Controller {
 		}
 
 		$this->access_manager_model->set_allowed_modules_for_user($user_id, $modules);
-		$this->data['message']=$this->lang->line("changed_successfully");
+		set_message($this->lang->line("changed_successfully"));
+		redirect(get_link("admin_access"));
 
 		return;
 	}
@@ -83,11 +85,12 @@ class Access extends Burge_CMF_Controller {
 		$module_id=$this->input->post("module_id");
 		if(!$module_id)
 		{
-			$this->data['message']=$this->lang->line("select_module");
+			set_message($this->lang->line("select_module"));
+			redirect(get_link("admin_access"));
 			return;
 		}
 
-		$this->data['selected_module_id']=$module_id;
+		$this->session->set_flashdata('selected_module_id',$module_id);
 
 		$users=array();
 		foreach($this->data['users_info'] as $user)
@@ -101,7 +104,8 @@ class Access extends Burge_CMF_Controller {
 		}
 
 		$this->access_manager_model->set_allowed_users_for_module($module_id, $users);
-		$this->data['message']=$this->lang->line("changed_successfully");
+		set_message($this->lang->line("changed_successfully"));
+		redirect(get_link("admin_access"));
 
 		return;
 	}

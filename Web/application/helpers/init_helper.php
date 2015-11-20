@@ -1,35 +1,44 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 
-function &get_links()
+function &get_links($just_common=FALSE)
 {
-	global $LINKS;
+	global $LINKS,$LINKS_COMMON;
 	if(!$LINKS)
-		$LINKS=array(
-		'home_url'				=>	HOME_URL_LANG
-		,'home_surl'			=> HOME_SURL_LANG
+	{
+		//we separated links sent to parser which is named $LINKS_COMMON
+		//and all links used by get_link which is named $LINKS
+		//this action has been done to prevent get_initialized_data()
+		//to send our admin urls to parser ;)
 
-		,'images_url'			=>	IMAGES_URL
-		,'styles_url'			=> STYLES_URL
-		,'scripts_url'			=> SCRIPTS_URL
+		$LINKS_COMMON=array(
+			'home_url'				=>	HOME_URL_LANG
+			,'home_surl'			=> HOME_SURL_LANG
 
+			,'images_url'			=>	IMAGES_URL
+			,'styles_url'			=> STYLES_URL
+			,'scripts_url'			=> SCRIPTS_URL
+		);
 
-		,'admin_url'				=> ADMIN_URL_LANG
-		,'admin_surl'				=> ADMIN_SURL_LANG
-		,'admin_no_access'		=>	HOME_URL_LANG
-		,'admin_login'				=> ADMIN_SURL_LANG."/login"
-		,'admin_logout'			=> ADMIN_SURL_LANG."/logout"
-		,'admin_dashboard'		=> ADMIN_SURL_LANG."/dashboard"
-		,'admin_change_pass'		=> ADMIN_SURL_LANG."/change_pass"
-		,'admin_access'			=> ADMIN_SURL_LANG."/access"
-		,'admin_user'				=> ADMIN_SURL_LANG."/user"
-		,'admin_module'			=> ADMIN_SURL_LANG."/module"
-		,'admin_hit_counter'		=> ADMIN_SURL_LANG."/hit_counter"
-		,'admin_post'				=> ADMIN_SURL_LANG."/post"
-		,'admin_log'				=> ADMIN_SURL_LANG."/log"
+		$LINKS=array_merge($LINKS_COMMON, array(
+			'admin_url'				=> ADMIN_URL_LANG
+			,'admin_surl'				=> ADMIN_SURL_LANG
+			,'admin_no_access'		=>	HOME_URL_LANG
+			,'admin_login'				=> ADMIN_SURL_LANG."/login"
+			,'admin_logout'			=> ADMIN_SURL_LANG."/logout"
+			,'admin_dashboard'		=> ADMIN_SURL_LANG."/dashboard"
+			,'admin_change_pass'		=> ADMIN_SURL_LANG."/change_pass"
+			,'admin_access'			=> ADMIN_SURL_LANG."/access"
+			,'admin_user'				=> ADMIN_SURL_LANG."/user"
+			,'admin_module'			=> ADMIN_SURL_LANG."/module"
+			,'admin_hit_counter'		=> ADMIN_SURL_LANG."/hit_counter"
+			,'admin_post'				=> ADMIN_SURL_LANG."/post"
+			,'admin_log'				=> ADMIN_SURL_LANG."/log"
+		));
+	}
 
-
-	);
+	if($just_common)
+		return $LINKS_COMMON;
 	
 	return $LINKS;
 }
@@ -63,22 +72,34 @@ function get_link($page,$do_not_set_lang=FALSE)
 	return str_replace($lang_pattern,$lang, $ret_link);
 }
 
-function get_initialized_data()
+
+//we have created an initialization for data array sent to parser
+//so if we wanted to add an index, we can do it without changing all controller. 
+//however, it seems it is useless
+//if we want to add an index we should set its value for different pages
+//...
+//OK, we keep it 
+function get_initialized_data($CUSOMER_ENV=TRUE)
 {
-	$links=&get_links();
+	$links=&get_links(TRUE);
 	
 	$data=array();
 	
+	//its not so wise to send all links for the possibility of usage
+	//its not also secure
 	foreach ($links as $key => $link) 
 		$data[$key]=get_link($key);
+
+	if(!$CUSOMER_ENV)
+		return $data;
+	
+	//
+	//now we are in customer env
 
 	$data['header_description']='';
 	$data['header_keywords']='';
 	$data['header_canonical_url']='';
 	$data['header_title']='';
-
-	//do it yourself ;-)
-	//$data['message']=get_message();
 
 	return $data;
 }
