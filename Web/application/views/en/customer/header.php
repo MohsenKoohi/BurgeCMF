@@ -7,13 +7,22 @@
   <meta name="viewport" content="width=device-width,initial-scale=1, user-scalable=yes">
   <title>{header_title}</title>
   <link rel="canonical" href="{header_canonical_url}"/>
-  <?php if(isset($lang_pages) && sizeof($lang_pages)>1) 
-      foreach($lang_pages as $lp)
+  <?php 
+    if(isset($lang_pages))
+    { if(sizeof($lang_pages)>1) 
+        foreach($lang_pages as $lp)
+        {
+          $abbr=$lp['lang_abbr'];
+          $link=$lp['link'];
+          echo '<link rel="alternate" hreflang="'.$abbr.'" href="'.$link.'" />'."\n";
+        }
+      else
       {
-        $abbr=$lp['lang_abbr'];
-        $link=$lp['link'];
-        echo '<link rel="alternate" hreflang="'.$abbr.'" href="'.$link.'" />'."\n";
+        $langs=array_keys($lang_pages);
+        $lang=$langs[0];
+        echo '<link rel="alternate" hreflang="x-default" href="'.$lang_pages[$lang]['link'].'" />'."\n";
       }
+    }
   ?>
   
   <link rel="shortcut icon" href="{images_url}/favicon.png"/> 
