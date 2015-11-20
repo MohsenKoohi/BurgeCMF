@@ -8,11 +8,12 @@ class Home extends Burge_CMF_Controller {
 	}
 
 	public function index()
-	{		
+	{	
+		$this->data['lang_pages']=get_lang_pages(get_link("home_link",TRUE));
 	
 		$this->data['header_description']='';
 		$this->data['header_keywords']='';
-		$this->data['header_canonical_url']=HOME_URL;
+		$this->data['header_canonical_url']=get_link("home_link");
 		$this->data['header_title']='';
 
 		$this->send_customer_output("home");

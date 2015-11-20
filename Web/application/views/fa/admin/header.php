@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html dir="rtl" lang="en">
+<html dir="rtl" lang="fa">
 <head>
 	<meta charset="UTF-8" />
 	<meta name="description" content="{header_description}"/>

@@ -70,10 +70,10 @@
     ?>
 
     <div>
-      <?php if(isset($side_menu_modules)) { ?>
+      <?php if(TRUE || isset($side_menu_modules)) { ?>
         <div class="side-menu">
           <div class="mobile">
-            <img src="{images_url}/logo-text-fa.png"/>
+            <img src="{images_url}/logo-text.png"/>
             <div class="click">
               <div></div>
               <div></div>
@@ -82,6 +82,9 @@
             </div>
           </div>
            <ul>
+            <li>Item1</li>
+            <li>Item2</li>
+            <li>Item3</li>
             <?php 
               if(isset($side_menu_modules))
                 foreach ($side_menu_modules as $mod) 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html dir="rtl" lang="en">
+<html dir="rtl" lang="fa">
 <head>
 	<meta charset="UTF-8" />
 	<meta name="description" content="{header_description}"/>
@@ -7,6 +7,15 @@
   <meta name="viewport" content="width=device-width,initial-scale=1, user-scalable=yes">
 	<title>{header_title}</title>
   <link rel="canonical" href="{header_canonical_url}"/>
+  <?php if(isset($lang_pages) && sizeof($lang_pages)>1) 
+      foreach($lang_pages as $lp)
+      {
+        $abbr=$lp['lang_abbr'];
+        $link=$lp['link'];
+        echo '<link rel="alternate" hreflang="'.$abbr.'" href="'.$link.'" />'."\n";
+      }
+  ?>
+
 	<link rel="shortcut icon" href="{images_url}/favicon.png"/> 
 
   <link rel="stylesheet" type="text/css" href="{styles_url}/jquery-ui.min.css" />
@@ -70,7 +79,7 @@
     ?>
 
     <div>
-      <?php if(isset($side_menu_modules)) { ?>
+      <?php if(TRUE || isset($side_menu_modules)) { ?>
         <div class="side-menu">
           <div class="mobile">
             <img src="{images_url}/logo-text-fa.png"/>
@@ -82,6 +91,9 @@
             </div>
           </div>
            <ul>
+            <li>Item1</li>
+            <li>Item2</li>
+            <li>Item3</li>
             <?php 
               if(isset($side_menu_modules))
                 foreach ($side_menu_modules as $mod) 

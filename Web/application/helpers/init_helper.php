@@ -129,6 +129,7 @@ function get_lang_pages($pattern)
 		$ret[$value]=array(
 			"link"=> str_replace($lang_pattern,$lang_index, $pattern)
 			,"selected"=>$selected
+			,"lang_abbr"=>$key
 		);
 	}
 
