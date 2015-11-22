@@ -93,7 +93,7 @@ class Hit_counter_model extends CI_Model
 				mc.ht_year = $year 
 				AND mc.ht_month = $month
 			GROUP BY (CONCAT(month_count,'*',year_count,'*',total_count,'*',REPLACE(mc.ht_url,'$del','')))
-			ORDER BY mc.ht_count DESC 
+			ORDER BY url ASC, mc.ht_count DESC 
 		";
 		$result=$this->db->query($sql);
 		
