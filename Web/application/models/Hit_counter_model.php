@@ -81,6 +81,7 @@ class Hit_counter_model extends CI_Model
 		$tbl="`".$this->db->dbprefix($this->hit_counter_table_name)."`";
 		$year=$this->year;
 		$month=$this->month;
+		$del="/".$this->home_del;
 
 		$sql=" 
 			SELECT mc.ht_url AS url, mc.ht_count AS month_count, year_count, total_count FROM $tbl mc
@@ -90,7 +91,8 @@ class Hit_counter_model extends CI_Model
 				ON mc.ht_url_md5 = tc.ht_url_md5
 			WHERE 
 				mc.ht_year = $year 
-				AND mc.ht_month = $month 
+				AND mc.ht_month = $month
+			GROUP BY (CONCAT(month_count,'*',year_count,'*',total_count,'*',REPLACE(mc.ht_url,'$del','')))
 			ORDER BY mc.ht_count DESC 
 		";
 		$result=$this->db->query($sql);
@@ -119,6 +121,4 @@ class Hit_counter_model extends CI_Model
 		
 		return $ret;		
 	}
-
-
 }
