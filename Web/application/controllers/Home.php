@@ -9,6 +9,8 @@ class Home extends Burge_CMF_Controller {
 
 	public function index()
 	{	
+		$this->data['message']=get_message();
+		
 		$this->lang->load('customer_home',$this->selected_lang);	
 
 		$this->data['lang_pages']=get_lang_pages(get_link("home_link",TRUE));

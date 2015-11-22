@@ -14,13 +14,14 @@ CREATE TABLE IF NOT EXISTS `burge_cmf_sessions` (
 	a) Set database name, username, and password
 	b) Set 'VISITOR_TRACKING_COOKIE_NAME','TRACKING_ENCRYPTION_KEY','TRACKING_IV'
 	
+4) Set mail configs in application/helper/init_helper in burge_cmf_send_mail function
 
-4) install the Burge CMF:
+5) Install the Burge CMF:
 your_address/admin/install
 
-5) Enjoy developing;
+6) Enjoy developing;
 
-6) After developing , change ENVIRONMENT constant to 'production';
+7) After developing , change ENVIRONMENT constant to 'production';
 
-7) Enjoy using your app;
+8) Enjoy using your app;
 
