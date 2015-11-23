@@ -54,6 +54,8 @@ class Login extends CI_Controller {
 
 		if(isset($message))
 			$data['message']=$message;
+		else
+			$data['message']=get_message();
 		
 		$data['header_title']=$this->lang->line("login");
 		foreach($this->lang->language as $index => $val)

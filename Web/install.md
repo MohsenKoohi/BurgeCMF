@@ -1,6 +1,6 @@
-1) set CI settings databse , session , ...
+- set CI settings databse , session , ...
 
-2) if you use database for your sessions, create a session table:
+- if you use database for your sessions, create a session table:
 
 CREATE TABLE IF NOT EXISTS `burge_cmf_sessions` ( 
 	`id` varchar(40) NOT NULL, 
@@ -10,18 +10,18 @@ CREATE TABLE IF NOT EXISTS `burge_cmf_sessions` (
 	KEY `ci_sessions_timestamp` (`timestamp`)
 ) 
 
-3) Configuration:
+- Configuration:
 	a) Set database name, username, and password
 	b) Set 'VISITOR_TRACKING_COOKIE_NAME','TRACKING_ENCRYPTION_KEY','TRACKING_IV'
 	
-4) Set mail configs in application/helper/init_helper in burge_cmf_send_mail function
+- Set mail configs in application/helper/init_helper in burge_cmf_send_mail function
 
-5) Install the Burge CMF:
+- Install the Burge CMF:
 your_address/admin/install
 
-6) Enjoy developing;
+- Enjoy developing;
 
-7) After developing , change ENVIRONMENT constant to 'production';
+- After developing , change ENVIRONMENT constant to 'production';
 
-8) Enjoy using your app;
+- Enjoy using your app;
 

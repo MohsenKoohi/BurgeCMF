@@ -58,6 +58,7 @@ $route[ADMIN_URL_FOLDER."/log"]				="log";
 
 $route[ADMIN_URL_FOLDER."/post"]			="post";
 
+$route["retry"]="retry";
 
 $route[urlencode('ثبت')]="register";
 $route['register/request_pay/(.*)']="register/request_pay/$1";

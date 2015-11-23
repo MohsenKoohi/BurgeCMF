@@ -436,7 +436,7 @@ $config['global_xss_filtering'] = TRUE;
 $config['csrf_protection'] = TRUE;
 $config['csrf_token_name'] = 'Hidden_Session_Burge_CMF';
 $config['csrf_cookie_name'] = 'Mark_Went_Out';
-$config['csrf_expire'] = 3600;
+$config['csrf_expire'] = 60*60;
 $config['csrf_regenerate'] = TRUE;
 $config['csrf_exclude_uris'] = array(
 );
