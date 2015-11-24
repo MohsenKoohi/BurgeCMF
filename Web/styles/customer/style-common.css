@@ -2,6 +2,17 @@
 green-blue #0C7B77
 pink #C63672
 darkblue #014083
+
+@font-face
+{
+	font-family: OnLineKoodak;
+	src: url('../fonts/koodak/koodak.eot');
+	src: 
+		url('../fonts/koodak/koodak.eot?msie') format('embedded-opentype'),
+		url('../fonts/koodak/koodak.woff') format('woff'),
+		url('../fonts/koodak/koodak.ttf')  format('truetype')
+}
+
 */
 
 *
