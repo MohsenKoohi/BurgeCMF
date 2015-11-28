@@ -59,7 +59,7 @@ class Hit_counter_model extends CI_Model
 		if($hit_level)
 		{
 			$new_parts=array();
-			for($i=1;$i<$hit_level;$i++)
+			for($i=1;$i<min($hit_level,1+sizeof($parts));$i++)
 				$new_parts[]=$parts[$i-1];
 			$parts=$new_parts;
 		}
