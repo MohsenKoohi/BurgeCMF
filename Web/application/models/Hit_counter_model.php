@@ -1,3 +1,4 @@
+
 <?php
 class Hit_counter_model extends CI_Model
 {
@@ -46,11 +47,33 @@ class Hit_counter_model extends CI_Model
 		return;
 	}
 
-	public function count($parts)
+	//$hit_level specifies how many indexes of $parts has value.
+	//0 means all indexes of $parts has value;
+	//negative means none
+
+	public function count($parts,$hit_level=0)
 	{
-		if($parts[sizeof($parts)-1])
+		if($hit_level<0)
+			return;
+
+		if($hit_level)
+		{
+			$new_parts=array();
+			for($i=1;$i<$hit_level;$i++)
+				$new_parts[]=$parts[$i-1];
+			$parts=$new_parts;
+		}
+		
+		if(!sizeof($parts))
 			$parts[]="";
-		$parts[sizeof($parts)-1]=$this->home_del;
+
+		if(!$hit_level || ($hit_level == 1))
+		{
+			if($parts[sizeof($parts)-1])
+				$parts[]="";
+			$parts[sizeof($parts)-1]=$this->home_del;
+		}
+
 		$all_parts="";
 		$query_parts=array("/");
 		foreach($parts as $part)

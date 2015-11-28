@@ -9,6 +9,8 @@ class Burge_CMF_Controller extends CI_Controller{
 	protected $default_lang;
 	protected $all_langs;
 
+	protected $hit_level=0;
+
 	protected $data;
 	public $in_admin_env=FALSE;
 
@@ -56,9 +58,11 @@ class Burge_CMF_Controller extends CI_Controller{
 		else
 		{
 			//since we are in customer env., we should count this hit
-
-			$this->load->model("hit_counter_model");
-			$this->hit_counter_model->count($parts);
+			if($this->hit_level>=0)
+			{
+				$this->load->model("hit_counter_model");
+				$this->hit_counter_model->count($parts,$this->hit_level);
+			}
 
 			$this->lang->load('customer_general',$this->selected_lang);	
 

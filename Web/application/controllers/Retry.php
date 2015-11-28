@@ -1,6 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Retry extends Burge_CMF_Controller {
+	protected $hit_level=-1;
 
 	function __construct()
 	{
