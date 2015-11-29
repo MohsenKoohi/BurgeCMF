@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Home extends Burge_CMF_Controller {
+class CE_Home extends Burge_CMF_Controller {
 	protected $hit_level=1;
 
 	function __construct()

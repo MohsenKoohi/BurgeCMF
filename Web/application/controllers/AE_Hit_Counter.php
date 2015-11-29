@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Hit_counter extends Burge_CMF_Controller {
+class AE_Hit_Counter extends Burge_CMF_Controller {
 
 	function __construct()
 	{

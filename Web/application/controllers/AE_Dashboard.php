@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Dashboard extends Burge_CMF_Controller {
+class AE_Dashboard extends Burge_CMF_Controller {
 
 	function __construct()
 	{

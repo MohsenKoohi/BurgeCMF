@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Change_pass extends Burge_CMF_Controller {
+class AE_Change_Pass extends Burge_CMF_Controller {
 
 	function __construct()
 	{

@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Setup extends CI_Controller {
+class AE_Setup extends CI_Controller {
 
 	function __construct()
 	{

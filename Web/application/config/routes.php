@@ -37,26 +37,26 @@
 | in the URL cannot be matched to a valid route.
 |
 */
-$route['default_controller'] = "home";
+$route['default_controller'] = "CE_Home";
 
 if(ENVIRONMENT==='development')
 {
-	$route[ADMIN_URL_FOLDER.'/install']		="setup/install";
-	$route[ADMIN_URL_FOLDER.'/uninstall']	="setup/uninstall";
+	$route[ADMIN_URL_FOLDER.'/install']		="AE_Setup/install";
+	$route[ADMIN_URL_FOLDER.'/uninstall']	="AE_Setup/uninstall";
 }
 
-$route[ADMIN_URL_FOLDER]						="dashboard";
-$route[ADMIN_URL_FOLDER."/dashboard"]		="dashboard";
-$route[ADMIN_URL_FOLDER."/user"]				="users";
-$route[ADMIN_URL_FOLDER."/login"]			="login";
-$route[ADMIN_URL_FOLDER."/change_pass"]	="change_pass";
-$route[ADMIN_URL_FOLDER."/logout"]			="logout";
-$route[ADMIN_URL_FOLDER."/access"]			="access";
-$route[ADMIN_URL_FOLDER."/module"]			="module";
-$route[ADMIN_URL_FOLDER."/hit_counter"]	="hit_counter";
-$route[ADMIN_URL_FOLDER."/log"]				="log";
+$route[ADMIN_URL_FOLDER]						="AE_Dashboard";
+$route[ADMIN_URL_FOLDER."/dashboard"]		="AE_Dashboard";
+$route[ADMIN_URL_FOLDER."/user"]				="AE_Users";
+$route[ADMIN_URL_FOLDER."/login"]			="AE_Login";
+$route[ADMIN_URL_FOLDER."/change_pass"]	="AE_Change_Pass";
+$route[ADMIN_URL_FOLDER."/logout"]			="AE_Logout";
+$route[ADMIN_URL_FOLDER."/access"]			="AE_Access";
+$route[ADMIN_URL_FOLDER."/module"]			="AE_Module";
+$route[ADMIN_URL_FOLDER."/hit_counter"]	="AE_Hit_Counter";
+$route[ADMIN_URL_FOLDER."/log"]				="AE_Log";
 
-$route[ADMIN_URL_FOLDER."/post"]			="post";
+$route[ADMIN_URL_FOLDER."/post"]			="AE_Post";
 
 $route["retry"]="retry";
 

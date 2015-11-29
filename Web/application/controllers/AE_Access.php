@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Access extends Burge_CMF_Controller {
+class AE_Access extends Burge_CMF_Controller {
 
 	function __construct()
 	{
