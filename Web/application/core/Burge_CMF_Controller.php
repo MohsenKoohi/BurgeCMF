@@ -69,8 +69,8 @@ class Burge_CMF_Controller extends CI_Controller{
 			$this->data=get_initialized_data(TRUE);	
 
 			$this->data['header_title']=$this->lang->line("header_title");
-			$this->data['header_description']=$this->lang->line("header_description");
-			$this->data['header_keywords']=$this->lang->line("header_keywords");
+			$this->data['header_meta_description']=$this->lang->line("header_meta_description");
+			$this->data['header_meta_keywords']=$this->lang->line("header_meta_keywords");
 
 		}
 		
