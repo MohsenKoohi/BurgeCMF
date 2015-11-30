@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html dir="rtl" lang="en">
+<html dir="ltr" lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="keywords" content="{header_meta_keywords}"/>
@@ -9,7 +9,9 @@
   <?php } ?>
   <meta name="viewport" content="width=device-width,initial-scale=1, user-scalable=yes">
   <title>{header_title}</title>
-  <link rel="canonical" href="{header_canonical_url}"/>
+  <?php if(isset($header_canonical_url) && $header_canonical_url) {?> 
+    <link rel="canonical" href="{header_canonical_url}"/>
+  <?php } ?>
   <?php 
     if(isset($lang_pages))
     { if(sizeof($lang_pages)>1) 
