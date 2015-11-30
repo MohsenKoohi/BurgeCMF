@@ -64,7 +64,7 @@ class Burge_CMF_Controller extends CI_Controller{
 				$this->hit_counter_model->count($parts,$this->hit_level);
 			}
 
-			$this->lang->load('ae_general',$this->selected_lang);	
+			$this->lang->load('ce_general',$this->selected_lang);	
 
 			$this->data=get_initialized_data(TRUE);	
 
