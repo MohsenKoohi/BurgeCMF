@@ -14,14 +14,13 @@ class CE_Home extends Burge_CMF_Controller {
 		
 		$this->lang->load('customer_home',$this->selected_lang);	
 
-		$this->data['lang_pages']=get_lang_pages(get_link("home_link",TRUE));
+		$this->data['lang_pages']=get_lang_pages(get_link("home_url",TRUE));
 		
 		$this->data['header_title'].=$this->lang->line("header_title");
 		$this->data['header_description'].=$this->lang->line("header_description");
 		$this->data['header_keywords'].=$this->lang->line("header_keywords");
 
-		$this->data['header_canonical_url']=get_link("home_link");
-		
+		$this->data['header_canonical_url']=get_link("home_url");
 
 		$this->send_customer_output("home");
 
