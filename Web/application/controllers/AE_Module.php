@@ -12,7 +12,7 @@ class AE_Module extends Burge_CMF_Controller {
 	{
 		$this->load->model("module_manager_model");
 
-		$this->lang->load('admin_module',$this->selected_lang);
+		$this->lang->load('ae_module',$this->selected_lang);
 
 		$this->data['modules_info']=$this->module_manager_model->get_all_modules_info($this->selected_lang);
 	

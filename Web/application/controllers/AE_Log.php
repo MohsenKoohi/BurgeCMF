@@ -11,7 +11,7 @@ class AE_Log extends Burge_CMF_Controller {
 	public function index()
 	{
 		
-		$this->lang->load('admin_log',$this->selected_lang);
+		$this->lang->load('ae_log',$this->selected_lang);
 
 		$this->data['logs']=$this->log_manager_model->get_today_logs(2,30);
 	

@@ -24,7 +24,7 @@ class AE_Post extends Burge_CMF_Controller {
 		$this->load->model("user_manager_model");
 		$this->load->model("module_manager_model");
 
-		$this->lang->load('admin_access',$this->selected_lang);
+		$this->lang->load('ae_access',$this->selected_lang);
 
 		$this->data['users_info']=$this->user_manager_model->get_all_users_info();
 		$this->data['modules_info']=$this->module_manager_model->get_all_modules_info($this->selected_lang);

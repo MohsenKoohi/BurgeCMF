@@ -139,7 +139,7 @@ class Module_manager_model extends CI_Model
 		$CI=& get_instance();
 		foreach($CI->language->get_languages() as $lang => $value)
 		{
-			$CI->lang->load('modules',$lang);
+			$CI->lang->load('ae_all_modules',$lang);
 			$name=$CI->lang->line($module_id);
 			$this->add_module_name($module_id,$lang,$name);
 		}
@@ -186,7 +186,7 @@ class Module_manager_model extends CI_Model
 	{
 		$CI=& get_instance();
 		$lang=$CI->language->get();
-		$CI->lang->load('admin_module',$lang);		
+		$CI->lang->load('ae_module',$lang);		
 		
 		$data=array();
 		$data['modules']=$this->get_all_modules_info($lang);

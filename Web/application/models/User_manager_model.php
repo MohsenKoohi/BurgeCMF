@@ -332,7 +332,7 @@ class User_manager_model extends CI_Model
 	{
 		$CI=& get_instance();
 		$lang=$CI->language->get();
-		$CI->lang->load('admin_user',$lang);		
+		$CI->lang->load('ae_user',$lang);		
 		
 		$data=array();
 		$data['users']=$this->get_all_users_info();

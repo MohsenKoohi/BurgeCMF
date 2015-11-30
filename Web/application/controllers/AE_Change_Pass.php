@@ -10,7 +10,7 @@ class AE_Change_Pass extends Burge_CMF_Controller {
 
 	public function index()
 	{
-		$this->lang->load('admin_change_pass',$this->selected_lang);
+		$this->lang->load('ae_change_pass',$this->selected_lang);
 
 		if($this->input->post())
 		{

@@ -18,7 +18,7 @@ class AE_Login extends CI_Controller {
 		}
 		
 		$lang=$this->language->get();
-		$this->lang->load('admin_login',$lang);
+		$this->lang->load('ae_login',$lang);
 
 		if($this->input->post())
 		{

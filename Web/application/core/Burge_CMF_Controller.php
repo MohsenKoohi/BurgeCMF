@@ -50,7 +50,7 @@ class Burge_CMF_Controller extends CI_Controller{
 		if($this->in_admin_env)
 		{
 			//setting initial common data for the admin env
-			$this->lang->load('admin_general',$this->selected_lang);	
+			$this->lang->load('ae_general',$this->selected_lang);	
 
 			$this->data=get_initialized_data(FALSE);
 			$this->data['user_logged_in']=TRUE;
@@ -64,7 +64,7 @@ class Burge_CMF_Controller extends CI_Controller{
 				$this->hit_counter_model->count($parts,$this->hit_level);
 			}
 
-			$this->lang->load('customer_general',$this->selected_lang);	
+			$this->lang->load('ae_general',$this->selected_lang);	
 
 			$this->data=get_initialized_data(TRUE);	
 

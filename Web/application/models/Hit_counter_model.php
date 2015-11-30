@@ -127,7 +127,7 @@ class Hit_counter_model extends CI_Model
 	{
 		$CI=& get_instance();
 		$lang=$CI->language->get();
-		$CI->lang->load('admin_hit_counter',$lang);		
+		$CI->lang->load('ae_hit_counter',$lang);		
 		
 		$data=array();
 		$data['month_text']=$CI->lang->line("monthly_visit");

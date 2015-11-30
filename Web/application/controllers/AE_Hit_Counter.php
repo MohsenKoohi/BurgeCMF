@@ -12,7 +12,7 @@ class AE_Hit_Counter extends Burge_CMF_Controller {
 	{
 		$this->load->model("hit_counter_model");
 		
-		$this->lang->load('admin_hit_counter',$this->selected_lang);
+		$this->lang->load('ae_hit_counter',$this->selected_lang);
 
 		$this->data['counters_info']=$this->hit_counter_model->get_all_counts();
 	

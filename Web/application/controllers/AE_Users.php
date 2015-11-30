@@ -12,7 +12,7 @@ class AE_Users extends Burge_CMF_Controller {
 	{
 		$this->load->model("user_manager_model");
 
-		$this->lang->load('admin_user',$this->selected_lang);
+		$this->lang->load('ae_user',$this->selected_lang);
 
 		if($this->input->post())
 		{

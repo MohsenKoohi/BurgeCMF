@@ -41,7 +41,7 @@ class AE_Dashboard extends Burge_CMF_Controller {
 			);
 		}
 
-		$this->lang->load('admin_dashboard',$this->selected_lang);		
+		$this->lang->load('ae_dashboard',$this->selected_lang);		
 		
 		$this->data['lang_pages']=get_lang_pages(get_link("admin_dashboard",TRUE));
 		$this->data['header_title']=$this->lang->line("dashboard");

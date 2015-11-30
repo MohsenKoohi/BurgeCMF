@@ -162,7 +162,7 @@ class Log_manager_model extends CI_Model
 	{
 		$CI=& get_instance();
 		$lang=$CI->language->get();
-		$CI->lang->load('admin_log',$lang);		
+		$CI->lang->load('ae_log',$lang);		
 		
 		$data=array();
 		$data['logs']=$this->get_today_logs(2,8);
