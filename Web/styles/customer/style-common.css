@@ -13,8 +13,8 @@ darkblue #014083
 		url('../fonts/koodak/koodak.ttf')  format('truetype')
 }
 
-*/
 
+*/
 *
 {
 	margin:0px;
@@ -540,11 +540,15 @@ body .top-menu > ul > li, body.rtl .top-menu > ul > li
 	}
 }
 
-.main h1
+.main h1,.main h3,.main h5
 {
 	color:#0C7B77
 }
 
+.main h2,.main h4,.main h6
+{
+	color:#C63672
+}
 
 a, a.clicked
 {
