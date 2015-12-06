@@ -40,7 +40,7 @@ class Log_manager_model extends CI_Model
 		,"USER_LOGIN"				=>404
 		,"USER_LOGOUT"				=>405
 		,"USER_CHANGE_PROPS"		=>406
-		);
+	);
 
 	public function __construct()
 	{
@@ -230,7 +230,7 @@ class Log_manager_model extends CI_Model
 		{
 			$context["active_user_id"]=$CI->user->get_id();
 			//$context["active_user_code"]=$CI->user->get_id();
-			$context["active_user_name"]=$CI->user->get_id();
+			$context["active_user_name"]=$CI->user->get_name();
 			//$context["active_user_email"]=$CI->user->get_email();
 		}
 
