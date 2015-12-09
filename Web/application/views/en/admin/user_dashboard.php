@@ -4,7 +4,7 @@
 		$i=1;
 		foreach($users as $us)
 		{
-			echo "<li>".$us['user_email']."</li>";
+			echo "<li>".$us['user_name']."</li>";
 			if($i++>5)
 				break;
 		}

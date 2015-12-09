@@ -3,6 +3,11 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Burge_CMF_Controller extends CI_Controller{
+	//here we require to set/unset if we want to initialize session 
+	//and sending headers to the browser or not
+	//since some times we want to redirect for example for short links
+	//but CodeIgniter always sends headers, which prevents some bots to be redirected
+
 	public $user;
 	
 	protected $selected_lang;

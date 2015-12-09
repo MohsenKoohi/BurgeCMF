@@ -4,7 +4,7 @@ class User_manager_model extends CI_Model
 	private $user_info=NULL;
 	private $user_info_initialized=FALSE;
 	private $user_props_can_be_written=array("user_email","user_name","user_code","user_pass");
-	private $user_props_can_be_read=array("user_id","user_email","user_name","user_code","user_pass");
+	private $user_props_can_be_read=array("user_id","user_email","user_name","user_code");
 	private $user_props_can_be_modified_directly=array("user_name","user_code");
 
 	public function __construct()
