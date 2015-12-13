@@ -1,5 +1,5 @@
 <?php 
-
+$lang['comma']="،";
 $lang['submit']="ثبت";
 $lang['email']="پست الکترونیک";
 $lang['delete']="حذف";
