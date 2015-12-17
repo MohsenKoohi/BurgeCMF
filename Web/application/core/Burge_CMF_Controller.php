@@ -90,7 +90,32 @@ class Burge_CMF_Controller extends CI_Controller{
 
 		//loading side menu items
 		$this->load->model("module_manager_model");
-		$this->data['side_menu_modules']=$this->module_manager_model->get_user_modules_names($this->user->get_id());
+		
+		$modules=$this->module_manager_model->get_user_modules_names($this->user->get_id());
+
+		//some modules may have a number or text which may change in different times
+		//and like the user knows it changes. for example for messages module
+		//but since it requires all modules to be loaded,  it increases the process
+		//time and we don't run by default
+		if(FALSE)
+			foreach ($modules as &$module)
+			{
+				$module_id=$module['id'];
+				$model_name=$module['model'];
+				if(!$model_name)
+					continue;
+				$this->load->model($model_name."_model");
+				$model=$this->{$model_name."_model"};
+
+				if(!method_exists($model, "get_sidebar_text"))
+					continue;
+
+				$text=$model->{"get_sidebar_text"}($module_id);
+
+				$module['name'].=$text;
+			}
+
+		$this->data['side_menu_modules']=$modules;
 	
 		$this->load->library('parser');
 		$this->parser->parse($this->get_admin_view_file("header"),$this->data);

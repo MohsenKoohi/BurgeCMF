@@ -46,4 +46,11 @@ class Example_manager_model extends CI_Model
 	}
 
 
+	public function get_sidebar_text($module_id)
+	{
+		return "";
+	}
+
+
+
 }
