@@ -56,7 +56,9 @@ $route[ADMIN_URL_FOLDER."/module"]			="AE_Module";
 $route[ADMIN_URL_FOLDER."/hit_counter"]	="AE_Hit_Counter";
 $route[ADMIN_URL_FOLDER."/log"]				="AE_Log";
 
-$route[ADMIN_URL_FOLDER."/post"]			="AE_Post";
+$route[ADMIN_URL_FOLDER."/post"]					="AE_Post";
+$route[ADMIN_URL_FOLDER."/post/search"]		="AE_Post/search";
+$route[ADMIN_URL_FOLDER."/post/(\d+)"]			="AE_Post/details/$1";
 
 $route["retry"]="retry";
 

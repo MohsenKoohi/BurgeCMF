@@ -900,6 +900,12 @@ body.ltr .tabs li
 	border-radius: 5px 5px 0 0;
 }
 
+.tab-iframe
+{
+	width:100%;
+	border:0;
+}
+
 @media (max-width: 600px)
 {
 	.tabs a

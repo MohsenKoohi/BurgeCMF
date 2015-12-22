@@ -1,6 +1,8 @@
 <?php
 class Post_manager_model extends CI_Model
 {
+	private $post_table_name="post";
+	private $post_content_table_name="post_content";
 	public function __construct()
 	{
 		parent::__construct();
@@ -11,20 +13,19 @@ class Post_manager_model extends CI_Model
 	public function install()
 	{
 
-		$post_table=$this->db->dbprefix('post'); 
+		$post_table=$this->db->dbprefix($this->post_table_name); 
 		$this->db->query(
 			"CREATE TABLE IF NOT EXISTS $post_table (
 				`post_id` INT  NOT NULL AUTO_INCREMENT
 				,`post_creator_uid` INT NOT NULL DEFAULT 0
 				,`post_active` TINYINT NOT NULL DEFAULT 1
 				,`post_allow_comment` TINYINT NOT NULL DEFAULT 0
-				,`post_publication_date` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'
 				,`post_comment_count` INT NOT NULL DEFAULT 0
 				,PRIMARY KEY (post_id)	
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8"
 		);
 
-		$post_content_table=$this->db->dbprefix('post_content'); 
+		$post_content_table=$this->db->dbprefix($this->post_content_table_name); 
 		$this->db->query(
 			"CREATE TABLE IF NOT EXISTS $post_content_table (
 				`pc_post_id` INT  NOT NULL
