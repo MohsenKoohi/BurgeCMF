@@ -656,6 +656,15 @@ body.rtl .even-odd-bg > div
 	padding:2px 2px 2px 10px;
 }
 
+.row.even-odd-bg .counter {
+    font-size: 1.5em;
+    color: #0C7B77;
+}
+
+.row.even-odd-bg:nth-child(2n+2) .counter {
+    color: #C63672;
+}
+
 .checkbox-holder{
 	vertical-align: middle;;
 	position: relative;
