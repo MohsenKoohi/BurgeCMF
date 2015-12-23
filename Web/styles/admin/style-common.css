@@ -630,7 +630,13 @@ input[type="file"] > input[type="button"]::-moz-focus-inner
 	transition: font-size .1s;
 }
 
-.row.even-odd-bg .button-primary.sub-primary
+.even-odd-bg > div
+{
+	text-overflow: ellipsis;
+	overflow:hidden
+}
+
+.row.even-odd-bg .sub-primary
 {
 	font-size: 1.1em;
 	padding:0;

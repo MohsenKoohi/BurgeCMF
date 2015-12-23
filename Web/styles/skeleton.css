@@ -151,6 +151,7 @@ body.rtl .column,body.rtl .columns
 
 
 
+
 /* Base Styles
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 /* NOTE
@@ -268,7 +269,7 @@ input[type="reset"].button-primary,
 input[type="button"].button-primary {
   color: #FFF;
   background-color: #0C7B77;
-  border-color: #0C7B77;
+  border-color: #024240;
   transition: background-color .3s,color .3s;
    }
 .button.button-primary:hover,
@@ -283,11 +284,26 @@ input[type="reset"].button-primary:focus,
 input[type="button"].button-primary:focus {
   color: #FFF;
   background-color: #C63672;
-  border-color: #C63672;
+  border-color: #8D1648;
   transition: background-color .3s,color .3s;
 }
 
+.button.button-delete
+{
+  color: #FFF;
+  background-color: #9E8632;
+  border-color: #745E12;
+  transition: background-color .3s,color .3s;
+}
 
+.button.button-delete:focus,
+.button.button-delete:hover
+{
+  color: #FFF;
+  background-color: #872E36;
+  border-color: #790914;
+  transition: background-color .3s,color .3s;
+}
 
 /* Clearing
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
