@@ -16,6 +16,7 @@ class AE_Access extends Burge_CMF_Controller {
 
 		$this->lang->load('ae_access',$this->selected_lang);
 
+		$this->data['message']=get_message();
 		$this->data['users_info']=$this->user_manager_model->get_all_users_info();
 		$this->data['modules_info']=$this->module_manager_model->get_all_modules_info($this->selected_lang);
 		
