@@ -291,8 +291,8 @@ input[type="button"].button-primary:focus {
 .button.button-delete
 {
   color: #FFF;
-  background-color: #9E8632;
-  border-color: #745E12;
+  background-color: #555;
+  border-color: #000;
   transition: background-color .3s,color .3s;
 }
 
@@ -303,6 +303,41 @@ input[type="button"].button-primary:focus {
   background-color: #872E36;
   border-color: #790914;
   transition: background-color .3s,color .3s;
+}
+
+.button-type2
+{
+  background-color: #73012F;
+  border-color:#73012F;
+  color:white;
+  transition:background-color .3s;
+  padding:2px 5px;
+  border-radius: 4px;
+}
+
+.button-type2:hover
+{
+  color:white;
+  background-color: #A40344;
+  border-color:#73012F;
+  transition:background-color .3s;
+}
+.button-type1
+{
+  background-color: #137013;
+  border-color: #137013;
+  color:white;
+  transition:background-color .3s;
+  padding:2px 5px;
+  border-radius: 4px;
+}
+
+.button-type1:hover
+{
+  color:white;
+  border-color: #137013;
+  background-color: #1DA01D;
+  transition:background-color .3s;
 }
 
 /* Clearing
