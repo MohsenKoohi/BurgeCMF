@@ -583,7 +583,7 @@ function select_allowed_elements($cand ,$main_indexes)
 {
 	$result=array();
 	foreach ($main_indexes as $index) 
-		if(isset($cand[$index]))
+		if(array_key_exists($index,$cand))
 			$result[$index]=$cand[$index];
 
 	return $result;
