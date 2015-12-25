@@ -257,8 +257,8 @@ button:focus,
 input[type="submit"]:focus,
 input[type="reset"]:focus,
 input[type="button"]:focus {
-  color: #333;
-  border-color: #888;
+  //color: #333;
+  //border-color: #888;
   outline: 0;
 transition: background-color .3s,color .3s;
 }
@@ -276,12 +276,13 @@ input[type="button"].button-primary {
 button.button-primary:hover,
 input[type="submit"].button-primary:hover,
 input[type="reset"].button-primary:hover,
-input[type="button"].button-primary:hover,
-.button.button-primary:focus,
+input[type="button"].button-primary:hover
+
+/*,.button.button-primary:focus,
 button.button-primary:focus,
 input[type="submit"].button-primary:focus,
 input[type="reset"].button-primary:focus,
-input[type="button"].button-primary:focus {
+input[type="button"].button-primary:focus */{
   color: #FFF;
   background-color: #C63672;
   border-color: #8D1648;
