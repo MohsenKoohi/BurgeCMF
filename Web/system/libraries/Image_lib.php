@@ -1203,7 +1203,7 @@ class CI_Image_lib {
 
 		// Set RGB values for text and shadow
 		$rgba = imagecolorat($wm_img, $this->wm_x_transp, $this->wm_y_transp);
-		$alpha = ($rgba & 0x7F000000) >> 24;
+		$alpha =0xFF;// ($rgba & 0x7F000000) >> 24;
 
 		// make a best guess as to whether we're dealing with an image with alpha transparency or no/binary transparency
 		if ($alpha > 0)

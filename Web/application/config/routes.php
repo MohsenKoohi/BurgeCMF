@@ -61,6 +61,7 @@ $route[ADMIN_URL_FOLDER."/post/search"]		="AE_Post/search";
 $route[ADMIN_URL_FOLDER."/post/(\d+)"]			="AE_Post/details/$1";
 
 $route["retry"]="retry";
+$route["watermark"]="CE_Watermark";
 
 $route[urlencode('ثبت')]="register";
 $route['register/request_pay/(.*)']="register/request_pay/$1";

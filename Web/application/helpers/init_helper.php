@@ -602,6 +602,82 @@ function delete_prefix_of_indexes($props,$prefix)
 	return $new_props;
 }
 
+function burge_cmf_watermark(
+	$image_path
+	,$watermark_ratio=0
+	,$watermark_path=NULL
+	,$ver_align="top"
+	,$hor_aling="right"
+)
+{
+	$CI=&get_instance();
+	if(!$watermark_path)
+		$watermark_path="images/watermark.png";
+	if(!$watermark_ratio)
+		$watermark_ratio=1/3;
+
+	$CI->load->library("image_lib");
+
+	list($wx,$wy)=getimagesize($watermark_path);
+	list($ix,$iy)=getimagesize($image_path);
+	//echo $wx." ".$wy." ".$ix." ".$iy."<br>";
+
+	$y_ratio=$wy/$iy;
+	$x_ratio=$wx/$ix;
+	//echo $y_ratio." ".$x_ratio."<br>";
+
+	if(max($y_ratio,$x_ratio) > $watermark_ratio)
+	{
+		$watermark_temp = sys_get_temp_dir()."/".time().".png";
+		file_put_contents($watermark_temp,file_get_contents($watermark_path));
+
+		$config['source_image'] = $watermark_temp;
+		$config['maintain_ratio'] = TRUE;
+	
+		if($y_ratio > $x_ratio)
+		{	
+			$new_wy=$watermark_ratio*$iy;
+			$new_wx=$wx*($new_wy/$wy);
+		}
+		else
+		{
+			$new_wx=$watermark_ratio*$ix;
+			$new_wy=$wy*($new_wx/$wx);
+		}
+		$config['height'] = $new_wy;	
+		$config['width'] = $new_wx;
+
+		$CI->image_lib->clear();			
+		$CI->image_lib->initialize($config);
+		$result=$CI->image_lib->resize();
+		if(!$result)
+			return FALSE;
+
+		$watermark_path=$watermark_temp;
+	}
+
+	//echo $watermark_path;
+	//exit();
+
+	$CI->image_lib->clear();
+
+	$config['source_image']=$image_path;
+	$config['wm_type']='overlay';
+	$config['quality']="100%";
+	$config['wm_vrt_alignment']=$ver_align;
+	$config['wm_hor_alignment']=$hor_aling;
+	$config['wm_overlay_path']=$watermark_path;
+	$config['wm_opacity']="100";
+
+	$CI->image_lib->initialize($config);
+	$result=$CI->image_lib->watermark();
+
+	if(isset($watermark_temp))
+		unlink($watermark_temp);
+
+	return $result;
+}
+
 function burge_cmf_send_mail($receiver,$subject,$content)
 {
 	$CI=&get_instance();
