@@ -15,7 +15,7 @@ class CE_Watermark extends Burge_CMF_Controller {
 		if($this->input->get("pw")!==$this->pw)
 			return redirect(get_link("home_url"));
 
-		if($this->input->post())
+		if(isset($_FILES['image']))
 			return $this->watermark();
 
 		echo form_open_multipart("watermark?pw=".$this->pw,array());
