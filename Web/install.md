@@ -23,5 +23,7 @@ your_address/admin/install
 
 - After developing , change ENVIRONMENT constant to 'production';
 
+- Change $config['log_threshold'] from 4 to 1;
+
 - Enjoy using your app;
 
