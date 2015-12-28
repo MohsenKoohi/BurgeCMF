@@ -18,7 +18,7 @@ class Post_manager_model extends CI_Model
 			"CREATE TABLE IF NOT EXISTS $post_table (
 				`post_id` INT  NOT NULL AUTO_INCREMENT
 				,`post_creator_uid` INT NOT NULL DEFAULT 0
-				,`post_active` TINYINT NOT NULL DEFAULT 1
+				,`post_active` TINYINT NOT NULL DEFAULT 0
 				,`post_allow_comment` TINYINT NOT NULL DEFAULT 0
 				,`post_comment_count` INT NOT NULL DEFAULT 0
 				,PRIMARY KEY (post_id)	
@@ -63,5 +63,31 @@ class Post_manager_model extends CI_Model
 		$ret=$CI->parser->parse($CI->get_admin_view_file("hit_counter_dashboard"),$data,TRUE);
 		
 		return $ret;		
+	}
+
+	public function add_post()
+	{
+		$user=$this->user_manager_model->get_user_info();
+
+		$props=array(
+			"post_creator_uid"=>$user->get_id()
+		);
+
+		$this->db->insert($this->post_table_name,$props);
+		
+		$new_post_id=$this->db->insert_id();
+		$props['post_id']=$new_post_id;
+
+		$this->log_manager_model->info("POST_ADD",$props);	
+
+		$post_contents=array();
+		foreach($this->language->get_languages() as $index=>$lang)
+			$post_content[]=array(
+				"pc_post_id"=>$new_post_id
+				,"pc_lang_id"=>$index
+			);
+		$this->db->insert_batch($this->post_content_table_name,$post_content);
+
+		return $new_post_id;
 	}
 }

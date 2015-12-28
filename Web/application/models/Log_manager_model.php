@@ -40,6 +40,9 @@ class Log_manager_model extends CI_Model
 		,"USER_LOGIN"				=>404
 		,"USER_LOGOUT"				=>405
 		,"USER_CHANGE_PROPS"		=>406
+
+		,"POST_ADD"					=>501
+		,"POST_CHANGE"				=>502
 	);
 
 	public function __construct()

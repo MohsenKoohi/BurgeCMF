@@ -6,11 +6,19 @@ class AE_Post extends Burge_CMF_Controller {
 	{
 		parent::__construct();
 
+		$this->lang->load('ae_post',$this->selected_lang);
+		$this->load->model("post_manager_model");
+
 	}
 
 	public function index()
 	{
 		$this->lang->load('ae_post',$this->selected_lang);
+
+		if($this->input->post("post_type")==="add_post")
+			return $this->add_post();
+
+		$this->set_posts_info();
 
 		$this->data['lang_pages']=get_lang_pages(get_link("admin_post",TRUE));
 		$this->data['header_title']=$this->lang->line("posts");
@@ -18,11 +26,22 @@ class AE_Post extends Burge_CMF_Controller {
 		$this->send_admin_output("post");
 
 		return;	 
+	}	
+
+	private function set_posts_info()
+	{
+		$filters=array();
+
+		$this->data['posts_info']=$this->post_manager_model->get_posts_info($filter);
+
+		return;
 	}
 
-	public function search()
+	private function add_post()
 	{
-		echo "<a href='".get_admin_post_details_link(12)."' onclick='window.parent.window.show_post_details(12);'>Click</a>";
+		$post_id=$this->post_manager_model->add_post();
+
+		return redirect(get_admin_post_details_link($post_id));
 	}
 
 	public function details($id)

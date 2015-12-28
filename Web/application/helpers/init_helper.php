@@ -35,7 +35,6 @@ function &get_links($just_common=FALSE)
 			,'admin_log'				=> ADMIN_SURL_LANG."/log"
 			
 			,'admin_post'						=> ADMIN_SURL_LANG."/post"
-			,'admin_post_search'				=> ADMIN_SURL_LANG."/post/search"
 			,'admin_post_details_format'	=> ADMIN_SURL_LANG."/post/post_id"
 		));
 	}
@@ -614,7 +613,7 @@ function burge_cmf_watermark(
 	if(!$watermark_path)
 		$watermark_path="images/watermark.png";
 	if(!$watermark_ratio)
-		$watermark_ratio=1/3;
+		$watermark_ratio=1/4;
 
 	$CI->load->library("image_lib");
 
