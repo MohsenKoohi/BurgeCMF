@@ -31,8 +31,9 @@ class AE_Post extends Burge_CMF_Controller {
 	private function set_posts_info()
 	{
 		$filters=array();
+		$filters['lang']=$this->language->get();
 
-		$this->data['posts_info']=$this->post_manager_model->get_posts_info($filter);
+		$this->data['posts_info']=$this->post_manager_model->get_posts($filters);
 
 		return;
 	}

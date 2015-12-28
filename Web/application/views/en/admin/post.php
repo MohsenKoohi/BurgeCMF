@@ -10,18 +10,24 @@
 				</form>
 			</div>
 		</div>
-
-
+		<br><br>
 		<div class="container">
-			<div class="row even-odd-bg" >
-				<div class="three columns">
-					<label>{module_id_text}</label>
-				</div>
-				<div class="three columns">
-					<label>{module_name_text}</label>
-				</div>
-			</div>
-			
+			<?php foreach($posts_info as $post) { ?>
+				<a target="_blank" href="<?php echo get_admin_post_details_link($post['post_id']);?>">
+					<div class="row even-odd-bg" >
+						<div class="nine columns">
+							<span>
+								<?php 
+									if($post['pc_title']) 
+										echo $post['pc_title'];
+									else
+										echo $no_title_text;
+								?>
+							</span>
+						</div>
+					</div>
+				</a>
+			<?php } ?>
 		</div>
 
 	</div>

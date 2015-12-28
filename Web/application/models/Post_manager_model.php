@@ -90,4 +90,28 @@ class Post_manager_model extends CI_Model
 
 		return $new_post_id;
 	}
+
+	public function get_posts($filter)
+	{
+		$this->db->from($this->post_table_name);
+		$this->db->join($this->post_content_table_name,"post_id = pc_post_id","left");
+		
+		$this->set_post_query_filter($filter);
+		
+		$this->db->order_by("post_id DESC");
+		$results=$this->db->get();
+
+		return $results->result_array();
+	}
+
+	private function set_post_query_filter($filter)
+	{
+		if(isset($filter['lang']))
+			$this->db->where("pc_lang_id",$filter['lang']);
+
+		if(isset($filter['lang']))
+			$this->db->group_by("post_id");
+	
+		return;
+	}
 }
