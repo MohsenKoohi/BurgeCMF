@@ -6,18 +6,17 @@ class AE_Constant extends Burge_CMF_Controller {
 	{
 		parent::__construct();
 
+		$this->load->model("constant_manager_model");
 	}
 
 	public function index()
 	{
-		$this->load->model("constant_manager_model");
-
 		$this->lang->load('ae_constant',$this->selected_lang);
 
 		if($this->input->post())
 		{
 			if($this->input->post("post_type") === "constants_list")
-				return $this->set_constants();
+				return $this->modify_constants();
 
 			if($this->input->post("post_type") === "add_constant")
 				return $this->add_constant();	
@@ -47,56 +46,49 @@ class AE_Constant extends Burge_CMF_Controller {
 		{
 			$res=$this->constant_manager_model->set($key,$value);
 			
-			$this->data['message']=$this->lang->line("added_successfully");
+			set_message($this->lang->line("added_successfully"));
 		}
 
-		return;
+		return redirect(get_link("admin_constant"));
 	}
 
-	private function modify_users()
+	private function modify_constants()
 	{
 		$res=FALSE;
-		$users=$this->user_manager_model->get_all_users_info();
-		foreach ($users as $user)
+		$constants=$this->constant_manager_model->get_all();
+		foreach ($constants as $cons)
 		{
-			$uid=$user['user_id'];
+			$key=$cons['constant_key'];
 
 			//check if user has been deleted
-			$delete_string="delete_user_id_".$uid;
+			$delete_string="delete_".$key;
 			$post_delete=$this->input->post($delete_string);
 			if($post_delete==="on")
 			{
-				$this->user_manager_model->delete_user($uid,$user['user_email']);
+				$this->constant_manager_model->delete($key);
 				$res=TRUE;
 
 				continue;
 			}
 
-			//check if password has been changed
-			$pass_string="pass_user_id_".$uid;
-			$post_pass=$this->input->post($pass_string);
-			$post_pass=trim($post_pass);
-			if($post_pass)
-			{
-				$this->user_manager_model->change_user_pass($user['user_email'],$post_pass);
-				$res=TRUE;		
-			}
+			$changed_string="changed_".$key;
+			$post_changed=$this->input->post($changed_string);
+			if($post_changed !== "on")
+				continue;
 
-			//name and code changes
-			$name=$this->input->post("name_user_id_".$uid);
-			$code=$this->input->post("code_user_id_".$uid);
-			if($name && $code)
+			$value_string="value_".$key;
+			$post_value=$this->input->post($value_string);
+			$value=trim($post_value);
+			if($value)
 			{
-				$this->user_manager_model->change_user_props($uid,array(
-					"user_name"=>$name
-					,"user_code"=>$code
-				));
-				$res=TRUE;
-			}
-			
+				$this->constant_manager_model->set($key,$value);
+				$res=TRUE;		
+			}			
 		}
 
 		if($res)
-			$this->data['message']=$this->lang->line("modfied_successfully");
+			set_message($this->lang->line("modified_successfully"));
+
+		return redirect(get_link("admin_constant"));
 	}
 }

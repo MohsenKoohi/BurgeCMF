@@ -56,17 +56,23 @@ class Constant_manager_model extends CI_Model
 		return;
 	}
 
+	public function delete($key)
+	{
+		$this->db->where("constant_key",$key);
+		$this->db->delete($this->constant_table_name);
+
+		return;
+	}
+
 	public function get($key)
 	{
-		$this->db->from($this->post_table_name);
-		$this->db->join($this->post_content_table_name,"post_id = pc_post_id","left");
-		
-		$this->set_post_query_filter($filter);
-		
-		$this->db->order_by("post_id DESC");
-		$results=$this->db->get();
+		$result=$this->db->get_where($this->constant_table_name,array("constant_key"=>$key));
+		$row=$result->row_array();
 
-		return $results->result_array();
+		if($row)
+			return $row['constant_value'];
+
+		return FALSE;
 	}
 
 }
