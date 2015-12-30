@@ -55,6 +55,7 @@ $route[ADMIN_URL_FOLDER."/access"]			="AE_Access";
 $route[ADMIN_URL_FOLDER."/module"]			="AE_Module";
 $route[ADMIN_URL_FOLDER."/hit_counter"]	="AE_Hit_Counter";
 $route[ADMIN_URL_FOLDER."/log"]				="AE_Log";
+$route[ADMIN_URL_FOLDER."/constant"]		="AE_Constant";
 
 $route[ADMIN_URL_FOLDER."/post"]					="AE_Post";
 $route[ADMIN_URL_FOLDER."/post/search"]		="AE_Post/search";

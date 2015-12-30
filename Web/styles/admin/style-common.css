@@ -746,7 +746,7 @@ body.rtl .even-odd-bg > div
   border-radius: inherit;
   background: silver;
   position: absolute;
-  right: 0%;
+  right: -1%;
   top: 0;
   background: #b2ac9e;
   background: linear-gradient(#f7f2f6, #b2ac9e);
@@ -756,6 +756,11 @@ body.rtl .even-odd-bg > div
       0 5px 5px rgba(0,0,0,0.2);
 
   transition: right .3s;
+}
+
+.even-odd-bg:not(.dont-magnify) .checkbox-holder label i
+{
+  box-shadow: none;
 }
 
 .checkbox-holder label i:after {
@@ -793,7 +798,7 @@ body.rtl .checkbox-holder label i:before {
 
 
 .checkbox-holder input:checked ~ label i {
-  right: 50%;
+  right: 51%;
   transition: right .3s;
 }
 

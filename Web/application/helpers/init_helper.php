@@ -33,6 +33,7 @@ function &get_links($just_common=FALSE)
 			,'admin_module'			=> ADMIN_SURL_LANG."/module"
 			,'admin_hit_counter'		=> ADMIN_SURL_LANG."/hit_counter"
 			,'admin_log'				=> ADMIN_SURL_LANG."/log"
+			,'admin_constant'			=> ADMIN_SURL_LANG."/constant"
 			
 			,'admin_post'						=> ADMIN_SURL_LANG."/post"
 			,'admin_post_details_format'	=> ADMIN_SURL_LANG."/post/post_id"

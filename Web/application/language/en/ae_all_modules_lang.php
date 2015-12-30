@@ -9,3 +9,4 @@ $lang['hit_counter']="Visiting Counters";
 $lang['dashboard']="Dashboard";
 $lang['post']="Posts";
 $lang['log']="Logs";
+$lang['constant']="Constant Values";
