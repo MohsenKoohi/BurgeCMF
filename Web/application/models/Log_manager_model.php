@@ -21,28 +21,32 @@ class Log_manager_model extends CI_Model
 		"UNKOWN"						=>0
 		,"NEW_VISIT"				=>1
 
-		,"CMF_INSTALL" 			=>101
-		,"CMF_UNINSTALL" 			=>102
+		,"CMF_INSTALL" 			=>21
+		,"CMF_UNINSTALL" 			=>22
 
-		,"MODULE_INSTALL"			=>201
-		,"MODULE_UNINSTALL"		=>202
-		,"MODULE_ADD"				=>203
-		,"MODULE_ADD_NAME"		=>204
+		,"MODULE_INSTALL"			=>51
+		,"MODULE_UNINSTALL"		=>52
+		,"MODULE_ADD"				=>53
+		,"MODULE_ADD_NAME"		=>54
 
-		,"ACCESS_ALLOW_USER"		=>301
-		,"ACCESS_UNSET_USER"		=>302
-		,"ACCESS_UNSET_MODULE"	=>303
-		,"ACCESS_CHECK"			=>304
+		,"ACCESS_ALLOW_USER"		=>81
+		,"ACCESS_UNSET_USER"		=>82
+		,"ACCESS_UNSET_MODULE"	=>83
+		,"ACCESS_CHECK"			=>84
 
-		,"USER_ADD"					=>401
-		,"USER_DELETE"				=>402
-		,"USER_CHANGE_PASS"		=>403
-		,"USER_LOGIN"				=>404
-		,"USER_LOGOUT"				=>405
-		,"USER_CHANGE_PROPS"		=>406
+		,"USER_ADD"					=>101
+		,"USER_DELETE"				=>102
+		,"USER_CHANGE_PASS"		=>103
+		,"USER_LOGIN"				=>104
+		,"USER_LOGOUT"				=>105
+		,"USER_CHANGE_PROPS"		=>106
 
-		,"POST_ADD"					=>501
-		,"POST_CHANGE"				=>502
+		,"CONSTANT_SET"			=>131
+		,"CONSTANT_UNSET"			=>132		
+
+		,"POST_ADD"					=>161
+		,"POST_CHANGE"				=>162
+
 	);
 
 	public function __construct()

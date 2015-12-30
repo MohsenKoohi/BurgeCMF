@@ -53,6 +53,8 @@ class Constant_manager_model extends CI_Model
 
 		$this->db->replace($this->constant_table_name,$props);
 
+		$this->log_manager_model->info("CONSTANT_SET",$props);
+
 		return;
 	}
 
@@ -60,6 +62,8 @@ class Constant_manager_model extends CI_Model
 	{
 		$this->db->where("constant_key",$key);
 		$this->db->delete($this->constant_table_name);
+
+		$this->log_manager_model->info("CONSTANT_UNSET",array("constant_key"=>$key));
 
 		return;
 	}
