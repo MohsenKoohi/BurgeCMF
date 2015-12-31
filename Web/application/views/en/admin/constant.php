@@ -52,7 +52,7 @@
 					</div>
 					<div class="six columns">
 						<label>{value_text}</label>
-						<input type="text" name="value" class="ltr eng full-width"/>
+						<input type="text" name="value" class="full-width"/>
 				</div>
 				<div class="row"></div>
 				<div class="row">
