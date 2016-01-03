@@ -861,6 +861,23 @@ body.ltr .dash-ul li:before
 	transition: color, .6s;
 }
 
+.general-buttons div
+{
+	font-size: 1.2em;
+}
+
+body.rtl .general-buttons div
+{
+	float:left;
+}
+
+body.ltr .general-buttons div
+{
+	float:right;
+}
+
+
+
 body.rtl .results-page-select,body.rtl .results-search-again
 {
 	float:left;

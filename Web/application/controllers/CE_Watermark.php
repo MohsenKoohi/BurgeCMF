@@ -39,6 +39,7 @@ class CE_Watermark extends Burge_CMF_Controller {
 
 		$extension=pathinfo($temp_path, PATHINFO_EXTENSION);
 		$this->output->set_content_type($extension);
+		$this->output->set_header("Content-Disposition: attachment; filename=wm_".$file_name);
 		$this->output->set_output(file_get_contents($temp_path));
 
 		//move_uploaded_file($image_path, "images/watermark/new.jpg");
