@@ -75,9 +75,9 @@ function get_link($page,$do_not_set_lang=FALSE)
 	return str_replace($lang_pattern,$lang, $ret_link);
 }
 
-function get_admin_post_details_link($post_id)
+function get_admin_post_details_link($post_id,$do_not_set_lang=FALSE)
 {
-	return str_replace("post_id",$post_id,get_link("admin_post_details_format"));	
+	return str_replace("post_id",$post_id,get_link("admin_post_details_format",$do_not_set_lang));	
 }
 
 

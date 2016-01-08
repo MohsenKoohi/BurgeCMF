@@ -3,6 +3,13 @@ class Post_manager_model extends CI_Model
 {
 	private $post_table_name="post";
 	private $post_content_table_name="post_content";
+	private $post_writable_props=array(
+		"post_active","post_allow_comment"
+	);
+	private $post_content_writable_props=array(
+		"pc_active","pc_keywords","pc_description","pc_title","pc_content"
+		);
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -113,5 +120,17 @@ class Post_manager_model extends CI_Model
 			$this->db->group_by("post_id");
 	
 		return;
+	}
+
+	public function get_post($post_id)
+	{
+		return $this->db
+			->select("post.* , post_content.* , user_name ")
+			->from("post")
+			->join("user","post_creator_uid = user_id","left")
+			->join("post_content","post_id = pc_post_id","left")
+			->where("post_id",$post_id)
+			->get()
+			->result_array();
 	}
 }

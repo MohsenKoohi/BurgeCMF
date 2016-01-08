@@ -13,8 +13,6 @@ class AE_Post extends Burge_CMF_Controller {
 
 	public function index()
 	{
-		$this->lang->load('ae_post',$this->selected_lang);
-
 		if($this->input->post("post_type")==="add_post")
 			return $this->add_post();
 
@@ -45,9 +43,20 @@ class AE_Post extends Burge_CMF_Controller {
 		return redirect(get_admin_post_details_link($post_id));
 	}
 
-	public function details($id)
+	public function details($post_id)
 	{
-		echo "<h1>Details ".$id."</h1>";
+		if($this->input->post("post_type")==="edit_post")
+			return $this->edit_post();
+
+		$this->data['post_id']=$post_id;
+		$this->data['post_info']=$this->post_manager_model->get_post($post_id);
+
+		$this->data['lang_pages']=get_lang_pages(get_admin_post_details_link($post_id,TRUE));
+		$this->data['header_title']=$this->lang->line("post_details")." ".$post_id;
+
+		$this->send_admin_output("post_details");
+
+		return;
 	}
 
 }

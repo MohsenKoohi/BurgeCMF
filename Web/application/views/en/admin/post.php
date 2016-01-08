@@ -2,7 +2,7 @@
 	<div class="container">
 		<h1>{posts_text}</h1>
 
-		<div class="row">
+		<div class="row general-buttons">
 			<div class="three columns">
 				<?php echo form_open(get_link("admin_post"),array());?>
 					<input type="hidden" name="post_type" value="add_post"/>
