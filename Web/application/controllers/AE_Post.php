@@ -49,7 +49,24 @@ class AE_Post extends Burge_CMF_Controller {
 			return $this->edit_post();
 
 		$this->data['post_id']=$post_id;
-		$this->data['post_info']=$this->post_manager_model->get_post($post_id);
+		$post_info=$this->post_manager_model->get_post($post_id);
+		$this->data['langs']=$this->language->get_languages();
+
+		$this->data['post_contents']=array();
+		foreach($this->data['langs'] as $lang => $val)
+			foreach($post_info as $pi)
+				if($pi['pc_lang_id'] === $lang)
+				{
+					$this->data['post_contents'][$lang]=$pi;
+					break;
+				}
+		$this->data['post_info']=array(
+			"post_allow_comment"=>$post_info[0]['post_allow_comment']
+			,"post_active"=>$post_info[0]['post_active']
+			,"user_name"=>$post_info[0]['user_name']
+			,"user_id"=>$post_info[0]['user_id']
+			,"post_title"=>$this->data['post_contents'][$this->language->get()]['pc_title']
+		);
 
 		$this->data['lang_pages']=get_lang_pages(get_admin_post_details_link($post_id,TRUE));
 		$this->data['header_title']=$this->lang->line("post_details")." ".$post_id;
