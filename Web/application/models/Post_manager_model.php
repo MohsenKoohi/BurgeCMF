@@ -125,7 +125,7 @@ class Post_manager_model extends CI_Model
 	public function get_post($post_id)
 	{
 		return $this->db
-			->select("post.* , post_content.* , user_name ")
+			->select("post.* , post_content.* , user_id, user_name ")
 			->from("post")
 			->join("user","post_creator_uid = user_id","left")
 			->join("post_content","post_id = pc_post_id","left")

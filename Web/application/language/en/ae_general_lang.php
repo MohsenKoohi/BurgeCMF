@@ -4,3 +4,4 @@ $lang['submit']="Submit";
 $lang['email']="Email";
 $lang['delete']="Delete";
 $lang['select']="Select";
+$lang['code']="Code";
