@@ -46,7 +46,7 @@ class AE_Post extends Burge_CMF_Controller {
 	public function details($post_id)
 	{
 		if($this->input->post("post_type")==="edit_post")
-			return $this->edit_post();
+			return $this->edit_post($post_id);
 
 		$this->data['post_id']=$post_id;
 		$post_info=$this->post_manager_model->get_post($post_id);
@@ -68,6 +68,7 @@ class AE_Post extends Burge_CMF_Controller {
 			,"post_title"=>$this->data['post_contents'][$this->language->get()]['pc_title']
 		);
 
+		$this->data['message']=get_message();
 		$this->data['lang_pages']=get_lang_pages(get_admin_post_details_link($post_id,TRUE));
 		$this->data['header_title']=$this->lang->line("post_details")." ".$post_id;
 
@@ -76,4 +77,34 @@ class AE_Post extends Burge_CMF_Controller {
 		return;
 	}
 
+	private function edit_post($post_id)
+	{
+		
+
+		$post_props=array();
+		$post_props['post_active']=(int)($this->input->post('post_active') === "on");
+		$post_props['post_allow_comment']=(int)($this->input->post('post_allow_comment') === "on");
+		
+		$post_content_props=array();
+		foreach($this->language->get_languages() as $lang=>$name)
+		{
+			$post_content=$this->input->post($lang);
+			$post_content['pc_lang_id']=$lang;
+
+			if(isset($post_content['pc_active']))
+				$post_content['pc_active']=(int)($post_content['pc_active']=== "on");
+			else
+				$post_content['pc_active']=0;
+
+			$post_content_props[]=$post_content;
+		}
+
+		$this->post_manager_model->set_post_props($post_id,$post_props,$post_content_props);
+		
+		set_message($this->lang->line("changes_saved_successfully"));
+
+		//redirect(get_admin_post_details_link($post_id));
+
+		return;
+	}
 }

@@ -133,4 +133,44 @@ class Post_manager_model extends CI_Model
 			->get()
 			->result_array();
 	}
+
+	public function set_post_props($post_id, $props, $post_contents)
+	{
+		$props=select_allowed_elements($props,$this->post_writable_props);
+
+		if($props)
+		{
+			foreach ($props as $prop => $value)
+				$this->db->set($prop,$value);
+
+			$this->db
+				->where("post_id",$post_id)
+				->update($this->post_table_name);
+		}
+
+		foreach($post_contents as $content)
+		{
+			$lang=$content['pc_lang_id'];
+
+			$content=select_allowed_elements($content,$this->post_content_writable_props);
+			if(!$content)
+				continue;
+
+			foreach($content as $prop => $value)
+			{
+				$this->db->set($prop,$value);
+				$props[$lang."_".$prop]=$value;
+			}
+
+			$this->db
+				->where("pc_post_id",$post_id)
+				->where("pc_lang_id",$lang)
+				->update($this->post_content_table_name);
+		}
+
+		$this->log_manager_model->info("POST_CHANGE",$props);	
+
+		return;
+
+	}
 }

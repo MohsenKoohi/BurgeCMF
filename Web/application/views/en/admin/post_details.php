@@ -32,7 +32,7 @@
 							<span>{active_text}</span>
 						</div>
 						<div class="six columns">
-							<input type="checkbox" class="graphical" 
+							<input type="checkbox" class="graphical" name="post_active"
 								<?php if($post_info['post_active']) echo "checked"; ?>
 							/>
 						</div>
@@ -42,7 +42,7 @@
 							<span>{allow_comment_text}</span>
 						</div>
 						<div class="six columns">
-							<input type="checkbox" class="graphical" 
+							<input type="checkbox" class="graphical" name="post_allow_comment"
 								<?php if($post_info['post_allow_comment']) echo "checked"; ?>
 							/>
 						</div>
@@ -51,7 +51,7 @@
 						<ul class="tabs">
 							<?php foreach($post_contents as $pc) { ?>
 								<li>
-									<a href="#post_<?php echo $pc['pc_lang_id'];?>">
+									<a href="#pc_<?php echo $pc['pc_lang_id'];?>">
 										<?php echo $langs[$pc['pc_lang_id']];?>
 									</a>
 								</li>
@@ -104,17 +104,61 @@
 								});
 							});
 						</script>
-						<?php foreach($post_contents as $pc) {?>
-							<div class="tab" id="post_<?php echo $pc['pc_lang_id'];?>">
+						<?php foreach($post_contents as $lang=>$pc) {?>
+							<div class="tab" id="pc_<?php echo $pc['pc_lang_id'];?>">
 								<div class="container">
 									<div class="row even-odd-bg" >
 										<div class="three columns">
-											<label>{name_text}</label>
-											
+											<span>{active_text}</span>
 										</div>
 										<div class="six columns">
-											<label>{value_text}</label>
-											<input type="text" />
+											<input type="checkbox" class="graphical" 
+												name="<?php echo $lang;?>[pc_active]" 
+												<?php if($pc['pc_active']) echo "checked"; ?>
+											/>
+										</div>
+									</div>
+									<div class="row even-odd-bg" >
+										<div class="three columns">
+											<span>{title_text}</span>
+										</div>
+										<div class="nine columns">
+											<input type="text" class="full-width" 
+												name="<?php echo $lang;?>[pc_title]" 
+												value="<?php echo $pc['pc_title']; ?>"
+											/>
+										</div>
+									</div>
+									<div class="row even-odd-bg" >
+										<div class="three columns">
+											<span>{content_text}</span>
+										</div>
+										<div class="twelve columns">
+											<textarea class="full-width" rows="15"
+												name="<?php echo $lang;?>[pc_content]"
+											><?php echo $pc['pc_content']; ?></textarea>
+										</div>
+									</div>
+									<div class="row even-odd-bg" >
+										<div class="three columns">
+											<span>{meta_keywords_text}</span>
+										</div>
+										<div class="nine columns">
+											<input type="text" class="full-width" 
+												name="<?php echo $lang;?>[pc_keywords]" 
+												value="<?php echo $pc['pc_keywords']; ?>"
+											/>
+										</div>
+									</div>
+									<div class="row even-odd-bg" >
+										<div class="three columns">
+											<span>{meta_description_text}</span>
+										</div>
+										<div class="nine columns">
+											<input type="text" class="full-width" 
+												name="<?php echo $lang;?>[pc_description]" 
+												value="<?php echo $pc['pc_description']; ?>"
+											/>
 										</div>
 									</div>
 								</div>
