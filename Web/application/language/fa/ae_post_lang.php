@@ -14,6 +14,7 @@ $lang['content']="متن";
 $lang['meta_keywords']="کلمات کلیدی SEO";
 $lang['meta_description']="توضیح SEO";
 $lang['changes_saved_successfully']="تغییرات با موفقیت ثبت شد.";
+
 $lang['']="";
 $lang['']="";
 $lang['']="";
