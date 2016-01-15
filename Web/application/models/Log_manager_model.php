@@ -46,6 +46,7 @@ class Log_manager_model extends CI_Model
 
 		,"POST_ADD"					=>161
 		,"POST_CHANGE"				=>162
+		,"POST_DELETE"				=>163
 
 	);
 

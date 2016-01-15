@@ -18,6 +18,8 @@ class AE_Post extends Burge_CMF_Controller {
 
 		$this->set_posts_info();
 
+		//we may have some messages that our post has been deleted successfully.
+		$this->data['message']=get_message();
 		$this->data['lang_pages']=get_lang_pages(get_link("admin_post",TRUE));
 		$this->data['header_title']=$this->lang->line("posts");
 
@@ -48,6 +50,9 @@ class AE_Post extends Burge_CMF_Controller {
 		if($this->input->post("post_type")==="edit_post")
 			return $this->edit_post($post_id);
 
+		if($this->input->post("post_type")==="delete_post")
+			return $this->delete_post($post_id);
+
 		$this->data['post_id']=$post_id;
 		$post_info=$this->post_manager_model->get_post($post_id);
 		$this->data['langs']=$this->language->get_languages();
@@ -60,13 +65,16 @@ class AE_Post extends Burge_CMF_Controller {
 					$this->data['post_contents'][$lang]=$pi;
 					break;
 				}
-		$this->data['post_info']=array(
-			"post_allow_comment"=>$post_info[0]['post_allow_comment']
-			,"post_active"=>$post_info[0]['post_active']
-			,"user_name"=>$post_info[0]['user_name']
-			,"user_id"=>$post_info[0]['user_id']
-			,"post_title"=>$this->data['post_contents'][$this->language->get()]['pc_title']
-		);
+		if($post_info)
+			$this->data['post_info']=array(
+				"post_allow_comment"=>$post_info[0]['post_allow_comment']
+				,"post_active"=>$post_info[0]['post_active']
+				,"user_name"=>$post_info[0]['user_name']
+				,"user_id"=>$post_info[0]['user_id']
+				,"post_title"=>$this->data['post_contents'][$this->language->get()]['pc_title']
+			);
+		else
+			$this->data['post_info']=array();
 
 		$this->data['message']=get_message();
 		$this->data['lang_pages']=get_lang_pages(get_admin_post_details_link($post_id,TRUE));
@@ -77,10 +85,17 @@ class AE_Post extends Burge_CMF_Controller {
 		return;
 	}
 
+	private function delete_post($post_id)
+	{
+		$this->post_manager_model->delete_post($post_id);
+
+		set_message($this->lang->line('post_deleted_successfully'));
+
+		return redirect(get_link("admin_post"));
+	}
+
 	private function edit_post($post_id)
 	{
-		
-
 		$post_props=array();
 		$post_props['post_active']=(int)($this->input->post('post_active') === "on");
 		$post_props['post_allow_comment']=(int)($this->input->post('post_allow_comment') === "on");
@@ -103,7 +118,7 @@ class AE_Post extends Burge_CMF_Controller {
 		
 		set_message($this->lang->line("changes_saved_successfully"));
 
-		//redirect(get_admin_post_details_link($post_id));
+		redirect(get_admin_post_details_link($post_id));
 
 		return;
 	}

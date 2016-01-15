@@ -173,4 +173,22 @@ class Post_manager_model extends CI_Model
 		return;
 
 	}
+
+	public function delete_post($post_id)
+	{
+		$props=array("post_id"=>$post_id);
+
+		$this->db
+			->where("post_id",$post_id)
+			->delete($this->post_table_name);
+
+		$this->db
+			->where("pc_post_id",$post_id)
+			->delete($this->post_content_table_name);
+		
+		$this->log_manager_model->info("POST_DELETE",$props);	
+
+		return;
+
+	}
 }

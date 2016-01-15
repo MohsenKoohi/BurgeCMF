@@ -5,8 +5,7 @@
 			if($post_info && $post_info['post_title']) 
 				echo $comma_text." ".$post_info['post_title'];
 			?>
-		</h1>
-		
+		</h1>		
 		<?php 
 			if(!$post_info) {
 		?>
@@ -15,6 +14,12 @@
 			}else{ 
 		?>
 			<div class="container">
+				<div class="row general-buttons">
+					<div class="two columns button sub-primary button-type2" onclick="deletePost()">
+						{delete_post_text}
+					</div>
+				</div>
+				<br>
 				<?php echo form_open(get_admin_post_details_link($post_id),array()); ?>
 					<input type="hidden" name="post_type" value="edit_post" />
 					<div class="row even-odd-bg" >
@@ -171,10 +176,28 @@
 							<input type="submit" class=" button-primary four columns" value="{submit_text}"/>
 					</div>				
 				</form>
+
+				<div style="display:none">
+					<?php echo form_open(get_admin_post_details_link($post_id),array("id"=>"delete")); ?>
+						<input type="hidden" name="post_type" value="delete_post"/>
+						<input type="hidden" name="post_id" value="{post_id}"/>
+					</form>
+
+					<script type="text/javascript">
+						function deletePost()
+						{
+							if(!confirm("{are_you_sure_to_delete_this_post_text}"))
+								return;
+
+							$("form#delete").submit();
+						}
+					</script>
+				</div>
 			</div>
 		<?php 
 			}
 		?>
+		
 		
 
 
