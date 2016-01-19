@@ -104,6 +104,7 @@ class AE_Post extends Burge_CMF_Controller {
 		foreach($this->language->get_languages() as $lang=>$name)
 		{
 			$post_content=$this->input->post($lang);
+			$post_content['pc_content']=$_POST[$lang]['pc_content'];
 			$post_content['pc_lang_id']=$lang;
 
 			if(isset($post_content['pc_active']))

@@ -14,4 +14,6 @@ Resources we have used:
 - Skeleton 
 - Colorbox
 - Jquery
-- Jquery UI
+- JqueryUI 
+- TinyMCE  
+- RoxyFileMan 

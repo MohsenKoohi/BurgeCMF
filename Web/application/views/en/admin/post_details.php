@@ -13,6 +13,7 @@
 		<?php 
 			}else{ 
 		?>
+			<script src="{scripts_url}/tinymce/tinymce.min.js"></script>
 			<div class="container">
 				<div class="row general-buttons">
 					<div class="two columns button sub-primary button-type2" onclick="deletePost()">
@@ -20,7 +21,7 @@
 					</div>
 				</div>
 				<br>
-				<?php echo form_open(get_admin_post_details_link($post_id),array()); ?>
+				<?php echo form_open(get_admin_post_details_link($post_id),array("onsubmit"=>"return formSubmit();")); ?>
 					<input type="hidden" name="post_type" value="edit_post" />
 					<div class="row even-odd-bg" >
 						<div class="three columns">
@@ -134,11 +135,11 @@
 											/>
 										</div>
 									</div>
-									<div class="row even-odd-bg" >
+									<div class="row even-odd-bg dont-magnify" >
 										<div class="three columns">
 											<span>{content_text}</span>
 										</div>
-										<div class="twelve columns">
+										<div class="twelve columns ">
 											<textarea class="full-width" rows="15"
 												name="<?php echo $lang;?>[pc_content]"
 											><?php echo $pc['pc_content']; ?></textarea>
@@ -183,8 +184,56 @@
 						<input type="hidden" name="post_id" value="{post_id}"/>
 					</form>
 
-					<script type="text/javascript">
-						function deletePost()
+					 <script type="text/javascript">
+
+					$(initializeTextAreas);
+					var tmTextAreas=[];
+					<?php
+						foreach($langs as $lang => $value)
+							echo "\n".'tmTextAreas.push("textarea[name=\''.$lang.'[pc_content]\']");';
+					?>
+
+					function formSubmit()
+					{
+						return true;
+					}
+
+					function initializeTextAreas()
+					{
+						for(i in tmTextAreas)
+		               tinymce.init({
+								selector: tmTextAreas[i]
+								,plugins: "directionality textcolor link image hr emoticons lineheight colorpicker"
+								//,width:"600"
+								,height:"600"
+								,convert_urls:false
+								,toolbar: [
+								   "link image hr bold italic underline strikethrough alignleft aligncenter alignright alignjustify styleselect formatselect fontselect fontsizeselect  emoticons ",
+								   "cut copy paste bullist numlist outdent indent forecolor backcolor removeformat  ltr rtl lineheightselect "
+								]
+								,font_formats: "Mitra= b mitra, mitra;Yagut= b yagut, yagut; Titr= b titr, titr; Zar= b zar, zar; Koodak= b koodak, koodak;"+
+								             "Andale Mono=andale mono,times;"+
+								             "Arial=arial,helvetica,sans-serif;"+
+								             "Arial Black=arial black,avant garde;"+
+								             "Book Antiqua=book antiqua,palatino;"+
+								             "Comic Sans MS=comic sans ms,sans-serif;"+
+								             "Courier New=courier new,courier;"+
+								             "Georgia=georgia,palatino;"+
+								             "Helvetica=helvetica;"+
+								             "Impact=impact,chicago;"+
+								             "Symbol=symbol;"+
+								             "Tahoma=tahoma,arial,helvetica,sans-serif;"+
+								             "Terminal=terminal,monaco;"+
+								             "Times New Roman=times new roman,times;"+
+								             "Trebuchet MS=trebuchet ms,geneva;"+
+								             "Verdana=verdana,geneva;"+
+								             "Webdings=webdings;"+
+								             "Wingdings=wingdings,zapf dingbats"
+	               	});
+						
+						setTimeout(setupMovingHeader,1000);
+              	}
+              	function deletePost()
 						{
 							if(!confirm("{are_you_sure_to_delete_this_post_text}"))
 								return;
