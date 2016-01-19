@@ -1,5 +1,5 @@
 <?php 
 $lang['comma']=",";
-$lang['header_title']="BurgeATS";
-$lang['header_meta_keywords']="BurgeATS, Burge Affairs Tracking System, Open-Source MVC CRM System";
+$lang['header_title']="BurgeCMF";
+$lang['header_meta_keywords']="BurgeCMF, Burge Content Management Framework, Open-Source MVC CMF";
 $lang['header_meta_description']="";

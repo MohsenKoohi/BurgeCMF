@@ -12,11 +12,12 @@
 		</div>
 		<br><br>
 		<div class="container">
-			<?php foreach($posts_info as $post) { ?>
+			<?php $i=1;foreach($posts_info as $post) { ?>
 				<a target="_blank" href="<?php echo get_admin_post_details_link($post['post_id']);?>">
 					<div class="row even-odd-bg" >
 						<div class="nine columns">
 							<span>
+								<?php echo $i++;?>)
 								<?php 
 									if($post['pc_title']) 
 										echo $post['pc_title'];
