@@ -203,12 +203,12 @@
 						for(i in tmTextAreas)
 		               tinymce.init({
 								selector: tmTextAreas[i]
-								,plugins: "directionality textcolor link image hr emoticons lineheight colorpicker"
+								,plugins: "directionality textcolor link image hr emoticons2 lineheight colorpicker"
 								//,width:"600"
 								,height:"600"
 								,convert_urls:false
 								,toolbar: [
-								   "link image hr bold italic underline strikethrough alignleft aligncenter alignright alignjustify styleselect formatselect fontselect fontsizeselect  emoticons ",
+								   "link image hr bold italic underline strikethrough alignleft aligncenter alignright alignjustify styleselect formatselect fontselect fontsizeselect  emoticons2 ",
 								   "cut copy paste bullist numlist outdent indent forecolor backcolor removeformat  ltr rtl lineheightselect "
 								]
 								,font_formats: "Mitra= b mitra, mitra;Yagut= b yagut, yagut; Titr= b titr, titr; Zar= b zar, zar; Koodak= b koodak, koodak;"+
