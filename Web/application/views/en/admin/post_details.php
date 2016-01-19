@@ -192,6 +192,30 @@
 						foreach($langs as $lang => $value)
 							echo "\n".'tmTextAreas.push("textarea[name=\''.$lang.'[pc_content]\']");';
 					?>
+					var tineMCEFontFamilies=
+						"Mitra= b mitra, mitra;Yagut= b yagut, yagut; Titr= b titr, titr; Zar= b zar, zar; Koodak= b koodak, koodak;"+
+						+"Andale Mono=andale mono,times;"
+						+"Arial=arial,helvetica,sans-serif;"
+						+"Arial Black=arial black,avant garde;"
+						+"Book Antiqua=book antiqua,palatino;"
+						+"Comic Sans MS=comic sans ms,sans-serif;"
+						+"Courier New=courier new,courier;"
+						+"Georgia=georgia,palatino;"
+						+"Helvetica=helvetica;"
+						+"Impact=impact,chicago;"
+						+"Symbol=symbol;"
+						+"Tahoma=tahoma,arial,helvetica,sans-serif;"
+						+"Terminal=terminal,monaco;"
+						+"Times New Roman=times new roman,times;"
+						+"Trebuchet MS=trebuchet ms,geneva;"
+						+"Verdana=verdana,geneva;"
+						+"Webdings=webdings;"
+						+"Wingdings=wingdings,zapf dingbats";
+					var tinyMCEPlugins="directionality textcolor link image hr emoticons2 lineheight colorpicker";
+					var tinyMCEToolbar=[
+					   "link image hr bold italic underline strikethrough alignleft aligncenter alignright alignjustify styleselect formatselect fontselect fontsizeselect  emoticons2",
+					   "cut copy paste bullist numlist outdent indent forecolor backcolor removeformat  ltr rtl lineheightselect "
+					];
 
 					function formSubmit()
 					{
@@ -203,32 +227,12 @@
 						for(i in tmTextAreas)
 		               tinymce.init({
 								selector: tmTextAreas[i]
-								,plugins: "directionality textcolor link image hr emoticons2 lineheight colorpicker"
+								,plugins: tinyMCEPlugins
 								//,width:"600"
 								,height:"600"
 								,convert_urls:false
-								,toolbar: [
-								   "link image hr bold italic underline strikethrough alignleft aligncenter alignright alignjustify styleselect formatselect fontselect fontsizeselect  emoticons2 ",
-								   "cut copy paste bullist numlist outdent indent forecolor backcolor removeformat  ltr rtl lineheightselect "
-								]
-								,font_formats: "Mitra= b mitra, mitra;Yagut= b yagut, yagut; Titr= b titr, titr; Zar= b zar, zar; Koodak= b koodak, koodak;"+
-								             "Andale Mono=andale mono,times;"+
-								             "Arial=arial,helvetica,sans-serif;"+
-								             "Arial Black=arial black,avant garde;"+
-								             "Book Antiqua=book antiqua,palatino;"+
-								             "Comic Sans MS=comic sans ms,sans-serif;"+
-								             "Courier New=courier new,courier;"+
-								             "Georgia=georgia,palatino;"+
-								             "Helvetica=helvetica;"+
-								             "Impact=impact,chicago;"+
-								             "Symbol=symbol;"+
-								             "Tahoma=tahoma,arial,helvetica,sans-serif;"+
-								             "Terminal=terminal,monaco;"+
-								             "Times New Roman=times new roman,times;"+
-								             "Trebuchet MS=trebuchet ms,geneva;"+
-								             "Verdana=verdana,geneva;"+
-								             "Webdings=webdings;"+
-								             "Wingdings=wingdings,zapf dingbats"
+								,toolbar: tinyMCEToolbar
+								,font_formats:tineMCEFontFamilies
 	               	});
 						
 						setTimeout(setupMovingHeader,1000);
