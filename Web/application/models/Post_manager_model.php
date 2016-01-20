@@ -61,15 +61,28 @@ class Post_manager_model extends CI_Model
 	
 	public function get_dashbord_info()
 	{
-		return "";
-
 		$CI=& get_instance();
 		$lang=$CI->language->get();
-		
+
+		$CI->lang->load('ae_post',$lang);
+			
+		$data=$this->get_statistics();
+
 		$CI->load->library('parser');
-		$ret=$CI->parser->parse($CI->get_admin_view_file("hit_counter_dashboard"),$data,TRUE);
+		$ret=$CI->parser->parse($CI->get_admin_view_file("post_dashboard"),$data,TRUE);
 		
 		return $ret;		
+	}
+
+	private function get_statistics()
+	{
+		$tb=$this->db->dbprefix($this->post_table_name);
+
+		return $this->db->query("
+			SELECT 
+				(SELECT COUNT(*) FROM $tb) as total, 
+				(SELECT COUNT(*) FROM $tb WHERE post_active) as active
+			")->row_array();
 	}
 
 	public function add_post()
