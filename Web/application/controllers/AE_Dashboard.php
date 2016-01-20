@@ -28,10 +28,10 @@ class AE_Dashboard extends Burge_CMF_Controller {
 			$this->load->model($model_name."_model");
 			$model=$this->{$model_name."_model"};
 
-			if(!method_exists($model, "get_dashbord_info"))
+			if(!method_exists($model, "get_dashboard_info"))
 				continue;
 
-			$text=$model->{"get_dashbord_info"}();
+			$text=$model->{"get_dashboard_info"}();
 
 			$this->data['modules'][]=array(
 				"id"		=>$id

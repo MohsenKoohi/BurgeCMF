@@ -328,7 +328,7 @@ class User_manager_model extends CI_Model
 		return md5(md5($pass).$salt);
 	}
 
-	public function get_dashbord_info()
+	public function get_dashboard_info()
 	{
 		$CI=& get_instance();
 		$lang=$CI->language->get();

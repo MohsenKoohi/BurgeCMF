@@ -58,8 +58,9 @@ $route[ADMIN_URL_FOLDER."/log"]				="AE_Log";
 $route[ADMIN_URL_FOLDER."/constant"]		="AE_Constant";
 
 $route[ADMIN_URL_FOLDER."/post"]					="AE_Post";
-$route[ADMIN_URL_FOLDER."/post/search"]		="AE_Post/search";
 $route[ADMIN_URL_FOLDER."/post/(\d+)"]			="AE_Post/details/$1";
+$route[ADMIN_URL_FOLDER."/file"]					="AE_File";
+
 
 $route["retry"]="retry";
 $route["watermark"]="CE_Watermark";

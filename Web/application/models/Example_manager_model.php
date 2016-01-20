@@ -33,7 +33,7 @@ class Example_manager_model extends CI_Model
 
 	}
 	
-	public function get_dashbord_info()
+	public function get_dashboard_info()
 	{
 		return "";
 		$CI=& get_instance();

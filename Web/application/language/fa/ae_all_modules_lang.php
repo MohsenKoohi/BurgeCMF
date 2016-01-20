@@ -10,3 +10,4 @@ $lang['dashboard']="داشبورد";
 $lang['post']="پست‌ها";
 $lang['log']="فعالیت‌ها";
 $lang['constant']="مقادیر ثابت";
+$lang['file']="فایل‌ها";
