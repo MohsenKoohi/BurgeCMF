@@ -78,3 +78,6 @@ define ('STYLES_URL', HOME_URL."/styles");
 
 define ('SCRIPTS_URL', HOME_URL."/scripts");
 define ('SCRIPTS_DIR', HOME_DIR."/scripts");
+
+define ('UPLOAD_DIR', HOME_DIR."/upload");
+define ('UPLOAD_URL', HOME_URL."/upload");

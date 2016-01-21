@@ -29,7 +29,7 @@ class File_manager_model extends CI_Model
 	{
 		return '
 			{
-				"FILES_ROOT":          "Uploads",
+				"FILES_ROOT":          "upload",
 				"RETURN_URL_PREFIX":   "",
 				"SESSION_PATH_KEY":    "",
 				"THUMBS_VIEW_WIDTH":   "140",
@@ -64,5 +64,28 @@ class File_manager_model extends CI_Model
 				"OPEN_LAST_DIR":       "yes"
 			}
 		';
+	}
+
+	public function roxy_system_inc()
+	{
+		define('BASE_PATH', HOME_DIR);
+		date_default_timezone_set('UTC');
+		mb_internal_encoding("UTF-8");
+		mb_regex_encoding(mb_internal_encoding());
+
+		$this->load->helper("roxy");
+
+		$tmp = json_decode($this->get_conf(), true);
+		if($tmp){
+		  foreach ($tmp as $k=>$v)
+		    define($k, $v);
+		}
+		else
+		  die('Error parsing configuration');
+		$FilesRoot = fixPath(getFilesPath());
+		if(!is_dir($FilesRoot))
+		  @mkdir($FilesRoot, octdec(DIRPERMISSIONS));
+
+		return;
 	}
 }
