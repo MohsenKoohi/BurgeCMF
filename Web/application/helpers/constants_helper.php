@@ -77,3 +77,4 @@ define ('CAPTCHA_URL', IMAGES_URL."/captcha");
 define ('STYLES_URL', HOME_URL."/styles");
 
 define ('SCRIPTS_URL', HOME_URL."/scripts");
+define ('SCRIPTS_DIR', HOME_DIR."/scripts");

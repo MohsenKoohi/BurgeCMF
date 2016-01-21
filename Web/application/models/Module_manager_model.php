@@ -88,6 +88,19 @@ class Module_manager_model extends CI_Model
 		return $results->result_array();
 	}
 
+	//We have a problem with this method.
+	//While it is possible to exclude modules from being shown in the dashboard
+	// (by passing "" for $model_name)
+	//, all modules including pseudo modules display in side menu.
+	//In next version it should be an option that a module can be isplayed in side menu.
+	//For example we don't want to show file manager module to be shown in the side menu
+	//It can be done using database or by defining a function for each module.
+	//If we want to use function, it is necessary to cache values for side menu 
+	//and we should define a side menu manager, which maintatin a (for example JSON) file
+	//which contains all side menu items.
+	//It should also have an update method to update a specific item
+	//this update is also necessary for get_sidebar_text method of each module
+	//used in Burge_CMF_Controller .
 
 	//this method adds a module to the framework
 	public function add_module($module,$model_name,$sort_order=1)

@@ -38,6 +38,7 @@ function &get_links($just_common=FALSE)
 			,'admin_post'						=> ADMIN_SURL_LANG."/post"
 			,'admin_post_details_format'	=> ADMIN_SURL_LANG."/post/post_id"
 			,'admin_file'						=> ADMIN_SURL_LANG."/file"
+			,'admin_file_inline'				=> ADMIN_SURL_LANG."/file/inline"
 		));
 	}
 

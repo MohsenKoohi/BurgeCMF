@@ -57,9 +57,13 @@ $route[ADMIN_URL_FOLDER."/hit_counter"]	="AE_Hit_Counter";
 $route[ADMIN_URL_FOLDER."/log"]				="AE_Log";
 $route[ADMIN_URL_FOLDER."/constant"]		="AE_Constant";
 
-$route[ADMIN_URL_FOLDER."/post"]					="AE_Post";
-$route[ADMIN_URL_FOLDER."/post/(\d+)"]			="AE_Post/details/$1";
-$route[ADMIN_URL_FOLDER."/file"]					="AE_File";
+$route[ADMIN_URL_FOLDER."/post"]								="AE_Post";
+$route[ADMIN_URL_FOLDER."/post/(\d+)"]						="AE_Post/details/$1";
+$route[ADMIN_URL_FOLDER."/file"]								="AE_File";
+$route[ADMIN_URL_FOLDER."/file/inline"]					="AE_File/inline";
+$route[ADMIN_URL_FOLDER."/file/conf.json"]				="AE_File/conf";
+$route[ADMIN_URL_FOLDER."/file/lang/([^\.]+).json"]	="AE_File/lang/$1";
+$route[ADMIN_URL_FOLDER."/file/([^\/]+)"]					="AE_File/action/$1";
 
 
 $route["retry"]="retry";
