@@ -64,7 +64,7 @@ class AE_File extends Burge_CMF_Controller {
 
 	public function action($action)
 	{
-		$this->file_manager_model->roxy_system_inc();
+		$this->file_manager_model->initialize_roxy();
 		switch($action)
 		{
 			case 'dirtree':

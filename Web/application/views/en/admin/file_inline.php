@@ -29,8 +29,18 @@
 <script type="text/javascript" src="{scripts_url}/roxy/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="{scripts_url}/roxy/js/jquery-ui-1.10.4.custom.min.js"></script>
 <script type="text/javascript" src="{scripts_url}/roxy/js/custom.js"></script>
-<script type="text/javascript" src="{scripts_url}/roxy/js/main.min.js"></script>
+<!-- 
+  <script type="text/javascript" src="{scripts_url}/roxy/js/main.min.js"></script>
+-->
+<script type="text/javascript" src="{scripts_url}/roxy/js/filetypes.js"></script>
+<script type="text/javascript" src="{scripts_url}/roxy/js/file.js"></script>
+<script type="text/javascript" src="{scripts_url}/roxy/js/directory.js"></script>
+<script type="text/javascript" src="{scripts_url}/roxy/js/utils.js"></script>
+<script type="text/javascript" src="{scripts_url}/roxy/js/main.js"></script>
 <script type="text/javascript" src="{scripts_url}/roxy/js/jquery-dateFormat.min.js"></script>
+<script type="text/javascript">
+  var roxyUploadParentDirectory="{home_url}";
+</script>
 </head>
 <body>
 <table cellpadding="0" cellspacing="0" id="wraper">

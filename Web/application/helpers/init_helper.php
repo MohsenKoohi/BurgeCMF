@@ -18,6 +18,7 @@ function &get_links($just_common=FALSE)
 			,'images_url'			=>	IMAGES_URL
 			,'styles_url'			=> STYLES_URL
 			,'scripts_url'			=> SCRIPTS_URL
+			,'upload_url'			=> UPLOAD_URL
 		);
 
 		$LINKS=array_merge($LINKS_COMMON, array(

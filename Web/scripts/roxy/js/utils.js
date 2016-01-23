@@ -104,9 +104,12 @@ RoxyUtils.GetFileExt = function(path){
 };
 RoxyUtils.FileExists = function(path) {
   var ret = false;
-
+  var url=path;
+  if(!url.startsWith("lang/"))
+    url=roxyUploadParentDirectory+"/"+path;
+  
   $.ajax({
-      url: path,
+      url: url,
       type: 'HEAD',
       async: false,
       dataType:'text',
@@ -125,8 +128,12 @@ RoxyUtils.GetFileIcon = function(path){
 };
 RoxyUtils.GetFileSize = function(path){
   var ret = 0;
+  var url=path;
+  if(!url.startsWith("lang/"))
+    url=roxyUploadParentDirectory+"/"+path;
+
   $.ajax({
-      url: path,
+      url: url,
       type: 'HEAD',
       async: false,
       success:function(d,s, xhr){

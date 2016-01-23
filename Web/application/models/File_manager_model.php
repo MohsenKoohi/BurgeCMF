@@ -66,15 +66,19 @@ class File_manager_model extends CI_Model
 		';
 	}
 
-	public function roxy_system_inc()
+	public function initialize_roxy()
 	{
+
+		//from system.inc.php
 		define('BASE_PATH', HOME_DIR);
 		date_default_timezone_set('UTC');
 		mb_internal_encoding("UTF-8");
 		mb_regex_encoding(mb_internal_encoding());
 
+		//loading php/functions.inc.php
 		$this->load->helper("roxy");
 
+		//end of php/functions.inc.php which should be done here ;)
 		$tmp = json_decode($this->get_conf(), true);
 		if($tmp){
 		  foreach ($tmp as $k=>$v)

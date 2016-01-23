@@ -383,9 +383,14 @@ function deleteFile(){
   }
 }
 function previewFile(){
-  var f = getSelectedFile();
+  var f = getSelectedFile();  
+  
   if(f){
-    window.open(f.fullPath);
+    //////////////////////////changes for BurgeCMF
+    var fp=f.fullPath;
+    fp=roxyUploadParentDirectory+"/"+fp;
+    //////////////////////////changes for BurgeCMF    
+    window.open(fp);
   }
 }
 function downloadFile(){
