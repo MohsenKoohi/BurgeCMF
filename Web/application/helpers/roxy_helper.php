@@ -22,10 +22,10 @@
 */
 //include 'security.inc.php';
 function t($key){
-  global $LANG;
-  if(empty($LANG)){
+  global $ROXY_LANG;
+  if(empty($ROXY_LANG)){
     $file = 'en.json';
-    $langPath = '../lang/';
+    $langPath = SCRIPTS_URL.'/roxy/lang/';
     if(defined('LANG')){
       if(LANG == 'auto'){
         $lang = strtolower(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2));
@@ -36,12 +36,12 @@ function t($key){
         $file = LANG.'.json';
     }
     $file = $langPath.$file;
-    $LANG = json_decode(file_get_contents($file), true);
+    $ROXY_LANG = json_decode(file_get_contents($file), true);
   }
-  if(!$LANG[$key])
-    $LANG[$key] = $key;
+  if(!$ROXY_LANG[$key])
+    $ROXY_LANG[$key] = $key;
 
-  return $LANG[$key];
+  return $ROXY_LANG[$key];
 }
 function checkPath($path){
   $ret = false;

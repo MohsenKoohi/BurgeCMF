@@ -65,6 +65,7 @@ class AE_File extends Burge_CMF_Controller {
 	public function action($action)
 	{
 		$this->file_manager_model->initialize_roxy();
+
 		switch($action)
 		{
 			case 'dirtree':
@@ -75,7 +76,52 @@ class AE_File extends Burge_CMF_Controller {
 
 			case 'thumb':
 				return $this->thumb();
+
+			case 'createdir':
+				return $this->createdir();
+				
+			case 'deletedir':
+				return $this->deletedir();
 		}
+	}
+
+	private function deletedir()
+	{
+		$path = trim(empty($_GET['d'])?'':$_GET['d']);
+		verifyPath($path);
+
+		if(is_dir(fixPath($path))){
+		  if(fixPath($path.'/') == fixPath(getFilesPath().'/'))
+		    echo getErrorRes(t('E_CannotDeleteRoot'));
+		  elseif(count(glob(fixPath($path)."/*")))
+		    echo getErrorRes(t('E_DeleteNonEmpty'));
+		  elseif(rmdir(fixPath($path)))
+		    echo getSuccessRes();
+		  else
+		    echo getErrorRes(t('E_CannotDeleteDir').' '.basename($path));
+		}
+		else
+		  echo getErrorRes(t('E_DeleteDirInvalidPath').' '.$path);
+
+		return;
+	}
+
+	private function createdir()
+	{
+		$path = trim(empty($_POST['d'])?'':$_POST['d']);
+		$name = trim(empty($_POST['n'])?'':$_POST['n']);
+		verifyPath($path);
+
+		if(is_dir(fixPath($path))){
+		  if(mkdir(fixPath($path).'/'.$name, octdec(DIRPERMISSIONS)))
+		    echo getSuccessRes();
+		  else
+		    echo getErrorRes(t('E_CreateDirFailed').' '.basename($path));
+		}
+		else
+		  echo  getErrorRes(t('E_CreateDirInvalidPath'));
+
+		return;
 	}
 
 	private function thumb()
