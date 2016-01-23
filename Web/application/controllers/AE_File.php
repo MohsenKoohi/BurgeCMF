@@ -91,7 +91,118 @@ class AE_File extends Burge_CMF_Controller {
 
 			case 'renamedir':
 				return $this->renamedir();
+
+			case 'deletefile':
+				return $this->deletefile();
+
+			case 'copyfile':
+				return $this->copyfile();
+
+			case 'movefile':
+				return $this->movefile();
+
+			case 'renamefile':
+				return $this->renamefile();
+
+			case 'download':
+				return $this->download();
+
+			case 'upload':
+				return $this->upload();
 		}
+	}
+	
+	private function upload()
+	{
+
+	}
+
+	private function download()
+	{
+		
+	}
+
+	private function deletefile()
+	{
+		$path = trim($_POST['f']);
+		verifyPath($path);
+
+		if(is_file(fixPath($path))){
+		if(unlink(fixPath($path)))
+		  echo getSuccessRes();
+		else
+		  echo getErrorRes(t('E_DeletеFile').' '.basename($path));
+		}
+		else
+			echo getErrorRes(t('E_DeleteFileInvalidPath'));
+
+		return;		
+	}
+
+	private function movefile()
+	{		
+		$path = trim(empty($_POST['f'])?'':$_POST['f']);
+		$newPath = trim(empty($_POST['n'])?'':$_POST['n']);
+		if(!$newPath)
+		  $newPath = getFilesPath();
+		verifyPath($path);
+		verifyPath($newPath);
+
+		if(is_file(fixPath($path))){
+		  if(file_exists(fixPath($newPath)))
+		    echo getErrorRes(t('E_MoveFileAlreadyExists').' '.basename($newPath));
+		  elseif(rename(fixPath($path), fixPath($newPath)))
+		    echo getSuccessRes();
+		  else
+		    echo getErrorRes(t('E_MoveFile').' '.basename($path));
+		}
+		else
+		  echo getErrorRes(t('E_MoveFileInvalisPath'));
+
+		return;
+	}
+
+	private function renamefile()
+	{		
+		$path = trim(empty($_POST['f'])?'':$_POST['f']);
+		$name = trim(empty($_POST['n'])?'':$_POST['n']);
+		verifyPath($path);
+
+		if(is_file(fixPath($path))){
+		  if(!RoxyFile::CanUploadFile($name))
+		    echo getErrorRes(t('E_FileExtensionForbidden').' ".'.RoxyFile::GetExtension($name).'"');
+		  elseif(rename(fixPath($path), dirname(fixPath($path)).'/'.$name))
+		    echo getSuccessRes();
+		  else
+		    echo getErrorRes(t('E_RenameFile').' '.basename($path));
+		}
+		else
+		  echo getErrorRes(t('E_RenameFileInvalidPath'));
+
+		return;
+	}
+
+	private function copyfile()
+	{
+		$path = trim(empty($_POST['f'])?'':$_POST['f']);
+		$newPath = trim(empty($_POST['n'])?'':$_POST['n']);
+		if(!$newPath)
+		  $newPath = getFilesPath();
+
+		verifyPath($path);
+		verifyPath($newPath);
+
+		if(is_file(fixPath($path))){
+		  $newPath = $newPath.'/'.RoxyFile::MakeUniqueFilename(fixPath($newPath), basename($path));
+		  if(copy(fixPath($path), fixPath($newPath)))
+		    echo getSuccessRes();
+		  else
+		    echo getErrorRes(t('E_CopyFile'));
+		}
+		else
+		  echo getErrorRes(t('E_CopyFileInvalisPath'));
+			
+		return;
 	}
 
 	private function renamedir()
