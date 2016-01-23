@@ -79,10 +79,79 @@ class AE_File extends Burge_CMF_Controller {
 
 			case 'createdir':
 				return $this->createdir();
-				
+
 			case 'deletedir':
 				return $this->deletedir();
+
+			case 'copydir':
+				return $this->copydir();
+
+			case 'movedir':
+				return $this->movedir();
+
+			case 'renamedir':
+				return $this->renamedir();
 		}
+	}
+
+	private function renamedir()
+	{
+		$path = trim(empty($_POST['d'])? '': $_POST['d']);
+		$name = trim(empty($_POST['n'])? '': $_POST['n']);
+		verifyPath($path);
+
+		if(is_dir(fixPath($path))){
+		  if(fixPath($path.'/') == fixPath(getFilesPath().'/'))
+		    echo getErrorRes(t('E_CannotRenameRoot'));
+		  elseif(rename(fixPath($path), dirname(fixPath($path)).'/'.$name))
+		    echo getSuccessRes();
+		  else
+		    echo getErrorRes(t('E_RenameDir').' '.basename($path));
+		}
+		else
+		  echo getErrorRes(t('E_RenameDirInvalidPath'));
+
+		return;
+	}
+
+	private function copydir()
+	{
+		$path = trim(empty($_POST['d'])?'':$_POST['d']);
+		$newPath = trim(empty($_POST['n'])?'':$_POST['n']);
+		verifyPath($path);
+		verifyPath($newPath);
+
+		if(is_dir(fixPath($path))){
+		  copyDir(fixPath($path.'/'), fixPath($newPath.'/'.basename($path)));
+		  echo getSuccessRes();
+		}
+		else
+		  echo getErrorRes(t('E_CopyDirInvalidPath'));
+
+		return;
+	}
+
+	private function movedir()
+	{				
+		$path = trim(empty($_GET['d'])?'':$_GET['d']);
+		$newPath = trim(empty($_GET['n'])?'':$_GET['n']);
+		verifyPath($path);
+		verifyPath($newPath);
+
+		if(is_dir(fixPath($path))){
+		  if(mb_strpos($newPath, $path) === 0)
+		    echo getErrorRes(t('E_CannotMoveDirToChild'));
+		  elseif(file_exists(fixPath($newPath).'/'.basename($path)))
+		    echo getErrorRes(t('E_DirAlreadyExists'));
+		  elseif(rename(fixPath($path), fixPath($newPath).'/'.basename($path)))
+		    echo getSuccessRes();
+		  else
+		    echo getErrorRes(t('E_MoveDir').' '.basename($path));
+		}
+		else
+		  echo getErrorRes(t('E_MoveDirInvalisPath'));
+
+		return;
 	}
 
 	private function deletedir()

@@ -485,6 +485,7 @@ function getFilesNumber($path, $type){
 
   return array('files'=>$files, 'dirs'=>$dirs);
 }
+
 function GetDirs($path, $type){
   $ret = $sort = array();
   $files = listDirectory(fixPath($path), 0);
@@ -501,5 +502,22 @@ function GetDirs($path, $type){
     $tmp = $ret[$k];
     echo ',{"p":"'.mb_ereg_replace('"', '\\"', $tmp['path']).'","f":"'.$tmp['files'].'","d":"'.$tmp['dirs'].'"}';
     GetDirs($tmp['path'], $type);
+  }
+}
+
+function copyDir($path, $newPath){
+  $items = listDirectory($path);
+  if(!is_dir($newPath))
+    mkdir ($newPath, octdec(DIRPERMISSIONS));
+  foreach ($items as $item){
+    if($item == '.' || $item == '..')
+      continue;
+    $oldPath = RoxyFile::FixPath($path.'/'.$item);
+    $tmpNewPath = RoxyFile::FixPath($newPath.'/'.$item);
+    if(is_file($oldPath))
+      copy($oldPath, $tmpNewPath);
+    elseif(is_dir($oldPath)){
+      copyDir($oldPath, $tmpNewPath);
+    }
   }
 }
