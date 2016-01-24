@@ -211,9 +211,9 @@
 						+"Verdana=verdana,geneva;"
 						+"Webdings=webdings;"
 						+"Wingdings=wingdings,zapf dingbats";
-					var tinyMCEPlugins="directionality textcolor link image hr emoticons2 lineheight colorpicker";
+					var tinyMCEPlugins="directionality textcolor link image hr emoticons2 lineheight colorpicker media";
 					var tinyMCEToolbar=[
-					   "link image hr bold italic underline strikethrough alignleft aligncenter alignright alignjustify styleselect formatselect fontselect fontsizeselect  emoticons2",
+					   "link image media hr bold italic underline strikethrough alignleft aligncenter alignright alignjustify styleselect formatselect fontselect fontsizeselect  emoticons2",
 					   "cut copy paste bullist numlist outdent indent forecolor backcolor removeformat  ltr rtl lineheightselect "
 					];
 
@@ -225,7 +225,7 @@
 					function RoxyFileBrowser(field_name, url, type, win)
 					{
 						var roxyFileman ="<?php echo get_link('admin_file_inline');?>";
-						
+
 						if (roxyFileman.indexOf("?") < 0) {     
 						 roxyFileman += "?type=" + type;   
 						}
@@ -262,6 +262,7 @@
 								,convert_urls:false
 								,toolbar: tinyMCEToolbar
 								,font_formats:tineMCEFontFamilies
+								,media_live_embeds: true
 	               	});
 						
 						setTimeout(setupMovingHeader,1000);
