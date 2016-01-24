@@ -37,6 +37,14 @@ class Burge_CMF_Controller extends CI_Controller{
 			$access_result=$this->access_manager_model->check_access($module,$this->user);
 			if(!$access_result)
 			{
+				//there is a problem here which should be fixed in our next versions
+				//when the connection has been started from an iframe
+				//or from a javascript ajax, 
+				//we shouldn't redirect 
+				//we should send a response indicates that there is no access
+				//and the connection starter should be able to intrepret it
+				//and redirect the main page to the home_url
+				
 				redirect(get_link("home_url"));
 				return;
 			}
