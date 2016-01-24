@@ -34,15 +34,34 @@ function FileSelected(file){
    * 
    */
 
-   return;
-   
-  alert('"' + file.fullPath + "\" selected.\n To integrate with CKEditor or TinyMCE change INTEGRATION setting in conf.json. For more details see the Installation instructions at http://www.roxyfileman.com/install.");
+  //return;
+  var path=roxyUploadParentDirectory+"/"+file.fullPath;
+
+  if(!parent.$('.mce-btn.mce-open').length)
+    return;
+
+  parent.$('.mce-btn.mce-open').parent().find('.mce-textbox').val(path);
+
+  var i=0;
+  var ed;
+  do
+  {
+    ed = parent.tinymce.editors[i];
+  }
+  while(i++<10 && !ed.windowManager.windows.length)
+
+  ed.windowManager.windows[1].close();// CLOSES THE BROWSER WINDOW
+  
+  return   ;
+  //alert('"' + file.fullPath + "\" selected.\n To integrate with CKEditor or TinyMCE change INTEGRATION setting in conf.json. For more details see the Installation instructions at http://www.roxyfileman.com/install.");
 }
 function GetSelectedValue(){
+
+  //alert(1);
   /**
   * This function is called to retrieve selected value when custom integration is used.
   * Url parameter selected will override this value.
   */
   
-  return "";
+  return "asdfasd";
 }
