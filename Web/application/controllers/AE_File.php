@@ -115,9 +115,25 @@ class AE_File extends Burge_CMF_Controller {
 		}
 	}
 
+	private function log($type,$from_path,$to_path)
+	{
+		$path=array();
+		if($from_path)
+			$path['from_path']=$from_path;
+		if($to_path)
+			$path['to_path']=$to_path;
+
+		$this->log_manager_model->info($type,$path);
+
+		return;
+	}
+
 	private function downloaddir()
 	{
 		$path = trim($_GET['d']);
+		
+		$this->log("FILE_DIR_DOWNLOAD",$path,NULL);
+
 		verifyPath($path);
 		$path = fixPath($path);
 
@@ -152,6 +168,7 @@ class AE_File extends Burge_CMF_Controller {
 		$isAjax = (isset($_POST['method']) && $_POST['method'] == 'ajax');
 		$path = trim(empty($_POST['d'])?getFilesPath():$_POST['d']);
 		verifyPath($path);
+		$fileNames=array();
 		$res = '';
 		if(is_dir(fixPath($path))){
 		  if(!empty($_FILES['files']) && is_array($_FILES['files']['tmp_name'])){
@@ -169,6 +186,8 @@ class AE_File extends Burge_CMF_Controller {
 		         $errors[] = $filename; 
 		         $isUploaded = false;
 		      }
+		      if($isUploaded)
+		      	$fileNames[]=$path."/".$filename;
 		      if(is_file($filePath)){
 		         @chmod ($filePath, octdec(FILEPERMISSIONS));
 		      }
@@ -203,6 +222,9 @@ class AE_File extends Burge_CMF_Controller {
 			</script>';
 		}
 
+		$this->log("FILE_FILE_UPLOAD",NULL,implode("<br>", $fileNames));
+		bprint_r($fileNames);
+
 		return;
 	}
 
@@ -224,6 +246,9 @@ class AE_File extends Burge_CMF_Controller {
 	private function deletefile()
 	{
 		$path = trim($_POST['f']);
+
+		$this->log("FILE_FILE_DELETE",$path,NULL);
+
 		verifyPath($path);
 
 		if(is_file(fixPath($path))){
@@ -239,11 +264,15 @@ class AE_File extends Burge_CMF_Controller {
 	}
 
 	private function movefile()
-	{		
+	{	
 		$path = trim(empty($_POST['f'])?'':$_POST['f']);
 		$newPath = trim(empty($_POST['n'])?'':$_POST['n']);
+
 		if(!$newPath)
 		  $newPath = getFilesPath();
+
+		$this->log("FILE_FILE_DLETE",$path,$newPath);
+
 		verifyPath($path);
 		verifyPath($newPath);
 
@@ -265,6 +294,9 @@ class AE_File extends Burge_CMF_Controller {
 	{		
 		$path = trim(empty($_POST['f'])?'':$_POST['f']);
 		$name = trim(empty($_POST['n'])?'':$_POST['n']);
+
+		$this->log("FILE_FILE_RENAME",$path,$name);
+
 		verifyPath($path);
 
 		if(is_file(fixPath($path))){
@@ -288,6 +320,8 @@ class AE_File extends Burge_CMF_Controller {
 		if(!$newPath)
 		  $newPath = getFilesPath();
 
+		$this->log("FILE_FILE_COPY",$path,$newPath);
+
 		verifyPath($path);
 		verifyPath($newPath);
 
@@ -308,6 +342,10 @@ class AE_File extends Burge_CMF_Controller {
 	{
 		$path = trim(empty($_POST['d'])? '': $_POST['d']);
 		$name = trim(empty($_POST['n'])? '': $_POST['n']);
+
+		$this->log("FILE_DIR_RENAME",$path,$name);
+
+
 		verifyPath($path);
 
 		if(is_dir(fixPath($path))){
@@ -328,6 +366,9 @@ class AE_File extends Burge_CMF_Controller {
 	{
 		$path = trim(empty($_POST['d'])?'':$_POST['d']);
 		$newPath = trim(empty($_POST['n'])?'':$_POST['n']);
+
+		$this->log("FILE_DIR_COPY",$path,$newPath);
+
 		verifyPath($path);
 		verifyPath($newPath);
 
@@ -345,6 +386,9 @@ class AE_File extends Burge_CMF_Controller {
 	{				
 		$path = trim(empty($_GET['d'])?'':$_GET['d']);
 		$newPath = trim(empty($_GET['n'])?'':$_GET['n']);
+
+		$this->log("FILE_DIR_MOVE",$path,$newPath);
+
 		verifyPath($path);
 		verifyPath($newPath);
 
@@ -367,6 +411,9 @@ class AE_File extends Burge_CMF_Controller {
 	private function deletedir()
 	{
 		$path = trim(empty($_GET['d'])?'':$_GET['d']);
+
+		$this->log("FILE_DIR_DELETE",$path,NULL);
+
 		verifyPath($path);
 
 		if(is_dir(fixPath($path))){
@@ -389,6 +436,9 @@ class AE_File extends Burge_CMF_Controller {
 	{
 		$path = trim(empty($_POST['d'])?'':$_POST['d']);
 		$name = trim(empty($_POST['n'])?'':$_POST['n']);
+
+		$this->log("FILE_DIR_CREATE",$path,$name);
+
 		verifyPath($path);
 
 		if(is_dir(fixPath($path))){
