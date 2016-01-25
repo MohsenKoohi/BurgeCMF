@@ -47,7 +47,7 @@ class AE_File extends Burge_CMF_Controller {
 		return;
 	}
 
-	public function image($link1,$link2="",$link3="")
+	private function image($link1,$link2="",$link3="")
 	{
 		$path=SCRIPTS_DIR."/roxy/images/".$link1;
 		if($link2)

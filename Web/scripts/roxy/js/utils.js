@@ -119,9 +119,9 @@ RoxyUtils.FileExists = function(path) {
   return ret;
 };
 RoxyUtils.GetFileIcon = function(path){
-  ret = 'images/filetypes/unknown.png';//'images/filetypes/file_extension_' + RoxyUtils.GetFileExt(path).toLowerCase() + '.png';
+  ret = roxyScriptsDirectory+'/images/filetypes/unknown.png';//'images/filetypes/file_extension_' + RoxyUtils.GetFileExt(path).toLowerCase() + '.png';
   if(fileTypeIcons[RoxyUtils.GetFileExt(path).toLowerCase()]){
-    ret = 'images/filetypes/' + fileTypeIcons[RoxyUtils.GetFileExt(path).toLowerCase()];
+    ret = roxyScriptsDirectory+'/images/filetypes/' + fileTypeIcons[RoxyUtils.GetFileExt(path).toLowerCase()];
   }
 
   return ret;

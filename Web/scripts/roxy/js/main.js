@@ -50,10 +50,10 @@ function startDragFile(){
   selectFile(this);
 }
 function dragFileOver(){
-  $(this).children('img.dir').attr('src', 'images/folder-green.png');
+  $(this).children('img.dir').attr('src', roxyScriptsDirectory+'/images/folder-green.png');
 }
 function dragFileOut(){
-  $('#pnlDirList').find('img.dir').attr('src', 'images/folder.png');
+  $('#pnlDirList').find('img.dir').attr('src', roxyScriptsDirectory+'/images/folder.png');
 }
 function makeDragFile(e){
   var f = new File($(e.target).closest('li').attr('data-path'));
@@ -61,7 +61,7 @@ function makeDragFile(e){
 }
 function makeDragDir(e){
   var f = new Directory($(e.target).attr('data-path')?$(e.target).attr('data-path'):$(e.target).closest('li').attr('data-path'));
-  return '<div class="pnlDragDir" data-path="'+f.fullPath+'"><img src="images/folder.png" align="absmiddle">&nbsp;'+f.name+'</div>';
+  return '<div class="pnlDragDir" data-path="'+f.fullPath+'"><img src="'+roxyScriptsDirectory+'/images/folder.png" align="absmiddle">&nbsp;'+f.name+'</div>';
 }
 function moveDir(e, ui, obj){
   var dir = Directory.Parse(ui.draggable.attr('data-path'));
@@ -485,7 +485,7 @@ function switchView(t){
     t = $('#hdViewType').val();
   $('.btnView').removeClass('selected');
   if(t == 'thumb'){
-    $('#pnlFileList .icon').attr('src', 'images/blank.gif');
+    $('#pnlFileList .icon').attr('src', roxyScriptsDirectory+'/images/blank.gif');
     $('#pnlFileList').addClass('thumbView');
     if($('#dynStyle').length == 0){
       $('head').append('<style id="dynStyle" />');

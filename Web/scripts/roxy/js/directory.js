@@ -82,8 +82,8 @@ function Directory(fullPath, numDirs, numFiles){
   };
   this.GetHtml = function(){
      var html = '<li data-path="'+this.fullPath+'" data-dirs="'+this.dirs+'" data-files="'+this.files+'" class="directory">';
-     html += '<div><img src="images/'+(this.dirs > 0?'dir-plus.png':'blank.gif')+'" class="dirPlus" width="9" height="9">';
-     html += '<img src="images/folder.png" class="dir"><span class="name">'+this.name+' ('+this.files+')</span></div>';
+     html += '<div><img src="'+roxyScriptsDirectory+'/images/'+(this.dirs > 0?'dir-plus.png':'blank.gif')+'" class="dirPlus" width="9" height="9">';
+     html += '<img src="'+roxyScriptsDirectory+'/images/folder.png" class="dir"><span class="name">'+this.name+' ('+this.files+')</span></div>';
      html += '</li>';
 
     return html;
@@ -103,7 +103,7 @@ function Directory(fullPath, numDirs, numFiles){
     var el = this.GetElement();
     el.children('div').addClass('selected');
     $('#pnlDirList li[data-path!="'+this.fullPath+'"] > div').removeClass('selected');
-    el.children('img.dir').prop('src', 'images/folder.png');
+    el.children('img.dir').prop('src', roxyScriptsDirectory+'/images/folder.png');
     this.SetStatusBar();
     var p = this.GetParent();
     while(p){
@@ -155,11 +155,11 @@ function Directory(fullPath, numDirs, numFiles){
   this.SetOpened = function(){
     var li = this.GetElement();
     if(li.find('li').length < 1)
-      li.children('div').children('.dirPlus').prop('src', 'images/blank.gif');
+      li.children('div').children('.dirPlus').prop('src', roxyScriptsDirectory+'/images/blank.gif');
     else if(this.IsExpanded())
-      li.children('div').children('.dirPlus').prop('src', 'images/dir-minus.png');
+      li.children('div').children('.dirPlus').prop('src', roxyScriptsDirectory+'/images/dir-minus.png');
     else
-      li.children('div').children('.dirPlus').prop('src', 'images/dir-plus.png');
+      li.children('div').children('.dirPlus').prop('src', roxyScriptsDirectory+'/images/dir-plus.png');
   };
   this.Update = function(newPath){
     var el = this.GetElement();
