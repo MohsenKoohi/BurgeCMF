@@ -35,13 +35,15 @@ class AE_File extends Burge_CMF_Controller {
 
 	public function conf()
 	{
-		echo $this->file_manager_model->get_conf();
+		$this->output->set_content_type('application/json');
+    	$this->output->set_output($this->file_manager_model->get_conf());
 
 		return;
 	}
 
-	public function lang($lang)
+	private function lang($lang)
 	{
+
 		echo file_get_contents(SCRIPTS_DIR."/roxy/lang/".$lang.".json");
 
 		return;
