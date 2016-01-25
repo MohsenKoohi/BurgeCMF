@@ -105,7 +105,7 @@ RoxyUtils.GetFileExt = function(path){
 RoxyUtils.FileExists = function(path) {
   var ret = false;
   var url=path;
-  if(!url.startsWith("lang/"))
+  if(!url.startsWith(roxyScriptsDirectory+"/lang/"))
     url=roxyUploadParentDirectory+"/"+path;
   
   $.ajax({
@@ -129,7 +129,7 @@ RoxyUtils.GetFileIcon = function(path){
 RoxyUtils.GetFileSize = function(path){
   var ret = 0;
   var url=path;
-  if(!url.startsWith("lang/"))
+  if(!url.startsWith(roxyScriptsDirectory+"/lang/"))
     url=roxyUploadParentDirectory+"/"+path;
 
   $.ajax({
@@ -217,24 +217,24 @@ RoxyUtils.LoadLang = function(){
   var langUrl = '';
   if(RoxyFilemanConf.LANG && RoxyFilemanConf.LANG.toLowerCase() == 'auto'){
     if(RoxyUtils.GetUrlParam('langCode')){
-      langUrl = 'lang/' + RoxyUtils.GetUrlParam('langCode').substr(0, 2).toLowerCase() + '.json';
+      langUrl = roxyScriptsDirectory+'/lang/' + RoxyUtils.GetUrlParam('langCode').substr(0, 2).toLowerCase() + '.json';
     }
     else {
       var language = window.navigator.userLanguage || window.navigator.language;
-      langUrl = 'lang/' + language.substr(0, 2) + '.json';
+      langUrl = roxyScriptsDirectory+'/lang/' + language.substr(0, 2) + '.json';
     }
     if(!RoxyUtils.FileExists(langUrl))
       langUrl = '';
   }
   else{
     if(RoxyFilemanConf.LANG){
-      langUrl = 'lang/' + RoxyFilemanConf.LANG.substr(0, 2).toLowerCase() + '.json';
+      langUrl = roxyScriptsDirectory+'/lang/' + RoxyFilemanConf.LANG.substr(0, 2).toLowerCase() + '.json';
       if(!RoxyUtils.FileExists(langUrl))
         langUrl = '';
       }
   }
   if(!langUrl)
-    langUrl = 'lang/en.json';
+    langUrl = roxyScriptsDirectory+'/lang/en.json';
 
   $.ajax({
       url: langUrl,
