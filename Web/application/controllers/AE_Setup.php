@@ -82,13 +82,15 @@ class AE_Setup extends CI_Controller {
 
 		$this->module_manager_model->install_module("hit_counter");
 
-		$this->module_manager_model->install_module("post_manager");
-
 		$this->module_manager_model->install_module("log_manager");
 
 		$this->module_manager_model->install_module("constant_manager");
 
+		$this->module_manager_model->install_module("post_manager");
+
 		$this->module_manager_model->install_module("file_manager");
+
+		$this->module_manager_model->install_module("category_manager");
 
 		$default_lang=array_keys(LANGUAGES())[0];
 		$modules_info=$this->module_manager_model->get_all_modules_info($default_lang);
