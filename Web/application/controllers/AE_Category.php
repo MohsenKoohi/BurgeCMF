@@ -28,7 +28,9 @@ class AE_Category extends Burge_CMF_Controller {
 
 	private function add_category()
 	{
-		
+		$id=$this->category_manager_model->add();
+
+		//return redirect(get_admin_category_details_link($id));
 	}
 
 	public function details()

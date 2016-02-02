@@ -67,4 +67,22 @@ class Category_manager_model extends CI_Model
 		
 		return $ret;		
 	}	
+
+	public function add()
+	{
+		$this->db->insert($this->category_table_name,array("category_parent_id"=>0));
+		
+		$category_id=$this->db->insert_id();
+
+		$category_descs=array();
+		foreach($this->language->get_languages() as $index=>$lang)
+			$category_descs[]=array(
+				"cd_category_id"=>$category_id
+				,"cd_lang_id"=>$index
+			);
+
+		$this->db->insert_batch($this->category_description_table_name,$category_descs);
+
+		return $category_id;
+	}
 }
