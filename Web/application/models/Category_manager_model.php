@@ -3,6 +3,7 @@
 class Category_manager_model extends CI_Model
 {
 	private $category_table_name="category";
+	private $category_description_table_name="category_description";
 
 	public function __construct()
 	{
@@ -15,12 +16,26 @@ class Category_manager_model extends CI_Model
 	public function install()
 	{
 		$tbl_name=$this->db->dbprefix($this->category_table_name); 
-
 		$this->db->query(
 			"CREATE TABLE IF NOT EXISTS $tbl_name (
 				`category_id` INT AUTO_INCREMENT
 				,`category_parent_id` INT DEFAULT 0
 				,PRIMARY KEY (category_id)	
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8"
+		);
+
+		$tbl_name=$this->db->dbprefix($this->category_description_table_name); 
+		$this->db->query(
+			"CREATE TABLE IF NOT EXISTS $tbl_name (
+				`cd_category_id` INT NOT NULL
+				,`cd_lang_id` CHAR(2) NOT NULL
+				,`cd_name` VARCHAR(512)
+				,`cd_description` TEXT
+				,`cd_meta_key_words` VARCHAR(1024)
+				,`cd_meta_description` VARCHAR(1024)
+				,`cd_url` varchar(1024)
+
+				,PRIMARY KEY (cd_category_id, cd_lang_id)	
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8"
 		);
 
