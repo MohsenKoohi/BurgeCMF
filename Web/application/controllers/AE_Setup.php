@@ -15,7 +15,7 @@ class AE_Setup extends CI_Controller {
 
 	function check_directories_permission()
 	{
-		$dirs=array(LOG_DIR, CAPTCHA_DIR);
+		$dirs=array(LOG_DIR, CAPTCHA_DIR, UPLOAD_DIR,CATEGORY_CACHE_DIR);
 		$result=TRUE;
 
 		foreach($dirs as $dir)

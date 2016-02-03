@@ -81,3 +81,5 @@ define ('SCRIPTS_DIR', HOME_DIR."/scripts");
 
 define ('UPLOAD_DIR', HOME_DIR."/upload");
 define ('UPLOAD_URL', HOME_URL."/upload");
+
+define ('CATEGORY_CACHE_DIR', HOME_DIR."/application/cache/category");

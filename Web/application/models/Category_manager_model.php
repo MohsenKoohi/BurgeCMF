@@ -4,10 +4,13 @@ class Category_manager_model extends CI_Model
 {
 	private $category_table_name="category";
 	private $category_description_table_name="category_description";
+	private $organized_category_file_path;
 
 	public function __construct()
 	{
 		parent::__construct();
+
+		$this->organized_category_file_path=CATEGORY_CACHE_DIR."/organized_cats.json";
 
       return;
    }
@@ -66,7 +69,67 @@ class Category_manager_model extends CI_Model
 		$ret=$CI->parser->parse($CI->get_admin_view_file("log_dashboard"),$data,TRUE);
 		
 		return $ret;		
-	}	
+	}
+
+	//this method is responsible for creating hierarchical structure of categories,
+	//so we don't need to run multiplt queries to retreive the structure from the database.
+	//it should be updated 
+	private function organize()
+	{
+		$result=$this->db
+			->select("*")
+			->from($this->category_table_name)
+			->join($this->category_description_table_name,"category_id = cd_category_id","left")
+			->order_by("category_id ASC, cd_lang_id ASC")
+			->get();
+
+		$rows=$result->result_array();
+		
+		$cats=array();
+		foreach($rows as $row)
+		{
+			$cid=$row['category_id'];
+			if(!isset($cats[$cid]))
+			{
+				$cats[$cid]=array();
+
+				$cats[$cid]['id']=$cid;
+				$cats[$cid]['parent_id']=$row['category_parent_id'];
+				
+				$cats[$cid]['names']=array();
+				$cats[$cid]['urls']=array();
+				$cats[$cid]['children']=array();
+			}
+
+			$cats[$cid]['names'][$row['cd_lang_id']]=$row['cd_name'];
+			$cats[$cid]['urls'][$row['cd_lang_id']]=$row['cd_url'];
+		}
+
+		$cats[0]=array("id"=>0,"parent_id"=>0,'children'=>array());
+
+		foreach($cats as &$cat)
+		{
+			if(!$cat['id'])
+				continue; 
+
+			$parent=&$cats[$cat['parent_id']];
+			$parent['children'][]=&$cat;
+		}
+
+		file_put_contents($this->organized_category_file_path, json_encode($cats[0]));
+
+		return;
+	}
+
+	public function get($filter=array())
+	{
+		if(!file_exists($this->organized_category_file_path))
+			$this->organize();
+
+		$cats=json_decode(file_get_contents($this->organized_category_file_path));
+
+		return $cats;
+	}
 
 	public function add()
 	{
@@ -82,6 +145,8 @@ class Category_manager_model extends CI_Model
 			);
 
 		$this->db->insert_batch($this->category_description_table_name,$category_descs);
+
+		$this->organize();
 
 		return $category_id;
 	}

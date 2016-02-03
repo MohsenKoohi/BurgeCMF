@@ -18,6 +18,7 @@ class AE_Category extends Burge_CMF_Controller {
 
 		$this->data['message']=get_message();
 
+		$this->data['categories']=$this->category_manager_model->get();
 		$this->data['lang_pages']=get_lang_pages(get_link("admin_category",TRUE));
 		$this->data['header_title']=$this->lang->line("categories");
 		
@@ -30,7 +31,9 @@ class AE_Category extends Burge_CMF_Controller {
 	{
 		$id=$this->category_manager_model->add();
 
-		//return redirect(get_admin_category_details_link($id));
+		set_message($this->lang->line("category_added_successfully"));
+
+		return redirect(get_admin_category_details_link($id));
 	}
 
 	public function details()
