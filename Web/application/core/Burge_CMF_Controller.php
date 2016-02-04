@@ -67,6 +67,7 @@ class Burge_CMF_Controller extends CI_Controller{
 
 			$this->data=get_initialized_data(FALSE);
 			$this->data['user_logged_in']=TRUE;
+			$this->data['selected_lang']=$this->selected_lang;
 		}
 		else
 		{
@@ -81,6 +82,7 @@ class Burge_CMF_Controller extends CI_Controller{
 
 			$this->data=get_initialized_data(TRUE);	
 
+			$this->data['selected_lang']=$this->selected_lang;
 			$this->data['header_title']=$this->lang->line("header_title");
 			$this->data['header_meta_description']=$this->lang->line("header_meta_description");
 			$this->data['header_meta_keywords']=$this->lang->line("header_meta_keywords");
