@@ -41,7 +41,7 @@
 					$par_names[]=" ";
 					$par_name=implode($next_category_sign_text, $par_names);	
 			?>				
-				<div class="row even-odd-bg" >
+				<div class="row even-odd-bg dont-magnify" >
 					<div class="two columns counter">
 						#<?php echo $i++;?>
 					</div>
