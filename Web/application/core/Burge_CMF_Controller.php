@@ -59,15 +59,17 @@ class Burge_CMF_Controller extends CI_Controller{
 		$this->default_lang=Language::get_default_language();
 		$this->all_langs=Language::get_languages();
 
-
 		if($this->in_admin_env)
 		{
 			//setting initial common data for the admin env
 			$this->lang->load('ae_general',$this->selected_lang);	
 
 			$this->data=get_initialized_data(FALSE);
-			$this->data['user_logged_in']=TRUE;
+			
 			$this->data['selected_lang']=$this->selected_lang;
+			$this->data['all_langs']=$this->all_langs;
+
+			$this->data['user_logged_in']=TRUE;
 		}
 		else
 		{

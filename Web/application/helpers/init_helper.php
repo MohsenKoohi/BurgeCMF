@@ -36,12 +36,16 @@ function &get_links($just_common=FALSE)
 			,'admin_log'				=> ADMIN_SURL_LANG."/log"
 			,'admin_constant'			=> ADMIN_SURL_LANG."/constant"
 			
-			,'admin_post'							=> ADMIN_SURL_LANG."/post"
-			,'admin_post_details_format'		=> ADMIN_SURL_LANG."/post/post_id"
-			,'admin_file'							=> ADMIN_SURL_LANG."/file"
-			,'admin_file_inline'					=> ADMIN_SURL_LANG."/file/inline"
-			,'admin_category'						=> ADMIN_SURL_LANG."/category"
-			,'admin_category_details_format'	=> ADMIN_SURL_LANG."/category/category_id"
+			,'admin_post'									=> ADMIN_SURL_LANG."/post"
+			,'admin_post_details_format'				=> ADMIN_SURL_LANG."/post/post_id"
+			,'customer_post_details_format'			=> HOME_URL_LANG."/post-post_id/post_name"
+
+			,'admin_file'									=> ADMIN_SURL_LANG."/file"
+			,'admin_file_inline'							=> ADMIN_SURL_LANG."/file/inline"
+			
+			,'admin_category'								=> ADMIN_SURL_LANG."/category"
+			,'admin_category_details_format'			=> ADMIN_SURL_LANG."/category/category_id"
+			,'customer_category_details_format'		=> HOME_URL_LANG."/category-category_id/category_name"
 		));
 	}
 
@@ -85,9 +89,27 @@ function get_admin_post_details_link($post_id,$do_not_set_lang=FALSE)
 	return str_replace("post_id",$post_id,get_link("admin_post_details_format",$do_not_set_lang));	
 }
 
+function get_customer_post_details_link($post_id,$post_name,$do_not_set_lang=FALSE)
+{
+	return str_replace(
+		array("post_id","post_name")
+		,array($post_id,$post_name)
+		,get_link("customer_post_details_format",$do_not_set_lang)
+	);	
+}
+
 function get_admin_category_details_link($category_id,$do_not_set_lang=FALSE)
 {
 	return str_replace("category_id",$category_id,get_link("admin_category_details_format",$do_not_set_lang));	
+}
+
+function get_customer_category_details_link($category_id,$category_name,$do_not_set_lang=FALSE)
+{
+	return str_replace(
+		array("category_id","category_name")
+		,array($category_id,$category_name)
+		,get_link("customer_category_details_format",$do_not_set_lang)
+	);	
 }
 
 

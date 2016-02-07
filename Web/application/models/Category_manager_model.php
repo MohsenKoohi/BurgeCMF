@@ -34,7 +34,7 @@ class Category_manager_model extends CI_Model
 				,`cd_lang_id` CHAR(2) NOT NULL
 				,`cd_name` VARCHAR(512)
 				,`cd_description` TEXT
-				,`cd_meta_key_words` VARCHAR(1024)
+				,`cd_meta_keywords` VARCHAR(1024)
 				,`cd_meta_description` VARCHAR(1024)
 				,`cd_url` varchar(1024)
 
@@ -138,7 +138,7 @@ class Category_manager_model extends CI_Model
 		return;
 	}
 
-	public function get($filter=array())
+	public function get_all()
 	{
 		if(!file_exists($this->organized_category_file_path))
 			$this->organize();
@@ -146,6 +146,17 @@ class Category_manager_model extends CI_Model
 		$cats=json_decode(file_get_contents($this->organized_category_file_path),TRUE);
 
 		return $cats;
+	}
+
+	public function get_info($category_id)
+	{
+		return $this->db
+			->select("*")
+			->from($this->category_table_name)
+			->join($this->category_description_table_name,"category_id = cd_category_id","LEFT")
+			->where("category_id",(int)$category_id)
+			->get()
+			->result_array();
 	}
 
 	public function add()
