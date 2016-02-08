@@ -55,14 +55,18 @@ class AE_Category extends Burge_CMF_Controller {
 		}
 
 		$this->data['info']=array();
-		foreach($this->all_langs as $lang => $lang_name)
-			$this->data['info'][$lang]=$info[$lang];
+		if($info)
+			foreach($this->all_langs as $lang => $lang_name)
+				$this->data['info'][$lang]=$info[$lang];
 
 		$this->data['category_url_first_part']=get_customer_category_details_link($category_id,"");
 		
 		$this->data['category_id']=$category_id;
 		$this->data['lang_pages']=get_lang_pages(get_admin_category_details_link($category_id,TRUE));
-		$this->data['header_title']=$this->data['info'][$this->selected_lang]['cd_name'];
+		if($info)
+			$this->data['header_title']=$this->data['info'][$this->selected_lang]['cd_name'];
+		else
+			$this->data['header_title']=$this->lang->line("not_found");
 
 		$this->send_admin_output("category_details");
 	}
