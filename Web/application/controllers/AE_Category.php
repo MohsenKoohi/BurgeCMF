@@ -38,6 +38,9 @@ class AE_Category extends Burge_CMF_Controller {
 
 	public function details($category_id)
 	{
+		if($this->input->post("post_type")==="edit_category")
+			return $this->edit_category($category_id);
+
 		$this->data['message']=get_message();
 
 		$info=$this->category_manager_model->get_info((int)$category_id);
@@ -59,5 +62,24 @@ class AE_Category extends Burge_CMF_Controller {
 		$this->data['header_title']=$this->data['info'][$this->selected_lang]['cd_name'];
 
 		$this->send_admin_output("category_details");
+	}
+
+	private function edit_category($category_id)
+	{
+		$props=array();
+
+		foreach($this->language->get_languages() as $lang=>$name)
+		{
+			$category_content=$this->input->post($lang);
+			$category_content['cd_lang_id']=$lang;
+
+			$props[]=$category_content;
+		}
+
+		$this->category_manager_model->set_props($category_id,$props);
+
+		set_message($this->lang->line("edited_successfully"));
+
+		return redirect(get_admin_category_details_link($category_id));
 	}
 }

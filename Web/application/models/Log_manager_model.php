@@ -59,7 +59,10 @@ class Log_manager_model extends CI_Model
 		,"FILE_FILE_COPY"			=>209
 		,"FILE_FILE_MOVE"			=>210
 		,"FILE_FILE_RENAME"		=>211
-		
+
+		,"CATEGORY_CREATE"		=>241
+		,"CATEGORY_DELETE"		=>242
+		,"CATEGORY_CHANGE"		=>243		
 
 	);
 

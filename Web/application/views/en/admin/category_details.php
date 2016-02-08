@@ -90,6 +90,7 @@
 											<input type="text" class="full-width" 
 												name="<?php echo $lang;?>[cd_name]" 
 												value="<?php echo $cd['cd_name']; ?>"
+												onkeyup="setUrl(this,'<?php echo $lang;?>');"
 											/>
 										</div>
 									</div>
@@ -99,7 +100,7 @@
 										</div>
 										<div class="nine columns eng ltr">
 											{category_url_first_part}
-											<input type="text" class="six columns eng ltr" 
+											<input type="text" class="six columns ltr"
 												name="<?php echo $lang;?>[cd_url]" 
 												value="<?php echo $cd['cd_url']; ?>"
 											/>
@@ -145,7 +146,15 @@
 					<div class="row">
 							<div class="four columns">&nbsp;</div>
 							<input type="submit" class=" button-primary four columns" value="{submit_text}"/>
-					</div>				
+					</div>
+					<script type="text/javascript">
+						function setUrl(el,lang)
+						{
+							var val=$(el).val();
+							val=val.trim().replace(/\s+/g,"-");
+							$("input[name='"+lang+"[cd_url]']").val(val);
+						}
+					</script>
 				</form>
 
 				<div style="display:none">

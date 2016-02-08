@@ -6,6 +6,10 @@ class Category_manager_model extends CI_Model
 	private $category_description_table_name="category_description";
 	private $organized_category_file_path;
 
+	private $category_description_writable_props=array(
+		'cd_name','cd_description','cd_url','cd_meta_keywords','cd_meta_description'
+	);
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -174,8 +178,39 @@ class Category_manager_model extends CI_Model
 
 		$this->db->insert_batch($this->category_description_table_name,$category_descs);
 
+		$this->log_manager_model->info("CATEGORY_CREATE",array("category_id"=>$category_id));	
+
 		$this->organize();
 
 		return $category_id;
+	}
+
+	public function set_props($category_id,$category_descriptions)
+	{
+		$log_props=array();
+
+		foreach($category_descriptions as $category_description)
+		{
+			$lang=$category_description['cd_lang_id'];
+
+			$props=select_allowed_elements($category_description,$this->category_description_writable_props);
+
+			foreach($props as $prop => $value)
+			{
+				$this->db->set($prop,$value);
+				$log_props[$lang."_".$prop]=$value;
+			}
+
+			$this->db
+				->where("cd_category_id",$category_id)
+				->where("cd_lang_id",$lang)
+				->update($this->category_description_table_name);
+		}
+
+		$this->log_manager_model->info("CATEGORY_CHANGE",$log_props);	
+
+		$this->organize();
+
+		return;
 	}
 }
