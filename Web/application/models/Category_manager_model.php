@@ -61,16 +61,20 @@ class Category_manager_model extends CI_Model
 
 	public function get_dashboard_info()
 	{
-		return "";
 		$CI=& get_instance();
-		$lang=$CI->language->get();
-		$CI->lang->load('ae_log',$lang);		
+		//$lang=$CI->language->get();
+		//$CI->lang->load('ae_log',$lang);		
 		
 		$data=array();
-		$data['logs']=$this->get_today_logs(2,8);
+		$row=$this->db
+			->select("COUNT(*) as count")
+			->from($this->category_table_name)
+			->get()
+			->row_array();
+		$data['total']=$row['count'];
 		
 		$CI->load->library('parser');
-		$ret=$CI->parser->parse($CI->get_admin_view_file("log_dashboard"),$data,TRUE);
+		$ret=$CI->parser->parse($CI->get_admin_view_file("category_dashboard"),$data,TRUE);
 		
 		return $ret;		
 	}
@@ -136,7 +140,6 @@ class Category_manager_model extends CI_Model
 		file_put_contents($this->organized_category_file_path, json_encode($cats));
 
 		//bprint_r($cats);
-
 		//exit();
 
 		return;
