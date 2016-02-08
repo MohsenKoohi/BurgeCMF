@@ -19,7 +19,7 @@
 						{delete_category_text}
 					</div>
 				</div>
-				<br>
+				<br><br>
 				<?php echo form_open(get_admin_category_details_link($category_id),array()); ?>
 					<input type="hidden" name="post_type" value="edit_category" />
 					<div class="tab-container">
@@ -165,7 +165,7 @@
 
 					 <script type="text/javascript">
 
-              	function deletePost()
+              	function deleteCategory()
 						{
 							if(!confirm("{are_you_sure_to_delete_this_category_text}"))
 								return;

@@ -41,6 +41,9 @@ class AE_Category extends Burge_CMF_Controller {
 		if($this->input->post("post_type")==="edit_category")
 			return $this->edit_category($category_id);
 
+		if($this->input->post("post_type")==="delete_category")
+			return $this->delete_category($category_id);
+
 		$this->data['message']=get_message();
 
 		$info=$this->category_manager_model->get_info((int)$category_id);
@@ -81,5 +84,14 @@ class AE_Category extends Burge_CMF_Controller {
 		set_message($this->lang->line("edited_successfully"));
 
 		return redirect(get_admin_category_details_link($category_id));
+	}
+
+	private function delete_category($category_id)
+	{
+		$this->category_manager_model->delete($category_id);
+
+		set_message($this->lang->line("deleted_successfully"));
+
+		return redirect(get_link("admin_category"));
 	}
 }

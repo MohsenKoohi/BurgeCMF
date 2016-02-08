@@ -185,6 +185,33 @@ class Category_manager_model extends CI_Model
 		return $category_id;
 	}
 
+	//parentize of its sub-categories and posts 
+	//to its parent ;)
+	public function delete($category_id)
+	{
+		$row=$this->db
+			->get_where($this->category_table_name,array("category_id"=>$category_id))
+			->row_array();
+
+		$parent_id=$row['category_parent_id'];
+		
+		$this->db
+			->set("category_parent_id",$parent_id)
+			->where("category_parent_id",$category_id)
+			->update($this->category_table_name);
+
+
+		$this->db
+			->where("category_id",$category_id)
+			->delete($this->category_table_name);
+
+		$this->log_manager_model->info("CATEGORY_DELETE",array("category_id"=>$category_id));	
+
+		$this->organize();
+
+		return;
+	}
+
 	public function set_props($category_id,$category_descriptions)
 	{
 		$log_props=array();
