@@ -151,7 +151,7 @@
 						function setUrl(el,lang)
 						{
 							var val=$(el).val();
-							val=val.trim().replace(/\s+/g,"-");
+							val=val.replace(/[\s!#@\$%\^&\*><.;'"?\/\]\[\(\)\\]+/g," ").trim().replace(/\s+/g,"-");
 							$("input[name='"+lang+"[cd_url]']").val(val);
 						}
 					</script>
