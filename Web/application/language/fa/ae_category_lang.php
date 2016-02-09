@@ -18,5 +18,5 @@ $lang['url']="آدرس";
 $lang['edited_successfully']="تغییرات با موفقیت ثبت شد.";
 $lang['deleted_successfully']="دسته موردنظر با موفقیت حذف شد.";
 $lang['no_title']="بدون نام";
-$lang['']="";
-$lang['']="";
+$lang['parent']="دسته پدر";
+$lang['root']="ریشه";

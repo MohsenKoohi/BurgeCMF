@@ -155,6 +155,49 @@ class Category_manager_model extends CI_Model
 		return $cats;
 	}
 
+	public function get_hierarchy($type,$lang)
+	{
+		$categories=$this->get_all();
+		bprint_r($categories);
+
+		return $this->create_hierarchy($categories[0],$type);
+	}
+
+	private function create_hierarchy(&$category,$type,$lang)
+	{
+		switch($type)
+		{
+			case 'button':
+				$inp="<button name='category' value='".$category['id']."'/>";
+				break;
+		}
+
+		if(!$category['id'])
+			$ret="<ul><li>$inp {root_text}<ul>";
+		else
+			$ret="<li>$inp ".$category['names'][$lang];
+
+		if($category['children'])
+		{	
+			$ret.="<ul>";
+			
+			foreach($category['children'] as $child)
+				$ret.=$this->create_hierarchy($child,$type,$lang);
+
+			$ret.="</ul>";
+		}
+
+		if(!$category['id'])
+			$ret.="</li></ul>";
+		else
+			$ret="</li>";
+
+
+
+
+	}
+	
+
 	public function get_info($category_id)
 	{
 		return $this->db

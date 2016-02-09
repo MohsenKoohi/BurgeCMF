@@ -18,5 +18,5 @@ $lang['url']="Url";
 $lang['edited_successfully']="The category modified successfully.";
 $lang['deleted_successfully']="The category deleted successfully.";
 $lang['no_title']="No title";
-$lang['']="";
-$lang['']="";
+$lang['parent']="Parent";
+$lang['root']="Root";
