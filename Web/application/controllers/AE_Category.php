@@ -46,7 +46,7 @@ class AE_Category extends Burge_CMF_Controller {
 
 		$this->data['message']=get_message();
 		$this->data['categories']=$this->category_manager_model->get_hierarchy("button",$this->selected_lang);
-
+		
 		$info=$this->category_manager_model->get_info((int)$category_id);
 
 		foreach($info as &$row)

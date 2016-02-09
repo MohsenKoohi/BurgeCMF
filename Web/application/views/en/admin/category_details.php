@@ -22,20 +22,7 @@
 				<br><br>
 				<?php echo form_open(get_admin_category_details_link($category_id),array()); ?>
 					<input type="hidden" name="post_type" value="edit_category" />
-					<div class="row even-odd-bg">
-						<style type="text/css">
-							ul{margin:0 30px;}
-						</style>
-						<div class="three columns">
-							<span>{parent_text}</span>
-						</div>
-						<div id="parent" class="nine columns" style="height:200px;scroll:auto;overflow:auto">
-							<?php echo $categories_ul; ?>
-						</div>
-						<script type="text/javascript">
 					
-						</script>
-					</div>
 					<div class="tab-container">
 						<ul class="tabs">
 							<?php foreach($info as $inf) { ?>
@@ -155,6 +142,20 @@
 								</div>
 							</div>
 						<?php } ?>
+					</div>
+					<br>
+					<div class="row even-odd-bg">
+						<style type="text/css">
+							#parent ul{margin:0 30px;}
+							#parent li{list-style: none;margin: 0 20px;}
+							body.rtl #parent li{border-right:1px dotted #555;}
+						</style>
+						<div class="three columns">
+							<span>{parent_text}</span>
+						</div>
+						<div id="parent" class="nine columns">
+							<?php echo $categories; ?>
+						</div>
 					</div>
 					<br><br>
 					<div class="row">

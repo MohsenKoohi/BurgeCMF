@@ -158,9 +158,9 @@ class Category_manager_model extends CI_Model
 	public function get_hierarchy($type,$lang)
 	{
 		$categories=$this->get_all();
-		bprint_r($categories);
+		//bprint_r($categories);
 
-		return $this->create_hierarchy($categories[0],$type);
+		return "<ul>".$this->create_hierarchy($categories[0],$type,$lang)."</ul>";
 	}
 
 	private function create_hierarchy(&$category,$type,$lang)
@@ -168,14 +168,19 @@ class Category_manager_model extends CI_Model
 		switch($type)
 		{
 			case 'button':
-				$inp="<button name='category' value='".$category['id']."'/>";
+				$inp="<input type='radio' name='category' value='".$category['id']."'/>";
 				break;
 		}
 
 		if(!$category['id'])
-			$ret="<ul><li>$inp {root_text}<ul>";
+			$name="{root_text}";
 		else
-			$ret="<li>$inp ".$category['names'][$lang];
+			if($category['names'][$lang])
+				$name=$category['names'][$lang];
+			else
+				$name="{no_title_text}";
+	
+		$ret="<li>$inp $name";
 
 		if($category['children'])
 		{	
@@ -186,15 +191,10 @@ class Category_manager_model extends CI_Model
 
 			$ret.="</ul>";
 		}
+		
+		$ret.="</li>";
 
-		if(!$category['id'])
-			$ret.="</li></ul>";
-		else
-			$ret="</li>";
-
-
-
-
+		return $ret;
 	}
 	
 
