@@ -179,8 +179,9 @@ class Category_manager_model extends CI_Model
 				$name=$category['names'][$lang];
 			else
 				$name="{no_title_text}";
-	
-		$ret="<li>$inp $name";
+		$id=$category['id'];
+
+		$ret="<li>$inp <span data-id='$id'>$name</span>";
 
 		if($category['children'])
 		{	

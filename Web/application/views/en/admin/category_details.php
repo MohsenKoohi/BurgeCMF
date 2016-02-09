@@ -146,16 +146,27 @@
 					<br>
 					<div class="row even-odd-bg">
 						<style type="text/css">
-							#parent ul{margin:0 30px;}
-							#parent li{list-style: none;margin: 0 20px;}
-							body.rtl #parent li{border-right:1px dotted #555;}
+							#parent-category ul{margin:0 30px;}
+							#parent-category li{list-style: none;margin: 0 20px;}
+							body.rtl #parent-category li{border-right:1px dotted #555;}
+							body.ltr #parent-category li{border-left:1px dotted #555;}
 						</style>
 						<div class="three columns">
 							<span>{parent_text}</span>
 						</div>
-						<div id="parent" class="nine columns">
+						<div id="parent-category" class="nine columns">
 							<?php echo $categories; ?>
 						</div>
+						<script type="text/javascript">
+							$("#parent-category span").click(
+								function()
+								{
+									var id=$(this).data("id");
+									$("#parent-category input[value="+id+"]").prop("checked",true);
+
+								}
+							);
+						</script>
 					</div>
 					<br><br>
 					<div class="row">
