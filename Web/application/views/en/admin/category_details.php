@@ -155,6 +155,7 @@
 							<span>{parent_text}</span>
 						</div>
 						<div id="parent-category" class="nine columns">
+							<input type="hidden" name="category_parent_id" />
 							<?php echo $categories; ?>
 						</div>
 						<script type="text/javascript">
@@ -189,9 +190,20 @@
 						<input type="hidden" name="post_id" value="{category_id}"/>
 					</form>
 
-					 <script type="text/javascript">
+					<script type="text/javascript">
+						$(function(){
+							var parId="<?php echo $info[$selected_lang]['category_parent_id'];?>";
+							$("#parent-category input[value="+parId+"]").prop("checked","checked");
 
-              	function deleteCategory()
+							$("#parent-category input[name=category]").change(function()
+							{
+								$("input[name=category_parent_id]").val($(this).val());
+							});
+
+							$("#parent-category input[name=category][value="+parId+"]").trigger("change");
+						});
+
+	              	function deleteCategory()
 						{
 							if(!confirm("{are_you_sure_to_delete_this_category_text}"))
 								return;

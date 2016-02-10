@@ -155,40 +155,50 @@ class Category_manager_model extends CI_Model
 		return $cats;
 	}
 
-	public function get_hierarchy($type,$lang)
+	public function get_hierarchy($type,$lang,$ignore_ids=array())
 	{
 		$categories=$this->get_all();
 		//bprint_r($categories);
 
-		return "<ul>".$this->create_hierarchy($categories[0],$type,$lang)."</ul>";
+		return "<ul>".$this->create_hierarchy($categories[0],$type,$lang,$ignore_ids)."</ul>";
 	}
 
-	private function create_hierarchy(&$category,$type,$lang)
+	private function create_hierarchy(&$category,$type,$lang,&$ignore_ids)
 	{
-		switch($type)
-		{
-			case 'button':
-				$inp="<input type='radio' name='category' value='".$category['id']."'/>";
-				break;
-		}
+		$id=$category['id'];
+		if(in_array($id,$ignore_ids))
+			$inp="&nbsp;";
+		else
+			switch($type)
+			{
+				case 'button':
+					$inp="<input type='radio' name='category' value='".$id."'/>";
+					break;
+			}
 
-		if(!$category['id'])
+		if(!$id)
 			$name="{root_text}";
 		else
 			if($category['names'][$lang])
 				$name=$category['names'][$lang];
 			else
 				$name="{no_title_text}";
-		$id=$category['id'];
+		
 
 		$ret="<li>$inp <span data-id='$id'>$name</span>";
 
+		
 		if($category['children'])
 		{	
 			$ret.="<ul>";
 			
 			foreach($category['children'] as $child)
-				$ret.=$this->create_hierarchy($child,$type,$lang);
+			{
+				if(in_array($child['parents'][0],$ignore_ids))
+					$ignore_ids[]=$child['id'];
+
+				$ret.=$this->create_hierarchy($child,$type,$lang,$ignore_ids);
+			}
 
 			$ret.="</ul>";
 		}
@@ -259,15 +269,26 @@ class Category_manager_model extends CI_Model
 		return;
 	}
 
-	public function set_props($category_id,$category_descriptions)
+	public function set_props($category_id,$category_props)
 	{
 		$log_props=array();
 
-		foreach($category_descriptions as $category_description)
+		$parent_id=$category_props['category_parent_id'];
+		$this->db
+			->set("category_parent_id",$parent_id)
+			->where("category_id",$category_id)
+			->update($this->category_table_name);
+
+		$log_props["category_parent_id"]=$parent_id;
+
+		foreach($category_props['descriptions'] as $category_description)
 		{
 			$lang=$category_description['cd_lang_id'];
 
-			$props=select_allowed_elements($category_description,$this->category_description_writable_props);
+			$props=select_allowed_elements(
+				$category_description,
+				$this->category_description_writable_props
+			);
 
 			foreach($props as $prop => $value)
 			{

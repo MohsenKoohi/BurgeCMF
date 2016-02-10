@@ -45,7 +45,7 @@ class AE_Category extends Burge_CMF_Controller {
 			return $this->delete_category($category_id);
 
 		$this->data['message']=get_message();
-		$this->data['categories']=$this->category_manager_model->get_hierarchy("button",$this->selected_lang);
+		$this->data['categories']=$this->category_manager_model->get_hierarchy("button",$this->selected_lang,array($category_id));
 		
 		$info=$this->category_manager_model->get_info((int)$category_id);
 
@@ -76,12 +76,16 @@ class AE_Category extends Burge_CMF_Controller {
 	{
 		$props=array();
 
+		$props['descriptions']=array();
+
+		$props['category_parent_id']=$this->input->post("category_parent_id");
+
 		foreach($this->language->get_languages() as $lang=>$name)
 		{
 			$category_content=$this->input->post($lang);
 			$category_content['cd_lang_id']=$lang;
 
-			$props[]=$category_content;
+			$props['descriptions'][]=$category_content;
 		}
 
 		$this->category_manager_model->set_props($category_id,$props);
