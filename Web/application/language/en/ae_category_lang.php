@@ -9,6 +9,7 @@ $lang['next_category_sign']="<span class='cat-sign'> » </span>";
 $lang['not_found']="Not found.";
 $lang['category_details']="Category Details";
 $lang['delete_category']="Delete";
+$lang['add_sub_category']="Add Sub Category";
 $lang['are_you_sure_to_delete_this_category']="Are you sure?";
 $lang['name']="Name";
 $lang['description']="Description";

@@ -9,6 +9,7 @@ $lang['next_category_sign']="<span class='cat-sign'> » </span>";
 $lang['not_found']="اطلاعات این دسته پیدا نشد.";
 $lang['category_details']="مشخصات دسته";
 $lang['delete_category']="حذف";
+$lang['add_sub_category']="افزودن زیر دسته";
 $lang['are_you_sure_to_delete_this_category']="آیا با حذف این دسته موافقید؟";
 $lang['name']="نام";
 $lang['description']="توضیح";

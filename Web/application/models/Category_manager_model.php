@@ -220,9 +220,9 @@ class Category_manager_model extends CI_Model
 			->result_array();
 	}
 
-	public function add()
+	public function add($parent_id)
 	{
-		$this->db->insert($this->category_table_name,array("category_parent_id"=>0));
+		$this->db->insert($this->category_table_name,array("category_parent_id"=>$parent_id));
 		
 		$category_id=$this->db->insert_id();
 

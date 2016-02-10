@@ -15,8 +15,11 @@
 		?>
 			<div class="container">
 				<div class="row general-buttons">
-					<div class="two columns button sub-primary button-type2" onclick="deleteCategory()">
+					<div class="two columns half-col-margin button sub-primary button-type2" onclick="deleteCategory()">
 						{delete_category_text}
+					</div>
+					<div class="two columns button sub-primary button-type1" onclick="addSubCategory()">
+						{add_sub_category_text}
 					</div>
 				</div>
 				<br><br>
@@ -208,6 +211,12 @@
 							if(!confirm("{are_you_sure_to_delete_this_category_text}"))
 								return;
 
+							$("form#delete").submit();
+						}
+
+						function addSubCategory()
+						{
+							$("form#delete input[name=post_type]").val("add_sub_category");
 							$("form#delete").submit();
 						}
 					</script>

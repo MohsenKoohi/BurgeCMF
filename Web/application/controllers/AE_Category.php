@@ -27,9 +27,9 @@ class AE_Category extends Burge_CMF_Controller {
 		return;
 	}
 
-	private function add_category()
+	private function add_category($parent_id=0)
 	{
-		$id=$this->category_manager_model->add();
+		$id=$this->category_manager_model->add($parent_id);
 
 		set_message($this->lang->line("category_added_successfully"));
 
@@ -43,6 +43,9 @@ class AE_Category extends Burge_CMF_Controller {
 
 		if($this->input->post("post_type")==="delete_category")
 			return $this->delete_category($category_id);
+
+		if($this->input->post("post_type")==="add_sub_category")
+			return $this->add_category($category_id);
 
 		$this->data['message']=get_message();
 		$this->data['categories']=$this->category_manager_model->get_hierarchy("button",$this->selected_lang,array($category_id));
