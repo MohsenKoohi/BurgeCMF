@@ -171,7 +171,8 @@ class Post_manager_model extends CI_Model
 			->delete($this->post_category_table_name);
 		
 		$props_categories=$props['categories'];
-		if($props_categories || $props_categories==="0")
+		
+		if($props_categories!=NULL)
 		{
 			$categories=explode(",",$props_categories);
 			$ins=array();
