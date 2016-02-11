@@ -155,6 +155,12 @@ class Category_manager_model extends CI_Model
 		return $cats;
 	}
 
+
+	//creates the hierarchy of categories
+	//using get_all
+	//$type can be radio, or checkbox
+	//$lang is the language selected for the name of each category
+	//$ignore_ids are ids (and their children) which must not have radio or checkbox
 	public function get_hierarchy($type,$lang,$ignore_ids=array())
 	{
 		$categories=$this->get_all();
@@ -171,7 +177,7 @@ class Category_manager_model extends CI_Model
 		else
 			switch($type)
 			{
-				case 'button':
+				case 'radio':
 					$inp="<input type='radio' name='category' value='".$id."'/>";
 					break;
 			}
