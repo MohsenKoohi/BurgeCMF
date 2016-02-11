@@ -222,7 +222,36 @@ class Post_manager_model extends CI_Model
 		$this->log_manager_model->info("POST_CHANGE",$props);	
 
 		return;
+	}
 
+	public function change_category($old_category_id,$new_category_id)
+	{
+		$rows=$this->db
+			->where("pcat_category_id",$old_category_id)
+			->or_where("pcat_category_id",$new_category_id)
+			->group_by("pcat_post_id")
+			->get($this->post_category_table_name)
+			->result_array();
+
+		$post_ids=array();
+		foreach($rows as $row)
+			$post_ids[]=$row['pcat_post_id'];
+
+		if(!$post_ids)
+			return;
+
+		$this->db
+			->where("pcat_category_id",$old_category_id)
+			->or_where("pcat_category_id",$new_category_id)
+			->delete($this->post_category_table_name);
+
+		$ins=array();
+		foreach($post_ids as $post_id)
+			$ins[]=array("pcat_category_id"=>$new_category_id,"pcat_post_id"=>$post_id);
+
+		$this->db->insert_batch($this->post_category_table_name,$ins);
+
+		return;
 	}
 
 	public function delete_post($post_id)
