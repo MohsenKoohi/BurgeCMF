@@ -148,16 +148,10 @@
 					</div>
 					<br>
 					<div class="row even-odd-bg">
-						<style type="text/css">
-							#parent-category ul{margin:0 30px;}
-							#parent-category li{list-style: none;margin: 0 20px;}
-							body.rtl #parent-category li{border-right:1px dotted #555;}
-							body.ltr #parent-category li{border-left:1px dotted #555;}
-						</style>
 						<div class="three columns">
 							<span>{parent_text}</span>
 						</div>
-						<div id="parent-category" class="nine columns">
+						<div id="parent-category" class="nine columns category-div">
 							<input type="hidden" name="category_parent_id" />
 							<?php echo $categories; ?>
 						</div>

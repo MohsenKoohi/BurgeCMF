@@ -963,3 +963,24 @@ body.ltr .tabs li
 	padding:10px;
 	border-radius: 10px;
 }
+
+.category-div ul
+{
+	margin:0 30px;
+}
+
+.category-div li
+{
+	list-style: none;
+	margin: 0 20px;
+}
+
+body.rtl .category-div li
+{
+	border-right:1px dotted #555;
+}
+
+body.ltr .category-div li
+{
+	border-left:1px dotted #555;
+}

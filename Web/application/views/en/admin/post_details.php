@@ -53,6 +53,46 @@
 							/>
 						</div>
 					</div>
+					<div class="row even-odd-bg" >
+						<div class="three columns">
+							<span>{categories_text}</span>
+						</div>
+						<input type="hidden" name="categories"/>
+						<div id="category" class="nine columns category-div" style="max-height:500px;overflow:auto;">
+							<?php echo $categories;?>
+						</div>
+						<script type="text/javascript">
+							$(function()
+							{
+								var categories=[<?php echo $post_info['categories']?>];
+								for(i=0;i<categories.length;i++)
+									$("#category input[data-id="+categories[i]+"]").prop("checked","checked");
+								
+								$("input[name=categories]").val(categories);
+
+								$("#category span").click(
+									function()
+									{
+										var id=$(this).data("id");
+										var el=$("#category input[data-id="+id+"]");
+										el.trigger("click");
+									}
+								);
+
+								$("#category input").change(function()
+								{
+									var ids=[];
+									$("#category input:checked").each(function(index,el)
+									{
+										ids[ids.length]=$(el).data("id");
+									});
+
+									$("input[name=categories]").val(ids.join(","));
+								});
+							});						
+							
+						</script>
+					</div>
 					<div class="tab-container">
 						<ul class="tabs">
 							<?php foreach($post_contents as $pc) { ?>

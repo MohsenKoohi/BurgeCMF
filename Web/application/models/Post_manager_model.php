@@ -3,6 +3,7 @@ class Post_manager_model extends CI_Model
 {
 	private $post_table_name="post";
 	private $post_content_table_name="post_content";
+	private $post_category_table_name="post_category";
 	private $post_writable_props=array(
 		"post_active","post_allow_comment"
 	);
@@ -19,7 +20,6 @@ class Post_manager_model extends CI_Model
 
 	public function install()
 	{
-
 		$post_table=$this->db->dbprefix($this->post_table_name); 
 		$this->db->query(
 			"CREATE TABLE IF NOT EXISTS $post_table (
@@ -43,6 +43,15 @@ class Post_manager_model extends CI_Model
 				,`pc_keywords` TEXT
 				,`pc_description` TEXT
 				,PRIMARY KEY (pc_post_id, pc_lang_id)	
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8"
+		);
+
+		$post_category_table=$this->db->dbprefix($this->post_category_table_name); 
+		$this->db->query(
+			"CREATE TABLE IF NOT EXISTS $post_category_table (
+				`pcat_post_id` INT  NOT NULL
+				,`pcat_category_id` INT NOT NULL
+				,PRIMARY KEY (pcat_post_id, pcat_category_id)	
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8"
 		);
 
@@ -137,8 +146,15 @@ class Post_manager_model extends CI_Model
 
 	public function get_post($post_id)
 	{
+		$cat_query=$this->db
+			->select("GROUP_CONCAT(pcat_category_id)")
+			->from($this->post_category_table_name)
+			->where("pcat_post_id",$post_id)
+			->get_compiled_select();
+
 		return $this->db
-			->select("post.* , post_content.* , user_id, user_name ")
+			->select("post.* , post_content.* , user_id, user_name")
+			->select("(".$cat_query.") as categories")
 			->from("post")
 			->join("user","post_creator_uid = user_id","left")
 			->join("post_content","post_id = pc_post_id","left")
@@ -149,6 +165,25 @@ class Post_manager_model extends CI_Model
 
 	public function set_post_props($post_id, $props, $post_contents)
 	{
+		
+		$this->db
+			->where("pcat_post_id",$post_id)
+			->delete($this->post_category_table_name);
+		
+		$props_categories=$props['categories'];
+		if($props_categories || $props_categories==="0")
+		{
+			$categories=explode(",",$props_categories);
+			$ins=array();
+			foreach($categories as $category_id)
+				$ins[]=array("pcat_post_id"=>$post_id,"pcat_category_id"=>(int)$category_id);
+
+			if($ins)
+				$this->db->insert_batch($this->post_category_table_name,$ins);
+		}
+
+		unset($props['categories']);
+
 		$props=select_allowed_elements($props,$this->post_writable_props);
 
 		if($props)
@@ -160,6 +195,8 @@ class Post_manager_model extends CI_Model
 				->where("post_id",$post_id)
 				->update($this->post_table_name);
 		}
+
+		$props['categories']=$props_categories;
 
 		foreach($post_contents as $content)
 		{
@@ -180,7 +217,7 @@ class Post_manager_model extends CI_Model
 				->where("pc_lang_id",$lang)
 				->update($this->post_content_table_name);
 		}
-
+		
 		$this->log_manager_model->info("POST_CHANGE",$props);	
 
 		return;

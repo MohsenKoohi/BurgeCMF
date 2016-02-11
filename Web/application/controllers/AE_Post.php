@@ -55,6 +55,7 @@ class AE_Post extends Burge_CMF_Controller {
 
 		$this->data['post_id']=$post_id;
 		$post_info=$this->post_manager_model->get_post($post_id);
+
 		$this->data['langs']=$this->language->get_languages();
 
 		$this->data['post_contents']=array();
@@ -71,10 +72,14 @@ class AE_Post extends Burge_CMF_Controller {
 				,"post_active"=>$post_info[0]['post_active']
 				,"user_name"=>$post_info[0]['user_name']
 				,"user_id"=>$post_info[0]['user_id']
+				,"categories"=>$post_info[0]['categories']
 				,"post_title"=>$this->data['post_contents'][$this->language->get()]['pc_title']
 			);
 		else
 			$this->data['post_info']=array();
+
+		$this->load->model("category_manager_model");
+		$this->data['categories']=$this->category_manager_model->get_hierarchy("checkbox",$this->selected_lang);
 
 		$this->data['message']=get_message();
 		$this->data['lang_pages']=get_lang_pages(get_admin_post_details_link($post_id,TRUE));
@@ -97,6 +102,8 @@ class AE_Post extends Burge_CMF_Controller {
 	private function edit_post($post_id)
 	{
 		$post_props=array();
+		$post_props['categories']=$this->input->post("categories");
+
 		$post_props['post_active']=(int)($this->input->post('post_active') === "on");
 		$post_props['post_allow_comment']=(int)($this->input->post('post_allow_comment') === "on");
 		

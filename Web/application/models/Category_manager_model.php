@@ -180,6 +180,10 @@ class Category_manager_model extends CI_Model
 				case 'radio':
 					$inp="<input type='radio' name='category' value='".$id."'/>";
 					break;
+
+				case 'checkbox':
+					$inp="<input type='checkbox' data-id='".$id."' />";
+					break;
 			}
 
 		if(!$id)

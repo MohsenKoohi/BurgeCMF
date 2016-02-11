@@ -13,7 +13,10 @@ $lang['title']="Title";
 $lang['content']="Content";
 $lang['meta_keywords']="SEO Keywords";
 $lang['meta_description']="SEO Description";
+$lang['categories']="Categories";
 $lang['changes_saved_successfully']="Modifications saved successfully.";
+$lang['root']="Root";
+
 
 $lang['delete_post']="Delete";
 $lang['are_you_sure_to_delete_this_post']="Are you sure to delete this post?";
