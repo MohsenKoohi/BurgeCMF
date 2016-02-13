@@ -267,10 +267,13 @@ class Category_manager_model extends CI_Model
 			->where("category_parent_id",$category_id)
 			->update($this->category_table_name);
 
-
 		$this->db
 			->where("category_id",$category_id)
 			->delete($this->category_table_name);
+
+		$this->db
+			->where("cd_category_id",$category_id)
+			->delete($this->category_description_table_name);
 
 		$this->load->model("post_manager_model");
 		$this->post_manager_model->change_category($category_id,$parent_id);

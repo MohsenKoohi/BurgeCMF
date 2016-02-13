@@ -265,6 +265,10 @@ class Post_manager_model extends CI_Model
 		$this->db
 			->where("pc_post_id",$post_id)
 			->delete($this->post_content_table_name);
+
+		$this->db
+			->where("pcat_post_id",$post_id)
+			->delete($this->post_category_table_name);
 		
 		$this->log_manager_model->info("POST_DELETE",$props);	
 
