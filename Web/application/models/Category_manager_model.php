@@ -7,7 +7,7 @@ class Category_manager_model extends CI_Model
 	private $organized_category_file_path;
 
 	private $category_description_writable_props=array(
-		'cd_name','cd_description','cd_url','cd_meta_keywords','cd_meta_description'
+		'cd_name','cd_url','cd_description','cd_image','cd_meta_keywords','cd_meta_description'
 	);
 
 	public function __construct()
@@ -37,11 +37,11 @@ class Category_manager_model extends CI_Model
 				`cd_category_id` INT NOT NULL
 				,`cd_lang_id` CHAR(2) NOT NULL
 				,`cd_name` VARCHAR(512)
+				,`cd_url` varchar(1024)
 				,`cd_description` TEXT
+				,`cd_image` varchar(1024)
 				,`cd_meta_keywords` VARCHAR(1024)
 				,`cd_meta_description` VARCHAR(1024)
-				,`cd_url` varchar(1024)
-
 				,PRIMARY KEY (cd_category_id, cd_lang_id)	
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8"
 		);

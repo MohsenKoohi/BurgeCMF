@@ -122,6 +122,27 @@
 									</div>
 									<div class="row even-odd-bg" >
 										<div class="three columns">
+											<span>{image_text}</span>
+										</div>
+										<div class="nine columns ">
+											<input type="hidden" name="<?php echo $lang;?>[cd_image]"
+											value="<?php echo $cd['cd_image']; ?>" />
+											<?php
+												$image=$no_image_url;
+												if($cd['cd_image'])
+													$image=$cd['cd_image'];
+											?>
+											<img 
+												id="img-<?php echo $lang; ?>"
+												src="<?php echo $image; ?>"  
+												style="cursor:pointer;max-height:200px;background-color:white"
+												onclick="selectImage('<?php echo $lang; ?>');"
+											/>
+										</div>
+
+									</div>
+									<div class="row even-odd-bg" >
+										<div class="three columns">
 											<span>{meta_keywords_text}</span>
 										</div>
 										<div class="nine columns">
@@ -164,6 +185,49 @@
 
 								}
 							);
+
+							var activeLang;
+
+							function selectImage(lang)
+							{
+								var fileMan=$(".burgeFileMan");
+								if(!fileMan.length)
+									createFileMan();
+
+								fileMan.css("display","block");
+
+								activeLang=lang;
+							}
+
+							function createFileMan()
+							{
+								var src="<?php echo get_link('admin_file_inline');?>";
+								src+="?parent_function=fileSelected";
+								$(document.body).append(
+									"<div class='burgeFileMan'>"
+										+"<div class='bmain'>"
+										+	"<div class='bheader'>File Manager"
+										+		"<button class='close' onclick='closeFileMan()'>×</button>"
+										+ "</div>"
+										+	"<iframe src='"+src+"'></iframe>"
+										+"</div>"
+									+"</div>"
+								);
+							}
+
+							function closeFileMan()
+							{
+								var fileMan=$(".burgeFileMan");
+								
+								fileMan.css("display","none");	
+							}
+
+							function fileSelected(path)
+							{
+								$("#img-"+activeLang).prop("src",path);
+								$("input[name='"+activeLang+"[cd_image]']").val(path);
+								closeFileMan();
+							}
 						</script>
 					</div>
 					<br><br>

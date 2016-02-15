@@ -41,6 +41,7 @@
 <script type="text/javascript">
   var roxyUploadParentDirectory="{home_url}";
   var roxyScriptsDirectory="{scripts_url}/roxy";
+  var parentFunction="<?php echo $parent_function;?>";
 </script>
 </head>
 <body>

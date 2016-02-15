@@ -33,9 +33,13 @@ function FileSelected(file){
    * height - if the file is image, this will be the height of the original image, 0 otherwise
    * 
    */
-
-  //return;
   var path=roxyUploadParentDirectory+"/"+file.fullPath;
+
+  if(parentFunction)
+  {
+    parent.eval(parentFunction+"('"+path+"');");
+    return;
+  }
 
   if(!parent.$('.mce-btn.mce-open').length)
     return;
@@ -63,5 +67,5 @@ function GetSelectedValue(){
   * Url parameter selected will override this value.
   */
   
-  return "asdfasd";
+  //return "asdfasd";
 }

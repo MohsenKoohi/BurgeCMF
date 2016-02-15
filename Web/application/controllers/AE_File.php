@@ -27,7 +27,7 @@ class AE_File extends Burge_CMF_Controller {
 	public function inline()
 	{
 		$this->load->library('parser');
-		//$this->data[]
+		$this->data["parent_function"]=$this->input->get("parent_function");
 		
 		$this->parser->parse($this->get_admin_view_file("file_inline"),$this->data);
 		

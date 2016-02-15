@@ -16,6 +16,7 @@ function &get_links($just_common=FALSE)
 			,'home_surl'			=> HOME_SURL_LANG
 
 			,'images_url'			=>	IMAGES_URL
+			,'no_image_url'		=> IMAGES_URL."/no-image.png"
 			,'styles_url'			=> STYLES_URL
 			,'scripts_url'			=> SCRIPTS_URL
 			,'upload_url'			=> UPLOAD_URL
