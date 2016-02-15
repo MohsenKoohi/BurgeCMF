@@ -125,19 +125,28 @@
 											<span>{image_text}</span>
 										</div>
 										<div class="nine columns ">
-											<input type="hidden" name="<?php echo $lang;?>[cd_image]"
-											value="<?php echo $cd['cd_image']; ?>" />
-											<?php
-												$image=$no_image_url;
-												if($cd['cd_image'])
-													$image=$cd['cd_image'];
-											?>
-											<img 
-												id="img-<?php echo $lang; ?>"
-												src="<?php echo $image; ?>"  
-												style="cursor:pointer;max-height:200px;background-color:white"
-												onclick="selectImage('<?php echo $lang; ?>');"
-											/>
+											<div class="two columns ">
+												<span>{delete_image_text}</span>
+											</div>
+											<div class="three columns ">
+												<input id="del-img-<?php echo $lang; ?>" type="checkbox" class="graphical" onclick="deleteImage('<?php echo $lang;?>');"/>
+											</div>
+											<br><br>
+											<div class="tweleve columns">
+												<input type="hidden" name="<?php echo $lang;?>[cd_image]"
+												value="<?php echo $cd['cd_image']; ?>" />
+												<?php
+													$image=$no_image_url;
+													if($cd['cd_image'])
+														$image=$cd['cd_image'];
+												?>
+												<img 
+													id="img-<?php echo $lang; ?>"
+													src="<?php echo $image; ?>"  
+													style="cursor:pointer;max-height:200px;background-color:white"
+													onclick="selectImage('<?php echo $lang; ?>');"
+												/>
+											</div>
 										</div>
 
 									</div>
@@ -204,7 +213,7 @@
 								var src="<?php echo get_link('admin_file_inline');?>";
 								src+="?parent_function=fileSelected";
 								$(document.body).append(
-									"<div class='burgeFileMan'>"
+									"<div class='burgeFileMan' onkeypress='checkExit(event);'>"
 										+"<div class='bmain'>"
 										+	"<div class='bheader'>File Manager"
 										+		"<button class='close' onclick='closeFileMan()'>×</button>"
@@ -213,6 +222,11 @@
 										+"</div>"
 									+"</div>"
 								);
+							}
+
+							function checkExit(event)
+							{
+								alert(event.charCode);
 							}
 
 							function closeFileMan()
@@ -226,7 +240,27 @@
 							{
 								$("#img-"+activeLang).prop("src",path);
 								$("input[name='"+activeLang+"[cd_image]']").val(path);
+								$("#del-img-"+activeLang).prop("checked",false);
+								lastImages[activeLang]="";
 								closeFileMan();
+							}
+
+							var lastImages=[];
+
+							function deleteImage(lang)
+							{
+								if(typeof(lastImages[lang])==="undefined" || lastImages[lang]=="")
+								{
+									lastImages[lang]=$("#img-"+lang).prop("src");
+									$("input[name='"+lang+"[cd_image]']").val("");
+									$("#img-"+lang).prop("src","{no_image_url}");
+								}
+								else
+								{
+									$("input[name='"+lang+"[cd_image]']").val(lastImages[lang]);
+									$("#img-"+lang).prop("src",lastImages[lang]);	
+									lastImages[lang]="";
+								}
 							}
 						</script>
 					</div>
