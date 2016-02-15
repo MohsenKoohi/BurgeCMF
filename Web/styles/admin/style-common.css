@@ -994,6 +994,7 @@ body.ltr .category-div li
 	left:0;	
 	display: block;
 	background-color:rgba(160,160,160,.6);
+	z-index: 100;
 }
 
 .burgeFileMan .bmain

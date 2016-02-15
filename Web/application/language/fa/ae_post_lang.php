@@ -16,7 +16,8 @@ $lang['meta_description']="توضیح SEO";
 $lang['categories']="دسته‌ها";
 $lang['changes_saved_successfully']="تغییرات با موفقیت ثبت شد.";
 $lang['root']="ریشه";
-
+$lang['image']="تصویر";
+$lang['delete_image']="حذف تصویر";
 
 $lang['delete_post']="حذف";
 $lang['are_you_sure_to_delete_this_post']="آیا از حذف این پست مطمئن هستید؟";

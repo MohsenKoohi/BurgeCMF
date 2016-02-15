@@ -16,6 +16,8 @@ $lang['meta_description']="SEO Description";
 $lang['categories']="Categories";
 $lang['changes_saved_successfully']="Modifications saved successfully.";
 $lang['root']="Root";
+$lang['image']="Image";
+$lang['delete_image']="Delete Image";
 
 
 $lang['delete_post']="Delete";

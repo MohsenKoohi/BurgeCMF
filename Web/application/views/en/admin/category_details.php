@@ -148,7 +148,6 @@
 												/>
 											</div>
 										</div>
-
 									</div>
 									<div class="row even-odd-bg" >
 										<div class="three columns">
@@ -204,6 +203,10 @@
 									createFileMan();
 
 								fileMan.css("display","block");
+								setTimeout(function()
+								{
+									$(".burgeFileMan iframe")[0].focus();
+								},1000);
 
 								activeLang=lang;
 							}
@@ -213,7 +216,7 @@
 								var src="<?php echo get_link('admin_file_inline');?>";
 								src+="?parent_function=fileSelected";
 								$(document.body).append(
-									"<div class='burgeFileMan' onkeypress='checkExit(event);'>"
+									"<div class='burgeFileMan' onkeypress='checkExit(event);' tabindex='1' >"
 										+"<div class='bmain'>"
 										+	"<div class='bheader'>File Manager"
 										+		"<button class='close' onclick='closeFileMan()'>×</button>"
@@ -226,7 +229,9 @@
 
 							function checkExit(event)
 							{
-								alert(event.charCode);
+								if(event.keyCode == 27)
+									closeFileMan();
+								
 							}
 
 							function closeFileMan()

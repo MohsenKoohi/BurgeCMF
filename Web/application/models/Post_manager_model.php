@@ -8,7 +8,7 @@ class Post_manager_model extends CI_Model
 		"post_active","post_allow_comment"
 	);
 	private $post_content_writable_props=array(
-		"pc_active","pc_keywords","pc_description","pc_title","pc_content"
+		"pc_active","pc_image","pc_keywords","pc_description","pc_title","pc_content"
 		);
 
 	public function __construct()
@@ -38,6 +38,7 @@ class Post_manager_model extends CI_Model
 				`pc_post_id` INT  NOT NULL
 				,`pc_lang_id` CHAR(2) NOT NULL
 				,`pc_active` TINYINT NOT NULL DEFAULT 1
+				,`pc_image` VARCHAR(1024) NULL
 				,`pc_content` MEDIUMTEXT
 				,`pc_title`	 TEXT
 				,`pc_keywords` TEXT

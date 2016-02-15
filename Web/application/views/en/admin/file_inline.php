@@ -42,6 +42,16 @@
   var roxyUploadParentDirectory="{home_url}";
   var roxyScriptsDirectory="{scripts_url}/roxy";
   var parentFunction="<?php echo $parent_function;?>";
+  $(function()
+  {
+    $(document.body).keypress(function(event)
+    {
+      if(event.keyCode==27)
+        if(typeof parent.closeFileMan == 'function')
+          parent.eval("closeFileMan()");
+      
+    });
+  })
 </script>
 </head>
 <body>

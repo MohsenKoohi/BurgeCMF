@@ -175,6 +175,36 @@
 											/>
 										</div>
 									</div>
+
+									<div class="row even-odd-bg" >
+										<div class="three columns">
+											<span>{image_text}</span>
+										</div>
+										<div class="nine columns ">
+											<div class="two columns ">
+												<span>{delete_image_text}</span>
+											</div>
+											<div class="three columns ">
+												<input id="del-img-<?php echo $lang; ?>" type="checkbox" class="graphical" onclick="deleteImage('<?php echo $lang;?>');"/>
+											</div>
+											<br><br>
+											<div class="tweleve columns">
+												<input type="hidden" name="<?php echo $lang;?>[pc_image]"
+												value="<?php echo $pc['pc_image']; ?>" />
+												<?php
+													$image=$no_image_url;
+													if($pc['pc_image'])
+														$image=$pc['pc_image'];
+												?>
+												<img 
+													id="img-<?php echo $lang; ?>"
+													src="<?php echo $image; ?>"  
+													style="cursor:pointer;max-height:200px;background-color:white"
+													onclick="selectImage('<?php echo $lang; ?>');"
+												/>
+											</div>
+										</div>
+									</div>
 									<div class="row even-odd-bg dont-magnify" >
 										<div class="three columns">
 											<span>{content_text}</span>
@@ -224,7 +254,83 @@
 						<input type="hidden" name="post_id" value="{post_id}"/>
 					</form>
 
-					 <script type="text/javascript">
+					<script type="text/javascript">
+
+					//operations for post_content iamges
+
+					var activeLang;
+
+					function selectImage(lang)
+					{
+						var fileMan=$(".burgeFileMan");
+						if(!fileMan.length)
+							createFileMan();
+
+						fileMan.css("display","block");
+						setTimeout(function()
+						{
+							$(".burgeFileMan iframe")[0].focus();
+						},1000);
+
+						activeLang=lang;
+					}
+
+					function createFileMan()
+					{
+						var src="<?php echo get_link('admin_file_inline');?>";
+						src+="?parent_function=fileSelected";
+						$(document.body).append($(
+							"<div class='burgeFileMan' onkeypress='checkExit(event);' tabindex='1' >"
+								+"<div class='bmain'>"
+								+	"<div class='bheader'>File Manager"
+								+		"<button class='close' onclick='closeFileMan()'>×</button>"
+								+ "</div>"
+								+	"<iframe src='"+src+"'></iframe>"
+								+"</div>"
+							+"</div>"
+						));
+					}
+					function checkExit(event)
+					{
+						if(event.keyCode == 27)
+							closeFileMan();
+					}
+
+					function closeFileMan()
+					{
+						var fileMan=$(".burgeFileMan");
+						
+						fileMan.css("display","none");	
+					}
+
+					function fileSelected(path)
+					{
+						$("#img-"+activeLang).prop("src",path);
+						$("input[name='"+activeLang+"[pc_image]']").val(path);
+						$("#del-img-"+activeLang).prop("checked",false);
+						lastImages[activeLang]="";
+						closeFileMan();
+					}
+
+					var lastImages=[];
+
+					function deleteImage(lang)
+					{
+						if(typeof(lastImages[lang])==="undefined" || lastImages[lang]=="")
+						{
+							lastImages[lang]=$("#img-"+lang).prop("src");
+							$("input[name='"+lang+"[pc_image]']").val("");
+							$("#img-"+lang).prop("src","{no_image_url}");
+						}
+						else
+						{
+							$("input[name='"+lang+"[pc_image]']").val(lastImages[lang]);
+							$("#img-"+lang).prop("src",lastImages[lang]);	
+							lastImages[lang]="";
+						}
+					}
+
+					//end of operations for post_content images	
 
 					$(initializeTextAreas);
 					var tmTextAreas=[];
