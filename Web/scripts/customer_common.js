@@ -36,9 +36,39 @@ function changeGraphicalCheckBoxes()
       $(el).replaceWith(html);
     });
 }
-    
+
+//no moving header
 function setupMovingHeader()
 {
+  
+  var winHeight=$(window).height();
+  var winWidth=$(window).width();
+  $(".main").css("min-height",winHeight);
+
+  $(".side-menu .mobile .click").unbind("click");
+
+  if(winWidth<=600)
+  {
+    $(".side-menu").css("min-height","none").css("height","auto");
+    $(".side-menu .mobile .click").click(function()
+      {
+        $(".side-menu ul").toggleClass("active");
+      });
+  }
+  else
+  {
+    var sm_h=$(".side-menu").outerHeight();      
+    var m_h=$(".main").outerHeight();    
+    $(".side-menu,.main").outerHeight(Math.max(sm_h,m_h));
+  }
+
+  return;
+}
+    
+//with moving header
+function setupMovingHeader_with_moving_header()
+{
+
   $(".main").css("min-height",$(window).height());
 
   var header=$(".side-menu");

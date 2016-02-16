@@ -83,9 +83,10 @@ input.req
 
 .header, .content, .footer
 {
+	max-width: 1600px;
 	display: block;
-	width:95%;
-	margin:0 auto 10px auto;	
+	width:90%;
+	margin:0px auto 10px auto;		
 }
 
 .content
@@ -96,9 +97,8 @@ input.req
 
 .header
 {
-	display: inline-block;
+	display: block;
 	line-height: 0;
-	margin:0 2.5% 10px 2.5%;
 	border-bottom: 1px solid #398DBA;
 	background:linear-gradient(to left,rgba(255,255,255,1), rgba(255,255,255,.3), rgba(255,255,255,1));
 	white-space: nowrap;
@@ -270,6 +270,17 @@ body .top-menu > ul > li, body.rtl .top-menu > ul > li
 
 @media (max-width: 600px)
 {
+	.header, .content, .footer
+	{
+		width:95%;
+	}
+
+	.header
+	{
+		margin: 0 auto 10px auto;
+		background:linear-gradient(to left,rgba(255,255,255,.3), rgba(255,255,255,1), rgba(255,255,255,.3));
+	}
+
 	.header
 	{
 		text-align: center;

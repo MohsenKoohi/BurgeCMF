@@ -1,17 +1,19 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class CE_Home extends Burge_CMF_Controller {
-	protected $hit_level=1;
+class CE_Category extends Burge_CMF_Controller {
+	protected $hit_level=2;
 
 	function __construct()
 	{
 		parent::__construct();
 	}
 
-	public function index()
+	public function index($category_id)
 	{	
 		$this->data['message']=get_message();
-		
+		echo $category_id;
+
+		return;
 		$this->lang->load('ce_home',$this->selected_lang);	
 
 		$this->data['lang_pages']=get_lang_pages(get_link("home_url",TRUE));

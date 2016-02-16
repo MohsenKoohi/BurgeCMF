@@ -238,7 +238,7 @@
 							{
 								var fileMan=$(".burgeFileMan");
 								
-								fileMan.css("display","none");	
+								fileMan.css("display","none");//.remove();	
 							}
 
 							function fileSelected(path)

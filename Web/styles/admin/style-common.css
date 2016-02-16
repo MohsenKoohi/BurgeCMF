@@ -273,6 +273,7 @@ body .top-menu > ul > li, body.rtl .top-menu > ul > li
 	.header
 	{
 		text-align: center;
+		background:linear-gradient(to left,rgba(255,255,255,.3), rgba(255,255,255,1), rgba(255,255,255,.3));
 	}
 
 	.header .logo a
@@ -994,7 +995,6 @@ body.ltr .category-div li
 	left:0;	
 	display: block;
 	background-color:rgba(160,160,160,.6);
-	z-index: 100;
 }
 
 .burgeFileMan .bmain

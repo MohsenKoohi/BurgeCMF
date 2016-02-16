@@ -2,12 +2,12 @@
 <html dir="ltr" lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1, user-scalable=yes">
   <meta name="keywords" content="{header_meta_keywords}"/>
   <meta name="description" content="{header_meta_description}"/>
   <?php if(isset($header_meta_robots)) {?> 
     <meta name="robots" content="{header_meta_robots}" />
   <?php } ?>
-  <meta name="viewport" content="width=device-width,initial-scale=1, user-scalable=yes">
   <title>{header_title}</title>
   <?php if(isset($header_canonical_url) && $header_canonical_url) {?> 
     <link rel="canonical" href="{header_canonical_url}"/>
