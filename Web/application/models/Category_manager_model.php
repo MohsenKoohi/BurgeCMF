@@ -107,11 +107,13 @@ class Category_manager_model extends CI_Model
 				
 				$cats[$cid]['names']=array();
 				$cats[$cid]['urls']=array();
+				$cats[$cid]['images']=array();
 				$cats[$cid]['children']=array();
 			}
 
 			$cats[$cid]['names'][$row['cd_lang_id']]=$row['cd_name'];
 			$cats[$cid]['urls'][$row['cd_lang_id']]=$row['cd_url'];
+			$cats[$cid]['images'][$row['cd_lang_id']]=$row['cd_image'];
 		}
 
 		$cats[0]=array("id"=>0,"names"=>"ROOT","parents"=>array(0),'children'=>array());

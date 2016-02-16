@@ -59,7 +59,7 @@ $route[ADMIN_URL_FOLDER."/constant"]		="AE_Constant";
 
 $route[ADMIN_URL_FOLDER."/post"]					="AE_Post";
 $route[ADMIN_URL_FOLDER."/post/(\d+)"]			="AE_Post/details/$1";
-$route["post-(\d+)(/[^\/]+)?"]					="CE_Post/index/12";
+$route["post-(\d+)(/[^\/]+)?"]					="CE_Post/index/$1";
 
 $route[ADMIN_URL_FOLDER."/file"]					="AE_File";
 $route[ADMIN_URL_FOLDER."/file/inline"]		="AE_File/inline";
@@ -68,7 +68,7 @@ $route[ADMIN_URL_FOLDER."/file/([^\/]+)"]		="AE_File/action/$1";
 
 $route[ADMIN_URL_FOLDER."/category"]			="AE_Category";
 $route[ADMIN_URL_FOLDER."/category/(\d+)"]	="AE_Category/details/$1";
-$route["category-(\d+)(/[^\/]+)?"]				="CE_Category/index/12";
+$route["category-(\d+)(/[^\/]+)?"]				="CE_Category/index/$1";
 
 $route["retry"]="retry";
 $route["watermark"]="CE_Watermark";

@@ -86,11 +86,10 @@ class Burge_CMF_Controller extends CI_Controller{
 
 			$this->data['selected_lang']=$this->selected_lang;
 			$this->data['all_langs']=$this->all_langs;
-			
+
 			$this->data['header_title']=$this->lang->line("header_title");
 			$this->data['header_meta_description']=$this->lang->line("header_meta_description");
 			$this->data['header_meta_keywords']=$this->lang->line("header_meta_keywords");
-
 		}
 		
 		return;
@@ -163,6 +162,10 @@ class Burge_CMF_Controller extends CI_Controller{
 	{
 		foreach($this->lang->language as $index => $val)
 			$this->data[$index."_text"]=$val;
+
+		$this->load->model("category_manager_model");
+		$categories=$this->category_manager_model->get_all();
+		$this->data['categories']=$categories[0]['children'];
 
 		$this->load->library('parser');
 		$this->parser->parse($this->get_customer_view_file("header"),$this->data);
