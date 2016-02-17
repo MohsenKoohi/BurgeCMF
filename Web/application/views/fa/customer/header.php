@@ -104,9 +104,8 @@
             <div></div>
           </div>
         </div>
-         <ul>
+         <ul class="side-menu-ul">
           <?php 
-            bprint_r($categories);
             foreach($categories as $cat)
             {
               $id=$cat['id'];
