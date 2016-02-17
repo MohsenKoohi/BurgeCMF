@@ -93,25 +93,41 @@
     ?>
 
     <div>
-      <?php if(TRUE || isset($side_menu_modules)) { ?>
-        <div class="side-menu">
-          <div class="mobile">
-            <img src="{images_url}/logo-text.png"/>
-            <div class="click">
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-            </div>
+
+      <div class="side-menu">
+        <div class="mobile">
+          <img src="{images_url}/logo-text-fa.png"/>
+          <div class="click">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
           </div>
-           <ul>
-            <li>Item1</li>
-            <li>Item2</li>
-            <li>Item3</li>
-            <?php 
-              if(isset($side_menu_modules))
-                foreach ($side_menu_modules as $mod) 
-                  echo "<li><a href='".$mod['link']."'>".$mod['name']."</a></li>";
-            ?>
-          </ul>
-        </div><?php } ?>
+        </div>
+         <ul class="side-menu-ul">
+          <?php 
+            foreach($categories as $cat)
+            {
+              $id=$cat['id'];
+              $name=$cat['names'][$selected_lang];
+              $link=get_customer_category_details_link($id,$name);
+              echo "<li><a href='$link'>$name</a>\n";
+
+              if($cat['children'])
+              {
+                echo "<ul>\n";
+                foreach($cat['children'] as $child)
+                {
+                  $id=$child['id'];
+                  $name=$child['names'][$selected_lang];
+                  $link=get_customer_category_details_link($id,$name);
+                  echo "<li><a href='$link'>$name</a>\n";
+                }
+                echo "</ul>\n";
+              }
+              echo "</li>\n";
+            }
+          ?>
+        </ul>
+      </div>
+      
