@@ -418,7 +418,7 @@ body.ltr .side-menu
 
 .side-menu-ul a
 {
-	margin-top:5px;
+	margin-bottom:5px;
 	padding:10px;
 	display: inline-block;;
 	width:100%;
