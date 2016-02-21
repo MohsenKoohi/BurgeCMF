@@ -1,7 +1,7 @@
 <div class="main">
 
 	<div class="container category">
-		<h1>{page_title}</h1>
+		<!-- <h1>{page_title}</h1> -->
 		<?php
 			foreach($posts as $post)
 			{
@@ -15,14 +15,12 @@
 								<br>
 								<?php 
 									$content=$post['pc_content'];
-									//echo $content;
 									$content=preg_replace("/\s*<br\s*\/?>\s*/","\n",$content);
 									$content=str_replace("&nbsp;"," ", $content);
 									$content=strip_tags($content);
 									$content=mb_substr($content,0,100);								
-									$content=preg_replace("/(\s*\n+\s*)+/", "<br/>", $content);
-									
-									echo $content;//nl2br($content);
+									$content=preg_replace("/(\s*\n+\s*)+/", "<br/>", $content);									
+									echo $content;
 								?>							
 							</a>
 						</div>
