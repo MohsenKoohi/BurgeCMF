@@ -1024,3 +1024,36 @@ body.ltr .tabs li
 	padding:10px;
 	border-radius: 10px;
 }
+
+.container.category > div.row
+{
+	padding:10px 10px 20px 10px;
+	margin-bottom: 30px;
+	border-bottom: 1px dotted #ccc;
+}
+
+.container.category > div.row a:hover
+{
+	color:inherit;
+}
+
+.container.category > div.row h2
+{
+	margin-top: 10px;
+}
+
+.container.category img
+{
+	max-width: 100%;
+	max-height: 500px;
+	margin: 0 auto;
+	display: block;
+}
+
+@media (max-width: 600px)
+{
+	.container.category img
+	{
+		max-height: 300px;
+	}	
+}

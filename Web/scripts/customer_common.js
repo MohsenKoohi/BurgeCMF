@@ -43,8 +43,8 @@ function setupMovingHeader()
   
   var winHeight=$(window).height();
   var winWidth=$(window).width();
-  $(".main").css("min-height",winHeight);
-
+  
+  $(".main").css("min-height",winHeight).css("height","auto");
   $(".side-menu .mobile .click").unbind("click");
 
   if(winWidth<=600)

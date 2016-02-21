@@ -143,6 +143,12 @@ class Post_manager_model extends CI_Model
 		if(isset($filter['category_id']))
 			$this->db->where("pcat_category_id",$filter['category_id']);
 
+		if(isset($filter['active']))
+			$this->db->where(array(
+				"post_active"=>$filter['active']
+				,"pc_active"=>$filter['active']
+			));
+
 		if(isset($filter['order_by']))
 			$this->db->order_by($filter['order_by']);
 

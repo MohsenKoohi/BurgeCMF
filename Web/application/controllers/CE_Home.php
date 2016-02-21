@@ -18,13 +18,15 @@ class CE_Home extends Burge_CMF_Controller {
 		$this->data['posts']=$this->post_manager_model->get_posts(array(
 			"lang"=>$this->selected_lang
 			,"category_id"=>0
+			,"active"=>1
 			,"start"=>0
-			,"count"=>10
+			,"count"=>20
 			,"order_by"=>"post_id DESC"
 		));
 
 		$this->data['lang_pages']=get_lang_pages(get_link("home_url",TRUE));
 		
+		$this->data['page_title']="";//$this->data['header_title'];
 		$this->data['header_title']=$this->lang->line("header_title").$this->lang->line("header_separator").$this->data['header_title'];
 		$this->data['header_meta_description']=$this->lang->line("header_meta_description");
 		$this->data['header_meta_keywords'].=$this->lang->line("header_meta_keywords");

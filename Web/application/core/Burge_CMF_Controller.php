@@ -23,6 +23,8 @@ class Burge_CMF_Controller extends CI_Controller{
 	{
 		parent::__construct();
 
+		mb_internal_encoding("UTF-8");
+
 		$parts=explode("/",uri_string());
 		if(sizeof($parts)>0 &&  $parts[0]===ADMIN_URL_FOLDER)
 		{

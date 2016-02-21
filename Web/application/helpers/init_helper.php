@@ -92,6 +92,7 @@ function get_admin_post_details_link($post_id,$do_not_set_lang=FALSE)
 
 function get_customer_post_details_link($post_id,$post_name,$do_not_set_lang=FALSE)
 {
+	$post_name=linkenize($post_name);
 	return str_replace(
 		array("post_id","post_name")
 		,array($post_id,$post_name)
@@ -175,6 +176,15 @@ function get_lang_pages($pattern)
 	}
 
 	return $ret;
+}
+
+function linkenize($name){
+  $pattern_page = explode(' ',"+ , - ' \" & ! ? : ; # ~ = / $ £ ^ ( ) _ < > ؟ » « ) ( ْ ٌ ٍ ً ُ ِ َ ّ ] [ } { ؛ ٔ ٓ ، × ٪ ﷼ ٫ ÷ |");
+  $name=str_replace($pattern_page,'', $name);
+  $name=trim(preg_replace('/[\s\.]+/', ' ',$name));
+  $link=str_replace(" ","-",$name);
+ 
+  return $link;
 }
 
 function get_template_dir($lang)
