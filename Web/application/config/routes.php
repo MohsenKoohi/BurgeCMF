@@ -68,7 +68,8 @@ $route[ADMIN_URL_FOLDER."/file/([^\/]+)"]		="AE_File/action/$1";
 
 $route[ADMIN_URL_FOLDER."/category"]			="AE_Category";
 $route[ADMIN_URL_FOLDER."/category/(\d+)"]	="AE_Category/details/$1";
-$route["category-(\d+)(/[^\/]+)?"]				="CE_Category/index/$1";
+$route["category-(\d+)/?"]							="CE_Category/index/$1";
+$route["category-(\d+)/([^\/]*)"]				="CE_Category/index/$1/$2";
 
 $route["retry"]="retry";
 $route["watermark"]="CE_Watermark";

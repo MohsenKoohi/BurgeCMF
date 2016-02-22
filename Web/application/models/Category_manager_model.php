@@ -221,15 +221,25 @@ class Category_manager_model extends CI_Model
 	}
 	
 
-	public function get_info($category_id)
+	public function get_info($category_id,$lang_id=NULL)
 	{
-		return $this->db
+		$this->db
 			->select("*")
 			->from($this->category_table_name)
 			->join($this->category_description_table_name,"category_id = cd_category_id","LEFT")
-			->where("category_id",(int)$category_id)
+			->where("category_id",(int)$category_id);
+
+		if($lang_id)
+			$this->db->where("cd_lang_id",$lang_id);
+
+		$result=$this->db
 			->get()
 			->result_array();
+
+		if($lang_id)
+			return $result[0];
+
+		return $result;
 	}
 
 	public function add($parent_id)
