@@ -35,9 +35,8 @@ class CE_Category extends Burge_CMF_Controller {
 			,"order_by"=>"post_id DESC"
 		));
 
-		$this->data['lang_pages']=get_lang_pages(get_link("home_url",TRUE));
+		$this->data['lang_pages']=get_lang_pages(get_customer_category_details_link($category_id,$category_info['cd_url'],TRUE));
 		
-		$this->data['page_title']=$category_info['cd_name'];
 		$this->data['header_title']=$category_info['cd_name'].$this->lang->line("header_separator").$this->data['header_title'];
 		$this->data['header_meta_description']=$category_info['cd_meta_description'];
 		$this->data['header_meta_keywords'].=",".$category_info['cd_meta_keywords'];

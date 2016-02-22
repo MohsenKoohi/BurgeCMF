@@ -26,7 +26,6 @@ class CE_Home extends Burge_CMF_Controller {
 
 		$this->data['lang_pages']=get_lang_pages(get_link("home_url",TRUE));
 		
-		$this->data['page_title']="";//$this->data['header_title'];
 		$this->data['header_title']=$this->lang->line("header_title").$this->lang->line("header_separator").$this->data['header_title'];
 		$this->data['header_meta_description']=$this->lang->line("header_meta_description");
 		$this->data['header_meta_keywords'].=",".$this->lang->line("header_meta_keywords");

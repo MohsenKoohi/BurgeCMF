@@ -1,7 +1,7 @@
 <div class="main">
 
 	<div class="container category">
-		<h1>{page_title}</h1>
+		<h1><?php echo $category_info['cd_name'];?></h1>
 		<?php
 			foreach($posts as $post)
 			{
