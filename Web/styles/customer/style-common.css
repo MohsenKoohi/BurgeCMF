@@ -465,7 +465,7 @@ body.ltr .side-menu-ul a:hover
 
 @media (max-width: 600px)
 {
-	.side-menu
+	body.rtl .side-menu,body.ltr .side-menu
 	{
 		display:inline-block;
 		width:100%;
@@ -1042,12 +1042,21 @@ body.ltr .tabs li
 	margin-top: 10px;
 }
 
-.container.category img
+.container.category .post-img
 {
 	max-width: 100%;
-	max-height: 500px;
+	height:500px;
 	margin: 0 auto;
-	display: block;
+	background-size: cover;
+	background-position: center;
+}
+
+@media (max-width: 600px)
+{
+	.container.category .post-img
+	{
+		max-height: 300px;
+	}	
 }
 
 .container.category .read-more
@@ -1066,12 +1075,4 @@ body.ltr .container.category .read-more
 {
 	float:right;
 	margin-right:100px;
-}
-
-@media (max-width: 600px)
-{
-	.container.category img
-	{
-		max-height: 300px;
-	}	
 }

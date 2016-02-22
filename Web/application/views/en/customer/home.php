@@ -10,7 +10,8 @@
 					<div class="twelve columns">
 						<a href="<?php echo get_customer_post_details_link($post['post_id'],$post['pc_title']);?>" >
 							<h2><?php echo $post['pc_title'];?></h2>
-							<img src="<?php echo $post['pc_image'];?>"/>
+							<div class="post-img" style="background-image:url('<?php echo $post['pc_image'];?>')">
+							</div>
 							<br>
 							<?php 
 								$content=$post['pc_content'];
