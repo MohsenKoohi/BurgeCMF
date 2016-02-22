@@ -1051,6 +1051,11 @@ body.ltr .tabs li
 	background-position: center;
 }
 
+.container.category .post-short-desc
+{
+	text-align: justify;
+}
+
 @media (max-width: 600px)
 {
 	.container.category .post-img

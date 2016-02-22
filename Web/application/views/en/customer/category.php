@@ -2,6 +2,19 @@
 
 	<div class="container category">
 		<h1><?php echo $category_info['cd_name'];?></h1>
+		<div class="row">
+			<div class="twelve columns">
+				<?php if($category_info['cd_image']) { ?>
+					<div class="post-img" style="background-image:url('<?php echo $category_info['cd_image'];?>')">
+					</div>
+				<?php } ?>
+				<br>
+				<div class="post-short-desc">
+					<?php echo nl2br($category_info['cd_description']); ?>
+				</div>
+			</div>
+		</div>
+		<br>
 		<?php
 			foreach($posts as $post)
 			{
@@ -15,16 +28,18 @@
 								</div>
 							<?php } ?>
 							<br>
-							<?php 
-								$content=$post['pc_content'];
-								$content=preg_replace("/\s*<br\s*\/?>\s*/","\n",$content);
-								$content=str_replace("&nbsp;"," ", $content);
-								$content=strip_tags($content);
-								$content=mb_substr($content,0,100);								
-								$content=preg_replace("/(\s*\n+\s*)+/", "<br/>", $content);
-								
-								echo $content."...";
-							?>	
+							<div class="post-short-desc">
+								<?php 
+									$content=$post['pc_content'];
+									$content=preg_replace("/\s*<br\s*\/?>\s*/","\n",$content);
+									$content=str_replace("&nbsp;"," ", $content);
+									$content=strip_tags($content);
+									$content=mb_substr($content,0,100);								
+									$content=preg_replace("/(\s*\n+\s*)+/", "<br/>", $content);
+									
+									echo $content."...";
+								?>	
+							</div>
 							<br>
 							<div class="read-more">{read_more_text}</div>
 						</a>

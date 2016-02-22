@@ -14,16 +14,18 @@
 								</div>
 							<?php } ?>
 							<br>
-							<?php 
-								$content=$post['pc_content'];
-								$content=preg_replace("/\s*<br\s*\/?>\s*/","\n",$content);
-								$content=str_replace("&nbsp;"," ", $content);
-								$content=strip_tags($content);
-								$content=mb_substr($content,0,100);								
-								$content=preg_replace("/(\s*\n+\s*)+/", "<br/>", $content);
-								
-								echo $content."...";
-							?>	
+							<div class="post-short-desc">
+								<?php 
+									$content=$post['pc_content'];
+									$content=preg_replace("/\s*<br\s*\/?>\s*/","\n",$content);
+									$content=str_replace("&nbsp;"," ", $content);
+									$content=strip_tags($content);
+									$content=mb_substr($content,0,100);								
+									$content=preg_replace("/(\s*\n+\s*)+/", "<br/>", $content);
+									
+									echo $content."...";
+								?>	
+							</div>	
 							<br>
 							<div class="read-more">{read_more_text}</div>
 						</a>
