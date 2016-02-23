@@ -68,7 +68,8 @@ class AE_Post extends Burge_CMF_Controller {
 				}
 		if($post_info)
 			$this->data['post_info']=array(
-				"post_allow_comment"=>$post_info[0]['post_allow_comment']
+				"post_date"=>str_replace("-","/",$post_info[0]['post_date'])
+				,"post_allow_comment"=>$post_info[0]['post_allow_comment']
 				,"post_active"=>$post_info[0]['post_active']
 				,"user_name"=>$post_info[0]['user_name']
 				,"user_id"=>$post_info[0]['user_id']
@@ -104,6 +105,7 @@ class AE_Post extends Burge_CMF_Controller {
 		$post_props=array();
 		$post_props['categories']=$this->input->post("categories");
 
+		$post_props['post_date']=$this->input->post('post_date');
 		$post_props['post_active']=(int)($this->input->post('post_active') === "on");
 		$post_props['post_allow_comment']=(int)($this->input->post('post_allow_comment') === "on");
 		

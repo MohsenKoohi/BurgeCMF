@@ -5,7 +5,7 @@ class Post_manager_model extends CI_Model
 	private $post_content_table_name="post_content";
 	private $post_category_table_name="post_category";
 	private $post_writable_props=array(
-		"post_active","post_allow_comment"
+		"post_date","post_active","post_allow_comment"
 	);
 	private $post_content_writable_props=array(
 		"pc_active","pc_image","pc_keywords","pc_description","pc_title","pc_content"
@@ -24,6 +24,7 @@ class Post_manager_model extends CI_Model
 		$this->db->query(
 			"CREATE TABLE IF NOT EXISTS $post_table (
 				`post_id` INT  NOT NULL AUTO_INCREMENT
+				,`post_date` DATETIME  
 				,`post_creator_uid` INT NOT NULL DEFAULT 0
 				,`post_active` TINYINT NOT NULL DEFAULT 0
 				,`post_allow_comment` TINYINT NOT NULL DEFAULT 0
@@ -100,7 +101,8 @@ class Post_manager_model extends CI_Model
 		$user=$this->user_manager_model->get_user_info();
 
 		$props=array(
-			"post_creator_uid"=>$user->get_id()
+			"post_date"=>get_current_time()
+			,"post_creator_uid"=>$user->get_id()
 		);
 
 		$this->db->insert($this->post_table_name,$props);

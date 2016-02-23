@@ -187,6 +187,13 @@ function linkenize($name){
   return $link;
 }
 
+function get_current_time()
+{
+	$tf=DATE_FUNCTION;
+	$time=$tf("Y/m/d H:i:s");
+	return $time;
+}
+
 function get_template_dir($lang)
 {
 	return $lang;

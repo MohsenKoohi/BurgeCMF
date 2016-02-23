@@ -25,6 +25,14 @@
 					<input type="hidden" name="post_type" value="edit_post" />
 					<div class="row even-odd-bg" >
 						<div class="three columns">
+							<span>{date_text}</span>
+						</div>
+						<div class="six columns">
+							<input type="text" class="full-width ltr" name="post_date" value="<?php echo $post_info['post_date'];?>" />
+						</div>
+					</div>
+					<div class="row even-odd-bg" >
+						<div class="three columns">
 							<span>{creator_user_text}</span>
 						</div>
 						<div class="six columns">
