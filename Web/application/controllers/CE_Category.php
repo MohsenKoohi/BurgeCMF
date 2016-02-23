@@ -29,10 +29,11 @@ class CE_Category extends Burge_CMF_Controller {
 		$this->data['posts']=$this->post_manager_model->get_posts(array(
 			"lang"=>$this->selected_lang
 			,"category_id"=>$category_id
+			,"post_date_le"=>get_current_time()
 			,"active"=>1
 			,"start"=>0
 			,"count"=>20
-			,"order_by"=>"post_id DESC"
+			,"order_by"=>"post_date DESC"
 		));
 
 		$this->data['lang_pages']=get_lang_pages(get_customer_category_details_link($category_id,$category_info['cd_url'],TRUE));

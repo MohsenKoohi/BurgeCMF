@@ -130,7 +130,7 @@ class Post_manager_model extends CI_Model
 		$this->db->join($this->post_category_table_name,"post_id = pcat_post_id","left");
 		
 		$this->set_post_query_filter($filter);
-		
+
 		$this->db->order_by("post_id DESC");
 		$results=$this->db->get();
 
@@ -150,6 +150,9 @@ class Post_manager_model extends CI_Model
 				"post_active"=>$filter['active']
 				,"pc_active"=>$filter['active']
 			));
+
+		if(isset($filter['post_date_le']))
+			$this->db->where("post_date <",$filter['post_date_le']);
 
 		if(isset($filter['order_by']))
 			$this->db->order_by($filter['order_by']);

@@ -9,6 +9,7 @@ $lang['not_found']="This post can't be found.";
 $lang['allow_comment']="Allow Comment";
 $lang['active']="Active";
 $lang['creator_user']="Creator";
+$lang['date']="Date";
 $lang['title']="Title";
 $lang['content']="Content";
 $lang['meta_keywords']="SEO Keywords";
