@@ -23,6 +23,7 @@
 					<div class="twelve columns">
 						<a href="<?php echo get_customer_post_details_link($post['post_id'],$post['pc_title']);?>" >
 							<h2><?php echo $post['pc_title'];?></h2>
+							<div class="post-date"><?php echo str_replace("-","/",$post['post_date']);?></div>
 							<?php if($post['pc_image']) { ?>
 								<div class="post-img" style="background-image:url('<?php echo $post['pc_image'];?>')">
 								</div>
