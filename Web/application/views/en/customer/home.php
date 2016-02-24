@@ -24,7 +24,7 @@
 									$content=mb_substr($content,0,100);								
 									$content=preg_replace("/(\s*\n+\s*)+/", "<br/>", $content);
 									
-									echo $content;
+									echo $content."...";
 								?>	
 							</div>	
 							<br>

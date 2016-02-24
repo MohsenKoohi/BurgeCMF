@@ -105,13 +105,18 @@ function get_admin_category_details_link($category_id,$do_not_set_lang=FALSE)
 	return str_replace("category_id",$category_id,get_link("admin_category_details_format",$do_not_set_lang));	
 }
 
-function get_customer_category_details_link($category_id,$category_name,$do_not_set_lang=FALSE)
+function get_customer_category_details_link($category_id,$category_name,$page=1,$do_not_set_lang=FALSE)
 {
-	return str_replace(
+	$ret=str_replace(
 		array("category_id","category_name")
 		,array($category_id,$category_name)
 		,get_link("customer_category_details_format",$do_not_set_lang)
 	);	
+
+	if($page!=1)
+		$ret.="?page=$page";
+
+	return $ret;
 }
 
 

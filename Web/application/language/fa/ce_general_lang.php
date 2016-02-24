@@ -7,3 +7,4 @@ $lang['header_meta_keywords']="BurgeCMF, Burge Content Management Framework, Ope
 $lang['header_meta_description']="";
 
 $lang['read_more']="بیشتر بخوانید";
+$lang['page']="صفحه";

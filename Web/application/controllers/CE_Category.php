@@ -11,12 +11,16 @@ class CE_Category extends Burge_CMF_Controller {
 
 	public function index($category_id,$category_name="")
 	{	
+		$page=1;
+		if($this->input->get("page"))
+			$page=(int)$this->input->get("page");
+
 		$category_info=$this->category_manager_model->get_info((int)$category_id,$this->selected_lang);
 		if(!$category_info)
 			redirect(get_link("home_url"));
 
-		$category_link=get_customer_category_details_link($category_id,$category_info['cd_url']);
-		if(get_customer_category_details_link($category_id,urldecode($category_name)) !== $category_link)
+		$category_link=get_customer_category_details_link($category_id,$category_info['cd_url'],$page);
+		if(get_customer_category_details_link($category_id,urldecode($category_name),$page) !== $category_link)
 			redirect($category_link,"location",301);
 
 		//$this->lang->load('ce_category',$this->selected_lang);	
@@ -26,17 +30,33 @@ class CE_Category extends Burge_CMF_Controller {
 		$this->data['message']=get_message();
 
 		$this->load->model("post_manager_model");
-		$this->data['posts']=$this->post_manager_model->get_posts(array(
+
+		$per_page=20;
+		$filter=array(
 			"lang"=>$this->selected_lang
 			,"category_id"=>$category_id
 			,"post_date_le"=>get_current_time()
 			,"active"=>1
-			,"start"=>0
-			,"count"=>20
-			,"order_by"=>"post_date DESC"
-		));
+		);
+		$total_posts=$this->post_manager_model->get_total($filter);
+		$total_pages=round($total_posts/$per_page);
+		$this->data['total_pages']=$total_pages;
 
-		$this->data['lang_pages']=get_lang_pages(get_customer_category_details_link($category_id,$category_info['cd_url'],TRUE));
+		if($page>$total_pages)
+			redirect(get_customer_category_details_link($category_id,$category_info['cd_url'],$total_pages));
+		if($page<1)
+			redirect(get_customer_category_details_link($category_id,$category_info['cd_url']));
+
+		$this->data['current_page']=$page;
+		$this->data['pages_format']=get_customer_category_details_link($category_id,$category_info['cd_url'],"page_number");
+
+		$filter['start']=$per_page*($page-1);
+		$filter['count']=$per_page;
+		$filter['order_by']="post_date DESC";
+
+		$this->data['posts']=$this->post_manager_model->get_posts($filter);
+
+		$this->data['lang_pages']=get_lang_pages(get_customer_category_details_link($category_id,$category_info['cd_url'],$page,TRUE));
 		
 		$this->data['header_title']=$category_info['cd_name'].$this->lang->line("header_separator").$this->data['header_title'];
 		$this->data['header_meta_description']=$category_info['cd_meta_description'];
