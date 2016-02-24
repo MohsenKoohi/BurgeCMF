@@ -46,7 +46,7 @@ function &get_links($just_common=FALSE)
 			
 			,'admin_category'								=> ADMIN_SURL_LANG."/category"
 			,'admin_category_details_format'			=> ADMIN_SURL_LANG."/category/category_id"
-			,'customer_category_details_format'		=> HOME_URL_LANG."/category-category_id/category_name"
+			,'customer_category_details_format'		=> HOME_URL_LANG."/category-category_id/category_name/category_page"
 		));
 	}
 
@@ -108,13 +108,10 @@ function get_admin_category_details_link($category_id,$do_not_set_lang=FALSE)
 function get_customer_category_details_link($category_id,$category_name,$page=1,$do_not_set_lang=FALSE)
 {
 	$ret=str_replace(
-		array("category_id","category_name")
-		,array($category_id,$category_name)
+		array("category_id","category_name","category_page")
+		,array($category_id,$category_name,$page)
 		,get_link("customer_category_details_format",$do_not_set_lang)
 	);	
-
-	if($page!=1)
-		$ret.="?page=$page";
 
 	return $ret;
 }
