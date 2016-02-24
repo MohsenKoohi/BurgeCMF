@@ -12,6 +12,12 @@
   <?php if(isset($header_canonical_url) && $header_canonical_url) {?> 
     <link rel="canonical" href="{header_canonical_url}"/>
   <?php } ?>
+  <?php if(isset($header_next_url)) {?> 
+    <link rel="next" href="{header_next_url}"/>
+  <?php } ?>
+  <?php if(isset($header_prev_url)) {?> 
+    <link rel="prev" href="{header_prev_url}"/>
+  <?php } ?>
   <?php 
     if(isset($lang_pages))
     { if(sizeof($lang_pages)>1) 

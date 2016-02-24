@@ -28,7 +28,7 @@ class CE_Category extends Burge_CMF_Controller {
 
 		$this->load->model("post_manager_model");
 
-		$per_page=20;
+		$per_page=1;
 		$filter=array(
 			"lang"=>$this->selected_lang
 			,"category_id"=>$category_id
@@ -52,6 +52,11 @@ class CE_Category extends Burge_CMF_Controller {
 		$filter['order_by']="post_date DESC";
 
 		$this->data['posts']=$this->post_manager_model->get_posts($filter);
+
+		if($page>1)
+			$this->data['header_prev_url']=get_customer_category_details_link($category_id,$category_info['cd_url'],$page-1);
+		if($page<$total_pages)
+			$this->data['header_next_url']=get_customer_category_details_link($category_id,$category_info['cd_url'],$page+1);
 
 		$this->data['lang_pages']=get_lang_pages(get_customer_category_details_link($category_id,$category_info['cd_url'],$page,TRUE));
 		
