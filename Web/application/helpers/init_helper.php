@@ -107,11 +107,20 @@ function get_admin_category_details_link($category_id,$do_not_set_lang=FALSE)
 
 function get_customer_category_details_link($category_id,$category_name,$page=1,$do_not_set_lang=FALSE)
 {
-	$ret=str_replace(
-		array("category_id","category_name","category_page")
-		,array($category_id,$category_name,$page)
-		,get_link("customer_category_details_format",$do_not_set_lang)
-	);	
+	$search=array("category_id","category_name");
+	$replace=array($category_id,$category_name);
+	if($page==1)
+	{
+		$search[]="/category_page";
+		$replace[]="";
+	}
+	else
+	{
+		$search[]="category_page";
+		$replace[]=$page;	
+	}
+
+	$ret=str_replace($search,$replace,get_link("customer_category_details_format",$do_not_set_lang));	
 
 	return $ret;
 }

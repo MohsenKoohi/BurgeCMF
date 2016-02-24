@@ -16,8 +16,9 @@ class CE_Category extends Burge_CMF_Controller {
 			redirect(get_link("home_url"));
 
 		$category_link=get_customer_category_details_link($category_id,$category_info['cd_url'],$page);
-		if(get_customer_category_details_link($category_id,urldecode($category_name),$page) !== $category_link)
-			redirect($category_link,"location",301);
+		if($category_info['cd_url'])
+			if(get_customer_category_details_link($category_id,urldecode($category_name),$page) !== $category_link)
+				redirect($category_link,"location",301);
 
 		//$this->lang->load('ce_category',$this->selected_lang);	
 
