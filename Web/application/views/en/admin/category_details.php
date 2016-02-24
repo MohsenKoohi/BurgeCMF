@@ -103,8 +103,10 @@
 											<span>{url_text}</span>
 										</div>
 										<div class="nine columns eng ltr">
-											{category_url_first_part}
-											<input type="text" class="six columns ltr"
+											<div class="six columns eng" style="float:left">
+												{category_url_first_part}
+											</div>
+											<input type="text" class="six columns eng" 
 												name="<?php echo $lang;?>[cd_url]" 
 												value="<?php echo $cd['cd_url']; ?>"
 											/>
