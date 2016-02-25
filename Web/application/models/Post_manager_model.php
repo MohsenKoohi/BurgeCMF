@@ -182,7 +182,7 @@ class Post_manager_model extends CI_Model
 		return;
 	}
 
-	public function get_post($post_id)
+	public function get_post($post_id,$filter=array())
 	{
 		$cat_query=$this->db
 			->select("GROUP_CONCAT(pcat_category_id)")
@@ -190,13 +190,17 @@ class Post_manager_model extends CI_Model
 			->where("pcat_post_id",$post_id)
 			->get_compiled_select();
 
-		return $this->db
+		$this->db
 			->select("post.* , post_content.* , user_id, user_name")
 			->select("(".$cat_query.") as categories")
 			->from("post")
 			->join("user","post_creator_uid = user_id","left")
 			->join("post_content","post_id = pc_post_id","left")
-			->where("post_id",$post_id)
+			->where("post_id",$post_id);
+
+		$this->set_post_query_filter($filter);
+
+		return $this->db
 			->get()
 			->result_array();
 	}
