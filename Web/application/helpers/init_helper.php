@@ -190,9 +190,9 @@ function get_lang_pages($pattern)
 }
 
 function linkenize($name){
-  $pattern_page = explode(' ',"+ , - ' \" & ! ? : ; # ~ = / $ £ ^ ( ) _ < > ؟ » « ) ( ْ ٌ ٍ ً ُ ِ َ ّ ] [ } { ؛ ٔ ٓ ، × ٪ ﷼ ٫ ÷ |");
+  $pattern_page = explode(' ',"+ , ' \" & ! ? : ; # ~ = / $ £ ^ ( ) _ < > ؟ » « ) ( ْ ٌ ٍ ً ُ ِ َ ّ ] [ } { ؛ ٔ ٓ ، × ٪ ﷼ ٫ ÷ |");
   $name=str_replace($pattern_page,'', $name);
-  $name=trim(preg_replace('/[\s\.]+/', ' ',$name));
+  $name=trim(preg_replace('/[\s-]+/', '-',$name));
   $link=str_replace(" ","-",$name);
  
   return $link;
