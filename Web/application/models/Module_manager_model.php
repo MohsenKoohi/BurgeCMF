@@ -88,6 +88,12 @@ class Module_manager_model extends CI_Model
 		return $results->result_array();
 	}
 
+	//In next version we should allow for one module to have multiple items
+	//in side menu, or dashboard, thus we should set the name of method
+	//in addition to model, and separate it by "/", to allow the
+	//module manager to identify which method should be called
+	//2016/02/28
+
 	//We have a problem with this method.
 	//While it is possible to exclude modules from being shown in the dashboard
 	// (by passing "" for $model_name)
@@ -101,6 +107,7 @@ class Module_manager_model extends CI_Model
 	//It should also have an update method to update a specific item
 	//this update is also necessary for get_sidebar_text method of each module
 	//used in Burge_CMF_Controller .
+	//2015/11/02
 
 	//this method adds a module to the framework
 	public function add_module($module,$model_name,$sort_order=1)
