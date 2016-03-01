@@ -12,7 +12,7 @@ class Contact_us_manager_model extends CI_Model {
 		$table=$this->db->dbprefix($this->contact_us_table_name); 
 		$this->db->query(
 			"CREATE TABLE IF NOT EXISTS $table (
-				`cu_id` int NOT NULL
+				`cu_id` int AUTO_INCREMENT 
 				,`cu_ref_id` char(20) DEFAULT NULL
 				,`cu_sender_name` char(200) DEFAULT NULL
 				,`cu_sender_email` char(200) DEFAULT NULL
@@ -58,23 +58,27 @@ class Contact_us_manager_model extends CI_Model {
 		return $ret;		
 	}
 
-	public function add($email,$message)
+	public function add_message($props)
 	{
-		$this->db->insert("contact_messages",array(
-			"cm_email"=>$email,
-			"cm_message"=>$message,
-			"cm_message_time"=>jdate("Y/m/d H:i:s")
+		$this->db->insert($this->contact_us_table_name,array(
+			"cu_sender_name"=>$props['name']
+			,"cu_sender_email"=>$props['email']
+			,"cu_message_time"=>get_current_time()
+			,"cu_message_department"=>$props['department']
+			,"cu_message_subject"=>$props['subject']
+			,"cu_message_content"=>$props['content']
 		));
 
 		$id=$this->db->insert_id();
 		$idmod=$id%100000;
 		$tail=random_string("numeric",5);
-		$ref_id=jdate("Ymd").$tail.sprintf("%05d",$idmod);
+		$date_function=DATE_FUNCTION;
+		$ref_id=$date_function("Ymd").$tail.sprintf("%05d",$idmod);
 
-		$this->db->set("cm_ref_id", $ref_id);
-		$this->db->where("cm_id",$id);
+		$this->db->set("cu_ref_id", $ref_id);
+		$this->db->where("cu_id",$id);
 		$this->db->limit(1);
-		$this->db->update('contact_messages');
+		$this->db->update($this->contact_us_table_name);
 
 		return $ref_id;
 	}
