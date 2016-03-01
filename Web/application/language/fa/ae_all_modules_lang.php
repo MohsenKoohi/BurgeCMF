@@ -12,3 +12,4 @@ $lang['log']="فعالیت‌ها";
 $lang['constant']="مقادیر ثابت";
 $lang['file']="فایل‌ها";
 $lang['category']="دسته‌ها";
+$lang['contact_us']="تماس با ما";

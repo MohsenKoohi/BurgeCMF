@@ -47,6 +47,9 @@ function &get_links($just_common=FALSE)
 			,'admin_category'								=> ADMIN_SURL_LANG."/category"
 			,'admin_category_details_format'			=> ADMIN_SURL_LANG."/category/category_id"
 			,'customer_category_details_format'		=> HOME_URL_LANG."/category-category_id/category_name/category_page"
+
+			,'admin_contact_us'							=> ADMIN_SURL_LANG."/contact_us"
+			,'customer_contact_us'						=> HOME_URL_LANG."/contact_us"
 		));
 	}
 
