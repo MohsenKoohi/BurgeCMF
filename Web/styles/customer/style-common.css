@@ -1102,3 +1102,9 @@ body.ltr .container.category .read-more
 {
 	font-family: inherit;
 }
+
+.post-content img,.post-content video
+{
+	height:auto;
+	max-width: 100%;
+}
