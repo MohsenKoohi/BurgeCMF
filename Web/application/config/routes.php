@@ -74,6 +74,7 @@ $route["category-(\d+)/([^\/]*)/?"]				="CE_Category/index/$1/$2";
 $route["category-(\d+)/([^\/]*)/(\d+)"]		="CE_Category/index/$1/$2/$3";
 
 $route[ADMIN_URL_FOLDER."/contact_us"]			="AE_Contact_Us";
+$route[ADMIN_URL_FOLDER."/contact_us/(\d+)"]	="AE_Contact_Us/details/$1";
 $route["contact_us"]									="CE_Contact_Us";
 
 $route["retry"]="retry";

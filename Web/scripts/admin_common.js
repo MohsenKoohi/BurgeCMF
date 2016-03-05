@@ -37,8 +37,43 @@ function changeGraphicalCheckBoxes()
     });
 }
     
+//no moving header
 function setupMovingHeader()
 {
+  
+  var winHeight=$(window).height();
+  var winWidth=$(window).width();
+  
+  $(".message-main").css("min-height",winHeight).css("height","auto");
+  $(".side-menu .mobile .click").unbind("click");
+  $(".main").css("height","auto");
+
+  if(winWidth<=600)
+  {
+    $(".side-menu").css("min-height","none").css("height","auto");
+    $(".side-menu .mobile .click").click(function()
+      {
+        $(".side-menu ul").toggleClass("active");
+      });
+  }
+  else
+  {
+    var sm_h=$(".side-menu").outerHeight();      
+    var m_h=$(".message-main").outerHeight();    
+    var height=Math.max(sm_h,m_h);
+    $(".side-menu,.message-main").outerHeight(height);
+    if($(".message").length)
+      height-=$(".message").outerHeight()+10;
+    $(".main").outerHeight(height);
+  }
+
+  return;
+}
+    
+//with moving header
+function setupMovingHeader_with_moving_header()
+{
+
   $(".main").css("min-height",$(window).height());
 
   var header=$(".side-menu");

@@ -79,11 +79,16 @@
               <div></div>
             </div>
           </div>
-           <ul>
+           <ul class="side-menu-ul">
             <?php 
               if(isset($side_menu_modules))
                 foreach ($side_menu_modules as $mod) 
-                  echo "<li><a href='".$mod['link']."'>".$mod['name']."</a></li>";
+                  echo "<li><a href='".$mod['link']."'>".$mod['name']."</a></li>\n";
             ?>
           </ul>
         </div><?php } ?>
+
+      <div class="message-main">
+        <?php if(isset($message) && strlen($message)>0)
+          echo '<div class="message">'.$message.'</div>';
+        ?>

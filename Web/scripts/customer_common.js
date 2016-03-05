@@ -46,6 +46,7 @@ function setupMovingHeader()
   
   $(".message-main").css("min-height",winHeight).css("height","auto");
   $(".side-menu .mobile .click").unbind("click");
+  $(".main").css("height","auto");
 
   if(winWidth<=600)
   {

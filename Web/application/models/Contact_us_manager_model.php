@@ -58,6 +58,26 @@ class Contact_us_manager_model extends CI_Model {
 		return $ret;		
 	}
 
+	public function get_messages($filter)
+	{
+		$this->db
+			->select("*")
+			->from($this->contact_us_table_name);
+
+		$this->set_filters($filter);
+
+		$results=$this->db->get();
+
+		return $results->result_array();
+	}
+
+	private function set_filters($filter)
+	{
+		$this->db->order_by("cu_id DESC");
+
+		return;
+	}
+
 	public function add_message($props)
 	{
 		$this->db->insert($this->contact_us_table_name,array(

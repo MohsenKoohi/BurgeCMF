@@ -105,7 +105,7 @@
             <div></div>
           </div>
         </div>
-         <ul class="side-menu-ul">
+        <ul class="side-menu-ul">
           <?php 
             foreach($categories as $cat)
             {

@@ -48,8 +48,9 @@ function &get_links($just_common=FALSE)
 			,'admin_category_details_format'			=> ADMIN_SURL_LANG."/category/category_id"
 			,'customer_category_details_format'		=> HOME_URL_LANG."/category-category_id/category_name/category_page"
 
-			,'admin_contact_us'							=> ADMIN_SURL_LANG."/contact_us"
-			,'customer_contact_us'						=> HOME_URL_LANG."/contact_us"
+			,'admin_contact_us'									=> ADMIN_SURL_LANG."/contact_us"
+			,'admin_contact_us_message_details_format'	=> ADMIN_SURL_LANG."/contact_us/message_id"
+			,'customer_contact_us'								=> HOME_URL_LANG."/contact_us"
 		));
 	}
 
@@ -126,6 +127,11 @@ function get_customer_category_details_link($category_id,$category_name,$page=1,
 	$ret=str_replace($search,$replace,get_link("customer_category_details_format",$do_not_set_lang));	
 
 	return $ret;
+}
+
+function get_admin_contact_us_message_details_link($message_id, $do_not_set_lang=FALSE)
+{
+	return str_replace("message_id",$message_id,get_link("admin_contact_us_message_details_format",$do_not_set_lang));	
 }
 
 
@@ -755,9 +761,9 @@ function burge_cmf_send_mail($receiver,$subject,$message,$slogan="")
 		"mailtype"=>"html"
 		));
 	
-	$CI->email->from('your@email.com', 'Your Name');
+	$CI->email->from('admin@yeotagh.com', 'Your Name');
 	$CI->email->to($receiver);
-	$CI->email->bcc('bcc@email.com');
+	//$CI->email->bcc('bcc@email.com');
 	$CI->email->subject($subject);
 	$CI->email->message($message);
 
