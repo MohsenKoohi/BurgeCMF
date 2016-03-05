@@ -94,12 +94,7 @@
 
   </div>
   <div class="content">
-    <?php if(isset($message) && strlen($message)>0)
-      echo '<div class="message">'.$message.'</div>';
-    ?>
-
     <div>
-
       <div class="side-menu">
         <div class="mobile">
           <img src="{images_url}/logo-text.png"/>
@@ -137,4 +132,8 @@
           <li><a href='<?php echo get_link("customer_contact_us");?>'>{contact_us_text}</a>
         </ul>
       </div>
-      
+
+      <div class="message-main">
+        <?php if(isset($message) && strlen($message)>0)
+          echo '<div class="message">'.$message.'</div>';
+        ?>

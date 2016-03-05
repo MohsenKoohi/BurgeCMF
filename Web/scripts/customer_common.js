@@ -44,7 +44,7 @@ function setupMovingHeader()
   var winHeight=$(window).height();
   var winWidth=$(window).width();
   
-  $(".main").css("min-height",winHeight).css("height","auto");
+  $(".message-main").css("min-height",winHeight).css("height","auto");
   $(".side-menu .mobile .click").unbind("click");
 
   if(winWidth<=600)
@@ -58,8 +58,12 @@ function setupMovingHeader()
   else
   {
     var sm_h=$(".side-menu").outerHeight();      
-    var m_h=$(".main").outerHeight();    
-    $(".side-menu,.main").outerHeight(Math.max(sm_h,m_h));
+    var m_h=$(".message-main").outerHeight();    
+    var height=Math.max(sm_h,m_h);
+    $(".side-menu,.message-main").outerHeight(height);
+    if($(".message").length)
+      height-=$(".message").outerHeight()+10;
+    $(".main").outerHeight(height);
   }
 
   return;
