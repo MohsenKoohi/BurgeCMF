@@ -80,6 +80,9 @@ class Contact_us_manager_model extends CI_Model {
 		$this->db->limit(1);
 		$this->db->update($this->contact_us_table_name);
 
+		$props["ref_id"]=$ref_id;
+		$this->log_manager_model->info("CONTACT_US_ADD",$props);
+
 		return $ref_id;
 	}
 }

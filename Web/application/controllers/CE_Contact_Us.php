@@ -6,6 +6,8 @@ class CE_Contact_Us extends Burge_CMF_Controller {
 	function __construct()
 	{
 		parent::__construct();
+
+		$this->lang->load('ce_contact_us',$this->selected_lang);		
 	}
 
 	public function index()
@@ -46,6 +48,17 @@ class CE_Contact_Us extends Burge_CMF_Controller {
 				$this->load->model("contact_us_manager_model");
 				$ref_id=$this->contact_us_manager_model->add_message($props);
 
+				$subject=str_replace(
+					array("message_id","contact_subject"),
+					array($ref_id, $props['subject']),
+					$this->lang->line("email_subject")
+				);
+				$subject=$this->lang->line("main_name")." ".$this->lang->line("header_separator")." ".$subject;
+				$content=str_replace("message_id", $ref_id, $this->lang->line("email_content"));
+				$message=str_replace('$content', $content, $this->lang->line("email_template"));
+
+				burge_cmf_send_mail($props['email'],$subject,$message,$slogan);
+				
 				set_message(str_replace("ref_id",$ref_id,$this->lang->line("message_sent_successfully")));
 			}
 			else

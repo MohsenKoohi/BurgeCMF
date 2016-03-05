@@ -62,7 +62,11 @@ class Log_manager_model extends CI_Model
 
 		,"CATEGORY_CREATE"		=>241
 		,"CATEGORY_DELETE"		=>242
-		,"CATEGORY_CHANGE"		=>243		
+		,"CATEGORY_CHANGE"		=>243	
+
+		,"CONTACT_US_ADD"			=>271
+		,"CONTACT_US_REPLY"		=>272
+		,"CONTACT_US_DELTE"		=>273
 
 	);
 

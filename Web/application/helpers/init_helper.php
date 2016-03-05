@@ -742,7 +742,7 @@ function burge_cmf_watermark(
 	return $result;
 }
 
-function burge_cmf_send_mail($receiver,$subject,$content)
+function burge_cmf_send_mail($receiver,$subject,$message,$slogan="")
 {
 	$CI=&get_instance();
 	$CI->load->library("email");
@@ -755,29 +755,11 @@ function burge_cmf_send_mail($receiver,$subject,$content)
 		"mailtype"=>"html"
 		));
 	
-	$CI->email->from('from@email.com', 'Your Name');
+	$CI->email->from('your@email.com', 'Your Name');
 	$CI->email->to($receiver);
 	$CI->email->bcc('bcc@email.com');
 	$CI->email->subject($subject);
-	$CI->email->message('
-		<!DOCTYPE html>
-		<html dir="rtl" lang="fa">
-		<head>
-			<meta charset="UTF-8" />
-		</head>
-		<body style="direction:rtl;font-family:b koodak, koodak,b mitra, mitra, tahoma;">
-			<div style=";height:150px;display:block;text-align:center;direction:rtl;">
-				 <a title="" alt="" href="'.HOME_URL.'"><img src="'.IMAGES_URL.'/logo-text-fa.png"  style="height:130px" ></a>
-			 <a title="" alt="" href="'.HOME_URL.'"><img src="'.IMAGES_URL.'/logo-notext.png"  style="height:130px"></a>		    
-			</div>
-
-			<div class="main" style="direction:rtl;font-size:1.3em;direction:rtl;font-family:b koodak, koodak, b mitra, mitra, tahoma;text-align:justify;line-height:1.8em;background:white;min-height:200px">'
-			.$content.'
-			</div>		 
-			<br>
-			<div style="direction:rtl;text-align:center;font-family:b koodak, koodak, b mitra, mitra, tahoma;display:block;font-size:1em;color:darkgreen;">Your<br><span style="width:50px;display:inline-block"></span>Slogan</div> 
-		</body>
-		</html>');
+	$CI->email->message($message);
 
 	$CI->email->send();
 

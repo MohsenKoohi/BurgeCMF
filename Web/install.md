@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS `burge_cmf_sessions` (
 	b) Set 'VISITOR_TRACKING_COOKIE_NAME','TRACKING_ENCRYPTION_KEY','TRACKING_IV'
 	
 - Set mail configs in application/helper/init_helper in burge_cmf_send_mail function
+- Set emai customer env header, name, keywords, description, and email template in lang/*/ce_general_lang.php .
 
 - Install the Burge CMF:
 your_address/admin/install
