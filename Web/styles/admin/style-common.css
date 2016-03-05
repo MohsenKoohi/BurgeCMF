@@ -330,6 +330,12 @@ body .top-menu > ul > li, body.rtl .top-menu > ul > li
 	width:80%;
 }
 
+.message-main:nth-child(1)
+{
+	display:block;
+	width:100%;
+}
+
 .main, .message
 {
 	padding: 2%;

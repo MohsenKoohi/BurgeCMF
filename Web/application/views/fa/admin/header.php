@@ -63,10 +63,6 @@
 
   </div>
   <div class="content">
-    <?php if(isset($message) && strlen($message)>0)
-      echo '<div class="message">'.$message.'</div>';
-    ?>
-
     <div>
       <?php if(isset($user_logged_in) && $user_logged_in) { ?>
         <div class="side-menu">
