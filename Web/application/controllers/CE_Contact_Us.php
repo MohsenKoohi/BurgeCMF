@@ -45,6 +45,8 @@ class CE_Contact_Us extends Burge_CMF_Controller {
 
 			if($props['name']  && $props['email'] && $props['content'] )
 			{
+				persian_normalize($props);
+				
 				$this->load->model("contact_us_manager_model");
 				$ref_id=$this->contact_us_manager_model->add_message($props);
 

@@ -71,8 +71,63 @@ class Contact_us_manager_model extends CI_Model {
 		return $results->result_array();
 	}
 
+	public function get_total_messages($filter)
+	{
+		$this->db
+			->select("COUNT(*) as count")
+			->from($this->contact_us_table_name);
+
+		$this->set_filters($filter);
+
+		$results=$this->db->get();
+
+		return $results->row_array()['count'];
+	}
+
 	private function set_filters($filter)
 	{
+		if(isset($filter['ref_id']))
+		{
+			$id=trim($filter['ref_id']);
+			$ref_id="%".str_replace(" ","%",$id)."%";
+			$this->db->where("( `cu_ref_id` LIKE '$ref_id' OR `cu_id` = '$id' )");
+		}
+
+		if(isset($filter['sender']))
+		{
+			$sender="%".str_replace(" ","%",trim($filter['sender']))."%";
+			$this->db->where(" ( `cu_sender_name` LIKE '$sender' OR `cu_sender_name` LIKE '$sender' )");
+		}
+
+		if(isset($filter['time']))
+		{
+			$time=trim($filter['time']);
+			$time="%".str_replace(" ","",$time)."%";
+			$this->db->where("( `cu_message_time` LIKE '$time' OR `cu_response_time` LIKE '$time'  )");
+		}
+
+		if(isset($filter['subject']))
+		{
+			$subject=trim($filter['subject']);
+			$subject="%".str_replace(" ","%",$subject)."%";
+			$this->db->where("( `cu_message_subject` LIKE '$subject' OR `cu_message_department` LIKE '$subject'  )");
+		}
+
+		if(isset($filter['status']))
+		{
+			if($filter['status'] === "responded")
+				$this->db->where("!ISNULL (`cu_response_time`)");
+
+			if($filter['status'] === "not_responded")
+				$this->db->where("ISNULL (cu_response_time)");
+		}
+
+		if(isset($filter['start']))
+			$this->db->limit($filter['length'],$filter['start']);
+
+		//echo $this->db->get_compiled_select();
+
+
 		$this->db->order_by("cu_id DESC");
 
 		return;

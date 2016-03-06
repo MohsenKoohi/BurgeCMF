@@ -761,9 +761,9 @@ function burge_cmf_send_mail($receiver,$subject,$message,$slogan="")
 		"mailtype"=>"html"
 		));
 	
-	$CI->email->from('admin@yeotagh.com', 'Your Name');
+	$CI->email->from('your@eamil.com', 'Your Name');
 	$CI->email->to($receiver);
-	//$CI->email->bcc('bcc@email.com');
+	$CI->email->bcc('bcc@email.com');
 	$CI->email->subject($subject);
 	$CI->email->message($message);
 

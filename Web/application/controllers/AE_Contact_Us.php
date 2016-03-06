@@ -28,8 +28,68 @@ class AE_Contact_Us extends Burge_CMF_Controller {
 	private function set_messages_info()
 	{
 		$filters=array();
-	
-		$this->data['messages_info']=$this->contact_us_manager_model->get_messages($filters);
+
+		$this->data['raw_page_url']=get_link("admin_contact_us");
+		
+		$this->initialize_filters($filters);
+
+		$total=$this->contact_us_manager_model->get_total_messages($filters);
+		if($total)
+		{
+			$per_page=20;
+			$page=1;
+			if($this->input->get("page"))
+				$page=(int)$this->input->get("page");
+
+			$start=($page-1)*$per_page;
+			$filters['start']=$start;
+			$filters['length']=$per_page;
+			
+			$this->data['messages_info']=$this->contact_us_manager_model->get_messages($filters);
+			
+			$end=$start+sizeof($this->data['messages_info'])-1;
+
+			unset($filters['start']);
+			unset($filters['length']);
+
+			$this->data['messages_current_page']=$page;
+			$this->data['messages_total_pages']=ceil($total/$per_page);
+			$this->data['messages_total']=$total;
+			$this->data['messages_start']=$start+1;
+			$this->data['messages_end']=$end+1;		
+		}
+		else
+		{
+			$this->data['messages_current_page']=0;
+			$this->data['messages_total_pages']=0;
+			$this->data['messages_total']=$total;
+			$this->data['messages_start']=0;
+			$this->data['messages_end']=0;
+		}
+			
+		$this->data['filter']=$filters;
+
+		return;
+	}
+
+	private function initialize_filters(&$filters)
+	{
+		if($this->input->get("ref_id"))
+			$filters['ref_id']=$this->input->get("ref_id");
+
+		if($this->input->get("sender"))
+			$filters['sender']=$this->input->get("sender");
+
+		if($this->input->get("time"))
+			$filters['time']=$this->input->get("time");
+
+		if($this->input->get("subject"))
+			$filters['subject']=$this->input->get("subject");
+
+		if($this->input->get("status"))
+			$filters['status']=$this->input->get("status");
+
+		persian_normalize($filters);
 
 		return;
 	}
