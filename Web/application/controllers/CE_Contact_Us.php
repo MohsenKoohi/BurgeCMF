@@ -46,7 +46,7 @@ class CE_Contact_Us extends Burge_CMF_Controller {
 			if($props['name']  && $props['email'] && $props['content'] )
 			{
 				persian_normalize($props);
-				
+
 				$this->load->model("contact_us_manager_model");
 				$ref_id=$this->contact_us_manager_model->add_message($props);
 
@@ -57,7 +57,7 @@ class CE_Contact_Us extends Burge_CMF_Controller {
 					array($ref_id, $props['subject']),
 					$this->lang->line("email_subject")
 				);
-				$subject=$this->lang->line("main_name")." ".$this->lang->line("header_separator")." ".$subject;
+				$subject=$subject." ".$this->lang->line("header_separator")." ".$this->lang->line("main_name");
 				$content=str_replace("message_id", $ref_id, $this->lang->line("email_content"));
 				
 				$message=str_replace(

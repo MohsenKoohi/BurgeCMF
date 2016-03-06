@@ -15,6 +15,7 @@ $lang['search_again']="Search";
 $lang['responded']="Responded";
 $lang['not_responded']="Not responded";
 $lang['page']="Page";
+$lang['total']="Total";
 $lang['total_results']="Total";
 $lang['results']="Results";
 $lang['to']="To";

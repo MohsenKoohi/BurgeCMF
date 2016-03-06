@@ -94,53 +94,27 @@ class AE_Contact_Us extends Burge_CMF_Controller {
 		return;
 	}
 
-	public function details($post_id)
+	public function details($message_id)
 	{
-		if($this->input->post("post_type")==="edit_post")
-			return $this->edit_post($post_id);
+		if($this->input->post("post_type")==="edit_message")
+			return $this->edit_message($message_id);
 
-		if($this->input->post("post_type")==="delete_post")
-			return $this->delete_post($post_id);
+		if($this->input->post("post_type")==="delete_message")
+			return $this->delete_message($message_id);
 
-		$this->data['post_id']=$post_id;
-		$post_info=$this->post_manager_model->get_post($post_id);
-
-		$this->data['langs']=$this->language->get_languages();
-
-		$this->data['post_contents']=array();
-		foreach($this->data['langs'] as $lang => $val)
-			foreach($post_info as $pi)
-				if($pi['pc_lang_id'] === $lang)
-				{
-					$this->data['post_contents'][$lang]=$pi;
-					break;
-				}
-		if($post_info)
-			$this->data['post_info']=array(
-				"post_date"=>str_replace("-","/",$post_info[0]['post_date'])
-				,"post_allow_comment"=>$post_info[0]['post_allow_comment']
-				,"post_active"=>$post_info[0]['post_active']
-				,"user_name"=>$post_info[0]['user_name']
-				,"user_id"=>$post_info[0]['user_id']
-				,"categories"=>$post_info[0]['categories']
-				,"post_title"=>$this->data['post_contents'][$this->language->get()]['pc_title']
-			);
-		else
-			$this->data['post_info']=array();
-
-		$this->load->model("category_manager_model");
-		$this->data['categories']=$this->category_manager_model->get_hierarchy("checkbox",$this->selected_lang);
+		$this->data['message_id']=$message_id;
+		$message_info=$this->contact_us_manager_model->get_message($message_id);
 
 		$this->data['message']=get_message();
-		$this->data['lang_pages']=get_lang_pages(get_admin_post_details_link($post_id,TRUE));
-		$this->data['header_title']=$this->lang->line("post_details")." ".$post_id;
+		$this->data['lang_pages']=get_lang_pages(get_admin_contact_us_message_details_link($message_id,TRUE));
+		$this->data['header_title']=$this->lang->line("message_details")." ".$message_id;
 
-		$this->send_admin_output("post_details");
+		$this->send_admin_output("message_details");
 
 		return;
 	}
 
-	private function delete_post($post_id)
+	private function delete_message($message_id)
 	{
 		$this->post_manager_model->delete_post($post_id);
 
@@ -149,7 +123,7 @@ class AE_Contact_Us extends Burge_CMF_Controller {
 		return redirect(get_link("admin_post"));
 	}
 
-	private function edit_post($post_id)
+	private function edit_message($message_id)
 	{
 		$post_props=array();
 		$post_props['categories']=$this->input->post("categories");

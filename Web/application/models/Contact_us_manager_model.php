@@ -43,19 +43,32 @@ class Contact_us_manager_model extends CI_Model {
 
 	public function get_dashboard_info()
 	{
-		return "";
 		$CI=& get_instance();
 		$lang=$CI->language->get();
-		$CI->lang->load('ae_module',$lang);		
+		$CI->lang->load('ae_contact_us',$lang);		
 		
 		$data=array();
-		$data['modules']=$this->get_all_modules_info($lang);
+		$info=$this->get_statistics();
+		$data['responded']=$info['responded'];
+		$data['total']=$info['total'];
+		$data['responded_text']=$CI->lang->line("responded");
 		$data['total_text']=$CI->lang->line("total");
 		
 		$CI->load->library('parser');
-		$ret=$CI->parser->parse($CI->get_admin_view_file("module_dashboard"),$data,TRUE);
+		$ret=$CI->parser->parse($CI->get_admin_view_file("contact_us_dashboard"),$data,TRUE);
 		
 		return $ret;		
+	}
+
+	private function get_statistics()
+	{
+		$tb=$this->db->dbprefix($this->contact_us_table_name);
+
+		return $this->db->query("
+			SELECT 
+				(SELECT COUNT(*) FROM $tb) as total, 
+				(SELECT COUNT(*) FROM $tb WHERE !ISNULL(`cu_response_time`)) as responded
+			")->row_array();
 	}
 
 	public function get_messages($filter)

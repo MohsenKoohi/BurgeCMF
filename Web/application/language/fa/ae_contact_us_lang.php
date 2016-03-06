@@ -15,6 +15,7 @@ $lang['search_again']="جستجو";
 $lang['responded']="پاسخ داده شده";
 $lang['not_responded']="بدون پاسخ";
 $lang['page']="صفحه";
+$lang['total']="تعداد";
 $lang['total_results']="تعداد کل نتایج";
 $lang['results']="نتایج";
 $lang['to']="تا";
