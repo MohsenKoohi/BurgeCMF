@@ -149,9 +149,9 @@
 					<div class="three columns">
 						<label>{time_text}</label>
 						<span>
-							{received_time_text}: <span style="display:inline-block" class="ltr"> <?php echo $mess['cu_message_time'];?></span><br>
+							{received_text}: <span style="display:inline-block" class="ltr"> <?php echo $mess['cu_message_time'];?></span><br>
 							<?php if($mess['cu_response_time']) { ?>
-								{response_time_text}: <span style="display:inline-block" class="ltr"><?php  echo $mess['cu_response_time'];?> </span>
+								{response_text}: <span style="display:inline-block" class="ltr"><?php  echo $mess['cu_response_time'];?> </span>
 							<?php } ?>
 						</span>
 					</div>

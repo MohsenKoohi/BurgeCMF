@@ -56,6 +56,23 @@ input,select
 	font-family:Times New Roman, Arial;
 }
 
+.lang-en
+{
+	direction: ltr;
+	font-family:Times New Roman, Arial;
+}
+
+.lang-fa
+{
+	direction:rtl;
+	font-family: b koodak, koodak,tahoma;
+}
+
+.no-bottom-margin
+{
+	margin-bottom: 10px;
+}
+
 .width-80
 {
 	width:80%;

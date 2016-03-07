@@ -103,13 +103,21 @@ class AE_Contact_Us extends Burge_CMF_Controller {
 			return $this->delete_message($message_id);
 
 		$this->data['message_id']=$message_id;
-		$message_info=$this->contact_us_manager_model->get_message($message_id);
+		$info=$this->contact_us_manager_model->get_messages(
+			array("message_id"=>$message_id)
+		);
+		if(isset($info[0]))
+			$this->data['info']=$info[0];
+		else
+			$this->data['info']="";
+
+		//bprint_r($this->data['info']);
 
 		$this->data['message']=get_message();
 		$this->data['lang_pages']=get_lang_pages(get_admin_contact_us_message_details_link($message_id,TRUE));
-		$this->data['header_title']=$this->lang->line("message_details")." ".$message_id;
+		$this->data['header_title']=$this->lang->line("message")." ".$message_id.$this->lang->line("header_separator").$this->lang->line("contact_us");
 
-		$this->send_admin_output("message_details");
+		$this->send_admin_output("contact_us_details");
 
 		return;
 	}

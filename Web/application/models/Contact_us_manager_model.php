@@ -74,8 +74,10 @@ class Contact_us_manager_model extends CI_Model {
 	public function get_messages($filter)
 	{
 		$this->db
-			->select("*")
-			->from($this->contact_us_table_name);
+			->select($this->contact_us_table_name.".*")
+			->select("user.user_name, user.user_code")
+			->from($this->contact_us_table_name)
+			->join("user",$this->contact_us_table_name.".cu_response_user_id = user.user_id","LEFT");
 
 		$this->set_filters($filter);
 
@@ -134,6 +136,10 @@ class Contact_us_manager_model extends CI_Model {
 			if($filter['status'] === "not_responded")
 				$this->db->where("ISNULL (cu_response_time)");
 		}
+
+		if(isset($filter['message_id']))
+			$this->db->where("cu_id",(int)$filter['message_id']);
+
 
 		if(isset($filter['start']))
 			$this->db->limit($filter['length'],$filter['start']);

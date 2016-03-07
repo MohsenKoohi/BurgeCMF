@@ -57,7 +57,7 @@ class CE_Contact_Us extends Burge_CMF_Controller {
 					array($ref_id, $props['subject']),
 					$this->lang->line("email_subject")
 				);
-				$subject=$subject." ".$this->lang->line("header_separator")." ".$this->lang->line("main_name");
+				$subject=$subject.$this->lang->line("header_separator").$this->lang->line("main_name");
 				$content=str_replace("message_id", $ref_id, $this->lang->line("email_content"));
 				
 				$message=str_replace(

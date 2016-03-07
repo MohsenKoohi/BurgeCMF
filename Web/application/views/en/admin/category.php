@@ -58,6 +58,7 @@
 								else
 									echo $no_title_text;
 							?>
+						
 						</a>
 					</div>
 				</div>
