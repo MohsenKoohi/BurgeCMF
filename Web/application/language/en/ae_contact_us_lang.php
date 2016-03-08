@@ -1,8 +1,10 @@
 <?php 
 
 $lang['contact_us']="Contact us";
-$lang['received_time']="Received";
-$lang['response_time']="Responsed";
+$lang['received']="Received";
+$lang['response']="Responsed";
+$lang['received_time']="Received time";
+$lang['response_time']="Responsed time";
 $lang['view']="View";
 
 $lang['sender']="Sender";
@@ -20,9 +22,15 @@ $lang['total_results']="Total";
 $lang['results']="Results";
 $lang['to']="To";
 
-$lang['']="";
-$lang['']="";
-$lang['']="";
-$lang['']="";
-$lang['']="";
-$lang['']="";
+$lang['message']="Message";
+$lang['content']="Content";
+$lang['response_content']="Response content";
+$lang['user']="User";
+$lang['send']="Send";
+$lang['the_last_response']="The Last Response";
+$lang['language']="Language";
+$lang['are_you_sure_to_delete_this_message']="Are you sure to delete this message?";
+$lang['response_content_is_empty']="Response content is empty";
+$lang['response_sent_successfully']="Response sent successfully.";
+$lang['message_deleted_successfully']="Message deleted successfully.";
+$lang['message_cant_be_deleted']="Message can't be deleted.";
