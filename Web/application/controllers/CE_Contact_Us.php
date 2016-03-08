@@ -61,12 +61,12 @@ class CE_Contact_Us extends Burge_CMF_Controller {
 				$content=str_replace("message_id", $ref_id, $this->lang->line("email_content"));
 				
 				$message=str_replace(
-					array('$content','$slogan'),
-					array($content,$this->lang->line("slogan"))
+					array('$content','$slogan','$response_to'),
+					array($content,$this->lang->line("slogan"),"")
 					,$this->lang->line("email_template")
 				);
 
-				burge_cmf_send_mail($props['email'],$subject,$message,$slogan);
+				burge_cmf_send_mail($props['email'],$subject,$message);
 				
 				set_message(str_replace("ref_id",$ref_id,$this->lang->line("message_sent_successfully")));
 			}

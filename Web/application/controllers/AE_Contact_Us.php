@@ -96,8 +96,8 @@ class AE_Contact_Us extends Burge_CMF_Controller {
 
 	public function details($message_id)
 	{
-		if($this->input->post("post_type")==="edit_message")
-			return $this->edit_message($message_id);
+		if($this->input->post("post_type")==="send_response")
+			return $this->send_response($message_id);
 
 		if($this->input->post("post_type")==="delete_message")
 			return $this->delete_message($message_id);
@@ -131,36 +131,48 @@ class AE_Contact_Us extends Burge_CMF_Controller {
 		return redirect(get_link("admin_post"));
 	}
 
-	private function edit_message($message_id)
+	private function send_response($message_id)
 	{
-		$post_props=array();
-		$post_props['categories']=$this->input->post("categories");
+		$subject=$this->input->post("subject");
+		$response=trim($this->input->post("content"));
+		$lang=$this->input->post("language");
 
-		$post_props['post_date']=$this->input->post('post_date');
-		$post_props['post_active']=(int)($this->input->post('post_active') === "on");
-		$post_props['post_allow_comment']=(int)($this->input->post('post_allow_comment') === "on");
-		
-		$post_content_props=array();
-		foreach($this->language->get_languages() as $lang=>$name)
+		$info=$this->contact_us_manager_model->get_messages(
+			array("message_id"=>$message_id)
+		);
+		if(isset($info[0]))
+			$info=$info[0];
+		else
+			return redirect(get_link("admin_contact_us"));
+
+		if($response)
 		{
-			$post_content=$this->input->post($lang);
-			$post_content['pc_content']=$_POST[$lang]['pc_content'];
-			$post_content['pc_lang_id']=$lang;
+			$response=persian_normalize($response);
+			$subject=persian_normalize($subject);
 
-			if(isset($post_content['pc_active']))
-				$post_content['pc_active']=(int)($post_content['pc_active']=== "on");
-			else
-				$post_content['pc_active']=0;
+			$this->lang->load('ae_general_lang',$lang);
+			$this->lang->load('email_lang',$lang);	
 
-			$post_content_props[]=$post_content;
+			$subject.=$this->lang->line("header_separator").$info['cu_ref_id'].$this->lang->line("header_separator").$this->lang->line("main_name");
+
+			$mo_response=$subject."\n".$response;
+			$this->contact_us_manager_model->set_response($message_id,$mo_response);
+			
+			$response_to=$this->lang->line("response_to")."<br>".nl2br($info['cu_message_content']);
+
+			$message=str_replace(
+				array('$content','$slogan','$response_to'),
+				array(nl2br($response),$this->lang->line("slogan"),$response_to)
+				,$this->lang->line("email_template")
+			);
+
+			burge_cmf_send_mail($info['cu_sender_email'],$subject,$message);
+
+			set_message($this->lang->line("response_sent_successfully"));
 		}
+		else
+			set_message($this->lang->line("response_content_is_empty"));
 
-		$this->post_manager_model->set_post_props($post_id,$post_props,$post_content_props);
-		
-		set_message($this->lang->line("changes_saved_successfully"));
-
-		redirect(get_admin_post_details_link($post_id));
-
-		return;
+		return redirect(get_admin_contact_us_message_details_link($message_id));
 	}
 }

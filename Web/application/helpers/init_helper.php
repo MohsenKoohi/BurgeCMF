@@ -748,7 +748,7 @@ function burge_cmf_watermark(
 	return $result;
 }
 
-function burge_cmf_send_mail($receiver,$subject,$message,$slogan="")
+function burge_cmf_send_mail($receiver,$subject,$message)
 {
 	$CI=&get_instance();
 	$CI->load->library("email");
@@ -761,7 +761,7 @@ function burge_cmf_send_mail($receiver,$subject,$message,$slogan="")
 		"mailtype"=>"html"
 		));
 	
-	$CI->email->from('admin@yeotagh.com', 'Your Name');
+	$CI->email->from('you@youremail.com', 'Your Name');
 	$CI->email->to($receiver);
 	$CI->email->bcc('bcc@email.com');
 	$CI->email->subject($subject);

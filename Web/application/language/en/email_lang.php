@@ -1,5 +1,6 @@
 <?php 
 
+$lang['response_to']="Response to:";
 $lang['email_template']='
 	<!DOCTYPE html>
 	<html dir="ltr" lang="en">
@@ -15,6 +16,9 @@ $lang['email_template']='
 		$content
 		</div>		 
 		<br>
-		<div style="direction:ltr;text-align:center;font-family:Times new roman, Arial;display:block;font-size:1em;color:#024240;">$slogan</div>
+		<div style="direction:ltr;text-align:center;font-family:Times new roman, Arial;display:block;font-size:1em;color:#0C7B77;">$slogan</div>
+		<hr>
+		<br>
+		$response_to		
 	</body>
 	</html>';

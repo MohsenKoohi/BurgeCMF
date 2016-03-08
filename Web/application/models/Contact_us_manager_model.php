@@ -179,4 +179,24 @@ class Contact_us_manager_model extends CI_Model {
 
 		return $ref_id;
 	}
+
+	public function set_response($message_id,$response)
+	{
+		$props=array(
+			'cu_response'=>$response
+			,'cu_response_time'=>get_current_time()
+			,'cu_response_user_id'=>$this->user_manager_model->get_user_info()->get_id()
+		);
+
+		$this->db->set($props);
+		$this->db->where("cu_id",$message_id);
+		$this->db->limit(1);
+		$this->db->update($this->contact_us_table_name);
+
+		$props['cu_id']=$message_id;
+
+		$this->log_manager_model->info("CONTACT_US_REPLY",$props);
+		
+		return ;
+	}
 }

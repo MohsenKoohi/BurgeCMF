@@ -1,5 +1,6 @@
 <?php 
 
+$lang['response_to']="پاسخ به پیام شما:";
 $lang['email_template']='
 	<!DOCTYPE html>
 	<html dir="rtl" lang="fa">
@@ -15,6 +16,9 @@ $lang['email_template']='
 		$content
 		</div>		 
 		<br>
-		<div style="direction:rtl;text-align:center;font-family:b koodak, koodak, b mitra, mitra, tahoma;display:block;font-size:1em;color:#024240;">$slogan</div>
+		<div style="direction:rtl;text-align:center;font-family:b koodak, koodak, b mitra, mitra, tahoma;display:block;font-size:1em;color:#0C7B77;">$slogan</div>
+		<hr>
+		<br>
+		$response_to
 	</body>
 	</html>';

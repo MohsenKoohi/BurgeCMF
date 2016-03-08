@@ -31,3 +31,5 @@ $lang['send']="ارسال";
 $lang['the_last_response']="آخرین پاسخ";
 $lang['language']="زبان";
 $lang['are_you_sure_to_delete_this_message']="آیا با حذف این پیام موافقید؟";
+$lang['response_content_is_empty']="متن پاسخ را ثبت کنید.";
+$lang['response_sent_successfully']="پاسخ با موفقیت ارسال شد.";

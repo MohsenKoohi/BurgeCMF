@@ -108,10 +108,8 @@
 				?>
 				<div class="separated">
 					<?php echo form_open(get_admin_contact_us_message_details_link($message_id),array()); ?>
-					<input type="hidden" name="post_type" value="send_message" />
-			
-						<h2>{response_text}</h2>
-						
+					<input type="hidden" name="post_type" value="send_response" />			
+						<h2>{response_text}</h2>						
 						<div class="row even-odd-bg">
 							<div class="three columns">
 								<span>{language_text}</span>
