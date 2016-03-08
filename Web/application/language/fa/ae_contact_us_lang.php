@@ -11,7 +11,6 @@ $lang['sender']="فرستنده";
 $lang['subject']="عنوان";
 $lang['time']="زمان";
 $lang['details']="جزئیات";
-
 $lang['ref_id']="کد رهگیری";
 $lang['status']="وضعیت";
 $lang['search_again']="جستجو";
@@ -35,3 +34,9 @@ $lang['response_content_is_empty']="متن پاسخ را ثبت کنید.";
 $lang['response_sent_successfully']="پاسخ با موفقیت ارسال شد.";
 $lang['message_deleted_successfully']="پیام با موفقیت حذف شد.";
 $lang['message_cant_be_deleted']="امکان حذف پیام وجود ندارد.";
+
+$lang['send_new_message']="ارسال پیام جدید";
+$lang['receiver_email']="پست الکترونیک";
+$lang['message_sent_successfully']="پیام با موفقیت ارسال شد.";
+$lang['fill_all_fields']="لطفا تمامی فیلدها را کامل کنید.";
+$lang['split_emails_by_enter_or_semicolumn']="پست الکترونیک گیرندگان را با خط جدید و یا ; از هم تفکیک نمایید.";

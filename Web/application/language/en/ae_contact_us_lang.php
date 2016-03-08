@@ -34,3 +34,9 @@ $lang['response_content_is_empty']="Response content is empty";
 $lang['response_sent_successfully']="Response sent successfully.";
 $lang['message_deleted_successfully']="Message deleted successfully.";
 $lang['message_cant_be_deleted']="Message can't be deleted.";
+
+$lang['send_new_message']="Send New Message";
+$lang['receiver_email']="Email";
+$lang['message_sent_successfully']="Message sent successfully.";
+$lang['fill_all_fields']="Please fill all fields.";
+$lang['split_emails_by_enter_or_semicolumn']="Separate emails by new line or ;";

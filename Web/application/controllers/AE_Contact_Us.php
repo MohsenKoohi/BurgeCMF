@@ -176,4 +176,49 @@ class AE_Contact_Us extends Burge_CMF_Controller {
 
 		return redirect(get_admin_contact_us_message_details_link($message_id));
 	}
+
+	public function send_new()
+	{
+		if($this->input->post("post_type")==="send_message")
+		{
+			$receivers=$this->input->post("receivers");
+			$subject=$this->input->post("subject");
+			$content=$this->input->post("content");
+			$lang=$this->input->post("language");
+
+			if($receivers && $subject && $content)
+			{
+				$receivers=preg_replace("/\s*[\n]+\s*/", ";", $receivers);
+				$receivers=explode(";", $receivers);
+				
+				$this->lang->load('ae_general_lang',$lang);
+				$this->lang->load('email_lang',$lang);	
+
+				$subject.=$this->lang->line("header_separator").$this->lang->line("main_name");
+
+				$message=str_replace(
+					array('$content','$slogan','$response_to'),
+					array($content,$this->lang->line("slogan"),"")
+					,$this->lang->line("email_template")
+				);
+
+				burge_cmf_send_mail($receivers,$subject,$message);
+
+				set_message($this->lang->line("message_sent_successfully"));
+				redirect(get_link("admin_contact_us_send_new"));
+				return;
+			}
+			else
+				set_message($this->lang->line("fill_all_fields"));
+
+			
+		}
+
+		$this->data['message']=get_message();
+		$this->data['lang_pages']=get_lang_pages(get_link("admin_contact_us_send_new",TRUE));
+		$this->data['header_title']=$this->lang->line("send_new_message");
+
+		$this->send_admin_output("contact_us_send_new");
+
+	}
 }

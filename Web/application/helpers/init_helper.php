@@ -49,6 +49,7 @@ function &get_links($just_common=FALSE)
 			,'customer_category_details_format'		=> HOME_URL_LANG."/category-category_id/category_name/category_page"
 
 			,'admin_contact_us'									=> ADMIN_SURL_LANG."/contact_us"
+			,'admin_contact_us_send_new'						=> ADMIN_SURL_LANG."/contact_us/send_new"
 			,'admin_contact_us_message_details_format'	=> ADMIN_SURL_LANG."/contact_us/message_id"
 			,'customer_contact_us'								=> HOME_URL_LANG."/contact_us"
 		));
@@ -761,7 +762,7 @@ function burge_cmf_send_mail($receiver,$subject,$message)
 		"mailtype"=>"html"
 		));
 	
-	$CI->email->from('you@youremail.com', 'Your Name');
+	$CI->email->from('your@email.com', 'Your Name');
 	$CI->email->to($receiver);
 	$CI->email->bcc('bcc@email.com');
 	$CI->email->subject($subject);
