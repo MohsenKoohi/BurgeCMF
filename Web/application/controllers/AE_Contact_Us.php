@@ -111,8 +111,6 @@ class AE_Contact_Us extends Burge_CMF_Controller {
 		else
 			$this->data['info']="";
 
-		//bprint_r($this->data['info']);
-
 		$this->data['message']=get_message();
 		$this->data['lang_pages']=get_lang_pages(get_admin_contact_us_message_details_link($message_id,TRUE));
 		$this->data['header_title']=$this->lang->line("message")." ".$message_id.$this->lang->line("header_separator").$this->lang->line("contact_us");

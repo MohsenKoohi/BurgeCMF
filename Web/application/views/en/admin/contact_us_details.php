@@ -64,7 +64,13 @@
 						<div class="three columns">
 							<span>{content_text}</span>
 						</div>
-						<div class="nine columns">
+						<?php
+							if(preg_match("/ا/",$info['cu_message_content']))
+								$lang="fa";
+							else
+								$lang="en";
+						?>
+						<div class="nine columns lang-<?php echo $lang;?>">
 							<?php 
 								echo nl2br($info['cu_message_content']);
 							?>
@@ -98,7 +104,13 @@
 							<div class="three columns">
 								<span>{response_content_text}</span>
 							</div>
-							<div class="nine columns">
+							<?php
+								if(preg_match("/ا/",$info['cu_response']))
+									$lang="fa";
+								else
+									$lang="en";
+							?>
+							<div class="nine columns lang-<?php echo $lang;?>">
 								<?php echo nl2br($info['cu_response']);?>
 							</div>
 						</div>
@@ -157,7 +169,9 @@
 								<span>{subject_text}</span>
 							</div>
 							<div class="nine columns">
-								<input id="subject-in" name="subject" class="full-width" />
+								<input id="subject-in" name="subject"  class="full-width" 
+									value="<?php echo $info['cu_message_subject'];?>"
+								/>
 							</div>
 						</div>
 
