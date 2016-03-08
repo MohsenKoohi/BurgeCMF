@@ -122,11 +122,14 @@ class AE_Contact_Us extends Burge_CMF_Controller {
 
 	private function delete_message($message_id)
 	{
-		$this->post_manager_model->delete_post($post_id);
+		$res=$this->contact_us_manager_model->delete($message_id);
 
-		set_message($this->lang->line('post_deleted_successfully'));
+		if($res)
+			set_message($this->lang->line('message_deleted_successfully'));
+		else
+			set_message($this->lang->line('message_cant_be_deleted'));
 
-		return redirect(get_link("admin_post"));
+		return redirect(get_link("admin_contact_us"));
 	}
 
 	private function send_response($message_id)

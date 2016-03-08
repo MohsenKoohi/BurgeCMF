@@ -199,4 +199,17 @@ class Contact_us_manager_model extends CI_Model {
 		
 		return ;
 	}
+
+	public function delete($message_id)
+	{
+		//return FALSE;
+
+		$this->db
+			->where("cu_id",$message_id)
+			->delete($this->contact_us_table_name);
+
+		$this->log_manager_model->info("CONTACT_US_DELETE",array("cu_id"=>$message_id));
+
+		return TRUE;
+	}
 }

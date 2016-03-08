@@ -33,3 +33,5 @@ $lang['language']="زبان";
 $lang['are_you_sure_to_delete_this_message']="آیا با حذف این پیام موافقید؟";
 $lang['response_content_is_empty']="متن پاسخ را ثبت کنید.";
 $lang['response_sent_successfully']="پاسخ با موفقیت ارسال شد.";
+$lang['message_deleted_successfully']="پیام با موفقیت حذف شد.";
+$lang['message_cant_be_deleted']="امکان حذف پیام وجود ندارد.";
