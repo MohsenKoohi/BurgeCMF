@@ -215,6 +215,13 @@ function get_current_time()
 	return $time;
 }
 
+function get_current_date()
+{
+	$tf=DATE_FUNCTION;
+	$time=$tf("Y/m/d");
+	return $time;
+}
+
 function get_template_dir($lang)
 {
 	return $lang;

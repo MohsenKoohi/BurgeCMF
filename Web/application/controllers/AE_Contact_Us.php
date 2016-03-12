@@ -202,6 +202,12 @@ class AE_Contact_Us extends Burge_CMF_Controller {
 					,$this->lang->line("email_template")
 				);
 
+				$this->log_manager_model->info("CONTACT_US_NEW_MESSAGE",array(
+					"receivers"=>implode(";", $receivers)
+					,"subject"=>$subject
+					,"message"=>$content
+				));
+
 				burge_cmf_send_mail($receivers,$subject,$message);
 
 				set_message($this->lang->line("message_sent_successfully"));
