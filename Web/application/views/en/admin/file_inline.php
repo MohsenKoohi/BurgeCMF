@@ -39,7 +39,7 @@
 <script type="text/javascript" src="{scripts_url}/roxy/js/main.js"></script>
 <script type="text/javascript" src="{scripts_url}/roxy/js/jquery-dateFormat.min.js"></script>
 <script type="text/javascript">
-  var roxyUploadParentDirectory="{home_url}";
+  var roxyUploadParentDirectory="<?php echo HOME_SURL;?>";
   var roxyScriptsDirectory="{scripts_url}/roxy";
   var parentFunction="<?php echo $parent_function;?>";
   $(function()
