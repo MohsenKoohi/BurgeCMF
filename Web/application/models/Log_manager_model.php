@@ -131,8 +131,15 @@ class Log_manager_model extends CI_Model
    		$res=json_decode("[".$content."]");
 
    		$count=0;
+   		$end=$start;
+   		$result['start']=$start;
+   		$result['total']=sizeof($res);
+   		
    		for($i=sizeof($res)-1-$start;($i>=0) && ($count<$len);$i--,$count++)
-   			$result[]=$res[$i];
+   			$result[$end++]=$res[$i];
+
+   		$result['end']=$end;
+   		$result['length']=$count;
    	}
 
    	return $result;
