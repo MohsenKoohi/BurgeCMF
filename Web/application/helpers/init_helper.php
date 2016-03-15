@@ -686,6 +686,7 @@ function burge_cmf_watermark(
 	,$watermark_path=NULL
 	,$ver_align="top"
 	,$hor_aling="right"
+	,$quality="100%"
 )
 {
 	$CI=&get_instance();
@@ -741,7 +742,7 @@ function burge_cmf_watermark(
 
 	$config['source_image']=$image_path;
 	$config['wm_type']='overlay';
-	$config['quality']="100%";
+	$config['quality']=$quality;
 	$config['wm_vrt_alignment']=$ver_align;
 	$config['wm_hor_alignment']=$hor_aling;
 	$config['wm_overlay_path']=$watermark_path;
