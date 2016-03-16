@@ -682,7 +682,10 @@ function delete_prefix_of_indexes($props,$prefix)
 
 function current_url_with_queries()
 {
-	return base_url().ltrim($_SERVER['REQUEST_URI'], '/');
+	$url = current_url();
+	if($_SERVER['QUERY_STRING'])
+		$url.= '?'.$_SERVER['QUERY_STRING'];
+	return $url;
 }
 
 function burge_cmf_watermark(
