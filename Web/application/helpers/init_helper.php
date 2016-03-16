@@ -680,6 +680,11 @@ function delete_prefix_of_indexes($props,$prefix)
 	return $new_props;
 }
 
+function current_url_with_queries()
+{
+	return base_url().ltrim($_SERVER['REQUEST_URI'], '/');
+}
+
 function burge_cmf_watermark(
 	$image_path
 	,$watermark_ratio=0
