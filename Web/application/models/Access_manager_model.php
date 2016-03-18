@@ -1,6 +1,8 @@
 <?php
 class Access_manager_model extends CI_Model
 {
+	private $access_table_name="access";
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -10,7 +12,7 @@ class Access_manager_model extends CI_Model
 
 	public function install()
 	{
-		$access_table=$this->db->dbprefix('access'); 
+		$access_table=$this->db->dbprefix($this->access_table_name); 
 		$this->db->query(
 			"CREATE TABLE IF NOT EXISTS $access_table (
 				`user_id` int NOT NULL,
@@ -47,7 +49,7 @@ class Access_manager_model extends CI_Model
 				,"module_id"=>$module
 				);
 
-		$this->db->insert_batch("access",$batch);
+		$this->db->insert_batch($this->access_table_name,$batch);
 
 		$this->log_manager_model->info("ACCESS_ALLOW_USER",array(
 			"modules"=>implode(" , ", $modules),
@@ -59,7 +61,7 @@ class Access_manager_model extends CI_Model
 
 	public function unset_user_access($user_id)
 	{
-		$this->db->delete("access",array("user_id"=>$user_id));
+		$this->db->delete($this->access_table_name,array("user_id"=>$user_id));
 
 		$this->log_manager_model->info("ACCESS_UNSET_USER",array(
 			"for_user"=>$user_id
@@ -82,7 +84,7 @@ class Access_manager_model extends CI_Model
 				,"module_id"=>$module_id
 				);
 
-		$this->db->insert_batch("access",$batch);
+		$this->db->insert_batch($this->access_table_name,$batch);
 
 		$this->log_manager_model->info("ACCESS_ALLOW_USER",array(
 			"for_user_ids"=>implode(" , ", $users)
@@ -94,7 +96,7 @@ class Access_manager_model extends CI_Model
 
 	public function unset_module_access($module_id)
 	{
-		$this->db->delete("access",array("module_id"=>$module_id));
+		$this->db->delete($this->access_table_name,array("module_id"=>$module_id));
 
 		$this->log_manager_model->info("ACCESS_UNSET_MODULE",array(
 			"module_id"=>$module_id
@@ -114,7 +116,7 @@ class Access_manager_model extends CI_Model
 			$log_context['user_id']=$user->get_id();
 			
 			//check access to module
-			$query_result=$this->db->get_where("access",array("user_id"=>$user->get_id(),"module_id"=>$module));
+			$query_result=$this->db->get_where($this->access_table_name,array("user_id"=>$user->get_id(),"module_id"=>$module));
 			if($query_result->num_rows() == 1)
 			{
 				//$log_context['user_email']=$user->get_email();
@@ -145,7 +147,7 @@ class Access_manager_model extends CI_Model
 		if(!$user_id)
 			return $ret;
 
-		$result=$this->db->get_where("access",array("user_id"=>$user_id));
+		$result=$this->db->get_where($this->access_table_name,array("user_id"=>$user_id));
 		foreach($result->result_array() as $row)
 			$ret[]=$row["module_id"];
 
@@ -156,7 +158,7 @@ class Access_manager_model extends CI_Model
 	{	
 		$this->db->select("user.user_email,user.user_id");
 		$this->db->from("user");
-		$this->db->join("access","user.user_id = access.user_id","left");
+		$this->db->join($this->access_table_name,"user.user_id = access.user_id","left");
 		$this->db->where(array("module_id"=>$module_id));
 		$this->db->order_by("access.user_id desc");
 		$result=$this->db->get();
