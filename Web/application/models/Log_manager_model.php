@@ -120,14 +120,12 @@ class Log_manager_model extends CI_Model
    	return $this->event_types;
    }
 
-   public function get_today_logs($start,$len)
+   public function get_today_logs()
    {
    	return $this->get_logs(array(
    		"year"=>$this->today_year
    		,"month"=>$this->today_month
    		,"day"=>$this->today_day
-   		,"start"=>$start
-   		,"lenght"=>$len
    	));
    }
 
@@ -223,7 +221,14 @@ class Log_manager_model extends CI_Model
 		$CI->lang->load('ae_log',$lang);		
 		
 		$data=array();
-		$data['logs']=$this->get_today_logs(2,8);
+		$data['logs']=$this->get_today_logs();
+
+		$total=$data['logs']['total'];
+		if($total)
+		{			
+			$data['logs']['start']=1;
+			$data['logs']['end']=min(9,$data['logs']['total']);
+		}
 		
 		$CI->load->library('parser');
 		$ret=$CI->parser->parse($CI->get_admin_view_file("log_dashboard"),$data,TRUE);
