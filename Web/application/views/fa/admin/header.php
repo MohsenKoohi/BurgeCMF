@@ -12,7 +12,7 @@
   <link rel="stylesheet" type="text/css" href="{styles_url}/jquery-ui.min.css" />
   <link rel="stylesheet" type="text/css" href="{styles_url}/colorbox.css" />
   <link rel="stylesheet" type="text/css" href="{styles_url}/skeleton.css" />  
-  <link rel="stylesheet" type="text/css" href="{styles_url}/admin/style-common.css" />
+  <link rel="stylesheet" type="text/css" href="{styles_url}/admin.css" />
   <link rel="stylesheet" type="text/css" href="{styles_url}/admin/style-rtl.css" />  
   
   <!--[if ! lte IE 8]>-->

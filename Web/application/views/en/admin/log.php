@@ -44,7 +44,7 @@
 				</div>
 				<div class="three columns half-col-margin">
 					<label>{visitor_id_text}</label>
-					<input name="visitor_id" type="text" class="full-width ltr eng"/>
+					<input name="visitor_id" type="text" class="full-width lang-en"/>
 				</div>
 				<div class="two columns results-search-again half-col-margin">
 					<label></label>
@@ -151,9 +151,9 @@
 							</div>
 							<?php foreach ($log as $key => $value) { 
 							?>
-								<div class="three columns eng ltr">
+								<div class="three columns lang-en">
 									<span><?php echo $key;?></span>
-									<label class="eng ltr"><?php echo $value;?></label>
+									<label class="lang-en"><?php echo $value;?></label>
 								</div>
 							<?php } ?>				
 						</div>

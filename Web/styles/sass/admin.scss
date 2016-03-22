@@ -1,8 +1,9 @@
-/* 
-green-blue #0C7B77
-pink #C63672
-darkblue #014083
+$primary-color:#0C7B77;
+$secondary-color: #C63672;
 
+$fa-font: b koodak, koodak,tahoma;;
+$en-font: Times New Roman, Arial;
+/* 
 @font-face
 {
 	font-family: OnLineKoodak;
@@ -24,21 +25,11 @@ darkblue #014083
 
 body
 {
-	background-image:url(../../images/bg-big3.jpg);
+	background-image:url(../images/bg-big3.jpg);
 	background-positon:center center;
 	background-size:cover;
 	background-attachment: fixed;
 	background-repeat:no-repeat;
-}
-
-input, textarea,select
-{
-	padding:4px;
-}
-
-input,select
-{
-	height: 32px;
 }
 
 .ltr
@@ -51,22 +42,36 @@ input,select
 	direction:rtl;
 }
 
-.eng
+.fa, body.rtl *:not(.en)
 {
-	font-family:Times New Roman, Arial;
+	font-family:$fa-font;
 }
 
-.lang-en
+.en, body.ltr *:not(.fa)
 {
-	direction: ltr;
-	font-family:Times New Roman, Arial;
+	font-family:$en-font;
 }
 
 .lang-fa
 {
-	direction:rtl;
-	font-family: b koodak, koodak,tahoma;
+	@extend .fa,.rtl;
 }
+
+.lang-en
+{
+	@extend .en,.ltr
+}
+
+input, textarea,select
+{
+	padding:4px;
+}
+
+input,select
+{
+	height: 32px;
+}
+
 
 .no-bottom-margin
 {
@@ -93,7 +98,7 @@ input
 
 input.req 
 {
-	background:white url(../../images/ast.png) no-repeat  right center ;	
+	background:white url(../images/ast.png) no-repeat  right center ;	
 	padding-right:25px;
 	background-size: 16px;
 }
@@ -260,7 +265,7 @@ body .top-menu > ul > li, body.rtl .top-menu > ul > li
 
 .top-menu .lang
 {
-	background-image: url(../../images/lang-s.png);
+	background-image: url(../images/lang-s.png);
 	background-size: cover;
 	display: inline-block;
 	width:58px;
@@ -274,7 +279,7 @@ body .top-menu > ul > li, body.rtl .top-menu > ul > li
 {
 	width:30px;	
 	background-size:cover;
-	background-image: url(../../images/tick.png);
+	background-image: url(../images/tick.png);
 }
 
 .top-menu a
@@ -436,22 +441,22 @@ body.ltr .side-menu
 
 body.rtl .side-menu-ul a
 {
-	background: linear-gradient(to left,#0C7B77 ,#eee);
+	background: linear-gradient(to left,$primary-color ,#eee);
 }
 
 body.rtl .side-menu-ul a:hover
 {
-	background: linear-gradient(to left,#C63672 ,#eee);
+	background: linear-gradient(to left,$secondary-color ,#eee);
 }
 
 body.ltr .side-menu-ul a
 {
-	background: linear-gradient(to right, #0C7B77,#eee);
+	background: linear-gradient(to right, $primary-color,#eee);
 }
 
 body.ltr .side-menu-ul a:hover
 {
-	background: linear-gradient(to right,#C63672 ,#eee);
+	background: linear-gradient(to right,$secondary-color ,#eee);
 }
 
 .side-menu-ul ul a:before
@@ -616,12 +621,12 @@ body.ltr .side-menu-ul a:hover
 
 .main h1,.main h3,.main h5
 {
-	color:#0C7B77
+	color:$primary-color
 }
 
 .main h2,.main h4,.main h6
 {
-	color:#C63672
+	color:$secondary-color
 }
 
 a, a.clicked
@@ -738,11 +743,11 @@ body.rtl .even-odd-bg > div
 
 .row.even-odd-bg .counter {
     font-size: 1.5em;
-    color: #0C7B77;
+    color: $primary-color;
 }
 
 .row.even-odd-bg:nth-child(2n+2) .counter {
-    color: #C63672;
+    color: $secondary-color;
 }
 
 .checkbox-holder{
@@ -780,7 +785,7 @@ body.rtl .even-odd-bg > div
   display: block;
   width: 100%;
   height: 100%;
-  background: #C63672;
+  background: $secondary-color;
   border-radius: 40px;
   box-shadow:
       inset 0 3px 8px 1px rgba(0,0,0,0.2),
@@ -866,7 +871,7 @@ body.rtl .checkbox-holder label i:before {
 }
 
 .checkbox-holder input:checked ~ label {
-  background: #0C7B77;
+  background: $primary-color;
   transition: background-color .3s;
 }
 
@@ -926,12 +931,12 @@ body.ltr .dash-ul li:before
 
 .hov-col-changed
 {
-	color:#C63672;
+	color:$secondary-color;
 	transition: color, .6s;
 }
 .hov-col-changed:hover
 {
-	color:#0C7B77;
+	color:$primary-color;
 	transition: color, .6s;
 }
 
