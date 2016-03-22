@@ -1,0 +1,15 @@
+.container.dashboard h4
+{
+	margin-bottom:10px;
+}
+
+.hov-col-changed
+{
+	color:$secondary-color;
+	transition: color, .6s;
+}
+.hov-col-changed:hover
+{
+	color:$primary-color;
+	transition: color, .6s;
+}

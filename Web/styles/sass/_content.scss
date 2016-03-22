@@ -1,0 +1,288 @@
+.content
+{
+	white-space: nowrap;
+	margin-bottom: 0;
+}
+
+.message-main
+{
+	display:inline-block;
+	width:80%;
+}
+
+.message-main:nth-child(1)
+{
+	display:block;
+	width:100%;
+}
+
+.main, .message
+{
+	padding: 2%;
+	white-space: normal;
+	display: block;
+	width: 100%;
+}
+
+.message
+{
+	background-color:white;
+	color:#223F56;
+	font-size: 1.5em;
+	border:1px solid #223F56;
+	margin-bottom:10px;
+}
+
+.main
+{
+	background-color:white;	
+}
+
+.side-menu
+{
+	font-size:1.2em;
+	display: inline-block;
+	vertical-align: top;
+	height: 100%;
+	padding:10px;
+	margin:0;
+	box-sizing:border-box;
+	white-space: normal;
+	width:calc(20% - 10px);
+}
+
+body.rtl .side-menu
+{
+	float:right;
+	background:linear-gradient(to left, #fff,#bbb);
+}
+body.ltr .side-menu
+{
+	float:left;
+	background:linear-gradient(to right, #fff,#bbb);
+}
+
+
+@media (min-width: 600px)
+{
+	body.ltr .side-menu:not(.moving)
+	{
+		margin-right: 10px;	
+	}
+
+	body.rtl .side-menu:not(.moving)
+	{
+		margin-left: 10px;	
+	}
+}
+
+.side-menu-ul,.side-menu ul
+{
+	list-style: none;
+}
+
+.side-menu-ul li
+{
+	line-height: 30px;
+}
+
+.side-menu-ul a
+{
+	margin-bottom:5px;
+	padding:10px;
+	display: inline-block;;
+	width:100%;
+	color:white;	
+	border-radius: 10px;
+
+}
+
+body.rtl .side-menu-ul a
+{
+	background: linear-gradient(to left,$primary-color ,#eee);
+}
+
+body.rtl .side-menu-ul a:hover
+{
+	background: linear-gradient(to left,$secondary-color ,#eee);
+}
+
+body.ltr .side-menu-ul a
+{
+	background: linear-gradient(to right, $primary-color,#eee);
+}
+
+body.ltr .side-menu-ul a:hover
+{
+	background: linear-gradient(to right,$secondary-color ,#eee);
+}
+
+.side-menu-ul ul a:before
+{
+	font-family: tahoma;
+	content:"» ";
+}
+.side-menu-ul ul a
+{
+	padding-right: 30px;
+}
+
+.side-menu .mobile
+{
+	display: none;
+}
+
+
+@media (max-width: 600px)
+{
+	.message-main
+	{
+		display:block;
+		width:100%;
+	}
+
+	body.rtl .side-menu, body.ltr .side-menu
+	{
+		float:none;
+	}
+
+	body.rtl .side-menu,body.ltr .side-menu
+	{
+		display:inline-block;
+		width:100%;
+		padding: 0;
+		margin: 0 0 10px 0;
+		background:linear-gradient(to left,rgba(255,255,255,1), rgba(255,255,255,.3), rgba(255,255,255,1));
+		height:80px;
+		z-index: 10;
+		position: relative;
+		transition: background-color .3s;
+	}
+
+	.side-menu.moving
+	{
+		//background:linear-gradient(to left,rgba(255,255,255,1), rgba(80,80,80,.6), rgba(255,255,255,1));
+		width:95%;		
+		top:0;
+		position: fixed;
+		box-shadow: inset 0px -1px 1px #555;//,inset -1px -1px 2px #555;
+		border-radius: 0px;
+
+	}
+
+	.side-menu.moving:hover 
+	{
+		background-color: white;
+		transition: background-color .3s;
+	}
+
+	.side-menu.moving ul
+	{
+		margin-top: 0;
+	}
+
+	.side-menu .mobile
+	{
+		vertical-align: middle;
+		display: inline-block;
+		height: 80px;
+		width:100%;
+		line-height: 80px;
+		white-space: nowrap;
+		position: relative;		
+	}
+
+	.side-menu .mobile img
+	{
+		max-height:calc(100% - 4px);
+		vertical-align: middle;
+		max-width: calc(100% - 80px);
+		min-width: 40px;
+		display: inline-block;
+	}
+
+	.side-menu .mobile .click
+	{
+		cursor: pointer;
+		position: absolute;
+		top:10px;
+		width: 60px;
+		height: 60px;
+		border:2px solid #aaa;
+		display: inline-block;
+		vertical-align: middle;
+		padding:-2px 10px;
+		background-color: rgba(255,255,255,.5);
+		box-shadow:2px 2px 5px #aaa, -2px -2px 5px #aaa;
+		border-radius: 5px;
+		margin:0;
+		transition: border .3s, box-shadow .3s;
+	}
+
+	.side-menu:hover .click 
+	{
+		box-shadow:2px 2px 5px #555, -2px -2px 5px #555;
+		border:2px solid #555;
+		transition: border .3s, box-shadow .3s;
+	}
+
+	body.ltr .side-menu .mobile .click
+	{
+		right:10px;
+	}
+
+	body.rtl .side-menu .mobile .click
+	{
+		left:10px;
+	}
+
+	.side-menu .mobile .click div
+	{
+		border: 3px solid #999;
+		border-right: none;
+		border-left: none;
+		height:30%;
+		width: 70%;
+		margin:-2px 15%;
+	}
+	
+	.side-menu:hover .mobile .click div
+	{
+		border: 3px solid #555;
+		border-right: none;
+		border-left: none;
+	}
+
+	.side-menu .mobile .click div:first-child
+	{
+		border-top: none;
+	}
+
+	.side-menu .mobile .click div:last-child
+	{
+		border-bottom: none;
+	}
+
+	.side-menu > ul
+	{
+		display: none;
+		margin:0;
+		padding:5px;
+
+	}
+	.side-menu ul.active
+	{
+		display: block;
+
+	}
+}
+
+.main h1,.main h3,.main h5
+{
+	color:$primary-color
+}
+
+.main h2,.main h4,.main h6
+{
+	color:$secondary-color
+}

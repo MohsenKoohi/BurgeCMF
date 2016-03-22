@@ -1,0 +1,22 @@
+.footer
+{
+	text-align: center;
+	margin:10px 2.5% 0px 2.5%;
+	padding:0;
+}
+
+.footer img
+{
+	border-radius: 10px;
+	width:100%;
+	max-width: 200px;
+	transition: background-color .3s, opacity .3s;
+	opacity: .5;
+}
+
+.footer:hover img
+{
+	background-color: white;
+	opacity:1;
+	transition: background-color .3s,opacity .3s;
+}

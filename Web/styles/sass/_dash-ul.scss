@@ -1,0 +1,20 @@
+.dash-ul
+{
+	list-style-type:none;
+}
+
+.dash-ul li:before
+{
+	content: '—';
+	font-size: .7em;
+}
+
+body.rtl .dash-ul li:before
+{
+	margin-left:10px;
+}
+
+body.ltr .dash-ul li:before
+{
+	margin-right:10px;
+}

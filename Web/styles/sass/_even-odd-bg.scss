@@ -1,0 +1,66 @@
+.even-odd-bg
+{
+	padding:10px;
+	border-radius: 5px;
+	transition: font-size .1s;
+}
+
+.even-odd-bg:nth-child(2n + 1)
+{
+	background-color: #eee;
+}
+
+.even-odd-bg:nth-child(2n + 2)
+{
+	background-color: #bbb;
+}
+
+.even-odd-bg:not(.dont-magnify):hover,
+.even-odd-bg:not(.dont-magnify):focus,
+.even-odd-bg:not(.dont-magnify):active
+{
+	box-shadow: 2px 2px 2px #555,-2px -2px 2px #555;
+	font-size:1.1em;
+	transition: font-size .1s;
+}
+
+.even-odd-bg > div
+{
+	text-overflow: ellipsis;
+	overflow:hidden
+}
+
+.row.even-odd-bg .sub-primary
+{
+	font-size: 1.1em;
+	padding:0;
+}
+
+.even-odd-bg label
+{
+	font-size:.9em;
+}
+
+.even-odd-bg span
+{
+	font-size: 1.1em;
+}
+
+body.ltr .even-odd-bg > div
+{
+	padding:2px 10px 2px 2px;
+}
+
+body.rtl .even-odd-bg > div
+{
+	padding:2px 2px 2px 10px;
+}
+
+.row.even-odd-bg .counter {
+    font-size: 1.5em;
+    color: $primary-color;
+}
+
+.row.even-odd-bg:nth-child(2n+2) .counter {
+    color: $secondary-color;
+}
