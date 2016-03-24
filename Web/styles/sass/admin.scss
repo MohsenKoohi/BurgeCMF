@@ -3,19 +3,7 @@ $secondary-color: #C63672;
 
 $fa-font: b koodak, koodak,tahoma;;
 $en-font: Times New Roman, Arial;
-/* 
-@font-face
-{
-	font-family: OnLineKoodak;
-	src: url('../fonts/koodak/koodak.eot');
-	src: 
-		url('../fonts/koodak/koodak.eot?msie') format('embedded-opentype'),
-		url('../fonts/koodak/koodak.woff') format('woff'),
-		url('../fonts/koodak/koodak.ttf')  format('truetype')
-}
 
-
-*/
 @import "general";
 
 @import "header";
