@@ -1,0 +1,22 @@
+$primary-color:#0C7B77;
+$secondary-color: #C63672;
+
+$fa-font: b koodak, koodak,tahoma;;
+$en-font: Times New Roman, Arial;
+
+@import "general";
+
+@import "header";
+@import "footer";
+@import "content";
+
+@import "even-odd-bg";
+@import "checkbox-holder";
+@import "dash-ul";
+@import "dashboard";
+@import "results-page";
+@import "tabs";
+@import "category-div";
+@import "burge-file-man";
+
+@import "customer-category";
