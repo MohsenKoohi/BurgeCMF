@@ -17,31 +17,37 @@ body
 .ltr
 {
 	direction:ltr;
+	text-align: left;
 }
 
 .rtl
 {
 	direction:rtl;
+	text-align: justify;
 }
 
-.fa, body.rtl *:not(.en)
+.fa, body.rtl *:not(.en):not(.lang-en)
 {
 	font-family:$fa-font;
 }
 
-.en, body.ltr *:not(.fa)
+.en, body.ltr *:not(.fa):not(.lang-fa)
 {
 	font-family:$en-font;
 }
 
 .lang-fa
 {
-	@extend .fa,.rtl;
+	font-family:$fa-font;
+	direction:rtl;
+	text-align: justify;
 }
 
 .lang-en
 {
-	@extend .en,.ltr
+	direction:ltr;
+	text-align: left;
+	font-family:$en-font;
 }
 
 input, textarea,select

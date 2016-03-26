@@ -79,10 +79,17 @@
             <a class="lang"></a>
             <ul>
               <?php foreach($lang_pages as $lang => $spec ) { ?>
-                <li><a <?php if($spec['selected']) echo "class='selected'";?>
+                <li>
+                  <a
+                    <?php
+                      $class="lang-".$spec['lang_abbr'];
+                      if($spec['selected'])
+                        $class.=" selected";
+                      echo "class='$class'";
+                    ?>  
                     href="<?php echo $spec['link']; ?>">
                       <?php echo $lang;?>
-                    </a>
+                  </a>
                 </li>
               <?php } ?>
             </ul>
