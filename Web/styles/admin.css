@@ -173,7 +173,7 @@ body.ltr .header .logo a.logo-text, body.rtl .header .logo a.logo-img {
   background-color: #aaa;
   transition: background-color .3s; }
 
-body .top-menu > ul > li, body.rtl .top-menu > ul > li {
+body.ltr .top-menu > ul > li, body.rtl .top-menu > ul > li {
   text-align: center; }
 
 .top-menu li.has-sub {
