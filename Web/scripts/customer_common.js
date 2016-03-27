@@ -8,7 +8,7 @@ if(typeof String.prototype.trim !== 'function')
   }
 }
 
-$(function()
+$(window).load(function()
 {
   $(".disable-new-line").keydown(function(e)
   {
@@ -23,7 +23,6 @@ $(function()
   $(window).on('resize',setupMovingHeader);
 
   changeGraphicalCheckBoxes();
-
 });
 
 function changeGraphicalCheckBoxes()

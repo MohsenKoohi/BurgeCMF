@@ -4,7 +4,7 @@
 		{
 			$log=$logs[$i];
 
-			echo "<li class='eng ltr'>";
+			echo "<li class='en ltr'>";
 			$j=0;
 			foreach ($log as $key => $value)
 			{
