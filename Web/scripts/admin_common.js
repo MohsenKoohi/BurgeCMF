@@ -63,7 +63,7 @@ function setupMovingHeader()
     var height=Math.max(sm_h,m_h);
     $(".side-menu,.message-main").outerHeight(height);
     if($(".message").length)
-      height-=$(".message").outerHeight()+10;
+      height-=$(".message").outerHeight()+10; //10:margin-top
     $(".main").outerHeight(height);
   }
 
@@ -148,7 +148,7 @@ function setupMovingHeader_with_moving_header()
   return;
 }
 
-
+setupMovingHeader();
 
 /*!
  * jQuery Browser Plugin 0.0.8

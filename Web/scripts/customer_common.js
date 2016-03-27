@@ -147,7 +147,7 @@ function setupMovingHeader_with_moving_header()
   return;
 }
 
-
+setupMovingHeader();
 
 /*!
  * jQuery Browser Plugin 0.0.8
