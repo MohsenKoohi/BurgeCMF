@@ -3,6 +3,7 @@
 define('MAIN_ADDRESS',"192.168.2.100/Web/BurgeCMF/Web");
 
 define('ENVIRONMENT', 'development');
+//define('ENVIRONMENT', 'production');
 
 //languages
 //the default language should be the first index

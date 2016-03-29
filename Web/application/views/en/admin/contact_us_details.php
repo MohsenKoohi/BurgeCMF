@@ -65,7 +65,7 @@
 							<span>{content_text}</span>
 						</div>
 						<?php
-							if(preg_match("/ا/",$info['cu_message_content']))
+							if(preg_match("/[ابپتثجچحخدذرز]/",$info['cu_message_content']))
 								$lang="fa";
 							else
 								$lang="en";
@@ -105,7 +105,7 @@
 								<span>{response_content_text}</span>
 							</div>
 							<?php
-								if(preg_match("/ا/",$info['cu_response']))
+								if(preg_match("/ابپتثجچحخدذرز/",$info['cu_response']))
 									$lang="fa";
 								else
 									$lang="en";

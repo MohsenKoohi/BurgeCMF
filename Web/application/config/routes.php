@@ -83,7 +83,5 @@ $route["watermark"]="CE_Watermark";
 
 $route['(((:any)/)*:any)']="CE_Home";
 
-
-
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
