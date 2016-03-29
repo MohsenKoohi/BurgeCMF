@@ -19,10 +19,10 @@ body {
   direction: rtl;
   text-align: justify; }
 
-.fa, body.rtl *:not(.en):not(.lang-en) {
+.fa {
   font-family: b koodak, koodak, tahoma; }
 
-.en, body.ltr *:not(.fa):not(.lang-fa) {
+.en {
   font-family: Times New Roman, Arial; }
 
 .lang-fa {

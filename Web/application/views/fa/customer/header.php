@@ -41,6 +41,7 @@
   <link rel="stylesheet" type="text/css" href="{styles_url}/jquery-ui.min.css" />
   <link rel="stylesheet" type="text/css" href="{styles_url}/colorbox.css" />
   <link rel="stylesheet" type="text/css" href="{styles_url}/skeleton.css" />  
+  <link rel="stylesheet" type="text/css" href="{styles_url}/style-rtl.css" />  
   <link rel="stylesheet" type="text/css" href="{styles_url}/customer.css" />
   
   <!--[if ! lte IE 8]>-->

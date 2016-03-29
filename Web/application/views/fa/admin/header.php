@@ -12,8 +12,8 @@
   <link rel="stylesheet" type="text/css" href="{styles_url}/jquery-ui.min.css" />
   <link rel="stylesheet" type="text/css" href="{styles_url}/colorbox.css" />
   <link rel="stylesheet" type="text/css" href="{styles_url}/skeleton.css" />  
-  <link rel="stylesheet" type="text/css" href="{styles_url}/admin.css" />
-  <link rel="stylesheet" type="text/css" href="{styles_url}/admin/style-rtl.css" />  
+  <link rel="stylesheet" type="text/css" href="{styles_url}/style-rtl.css" />  
+  <link rel="stylesheet" type="text/css" href="{styles_url}/admin.css" />  
   
   <!--[if ! lte IE 8]>-->
     <script src="{scripts_url}/jquery-2.1.3.min.js"></script>

@@ -26,12 +26,12 @@ body
 	text-align: justify;
 }
 
-.fa, body.rtl *:not(.en):not(.lang-en)
+.fa
 {
 	font-family:$fa-font;
 }
 
-.en, body.ltr *:not(.fa):not(.lang-fa)
+.en
 {
 	font-family:$en-font;
 }
