@@ -51,7 +51,7 @@
 						{captcha}
 					</div>
 					<div class="nine columns">
-						<input name="captcha" class="ltr eng"/>
+						<input name="captcha" class="lang-en"/>
 					</div>
 				</div>
 				<div class="row">
