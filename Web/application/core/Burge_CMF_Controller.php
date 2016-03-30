@@ -10,9 +10,9 @@ class Burge_CMF_Controller extends CI_Controller{
 
 	public $user;
 	
-	protected $selected_lang;
-	protected $default_lang;
-	protected $all_langs;
+	public $selected_lang;
+	public $default_lang;
+	public $all_langs;
 
 	//visit logging should go to the end of controller
 	//which allows the hit_level to change during the controller execution

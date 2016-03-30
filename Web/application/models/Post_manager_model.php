@@ -206,8 +206,7 @@ class Post_manager_model extends CI_Model
 	}
 
 	public function set_post_props($post_id, $props, $post_contents)
-	{
-		
+	{	
 		$this->db
 			->where("pcat_post_id",$post_id)
 			->delete($this->post_category_table_name);
