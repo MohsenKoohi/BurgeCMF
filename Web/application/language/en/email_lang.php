@@ -12,7 +12,7 @@ $lang['email_template']='
 			 <a title="" alt="" href="'.HOME_URL.'"><img src="'.IMAGES_URL.'/logo-text.png"  style="height:130px" ></a>
 		 <a title="" alt="" href="'.HOME_URL.'"><img src="'.IMAGES_URL.'/logo-notext.png"  style="height:130px"></a>		    
 		</div>
-		<div class="main" style="direction:ltr;font-size:1.3em;font-family:Time new roman,Arial;line-height:1.8em;background:white;min-height:200px">
+		<div class="main" style="direction:ltr;font-size:1.3em;font-family:Times new roman,Arial;line-height:1.8em;background:white;min-height:200px">
 		$content
 		</div>		 
 		<br>
