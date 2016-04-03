@@ -62,8 +62,7 @@ input.req {
   background-size: 16px; }
 
 a, a.clicked {
-  text-decoration: none;
-  color: black; }
+  text-decoration: none; }
 
 .disno {
   display: none; }
