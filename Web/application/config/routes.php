@@ -81,7 +81,7 @@ $route["contact_us"]										="CE_Contact_Us";
 $route["retry"]="retry";
 $route["watermark"]="CE_Watermark";
 
-$route['(((:any)/)*:any)']="CE_Home";
+$route['(((:any)/)*:any)']="CE_Home/redirect";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
