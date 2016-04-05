@@ -8,6 +8,7 @@ $lang['slogan']="BurgeCMF";
 $lang['header_meta_keywords']="BurgeCMF, Burge Content Management Framework, Open-Source MVC CMF";
 $lang['header_meta_description']="";
 
+$lang['select']="Please select";
 $lang['read_more']="More";
 $lang['page']="Page";
 $lang['contact_us']="Contact us";
