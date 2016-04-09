@@ -16,11 +16,13 @@ body.ltr .general-buttons div
 body.rtl .results-page-select,body.rtl .results-search-again
 {
 	float:left;
+	margin-right:4.161616%;
 }
 
 body.ltr .results-page-select,body.ltr .results-search-again
 {
 	float:right;
+	margin-left:4.161616%;
 }
 
 div.results-count
