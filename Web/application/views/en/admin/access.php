@@ -86,8 +86,10 @@
 		$(".user-div select").change(userChanged);
 		$(".module-div select").change(moduleChanged);
 
-		$(".user-div select").val(selected_user_id).trigger("change");
-		$(".module-div select").val(selected_module_id).trigger("change");
+		$(".user-div select").val(selected_user_id)
+		setTimeout(userChanged,100);
+		$(".module-div select").val(selected_module_id);
+		setTimeout(moduleChanged,100);
 
 	})
 
