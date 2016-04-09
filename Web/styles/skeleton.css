@@ -112,6 +112,16 @@ body.rtl .column,body.rtl .columns
   {
     margin-left:4.161616%;
   }
+
+  body.rtl .row.half-col-margin-children  div:not(.no-display):not(:nth-child(3n + 1))
+  {
+    margin-right:4.161616%;
+  }
+
+  body.ltr .row.half-col-margin-children  div:not(.no-display):not(:nth-child(3n + 1))
+  {
+    margin-left:4.161616%;
+  }
 }
 
 .width-400
