@@ -688,6 +688,13 @@ function current_url_with_queries()
 	return $url;
 }
 
+function prune_for_like_query($string)
+{
+	$string=preg_replace("/[;.'\"]/","", $string);
+	$string=preg_replace("/\s+/", "%", trim($string));
+	return $string;
+}
+
 function burge_cmf_watermark(
 	$image_path
 	,$watermark_ratio=0
