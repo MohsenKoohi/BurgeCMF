@@ -690,8 +690,9 @@ function current_url_with_queries()
 
 function prune_for_like_query($string)
 {
+	$string=trim($string);
 	$string=preg_replace("/[;.'\"]/","", $string);
-	$string=preg_replace("/\s+/", "%", trim($string));
+	$string=preg_replace("/\s+/", "%", $string);
 	return $string;
 }
 
