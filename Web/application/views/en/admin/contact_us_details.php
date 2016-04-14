@@ -105,7 +105,7 @@
 								<span>{response_content_text}</span>
 							</div>
 							<?php
-								if(preg_match("/ابپتثجچحخدذرز/",$info['cu_response']))
+								if(preg_match("/[ابپتثجچحخدذرز]/",$info['cu_response']))
 									$lang="fa";
 								else
 									$lang="en";
