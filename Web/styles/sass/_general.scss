@@ -50,6 +50,17 @@ body
 	font-family:$en-font;
 }
 
+body.rtl div.anti-float
+{
+	float:left;
+}
+
+body.ltr div.anti-float
+{
+	float:right;
+}
+
+
 input, textarea,select
 {
 	padding:4px;
