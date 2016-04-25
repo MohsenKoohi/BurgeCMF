@@ -50,12 +50,12 @@ body
 	font-family:$en-font;
 }
 
-body.rtl div.anti-float
+body.rtl .anti-float
 {
 	float:left;
 }
 
-body.ltr div.anti-float
+body.ltr .anti-float
 {
 	float:right;
 }
