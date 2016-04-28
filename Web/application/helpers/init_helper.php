@@ -32,6 +32,7 @@ function &get_links($just_common=FALSE)
 			,'admin_change_pass'		=> ADMIN_SURL_LANG."/change_pass"
 			,'admin_access'			=> ADMIN_SURL_LANG."/access"
 			,'admin_user'				=> ADMIN_SURL_LANG."/user"
+			,'admin_user_search'		=> ADMIN_SURL_LANG."/user/search"
 			,'admin_module'			=> ADMIN_SURL_LANG."/module"
 			,'admin_hit_counter'		=> ADMIN_SURL_LANG."/hit_counter"
 			,'admin_log'				=> ADMIN_SURL_LANG."/log"

@@ -45,17 +45,18 @@ if(ENVIRONMENT==='development')
 	$route[ADMIN_URL_FOLDER.'/uninstall']	="AE_Setup/uninstall";
 }
 
-$route[ADMIN_URL_FOLDER]						="AE_Dashboard";
-$route[ADMIN_URL_FOLDER."/dashboard"]		="AE_Dashboard";
-$route[ADMIN_URL_FOLDER."/user"]				="AE_Users";
-$route[ADMIN_URL_FOLDER."/login"]			="AE_Login";
-$route[ADMIN_URL_FOLDER."/change_pass"]	="AE_Change_Pass";
-$route[ADMIN_URL_FOLDER."/logout"]			="AE_Logout";
-$route[ADMIN_URL_FOLDER."/access"]			="AE_Access";
-$route[ADMIN_URL_FOLDER."/module"]			="AE_Module";
-$route[ADMIN_URL_FOLDER."/hit_counter"]	="AE_Hit_Counter";
-$route[ADMIN_URL_FOLDER."/log"]				="AE_Log";
-$route[ADMIN_URL_FOLDER."/constant"]		="AE_Constant";
+$route[ADMIN_URL_FOLDER]							="AE_Dashboard";
+$route[ADMIN_URL_FOLDER."/dashboard"]			="AE_Dashboard";
+$route[ADMIN_URL_FOLDER."/user"]					="AE_Users";
+$route[ADMIN_URL_FOLDER."/user/search/(.*)"]	="AE_Users/search/$1";
+$route[ADMIN_URL_FOLDER."/login"]				="AE_Login";
+$route[ADMIN_URL_FOLDER."/change_pass"]		="AE_Change_Pass";
+$route[ADMIN_URL_FOLDER."/logout"]				="AE_Logout";
+$route[ADMIN_URL_FOLDER."/access"]				="AE_Access";
+$route[ADMIN_URL_FOLDER."/module"]				="AE_Module";
+$route[ADMIN_URL_FOLDER."/hit_counter"]		="AE_Hit_Counter";
+$route[ADMIN_URL_FOLDER."/log"]					="AE_Log";
+$route[ADMIN_URL_FOLDER."/constant"]			="AE_Constant";
 
 $route[ADMIN_URL_FOLDER."/post"]					="AE_Post";
 $route[ADMIN_URL_FOLDER."/post/(\d+)"]			="AE_Post/details/$1";

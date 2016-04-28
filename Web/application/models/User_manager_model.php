@@ -53,6 +53,27 @@ class User_manager_model extends CI_Model
 		return;
 	}
 
+	public function get_users($filter)
+	{
+		$this->db
+			->select("user_id, user_name, user_code")
+			->from("user");
+
+		if($filter['name'])
+			$this->db->where("user_name LIKE '%".str_replace(' ', '%', $filter['name'])."%'");
+
+		if(isset($filter['start']) && isset($filter['length']))
+			$this->db->limit((int)$filter['length'],(int)$filter['start']);
+
+		if(isset($filter['order_by']))
+			$this->db->order_by($filter['order_by']);
+		else
+			$this->db->order_by("user_id DESC");
+
+		return $this->db->get()->result_array();
+		
+	}
+
 	//returns info of the logged user 
 	public function &get_user_info()
 	{

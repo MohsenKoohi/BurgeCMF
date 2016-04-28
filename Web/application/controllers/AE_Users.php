@@ -8,6 +8,33 @@ class AE_Users extends Burge_CMF_Controller {
 
 	}
 
+	public function search($name)
+	{
+		$max_count=5;
+		$name=urldecode($name);
+		$name=persian_normalize($name);
+
+		$results=$this->user_manager_model->get_users(array(
+			"name"=>$name
+			,"start"=>0
+			,"length"=>$max_count
+		));
+
+		$ret=array();
+
+		foreach ($results as $res)	
+			$ret[]=array(
+				"id"=>$res['user_id']
+				,"name"=>$res['user_code']." - ".$res['user_name']
+			);
+
+		$this->output->set_content_type('application/json');
+    	$this->output->set_output(json_encode($ret));
+
+    	return;
+	}
+
+
 	public function index()
 	{
 		$this->load->model("user_manager_model");
