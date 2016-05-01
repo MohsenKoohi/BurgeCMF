@@ -779,3 +779,24 @@ body.ltr .category-div li {
   width: 100%;
   border: 0;
   height: calc(100% - 60px); }
+
+.aclist > div {
+  background-color: darkblue;
+  color: white;
+  margin: 5px;
+  padding: 5px 10px;
+  font-weight: bold;
+  font-size: 1.2em;
+  border-radius: 5px; }
+
+.aclist > div > span {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  background-image: url({images_url}/remove.png);
+  background-size: 90% 90%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: white;
+  cursor: pointer; }
