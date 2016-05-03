@@ -233,11 +233,10 @@ legend
 
 /* Buttons
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-textarea,select, input
+textarea,select, input:not([type=radio])
 {
   font-size: 20px;
   min-height:42px;
-
   box-sizing:border-box;
 }
 .button,

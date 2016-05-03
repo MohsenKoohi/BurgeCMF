@@ -44,7 +44,7 @@ body.ltr .anti-float {
 input, textarea, select {
   padding: 4px; }
 
-input, select {
+select, input:not([type=radio]) {
   height: 32px; }
 
 .no-bottom-margin {
