@@ -842,6 +842,12 @@ body.ltr .container.category .read-more {
   font-size: 1.2em;
   border-radius: 5px; }
 
+@media (min-width: 550px) {
+  .aclist > div.three.columns {
+    width: calc(25% - 10px); }
+
+  .aclist > div.four.columns {
+    width: calc(33.33% - 10px); } }
 .aclist > div > span {
   display: inline-block;
   width: 30px;

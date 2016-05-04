@@ -276,6 +276,7 @@ button.button-primary,
 input[type="submit"].button-primary,
 input[type="reset"].button-primary,
 input[type="button"].button-primary {
+  height: auto;
   color: #FFF;
   background-color: #0C7B77;
   border-color: #024240;
