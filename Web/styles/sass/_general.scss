@@ -66,7 +66,7 @@ input, textarea
 	padding:4px;
 }
 
-input:not([type=radio])
+select, input:not([type=radio])
 {
 	height: 32px;
 }
