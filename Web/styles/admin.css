@@ -41,10 +41,10 @@ body.rtl .anti-float {
 body.ltr .anti-float {
   float: right; }
 
-input, textarea, select {
+input, textarea {
   padding: 4px; }
 
-select, input:not([type=radio]) {
+input:not([type=radio]) {
   height: 32px; }
 
 .no-bottom-margin {
