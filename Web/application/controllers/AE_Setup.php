@@ -15,6 +15,8 @@ class AE_Setup extends CI_Controller {
 
 	function check_directories_permission()
 	{
+		file_put_contents(IMAGES_DIR."/.htaccess", " Options -Indexes ");
+		
 		$dirs=array(LOG_DIR, CAPTCHA_DIR, UPLOAD_DIR,CATEGORY_CACHE_DIR);
 		$result=TRUE;
 
