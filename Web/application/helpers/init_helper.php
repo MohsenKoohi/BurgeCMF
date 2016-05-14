@@ -681,6 +681,16 @@ function delete_prefix_of_indexes($props,$prefix)
 	return $new_props;
 }
 
+function lang_current_url()
+{
+	$lang=Language::get();	
+	if($lang==Language::get_default_language())
+		return current_url();
+
+	$main_url_with_current_lang=str_replace(URL_LANGUAGE_PATTERN, $lang, HOME_URL_LANG);
+	return str_replace(HOME_URL, $main_url_with_current_lang, current_url());
+}
+
 function current_url_with_queries()
 {
 	$url = current_url();
