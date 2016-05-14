@@ -35,11 +35,23 @@ body {
   text-align: left;
   font-family: Times New Roman, Arial; }
 
+body.rtl .same-float {
+  float: right; }
+
+body.ltr .same-float {
+  float: left; }
+
 body.rtl .anti-float {
   float: left; }
 
 body.ltr .anti-float {
   float: right; }
+
+body.rtl .anti-align {
+  text-align: left; }
+
+body.ltr .anti-align {
+  text-align: right; }
 
 input, textarea {
   padding: 4px; }
