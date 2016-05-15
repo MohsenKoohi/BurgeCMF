@@ -6,7 +6,7 @@
 
 body {
   background-image: url(../images/bg-big3.jpg);
-  background-positon: center center;
+  background-position: center center;
   background-size: cover;
   background-attachment: fixed;
   background-repeat: no-repeat; }
@@ -696,50 +696,59 @@ div.results-count {
   font-size: 1.2em;
   border-radius: 5px; }
 
-.tab {
-  padding: 20px;
-  background-color: white;
-  margin: 0 5px 20px 5px;
-  min-height: 500px; }
-
-.tabs {
-  margin: 5px 5px 0 5px; }
-
-.tabs li {
-  list-style: none;
-  display: inline; }
-
-body.rtl .tabs li {
-  margin-left: 5px; }
-
-body.ltr .tabs li {
-  margin-right: 5px; }
-
-.tabs a {
-  font-size: 1.2em;
-  padding: 10px 20px;
-  display: inline-block;
-  background: #666;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 5px 5px 0 0; }
-
-.tab-iframe {
-  width: 100%;
-  border: 0; }
-
-@media (max-width: 600px) {
-  .tabs a {
-    padding: 5px 5px;
-    font-size: 1em; } }
-.tabs a.active {
-  background: #fff;
-  color: #000; }
-
 .tab-container {
   background-color: #ccc;
   padding: 10px;
   border-radius: 10px; }
+  .tab-container .tabs {
+    margin: 5px 5px 0px 5px; }
+    .tab-container .tabs li {
+      list-style: none;
+      display: inline; }
+    .tab-container .tabs a {
+      font-size: 1.2em;
+      padding: 10px 20px;
+      display: inline-block;
+      background: #666;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px 5px 0 0; }
+    .tab-container .tabs a.active {
+      background: #fff;
+      color: #000; }
+    @media (max-width: 800px) {
+      .tab-container .tabs a {
+        font-size: 1em;
+        padding: 5px 10px; } }
+    @media (max-width: 600px) {
+      .tab-container .tabs li {
+        display: block;
+        margin: 5px 0; }
+      .tab-container .tabs a, .tab-container .tabs a.active {
+        font-size: 1.3em;
+        border-radius: 0 0 0 0;
+        display: block;
+        background: default; } }
+  .tab-container .tab {
+    padding: 20px;
+    background-color: white;
+    margin: 0 5px 20px 5px;
+    min-height: 500px; }
+  .tab-container .tab-iframe {
+    width: 100%;
+    border: 0; }
+
+body.rtl .tab-container .tabs li {
+  margin-left: 5px; }
+  @media (max-width: 600px) {
+    body.rtl .tab-container .tabs li {
+      margin-left: 0; } }
+
+body.ltr .tab-container .tabs li {
+  margin-right: 5px; }
+  @media (max-width: 600px) {
+    body.ltr .tab-container .tabs li {
+      margin-right: 0; } }
 
 .category-div ul {
   margin: 0 30px; }
