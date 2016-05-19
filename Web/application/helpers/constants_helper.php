@@ -2,6 +2,9 @@
 
 define('MAIN_ADDRESS',"192.168.2.100/Web/BurgeCMF/Web");
 
+//if you have different domains for your different languages
+//define('MAIN_ADDRESS_EN',"your english webiste");
+
 define('ENVIRONMENT', 'development');
 //define('ENVIRONMENT', 'production');
 
@@ -62,10 +65,10 @@ define ('HOME_DIR',getcwd());
 define ('LOG_DIR',HOME_DIR."/application/logs/burge_cmf");
 define ('LOGS_PREFIX','bcmf-log-');
 
-define ('COOKIE_PREFIX','burge_cmf_');
-define ('SESSION_VARS_PREFIX','burge_cmf_');
+define ('COOKIE_PREFIX','sMDFJrwfs8923fda');
+define ('SESSION_VARS_PREFIX','sMDFJrwfsfda');
 
-define ('VISITOR_TRACKING_COOKIE_NAME',"visitor_tracking");
+define ('VISITOR_TRACKING_COOKIE_NAME',"sMDFJrwfsfdaaasd9f7q");
 define ('TRACKING_ENCRYPTION_KEY',		'YW32sde23rAeedfe');
 define ('TRACKING_IV',						'1820903763ebca98');
 

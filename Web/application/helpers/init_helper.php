@@ -181,14 +181,25 @@ function get_lang_pages($pattern)
 		$selected=($key === $cur);
 
 		if($key === $def)
+		{
 			$lang_index="";
-		else
-			$lang_index=$key;
-
-		if("" === $lang_index)
 			$lang_pattern="/".URL_LANGUAGE_PATTERN;
+		}
 		else
-			$lang_pattern=URL_LANGUAGE_PATTERN;
+		{	
+			$main_address_lang="MAIN_ADDRESS_".strtoupper($key);
+			if( isset($CI->in_admin_env) && (!$CI->in_admin_env) && defined($main_address_lang) )
+			{
+				$pattern=str_replace(MAIN_ADDRESS, constant($main_address_lang), $pattern);
+				$lang_index="";
+				$lang_pattern="/".URL_LANGUAGE_PATTERN;
+			}
+			else
+			{
+				$lang_index=$key;
+				$lang_pattern=URL_LANGUAGE_PATTERN;
+			}
+		}
 
 		$ret[$value]=array(
 			"link"=> str_replace($lang_pattern,$lang_index, $pattern)
