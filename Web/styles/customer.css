@@ -674,13 +674,13 @@ body.ltr .dash-ul li:before {
   color: #0C7B77;
   transition: color, .6s; }
 
-.general-buttons div {
+.general-buttons div, .general-buttons a {
   font-size: 1.2em; }
 
-body.rtl .general-buttons div {
+body.rtl .general-buttons div, body.rtl .general-buttons a {
   float: left; }
 
-body.ltr .general-buttons div {
+body.ltr .general-buttons div, body.ltr .general-buttons a {
   float: right; }
 
 body.rtl .results-page-select, body.rtl .results-search-again {

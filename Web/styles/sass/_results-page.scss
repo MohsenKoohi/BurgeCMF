@@ -1,14 +1,14 @@
-.general-buttons div
+.general-buttons div,.general-buttons a
 {
 	font-size: 1.2em;
 }
 
-body.rtl .general-buttons div
+body.rtl .general-buttons div,body.rtl .general-buttons a
 {
 	float:left;
 }
 
-body.ltr .general-buttons div
+body.ltr .general-buttons div,body.ltr .general-buttons a
 {
 	float:right;
 }
