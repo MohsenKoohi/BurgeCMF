@@ -75,9 +75,9 @@ html[xmlns] .flexslider .slides {
  * DEFAULT THEME
  * ====================================================================================================================*/
 .flexslider {
-  margin: 0 0 60px;
+  margin: 0 0 10px;
   background: #ffffff;
-  border: 4px solid #ffffff;
+  //border: 4px solid #ffffff;
   position: relative;
   zoom: 1;
   -webkit-border-radius: 4px;
@@ -293,6 +293,7 @@ html[xmlns] .flexslider .slides {
   z-index: 100;
   font-size: 1.3em;
   padding: 5px;
+  font-weight: bold;
   opacity: .7;
   background-color:rgba(1,71,153,.4);
   border:1px solid transparent;
@@ -315,15 +316,34 @@ html[xmlns] .flexslider .slides {
 @media screen and (max-width: 1000px) {
   .thumb-label
   {
-    font-size: 1.1em;
+    font-size: 1em;
   }
 
+}
+
+.slider
+{
+  margin:0 0 10px 0;
 }
 
 @media screen and (max-width: 600px) {
   .thumb-label
   {
-    font-size: .9em;
+    font-size: .7em;
+    padding:0;;
+    overflow: hidden;
+    height:20px;
+  }
+
+  .flex-control-nav.flex-control-thumbs
+  {
+    bottom: -18px;
+  }
+
+  .slider
+  {
+    margin-bottom: 30px;
   }
 
 }
+
