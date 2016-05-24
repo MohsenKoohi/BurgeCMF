@@ -10,11 +10,11 @@
 * Visiting counter module 
 * Log manager module with ability of tracking all events occured by users and visitors, and also reporting what has been happen
 
-##Documentations
-Review Web/functions.md 
-
 ##Installation
 Review Web/install.md
+
+##Documentation
+Review Web/functions.md 
 
 ##Third Party Resources
 * CI
