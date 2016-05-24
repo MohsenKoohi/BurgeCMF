@@ -26,3 +26,7 @@ Review Web/functions.md
 * TinyMCE  
 * RoxyFileMan 
 * SASS
+
+##License
+* GNU GPL2
+* Review LICENSE file
