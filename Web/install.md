@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `burge_cmf_sessions` (
 * Set emai customer env header, name, keywords, and description in language/*/ce_general_lang.php, language/*/ae_general_lang.php, and also email template  language/*/email_lang.php
 
 ##Install the Burge CMF:
-your_address/admin/install
+* http://your_address/admin/install
 
 ##Enjoy Developing
 
