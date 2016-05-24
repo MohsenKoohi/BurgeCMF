@@ -23,7 +23,7 @@
 
 	1. module_id which is the abbreviated name of the module, for example user_manager_module has "user" module_id.
 	2. sort_order
-	3. model_name which is the name of model file of the module substred by "_model" (;), for example hit_counter_module has "hit_counter" model_name. model_name is used to find the module by the framework and call its methods such as get_dashboard_info().
+	3. model_name which is the name of model file of the module substred by "_model", for example hit_counter_module has "hit_counter" model_name. model_name is used to find the module by the framework and call its methods such as get_dashboard_info().
 
 * We have some pseudo modules, which are added as module to module_manager but with no model_name. For example "change_pass", and "dashboard" modules as pseduo modules, which we insert in to module manager, since we want them to be controlled by access manager and also can be accessed from admin pages. But they haven't an independent module manager. 
 * For example, dashboard is just a controller page which gathers information from all modules, and also change_pass is a page controlled by user manager module, but it should be independent from it. Thus we added them as pseudo module to the framework. 
