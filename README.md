@@ -1,5 +1,5 @@
 #[BurgeCMF](http://burge.ir/BurgeCMF)
-##	[A MVC Content Management Framework based on CodeIgniter](http://burge.ir/BurgeCMF)
+##	[An Open Source MVC Content Management Framework based on CodeIgniter](http://burge.ir/BurgeCMF)
 
 ![BurgCMF Logo](http://burge.ir/BurgeCMF/logo-back-white.jpg)
 
