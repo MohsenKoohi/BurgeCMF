@@ -44,6 +44,7 @@ class Post_manager_model extends CI_Model
 				,`pc_title`	 TEXT
 				,`pc_keywords` TEXT
 				,`pc_description` TEXT
+				,`pc_gallery` TEXT
 				,PRIMARY KEY (pc_post_id, pc_lang_id)	
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8"
 		);
@@ -200,9 +201,31 @@ class Post_manager_model extends CI_Model
 
 		$this->set_post_query_filter($filter);
 
-		return $this->db
+		$results=$this->db
 			->get()
 			->result_array();
+
+		$this->set_galleries($results);
+
+		return $results;
+	}
+
+	private function set_galleries(&$posts)
+	{
+		foreach($posts as &$post)
+		{
+			$gallery=array(
+				'last_index'	=> 0
+				,'images'		=> array()
+			);
+
+			if($post['pc_gallery'])
+				$gallery=json_decode($post['pc_gallery']);
+
+			$post['pc_gallery']=$gallery;
+		}
+
+		return;
 	}
 
 	public function set_post_props($post_id, $props, $post_contents)

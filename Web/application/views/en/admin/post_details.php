@@ -21,7 +21,7 @@
 					</div>
 				</div>
 				<br>
-				<?php echo form_open(get_admin_post_details_link($post_id),array("onsubmit"=>"return formSubmit();")); ?>
+				<?php echo form_open_multipart(get_admin_post_details_link($post_id),array("onsubmit"=>"return formSubmit();")); ?>
 					<input type="hidden" name="post_type" value="edit_post" />
 					<div class="row even-odd-bg" >
 						<div class="three columns">
@@ -245,6 +245,14 @@
 											/>
 										</div>
 									</div>
+									<div class="row even-odd-bg" >
+										<div class="three columns">
+											<span>{gallery_text}</span>
+										</div>
+										<div class="nine columns">
+											
+										</div>
+									</div>
 								</div>
 							</div>
 						<?php } ?>
@@ -298,6 +306,7 @@
 							+"</div>"
 						));
 					}
+
 					function checkExit(event)
 					{
 						if(event.keyCode == 27)
@@ -340,7 +349,7 @@
 
 					//end of operations for post_content images	
 
-					$(initializeTextAreas);
+					$(window).load(initializeTextAreas);
 					var tmTextAreas=[];
 					<?php
 						foreach($langs as $lang => $value)
@@ -421,6 +430,7 @@
 						
 						setTimeout(setupMovingHeader,1000);
               	}
+
               	function deletePost()
 						{
 							if(!confirm("{are_you_sure_to_delete_this_post_text}"))

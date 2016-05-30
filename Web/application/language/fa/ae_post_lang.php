@@ -23,7 +23,8 @@ $lang['delete_image']="حذف تصویر";
 $lang['delete_post']="حذف";
 $lang['are_you_sure_to_delete_this_post']="آیا از حذف این پست مطمئن هستید؟";
 $lang['post_deleted_successfully']="پست موردنظر حذف شد.";
-$lang['']="";
+
+$lang['gallery']="گالری";
 $lang['']="";
 $lang['']="";
 $lang['']="";
