@@ -254,7 +254,7 @@
 												$gallery=$pc['pc_gallery']; 
 											?>
 											<input type="hidden"  
-												name="<?php echo $lang;?>[pc_gallery][last_index]"  
+												name="<?php echo $lang;?>[pc_gallery][count]"  
 												value="0"
 											/>
 											<div class="row">
@@ -289,19 +289,20 @@
 					//gallery operations
 					function addGalleryRow(lang,el)
 					{
-						var counter=$("input[name='"+lang+"[pc_gallery][last_index]']");
+						var counter=$("input[name='"+lang+"[pc_gallery][count]']");
 						var index=parseInt(counter.val());
 						counter.val(index+1);
 						
 						var html=
 							"<div class='row'>"
+							+	"<input type='hidden' name='"+lang+"[pc_gallery][new_images][]' value='"+index+"'/>"
 							+	"<div class='six columns'>"
 							+		"<label>{image_text}</label>"
-							+		"<input type='file' name='"+lang+"[pc_gallery][image]["+index+"]'/>"
+							+		"<input type='file' multiple name='"+lang+"[pc_gallery][new_image]["+index+"][]'/>"
 							+	"</div>"
 							+	"<div class='six columns'>"
 							+		"<label>{description_text}</label>"
-							+		"<input type='text' class='full-width' name='"+lang+"[pc_gallery][text]["+index+"]'/>"
+							+		"<input type='text' class='full-width' name='"+lang+"[pc_gallery][new_text]["+index+"]'/>"
 							+	"</div>"
 							+"</div>";
 						$(el).parent().before(html);

@@ -121,6 +121,8 @@ class AE_Post extends Burge_CMF_Controller {
 			else
 				$post_content['pc_active']=0;
 
+			$post_content['pc_gallery']=$this->get_post_gallery($lang);
+
 			$post_content_props[]=$post_content;
 		}
 
@@ -128,8 +130,36 @@ class AE_Post extends Burge_CMF_Controller {
 		
 		set_message($this->lang->line("changes_saved_successfully"));
 
-		redirect(get_admin_post_details_link($post_id));
+		//redirect(get_admin_post_details_link($post_id));
 
 		return;
+	}
+
+	private function get_post_gallery($lang)
+	{
+		$pp=$this->input->post($lang);
+		$pp=$pp['pc_gallery'];
+		bprint_r($pp);
+
+		foreach($pp['new_images'] as $index)
+		{
+			$file_names=$_FILES[$lang]['name']['pc_gallery']['new_image'][$index];
+			$file_tmp_names=$_FILES[$lang]['tmp_name']['pc_gallery']['new_image'][$index];
+			$file_errors=$_FILES[$lang]['error']['pc_gallery']['new_image'][$index];
+			$file_sizes=$_FILES[$lang]['size']['pc_gallery']['new_image'][$index];
+			
+			$text=$pp['new_text'][$index];
+
+			foreach($file_names as $index => $file_name)
+			{
+				if($file_errors[$index])
+					continue;
+
+				//echo "***<br>".$file_name."<br>".$file_sizes[$index]."<br>".$text."<br><br>";
+			}
+
+			
+		}
+		exit();
 	}
 }
