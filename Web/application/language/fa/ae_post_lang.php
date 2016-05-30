@@ -25,8 +25,8 @@ $lang['are_you_sure_to_delete_this_post']="آیا از حذف این پست مط
 $lang['post_deleted_successfully']="پست موردنظر حذف شد.";
 
 $lang['gallery']="گالری";
-$lang['']="";
-$lang['']="";
+$lang['add_image']="افزودن تصویر";
+$lang['description']="توضیح";
 $lang['']="";
 $lang['']="";
 $lang['']="";

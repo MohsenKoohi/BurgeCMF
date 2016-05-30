@@ -250,7 +250,21 @@
 											<span>{gallery_text}</span>
 										</div>
 										<div class="nine columns">
-											
+											<?php 
+												$gallery=$pc['pc_gallery']; 
+											?>
+											<input type="hidden"  
+												name="<?php echo $lang;?>[pc_gallery][last_index]"  
+												value="0"
+											/>
+											<div class="row">
+												<label>&nbsp;</label>
+												<div class="four columns button button-type1" style="font-size:1.3em"
+													onclick="addGalleryRow('<?php echo $lang;?>',this);" >
+													{add_image_text}
+												</div>
+											</div>
+
 										</div>
 									</div>
 								</div>
@@ -260,7 +274,7 @@
 					<br><br>
 					<div class="row">
 							<div class="four columns">&nbsp;</div>
-							<input type="submit" class=" button-primary four columns" value="{submit_text}"/>
+							<input type="submit" class="button-primary four columns" value="{submit_text}"/>
 					</div>				
 				</form>
 
@@ -272,8 +286,31 @@
 
 					<script type="text/javascript">
 
-					//operations for post_content iamges
+					//gallery operations
+					function addGalleryRow(lang,el)
+					{
+						var counter=$("input[name='"+lang+"[pc_gallery][last_index]']");
+						var index=parseInt(counter.val());
+						counter.val(index+1);
+						
+						var html=
+							"<div class='row'>"
+							+	"<div class='six columns'>"
+							+		"<label>{image_text}</label>"
+							+		"<input type='file' name='"+lang+"[pc_gallery][image]["+index+"]'/>"
+							+	"</div>"
+							+	"<div class='six columns'>"
+							+		"<label>{description_text}</label>"
+							+		"<input type='text' class='full-width' name='"+lang+"[pc_gallery][text]["+index+"]'/>"
+							+	"</div>"
+							+"</div>";
+						$(el).parent().before(html);
 
+						setupMovingHeader();
+					}
+					//end of gallery operations
+
+					//operations for post_content iamges
 					var activeLang;
 
 					function selectImage(lang)
@@ -346,7 +383,6 @@
 							lastImages[lang]="";
 						}
 					}
-
 					//end of operations for post_content images	
 
 					$(window).load(initializeTextAreas);
