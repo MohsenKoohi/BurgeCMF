@@ -8,7 +8,7 @@ class Post_manager_model extends CI_Model
 		"post_date","post_active","post_allow_comment"
 	);
 	private $post_content_writable_props=array(
-		"pc_active","pc_image","pc_keywords","pc_description","pc_title","pc_content"
+		"pc_active","pc_image","pc_keywords","pc_description","pc_title","pc_content","pc_gallery"
 		);
 
 	public function __construct()
@@ -220,7 +220,7 @@ class Post_manager_model extends CI_Model
 			);
 
 			if($post['pc_gallery'])
-				$gallery=json_decode($post['pc_gallery']);
+				$gallery=json_decode($post['pc_gallery'],TRUE);
 
 			$post['pc_gallery']=$gallery;
 		}
@@ -267,6 +267,7 @@ class Post_manager_model extends CI_Model
 		{
 			$lang=$content['pc_lang_id'];
 
+			$content['pc_gallery']=json_encode($content['pc_gallery']);
 			$content=select_allowed_elements($content,$this->post_content_writable_props);
 			if(!$content)
 				continue;

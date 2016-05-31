@@ -20,6 +20,7 @@ function &get_links($just_common=FALSE)
 			,'styles_url'			=> STYLES_URL
 			,'scripts_url'			=> SCRIPTS_URL
 			,'upload_url'			=> UPLOAD_URL
+			,'post_gallery_url'	=> POST_GALLERY_URL
 		);
 
 		$LINKS=array_merge($LINKS_COMMON, array(

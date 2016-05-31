@@ -145,41 +145,41 @@ class AE_Post extends Burge_CMF_Controller {
 		$gallery['last_index']=0;
 		$gallery['images']=array();
 
-		foreach($pp['new_images'] as $index)
-		{
-			$file_names=$_FILES[$lang]['name']['pc_gallery']['new_image'][$index];
-			$file_tmp_names=$_FILES[$lang]['tmp_name']['pc_gallery']['new_image'][$index];
-			$file_errors=$_FILES[$lang]['error']['pc_gallery']['new_image'][$index];
-			$file_sizes=$_FILES[$lang]['size']['pc_gallery']['new_image'][$index];
-			$text=$pp['new_text'][$index];
-			$watermark=isset($pp['new_image_watermark'][$index]);
 
-			foreach($file_names as $findex => $file_name)
+		if(isset($pp['new_images']))
+			foreach($pp['new_images'] as $index)
 			{
-				if($file_errors[$findex])
-					continue;
+				$file_names=$_FILES[$lang]['name']['pc_gallery']['new_image'][$index];
+				$file_tmp_names=$_FILES[$lang]['tmp_name']['pc_gallery']['new_image'][$index];
+				$file_errors=$_FILES[$lang]['error']['pc_gallery']['new_image'][$index];
+				$file_sizes=$_FILES[$lang]['size']['pc_gallery']['new_image'][$index];
+				$text=$pp['new_text'][$index];
+				$watermark=isset($pp['new_image_watermark'][$index]);
 
-				$extension=pathinfo($file_names[$findex], PATHINFO_EXTENSION);
+				foreach($file_names as $findex => $file_name)
+				{
+					if($file_errors[$findex])
+						continue;
 
-				if($watermark)
-					burge_cmf_watermark($file_tmp_names[$findex]);
+					$extension=pathinfo($file_names[$findex], PATHINFO_EXTENSION);
 
-				$img_name=$post_id."_".$lang."_".get_random_word(5).".".$extension;
-				$file_dest=POST_GALLERY_DIR."/".$img_name;
-				move_uploaded_file($file_tmp_names[$findex], $file_dest);
+					if($watermark)
+						burge_cmf_watermark($file_tmp_names[$findex]);
 
-				$gallery['images'][$gallery['last_index']++]=array(
-					"image"		=> $img_name
-					,"text"	=> $text
-					);
-				echo "***<br>".$file_name."<br>".$file_sizes[$findex]."<br>".$text."<br>".$watermark."<br><br>";
+					$img_name=$post_id."_".$lang."_".get_random_word(5).".".$extension;
+					$file_dest=POST_GALLERY_DIR."/".$img_name;
+					move_uploaded_file($file_tmp_names[$findex], $file_dest);
+
+					$gallery['images'][$gallery['last_index']++]=array(
+						"image"		=> $img_name
+						,"text"	=> $text
+						);
+					//echo "***<br>".$file_name."<br>".$file_sizes[$findex]."<br>".$text."<br>watermark:".$watermark."<br>###<br>";
+				}			
 			}
-			
-		}
-
-		bprint_r($gallery);
-		exit();
 		
+		//bprint_r($gallery);
+
 		return $gallery;
 	}
 }

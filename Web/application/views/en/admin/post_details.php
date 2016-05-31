@@ -250,21 +250,50 @@
 											<span>{gallery_text}</span>
 										</div>
 										<div class="nine columns">
+											<style type="text/css">
+												.gallery-row img
+												{
+													max-width: 100%;
+													max-height: 300px;
+												}
+											</style>
 											<?php 
 												$gallery=$pc['pc_gallery']; 
+												foreach($gallery['images'] as $index=>$gim)
+												{
+											?>
+													<div class="row gallery-row separated">
+														<input type='hidden' name='lang[pc_gallery][old_images][]' value='<?php echo $index;?>'/>
+														<div class="five columns">
+															<a href="{post_gallery_url}/<?php echo $gim['image']; ?>" target="_blank">
+																<img src="{post_gallery_url}/<?php echo $gim['image']; ?>"/>
+															</a>
+														</div>
+														<div class="six columns half-col-margin">
+															<input type="text"  class="full-width" 
+																name='lang[pc_gallery][old_image_text][<?php echo $index?>]'
+																value="<?php echo $gim['text']; ?>"
+															/>
+															<input type="hidden"  
+																name='lang[pc_gallery][old_image_image][<?php echo $index?>]'
+																value="<?php echo $gim['image']; ?>"
+															/>
+														</div>
+													</div>
+											<?php
+												}
 											?>
 											<input type="hidden"  
 												name="<?php echo $lang;?>[pc_gallery][count]"  
 												value="0"
 											/>
-											<div class="row">
+											<div class="row separated">
 												<label>&nbsp;</label>
 												<div class="four columns button button-type1" style="font-size:1.3em"
 													onclick="addGalleryRow('<?php echo $lang;?>',this);" >
 													{add_image_text}
 												</div>
 											</div>
-
 										</div>
 									</div>
 								</div>
@@ -294,7 +323,7 @@
 						counter.val(index+1);
 						
 						var html=
-							"<div class='row'>"
+							"<div class='row separated'>"
 							+	"<input type='hidden' name='"+lang+"[pc_gallery][new_images][]' value='"+index+"'/>"
 							+	"<div class='four columns'>"
 							+		"<label>{image_text}</label>"
