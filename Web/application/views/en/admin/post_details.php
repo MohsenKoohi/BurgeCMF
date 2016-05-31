@@ -296,15 +296,23 @@
 						var html=
 							"<div class='row'>"
 							+	"<input type='hidden' name='"+lang+"[pc_gallery][new_images][]' value='"+index+"'/>"
-							+	"<div class='six columns'>"
+							+	"<div class='four columns'>"
 							+		"<label>{image_text}</label>"
 							+		"<input type='file' multiple name='"+lang+"[pc_gallery][new_image]["+index+"][]'/>"
+							+	"</div>"
+							+	"<div class='two columns'>"
+							+		"<label>{watermark_text}</label>"
+							+		"<input type='checkbox' checked name='"+lang+"[pc_gallery][new_image_watermark]["+index+"]'/>"
 							+	"</div>"
 							+	"<div class='six columns'>"
 							+		"<label>{description_text}</label>"
 							+		"<input type='text' class='full-width' name='"+lang+"[pc_gallery][new_text]["+index+"]'/>"
 							+	"</div>"
 							+"</div>";
+
+						html=$(html);
+						setCheckBoxGraphical($("input[type=checkbox]",html)[0]);
+
 						$(el).parent().before(html);
 
 						setupMovingHeader();

@@ -17,7 +17,7 @@ class AE_Setup extends CI_Controller {
 	{
 		file_put_contents(IMAGES_DIR."/.htaccess", " Options -Indexes ");
 		
-		$dirs=array(LOG_DIR, CAPTCHA_DIR, UPLOAD_DIR,CATEGORY_CACHE_DIR);
+		$dirs=array(LOG_DIR, CAPTCHA_DIR, POST_GALLERY_DIR, UPLOAD_DIR,CATEGORY_CACHE_DIR);
 		$result=TRUE;
 
 		foreach($dirs as $dir)

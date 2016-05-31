@@ -78,6 +78,9 @@ define ('IMAGES_DIR', HOME_DIR."/images");
 define ('CAPTCHA_DIR', IMAGES_DIR."/captcha");
 define ('CAPTCHA_URL', IMAGES_URL."/captcha");
 
+define ('POST_GALLERY_DIR', IMAGES_DIR."/gallery");
+define ('POST_GALLERY_URL', IMAGES_URL."/gallery");
+
 define ('STYLES_URL', HOME_URL."/styles");
 
 define ('SCRIPTS_URL', HOME_URL."/scripts");

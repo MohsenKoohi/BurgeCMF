@@ -121,7 +121,7 @@ class AE_Post extends Burge_CMF_Controller {
 			else
 				$post_content['pc_active']=0;
 
-			$post_content['pc_gallery']=$this->get_post_gallery($lang);
+			$post_content['pc_gallery']=$this->get_post_gallery($post_id,$lang);
 
 			$post_content_props[]=$post_content;
 		}
@@ -135,11 +135,15 @@ class AE_Post extends Burge_CMF_Controller {
 		return;
 	}
 
-	private function get_post_gallery($lang)
+	private function get_post_gallery($post_id, $lang)
 	{
 		$pp=$this->input->post($lang);
 		$pp=$pp['pc_gallery'];
-		bprint_r($pp);
+		//bprint_r($pp);
+
+		$gallery=array();
+		$gallery['last_index']=0;
+		$gallery['images']=array();
 
 		foreach($pp['new_images'] as $index)
 		{
@@ -147,19 +151,35 @@ class AE_Post extends Burge_CMF_Controller {
 			$file_tmp_names=$_FILES[$lang]['tmp_name']['pc_gallery']['new_image'][$index];
 			$file_errors=$_FILES[$lang]['error']['pc_gallery']['new_image'][$index];
 			$file_sizes=$_FILES[$lang]['size']['pc_gallery']['new_image'][$index];
-			
 			$text=$pp['new_text'][$index];
+			$watermark=isset($pp['new_image_watermark'][$index]);
 
-			foreach($file_names as $index => $file_name)
+			foreach($file_names as $findex => $file_name)
 			{
-				if($file_errors[$index])
+				if($file_errors[$findex])
 					continue;
 
-				//echo "***<br>".$file_name."<br>".$file_sizes[$index]."<br>".$text."<br><br>";
-			}
+				$extension=pathinfo($file_names[$findex], PATHINFO_EXTENSION);
 
+				if($watermark)
+					burge_cmf_watermark($file_tmp_names[$findex]);
+
+				$img_name=$post_id."_".$lang."_".get_random_word(5).".".$extension;
+				$file_dest=POST_GALLERY_DIR."/".$img_name;
+				move_uploaded_file($file_tmp_names[$findex], $file_dest);
+
+				$gallery['images'][$gallery['last_index']++]=array(
+					"image"		=> $img_name
+					,"text"	=> $text
+					);
+				echo "***<br>".$file_name."<br>".$file_sizes[$findex]."<br>".$text."<br>".$watermark."<br><br>";
+			}
 			
 		}
+
+		bprint_r($gallery);
 		exit();
+		
+		return $gallery;
 	}
 }
