@@ -130,7 +130,7 @@ class AE_Post extends Burge_CMF_Controller {
 		
 		set_message($this->lang->line("changes_saved_successfully"));
 
-		//redirect(get_admin_post_details_link($post_id));
+		redirect(get_admin_post_details_link($post_id));
 
 		return;
 	}
@@ -144,6 +144,29 @@ class AE_Post extends Burge_CMF_Controller {
 		$gallery=array();
 		$gallery['last_index']=0;
 		$gallery['images']=array();
+
+		$last_index=&$gallery['last_index'];
+
+		if(isset($pp['old_images']))
+			foreach($pp['old_images'] as $index)
+			{
+				$img=$pp['old_image_image'][$index];
+				$delete=isset($pp['old_image_delete'][$index]);
+				if($delete)
+				{
+					unlink(POST_GALLERY_DIR."/".$img);
+					continue;
+				}
+
+				$text=$pp['old_image_text'][$index];
+				$gallery['images'][$index]=array(
+					"image"	=> $img
+					,"text"	=> $text
+				);
+
+				$last_index=max(1+$index,$last_index);
+			}
+		
 
 
 		if(isset($pp['new_images']))
@@ -166,12 +189,12 @@ class AE_Post extends Burge_CMF_Controller {
 					if($watermark)
 						burge_cmf_watermark($file_tmp_names[$findex]);
 
-					$img_name=$post_id."_".$lang."_".get_random_word(5).".".$extension;
+					$img_name=$post_id."_".$lang."_".$last_index."_".get_random_word(5).".".$extension;
 					$file_dest=POST_GALLERY_DIR."/".$img_name;
 					move_uploaded_file($file_tmp_names[$findex], $file_dest);
 
-					$gallery['images'][$gallery['last_index']++]=array(
-						"image"		=> $img_name
+					$gallery['images'][$last_index++]=array(
+						"image"	=> $img_name
 						,"text"	=> $text
 						);
 					//echo "***<br>".$file_name."<br>".$file_sizes[$findex]."<br>".$text."<br>watermark:".$watermark."<br>###<br>";
@@ -179,6 +202,9 @@ class AE_Post extends Burge_CMF_Controller {
 			}
 		
 		//bprint_r($gallery);
+
+		if(!sizeof($gallery['images']))
+			return NULL;
 
 		return $gallery;
 	}

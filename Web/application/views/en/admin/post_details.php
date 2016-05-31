@@ -263,7 +263,7 @@
 												{
 											?>
 													<div class="row gallery-row separated">
-														<input type='hidden' name='lang[pc_gallery][old_images][]' value='<?php echo $index;?>'/>
+														<input type='hidden' name='<?php echo $lang;?>[pc_gallery][old_images][]' value='<?php echo $index;?>'/>
 														<div class="five columns">
 															<a href="{post_gallery_url}/<?php echo $gim['image']; ?>" target="_blank">
 																<img src="{post_gallery_url}/<?php echo $gim['image']; ?>"/>
@@ -271,12 +271,17 @@
 														</div>
 														<div class="six columns half-col-margin">
 															<input type="text"  class="full-width" 
-																name='lang[pc_gallery][old_image_text][<?php echo $index?>]'
+																name='<?php echo $lang;?>[pc_gallery][old_image_text][<?php echo $index?>]'
 																value="<?php echo $gim['text']; ?>"
 															/>
 															<input type="hidden"  
-																name='lang[pc_gallery][old_image_image][<?php echo $index?>]'
+																name='<?php echo $lang;?>[pc_gallery][old_image_image][<?php echo $index?>]'
 																value="<?php echo $gim['image']; ?>"
+															/>
+															<br><br>
+															{delete_text}
+															<input type="checkbox" class="graphical"
+																name='<?php echo $lang;?>[pc_gallery][old_image_delete][<?php echo $index?>]'
 															/>
 														</div>
 													</div>
@@ -456,6 +461,9 @@
 
 					function formSubmit()
 					{
+						if(!confirm("{are_you_sure_to_submit_text}"))
+							return false;
+
 						return true;
 					}
 
