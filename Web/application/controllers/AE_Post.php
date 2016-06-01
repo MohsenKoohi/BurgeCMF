@@ -203,6 +203,7 @@ class AE_Post extends Burge_CMF_Controller {
 		
 		//bprint_r($gallery);
 
+		//we need in some positions to check if pc_gallery is null
 		if(!sizeof($gallery['images']))
 			return NULL;
 
