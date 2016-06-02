@@ -137,6 +137,16 @@ function get_admin_contact_us_message_details_link($message_id, $do_not_set_lang
 	return str_replace("message_id",$message_id,get_link("admin_contact_us_message_details_format",$do_not_set_lang));	
 }
 
+function get_post_gallery_image_path($img)
+{
+	return POST_GALLERY_DIR."/".$img;
+}
+
+function get_post_gallery_image_url($img)
+{
+	return POST_GALLERY_URL."/".$img;
+}
+
 
 //we have created an initialization for data array sent to parser
 //so if we wanted to add an index, we can do it without changing all controller. 

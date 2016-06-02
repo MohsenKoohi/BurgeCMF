@@ -172,6 +172,25 @@
 											/>
 										</div>
 									</div>
+									<div class="row even-odd-bg">
+										<div class="three columns">
+											<span>{copy_from_text}</span>
+										</div>
+										<div class="six columns">
+											<select class="full-width" name="<?php echo $lang;?>[copy]">
+												<option value="">{please_select_text}</option>
+												<?php 
+													foreach($all_langs as $slang=>$value)
+													{
+														if($slang === $lang)
+															continue;
+
+														echo "<option value='$slang'>".${"lang_".$slang."_name_text"}."</option>";
+													}
+												?>
+											</select>
+										</div>
+									</div>
 									<div class="row even-odd-bg" >
 										<div class="three columns">
 											<span>{title_text}</span>
@@ -262,12 +281,13 @@
 												if($gallery)
 													foreach($gallery['images'] as $index=>$gim)
 													{
+														$img_link=get_post_gallery_image_url($gim['image']);
 											?>
 													<div class="row gallery-row separated">
 														<input type='hidden' name='<?php echo $lang;?>[pc_gallery][old_images][]' value='<?php echo $index;?>'/>
 														<div class="five columns">
-															<a href="{post_gallery_url}/<?php echo $gim['image']; ?>" target="_blank">
-																<img src="{post_gallery_url}/<?php echo $gim['image']; ?>"/>
+															<a href="<?php echo $img_link; ?>" target="_blank">
+																<img src="<?php echo $img_link; ?>"/>
 															</a>
 														</div>
 														<div class="six columns half-col-margin">
@@ -295,7 +315,7 @@
 											/>
 											<div class="row separated">
 												<label>&nbsp;</label>
-												<div class="four columns button button-type1" style="font-size:1.3em"
+												<div class="five columns button button-type1" style="font-size:1.3em"
 													onclick="addGalleryRow('<?php echo $lang;?>',this);" >
 													{add_image_text}
 												</div>

@@ -123,8 +123,19 @@ class AE_Post extends Burge_CMF_Controller {
 
 			$post_content['pc_gallery']=$this->get_post_gallery($post_id,$lang);
 
-			$post_content_props[]=$post_content;
+			$post_content_props[$lang]=$post_content;
 		}
+
+		foreach($this->language->get_languages() as $lang=>$name)
+		{
+			$copy_from=$this->input->post($lang."[copy]");
+			if(!$copy_from)
+				continue;
+
+			$post_content_props[$lang]=$post_content_props[$copy_from];
+			$post_content_props[$lang]['pc_lang_id']=$lang;
+		}
+
 
 		$this->post_manager_model->set_post_props($post_id,$post_props,$post_content_props);
 		
@@ -154,7 +165,7 @@ class AE_Post extends Burge_CMF_Controller {
 				$delete=isset($pp['old_image_delete'][$index]);
 				if($delete)
 				{
-					unlink(POST_GALLERY_DIR."/".$img);
+					unlink(get_post_gallery_image_path($img));
 					continue;
 				}
 
@@ -167,8 +178,6 @@ class AE_Post extends Burge_CMF_Controller {
 				$last_index=max(1+$index,$last_index);
 			}
 		
-
-
 		if(isset($pp['new_images']))
 			foreach($pp['new_images'] as $index)
 			{
@@ -190,7 +199,7 @@ class AE_Post extends Burge_CMF_Controller {
 						burge_cmf_watermark($file_tmp_names[$findex]);
 
 					$img_name=$post_id."_".$lang."_".$last_index."_".get_random_word(5).".".$extension;
-					$file_dest=POST_GALLERY_DIR."/".$img_name;
+					$file_dest=get_post_gallery_image_path($img_name);
 					move_uploaded_file($file_tmp_names[$findex], $file_dest);
 
 					$gallery['images'][$last_index++]=array(
