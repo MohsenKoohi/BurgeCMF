@@ -259,8 +259,9 @@
 											</style>
 											<?php 
 												$gallery=$pc['pc_gallery']; 
-												foreach($gallery['images'] as $index=>$gim)
-												{
+												if($gallery)
+													foreach($gallery['images'] as $index=>$gim)
+													{
 											?>
 													<div class="row gallery-row separated">
 														<input type='hidden' name='<?php echo $lang;?>[pc_gallery][old_images][]' value='<?php echo $index;?>'/>
@@ -286,7 +287,7 @@
 														</div>
 													</div>
 											<?php
-												}
+													}
 											?>
 											<input type="hidden"  
 												name="<?php echo $lang;?>[pc_gallery][count]"  
