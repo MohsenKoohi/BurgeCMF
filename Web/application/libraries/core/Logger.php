@@ -405,7 +405,11 @@ class Logger extends AbstractLogger
         {
             $id=base64_decode($id);
             $id=mcrypt_decrypt(MCRYPT_RIJNDAEL_128, TRACKING_ENCRYPTION_KEY,$id,MCRYPT_MODE_CBC,TRACKING_IV);
-            $id=strstr($id,"_burge",TRUE);
+            $id=trim($id);
+            if(preg_match("/[^A-Za-z0-9\.\_]/", $id))
+                $id=NULL;
+            else
+                $id=strstr($id,"_burge",TRUE);
         }
         
         if(!$id)
