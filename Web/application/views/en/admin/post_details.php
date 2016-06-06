@@ -199,6 +199,7 @@
 											<input type="text" class="full-width" 
 												name="<?php echo $lang;?>[pc_title]" 
 												value="<?php echo $pc['pc_title']; ?>"
+												onchange="trimTitle(this);"
 											/>
 										</div>
 									</div>
@@ -340,6 +341,13 @@
 					</form>
 
 					<script type="text/javascript">
+
+					function trimTitle(el)
+					{
+						el=$(el);
+						var newTitle=el.val().trim().replace(/\s+/g," ");
+						el.val(newTitle);
+					}
 
 					//gallery operations
 					function addGalleryRow(lang,el)
