@@ -43,6 +43,15 @@
   <link rel="stylesheet" type="text/css" href="{styles_url}/skeleton.css" /> 
   <link rel="stylesheet" type="text/css" href="{styles_url}/style-ltr.css" />   
   <link rel="stylesheet" type="text/css" href="{styles_url}/customer.css" />
+
+  <?php if(isset($page_main_image)) { ?>
+    <meta property="og:image" content="{page_main_image}" >
+    <meta property="og:title" content="{header_title}">
+    <meta property="og:description" content="{header_description}">
+    <meta property="og:url" content="{header_canonical_url}">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="{main_name_text}">
+  <?php } ?>
   
   <!--[if ! lte IE 8]>-->
     <script src="{scripts_url}/jquery-2.1.3.min.js"></script>

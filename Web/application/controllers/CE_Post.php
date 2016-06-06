@@ -21,11 +21,13 @@ class CE_Post extends Burge_CMF_Controller {
 			redirect(get_link("home_url"));
 
 		$post_link=get_customer_post_details_link($post_id,$post_info['pc_title']);
-		if($post_info['pc_title'])
+		if($post_info['pc_title'] && $post_name)
 			if(get_customer_post_details_link($post_id,urldecode($post_name)) !== $post_link)
 				redirect($post_link,"location",301);
 
 		$this->data['post_info']=$post_info;
+		if($post_info['pc_image'])
+			$this->data['page_main_image']=$post_info['pc_image'];
 
 		$this->data['message']=get_message();
 
