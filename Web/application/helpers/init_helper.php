@@ -429,18 +429,59 @@ function get_captcha($length=0)
 	$cap = create_captcha($vals);
 
 	$CI=&get_instance();
-	$CI->session->set_flashdata("captcha",$cap['word']);
+	__add_captcha($cap['word']);
 	
 	return $cap['image'];	
 }
 
-function verify_captcha($val)
+function __add_captcha($word)
 {
 	$CI=&get_instance();
-	$captcha=$CI->session->flashdata("captcha");
-	if(!$captcha || (strtolower($captcha) !== strtolower($val)))
+	__initialize_captcha();
+	
+
+	$count=$CI->session->userdata("__captcha_count");
+	$caps=explode(",",$CI->session->userdata("__captcha_array"));
+	
+	$caps[$count]=strtolower($word);
+	$CI->session->set_userdata("__captcha_array",implode(",", $caps));
+	//bprint_r($caps);
+	
+	$count++;
+	if($count==10)
+		$count=0;
+	$CI->session->set_userdata("__captcha_count",$count);
+
+	return;
+}
+
+function __initialize_captcha()
+{
+	$CI=&get_instance();
+	if($CI->session->has_userdata("__captcha_count"))
+		return;
+	
+	$CI->session->set_userdata("__captcha_count",0);
+	$caps=array_fill(0,10,"");
+	$CI->session->set_userdata("__captcha_array",implode(",", $caps));
+
+	return;
+}
+
+function verify_captcha($val)
+{
+	$val=strtolower($val);
+	
+	$CI=&get_instance();
+
+	$caps=explode(",",$CI->session->userdata("__captcha_array"));
+	$key=array_search($val, $caps);
+	if($key===FALSE)
 		return FALSE;
 
+	$caps[$key]="";
+	$CI->session->set_userdata("__captcha_array",implode(",", $caps));
+	
 	return TRUE;
 }
 
