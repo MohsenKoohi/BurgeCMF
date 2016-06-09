@@ -23,6 +23,8 @@ class CE_Category extends Burge_CMF_Controller {
 		//$this->lang->load('ce_category',$this->selected_lang);	
 
 		$this->data['category_info']=$category_info;
+		if($category_info['cd_image'])
+			$this->data['page_main_image']=$category_info['cd_image'];
 
 		$this->data['message']=get_message();
 
