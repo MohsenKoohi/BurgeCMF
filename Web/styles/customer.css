@@ -661,17 +661,6 @@ body.rtl .dash-ul li:before {
 body.ltr .dash-ul li:before {
   margin-right: 10px; }
 
-.container.dashboard h4 {
-  margin-bottom: 10px; }
-
-.hov-col-changed {
-  color: #C63672;
-  transition: color, .6s; }
-
-.hov-col-changed:hover {
-  color: #0C7B77;
-  transition: color, .6s; }
-
 .general-buttons div, .general-buttons a {
   font-size: 1.2em; }
 
@@ -747,57 +736,6 @@ body.ltr .tab-container .tabs li {
   @media (max-width: 600px) {
     body.ltr .tab-container .tabs li {
       margin-right: 0; } }
-
-.category-div ul {
-  margin: 0 30px; }
-
-.category-div li {
-  list-style: none;
-  margin: 0 20px; }
-
-body.rtl .category-div li {
-  border-right: 1px dotted #555; }
-
-body.ltr .category-div li {
-  border-left: 1px dotted #555; }
-
-.burgeFileMan {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  display: block;
-  background-color: rgba(160, 160, 160, 0.6); }
-
-.burgeFileMan .bmain {
-  position: absolute;
-  width: 90%;
-  height: 90%;
-  top: 5%;
-  left: 5%;
-  border: 10px solid #aaa; }
-
-.burgeFileMan .bheader {
-  direction: ltr;
-  background: white;
-  font-size: 30px;
-  padding: 10px;
-  display: block;
-  height: 60px;
-  border-bottom: 2px solid #eee; }
-
-.burgeFileMan .close {
-  position: absolute;
-  right: 10px;
-  top: 5px;
-  padding: 0 10px; }
-
-.burgeFileMan iframe {
-  position: relative;
-  width: 100%;
-  border: 0;
-  height: calc(100% - 60px); }
 
 .container.category > div.row {
   padding: 10px 10px 20px 10px;
