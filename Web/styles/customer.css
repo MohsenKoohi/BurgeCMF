@@ -830,7 +830,8 @@ body.ltr .container.category .post-date {
   background-position: center; }
 
 .container.category .post-short-desc {
-  text-align: justify; }
+  text-align: justify;
+  color: black; }
 
 @media (max-width: 600px) {
   .container.category .post-img {
