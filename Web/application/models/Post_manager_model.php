@@ -135,7 +135,11 @@ class Post_manager_model extends CI_Model
 		$this->db->order_by("post_id DESC");
 		$results=$this->db->get();
 
-		return $results->result_array();
+		$rows=$results->result_array();
+		foreach($rows as &$row)
+			$row['pc_gallery']=json_decode($row['pc_gallery'],TRUE);
+		
+		return $rows;
 	}
 
 	public function get_total($filter)
