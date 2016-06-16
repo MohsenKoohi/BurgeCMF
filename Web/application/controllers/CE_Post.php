@@ -17,7 +17,7 @@ class CE_Post extends Burge_CMF_Controller {
 			,"active"=>1
 			))[0];
 
-		$this->data['post_gallery']=$post_info['pc_gallery'];
+		$this->data['post_gallery']=$post_info['pc_gallery']['images'];
 		
 		if(!$post_info)
 			redirect(get_link("home_url"));
