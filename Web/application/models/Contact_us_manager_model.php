@@ -94,9 +94,9 @@ class Contact_us_manager_model extends CI_Model {
 
 		$this->set_filters($filter);
 
-		$results=$this->db->get();
+		$res=$this->db->get()->row_array();
 
-		return $results->row_array()['count'];
+		return $res['count'];
 	}
 
 	private function set_filters($filter)

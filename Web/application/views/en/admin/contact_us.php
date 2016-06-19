@@ -2,8 +2,8 @@
 	<div class="container">
 		<h1>{contact_us_text}</h1>
 		<div class="row general-buttons">
-			<a href="<?php echo get_link("admin_contact_us_send_new");?>">
-				<div class="two columns button sub-primary button-type1 half-col-margin">
+			<a class="two columns" href="<?php echo get_link("admin_contact_us_send_new");?>">
+				<div class="full-width button sub-primary button-type1 half-col-margin">
 					{send_new_message_text}
 				</div>
 			</a>
