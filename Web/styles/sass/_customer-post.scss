@@ -1,5 +1,23 @@
+.post-content 
+{	* 
+	{
+		font-family: inherit;
+	}
+
+	img, video
+	{
+		height:auto;
+		max-width: 100%;
+	}
+}
+
+
 .post-gallery
 {
+	margin-top:25px; 
+	padding:25px 0;
+	border-bottom: 1px dotted #ccc;
+	
 	> div
 	{
 		padding:5px; 
@@ -7,9 +25,13 @@
 		cursor: pointer
 	}
 	
-	img
+	.img
 	{
 		width: 100%;
+		height:300px;
+		background-position: center center;
+		background-size: cover;
+		background-repeat: no-repeat;
 	}
 
 	.text
