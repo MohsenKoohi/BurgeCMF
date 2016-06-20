@@ -771,7 +771,7 @@ body.ltr .post-date {
   text-align: justify;
   color: black; }
 
-@media (max-width: 600px) {
+@media (max-width: 550px) {
   .container.category .post-img {
     max-height: 300px; } }
 .container.category .read-more {

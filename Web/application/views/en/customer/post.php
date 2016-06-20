@@ -39,22 +39,25 @@
 
 				function setColorBox()
 				{
-					$.colorbox.remove() ;
-					
-					var whp="90%";
-					if($(window).width() > 600)
-						whp="75%";
+					$.colorbox.remove();
+					$(".img-div").unbind("click");
 
-					$(".img-div").colorbox({
-						rel:"group"
-						,iframe:false
-						,width:whp
-						,height:whp
-						,opacity:.4
-						,fixed:true
-						,current:"{image_text} {current} {from_text} {total}" 
+					if($(window).width() < 550)
+						$(".img-div").click(function(event)
+						{
+							window.open($(event.target).parent().attr("href"));
+						});
+					else
+						$(".img-div").colorbox({
+							rel:"group"
+							,iframe:false
+							,width:"80%"
+							,height:"80%"
+							,opacity:.4
+							,fixed:true
+							,current:"{image_text} {current} {from_text} {total}" 
 
-					});
+						});
 				}
 			</script>
 		</div>
