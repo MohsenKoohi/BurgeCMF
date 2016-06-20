@@ -1,0 +1,47 @@
+.post-gallery
+{
+	> div
+	{
+		padding:5px; 
+		line-height: 0;
+		cursor: pointer
+	}
+	
+	img
+	{
+		width: 100%;
+	}
+
+	.text
+	{
+		background-color: #555;
+		color:white;
+		padding: 5px;
+		line-height: 1em;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+}
+
+body.post-page
+{
+	.cboxPhoto
+	{
+		max-height:calc(100% - 40px);
+	}
+
+	#cboxTitle
+	{ 
+		bottom:28px; 
+		color:black;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	#cboxCurrent
+	{
+		bottom:0px; 
+	}
+}

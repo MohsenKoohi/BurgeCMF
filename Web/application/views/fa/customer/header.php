@@ -38,8 +38,6 @@
 
 	<link rel="shortcut icon" href="{images_url}/favicon.png"/> 
 
-  <link rel="stylesheet" type="text/css" href="{styles_url}/jquery-ui.min.css" />
-  <link rel="stylesheet" type="text/css" href="{styles_url}/colorbox.css" />
   <link rel="stylesheet" type="text/css" href="{styles_url}/skeleton.css" />  
   <link rel="stylesheet" type="text/css" href="{styles_url}/style-rtl.css" />  
   <link rel="stylesheet" type="text/css" href="{styles_url}/customer.css" />
@@ -60,9 +58,7 @@
   <!--[if lte IE 8]>
     <script src="{scripts_url}/jquery-1.11.1.min.js"></script>
   <![endif]-->  
-  <script src="{scripts_url}/jquery-ui.min.js"></script>
   <script src="{scripts_url}/customer_common.js"></script>
-  <script src="{scripts_url}/colorbox.js"></script>
   <script src="{scripts_url}/scripts.js"></script>
   <!--[if lte IE 9]>
     <link rel="stylesheet" type="text/css" href="{styles_url}/style-ie.css" />

@@ -21,7 +21,13 @@
     ordered & tabbed in a way that represents the nesting of the generated HTML.
 */
 #cboxOverlay{background:url(cbox-images/overlay.jpg) repeat 0 0; opacity: 0.9; filter: alpha(opacity = 90);}
+
 #colorbox{outline:0;}
+
+/* changes for burgeCMF */
+#cboxContent{background:#fff; overflow:hidden;border:5px solid #555;border-radius:10px;padding:4px;}
+/*
+changes for burgeCMF
     #cboxTopLeft{width:21px; height:21px; background:url(cbox-images/controls.png) no-repeat -101px 0;}
     #cboxTopRight{width:21px; height:21px; background:url(cbox-images/controls.png) no-repeat -130px 0;}
     #cboxBottomLeft{width:21px; height:21px; background:url(cbox-images/controls.png) no-repeat -101px -29px;}
@@ -30,12 +36,13 @@
     #cboxMiddleRight{width:21px; background:url(cbox-images/controls.png) right top repeat-y;}
     #cboxTopCenter{height:21px; background:url(cbox-images/border.png) 0 0 repeat-x;}
     #cboxBottomCenter{height:21px; background:url(cbox-images/border.png) 0 -29px repeat-x;}
+*/
     #cboxContent{background:#fff; overflow:hidden;}
         .cboxIframe{background:#fff;}
         #cboxError{padding:50px; border:1px solid #ccc;}
         #cboxLoadedContent{margin-bottom:28px;}
         #cboxTitle{position:absolute; bottom:4px; left:0; text-align:center; width:100%; color:#949494;}
-        #cboxCurrent{position:absolute; bottom:4px; right:0px; color:#949494;}
+        #cboxCurrent{position:absolute; bottom:4px; right:4px; color:#949494;}
         #cboxLoadingOverlay{background:url(cbox-images/loading_background.png) no-repeat center center;}
         #cboxLoadingGraphic{background:url(cbox-images/loading.gif) no-repeat center center;}
 

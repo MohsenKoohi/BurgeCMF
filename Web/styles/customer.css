@@ -791,6 +791,32 @@ body.ltr .container.category .read-more {
   height: auto;
   max-width: 100%; }
 
+.post-gallery > div {
+  padding: 5px;
+  line-height: 0;
+  cursor: pointer; }
+.post-gallery img {
+  width: 100%; }
+.post-gallery .text {
+  background-color: #555;
+  color: white;
+  padding: 5px;
+  line-height: 1em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; }
+
+body.post-page .cboxPhoto {
+  max-height: calc(100% - 40px); }
+body.post-page #cboxTitle {
+  bottom: 28px;
+  color: black;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; }
+body.post-page #cboxCurrent {
+  bottom: 0px; }
+
 .aclist > div {
   background-color: darkblue;
   color: white;

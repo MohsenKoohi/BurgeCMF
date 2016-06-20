@@ -1,23 +1,6 @@
-<style type="text/css">
-	.post-gallery  > div
-	{
-		padding:5px; 
-		line-height: 0;
-	}
-	.post-gallery img
-	{
-		width: 100%;
-	}
-
-	.post-gallery .text
-	{
-		background-color: #555;
-		color:white;
-		padding: 5px;
-		line-height: 1em;
-		
-	}
-</style>
+<link rel="stylesheet" type="text/css" href="{styles_url}/colorbox.css" />
+<script src="{scripts_url}/colorbox.js"></script>
+  
 <div class="main">
 	<div class="container category">
 		<h1><?php echo $post_info['pc_title'];?></h1>
@@ -36,12 +19,43 @@
 		</div>
 		<div class="row post-gallery">
 			<?php foreach($post_gallery as $img) { ?>
-				<div class="four columns">
-					<img src="{post_gallery_url}/<?php echo $img['image'];?>"/>
+				<div class="four columns img-div" title="<?php echo $img['text'];?>"  href="{post_gallery_url}/<?php echo $img['image'];?>" >
+					<img  src="{post_gallery_url}/<?php echo $img['image'];?>"/>
 					<div class="text">
 						<?php echo $img['text'];?>
 					</div>
 				</div>
 			<?php } ?>
+
+			<script type="text/javascript">
+
+				$(window).on("resize",setColorBox);
+				$(window).load(function()
+				{
+					$("body").addClass("post-page");
+					setColorBox();
+				});
+
+				function setColorBox()
+				{
+					$.colorbox.remove() ;
+					
+					var whp="90%";
+					if($(window).width() > 600)
+						whp="75%";
+
+					$(".img-div").colorbox({
+						rel:"group"
+						,iframe:false
+						,width:whp
+						,height:whp
+						,opacity:.4
+						,fixed:true
+						,current:"{image_text} {current} {from_text} {total}" 
+
+					});
+				}
+			</script>
+		</div>
 	</div>
 </div>
