@@ -7,7 +7,8 @@
 		<div class="post-date"><?php echo str_replace("-","/",$post_info['post_date']);?></div>
 		<div class="row">
 			<?php if($post_info['pc_image']) { ?>
-				<div class="post-img" style="background-image:url('<?php echo $post_info['pc_image'];?>')">
+				<div class="post-img lazy-load" data-ll-type="background-image"
+				 data-ll-url="<?php echo $post_info['pc_image'];?>">
 				</div>
 				<br><br>
 			<?php } ?>
@@ -20,7 +21,8 @@
 		<div class="row post-gallery">
 			<?php foreach($post_gallery as $img) { ?>
 				<div class="four columns img-div" title="<?php echo $img['text'];?>"  href="{post_gallery_url}/<?php echo $img['image'];?>" >
-					<div class="img lazy-load"  data-ll-url="{post_gallery_url}/<?php echo $img['image'];?>" data-ll-type="background-image">
+					<div class="img lazy-load"  data-ll-url="{post_gallery_url}/<?php echo $img['image'];?>"
+					 data-ll-type="background-image" >
 					</div>
 					<div class="text">
 						<?php echo $img['text'];?>
@@ -33,14 +35,9 @@
 				$(window).load(function()
 				{
 					$("body").addClass("post-page");
-					initializeColorBox();
-				});
-
-				function initializeColorBox()
-				{
 					$(window).on("resize",setColorBox);
 					setColorBox();
-				}
+				});
 
 				function setColorBox()
 				{

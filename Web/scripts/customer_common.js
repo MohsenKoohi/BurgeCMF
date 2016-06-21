@@ -23,6 +23,8 @@ $(window).load(function()
   $(window).on('resize',setupMovingHeader);
 
   changeGraphicalCheckBoxes();
+
+  lazyLoader();
 });
 
 function changeGraphicalCheckBoxes()
@@ -149,6 +151,48 @@ function setupMovingHeader_with_moving_header()
 }
 
 setupMovingHeader();
+
+//lazy loader
+function lazyLoader()
+{
+  var images=$(".lazy-load");
+  var imageIndex=-1;
+  loadNext();
+
+  var el;
+  var url;
+
+  function loadNext()
+  {
+    imageIndex++;
+    if(imageIndex === images.length)
+    {
+      setupMovingHeader();
+      return;
+    }
+
+    el=$(images[imageIndex]);
+    url=el.data('ll-url');
+
+    $.get(url, function()
+    {
+      switch(el.data('ll-type'))
+      {
+        case "background-image":
+          el.css("background-image","url('"+url+"')");
+          break;
+
+        case "src":
+          el.prop("src",url);
+          break;
+      }
+
+    }).always(loadNext);
+
+  }
+}
+
+
 
 /*!
  * jQuery Browser Plugin 0.0.8
