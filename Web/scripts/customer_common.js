@@ -48,13 +48,13 @@ function setupMovingHeader()
   $(".side-menu .mobile .click").unbind("click");
   $(".main").css("height","auto");
 
-  if(winWidth<=600)
+  if(winWidth<=550)
   {
     $(".side-menu").css("min-height","none").css("height","auto");
     $(".side-menu .mobile .click").click(function()
-      {
-        $(".side-menu ul").toggleClass("active");
-      });
+    {
+      $(".side-menu ul").toggleClass("active");
+    });
   }
   else
   {
