@@ -11,7 +11,8 @@
 							<h2><?php echo $post['pc_title'];?></h2>
 							<div class="post-date"><?php echo str_replace("-","/",$post['post_date']);?></div>
 							<?php if($post['pc_image']) { ?>
-								<div class="post-img" style="background-image:url('<?php echo $post['pc_image'];?>')">
+								<div class="post-img lazy-load" data-ll-type="background-image"
+									data-ll-url="<?php echo $post['pc_image'];?>">
 								</div>
 							<?php } ?>
 							<br>

@@ -153,6 +153,9 @@ function setupMovingHeader_with_moving_header()
 setupMovingHeader();
 
 //lazy loader
+//loads all images and background images
+//with data-ll-url and data-ll-type props
+//after document loaded completely, so decreases page load time
 function lazyLoader()
 {
   var images=$(".lazy-load");
