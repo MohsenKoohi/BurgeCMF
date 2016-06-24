@@ -31,6 +31,8 @@ class CE_Home extends Burge_CMF_Controller {
 		$this->data['header_meta_description']=$this->lang->line("header_meta_description");
 		$this->data['header_meta_keywords'].=",".$this->lang->line("header_meta_keywords");
 
+		$this->data['page_main_image']=get_link("images_url")."/logo-back-white.jpg";
+
 		$this->data['header_canonical_url']=get_link("home_url");
 
 		$this->send_customer_output("home");
