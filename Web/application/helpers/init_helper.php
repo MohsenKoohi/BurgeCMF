@@ -442,9 +442,13 @@ function __add_captcha($word)
 
 	$count=$CI->session->userdata("__captcha_count");
 	$caps=explode(",",$CI->session->userdata("__captcha_array"));
-	
+	$timestamps=explode(",",$CI->session->userdata("__captcha_timestamps"));
+
 	$caps[$count]=strtolower($word);
+	$timestamps[$count]=time();
+
 	$CI->session->set_userdata("__captcha_array",implode(",", $caps));
+	$CI->session->set_userdata("__captcha_timestamps",implode(",", $timestamps));
 	//bprint_r($caps);
 	
 	$count++;
@@ -460,10 +464,15 @@ function __initialize_captcha()
 	$CI=&get_instance();
 	if($CI->session->has_userdata("__captcha_count"))
 		return;
-	
+
+	//initializing
 	$CI->session->set_userdata("__captcha_count",0);
+	
 	$caps=array_fill(0,10,"");
 	$CI->session->set_userdata("__captcha_array",implode(",", $caps));
+
+	$timestamps=array_fill(0,10,0);
+	$CI->session->set_userdata("__captcha_timestamps",implode(",", $timestamps));
 
 	return;
 }
@@ -474,13 +483,19 @@ function verify_captcha($val)
 	
 	$CI=&get_instance();
 
+	__initialize_captcha();
 	$caps=explode(",",$CI->session->userdata("__captcha_array"));
+	$timestamps=explode(",",$CI->session->userdata("__captcha_timestamps"));
 	$key=array_search($val, $caps);
-	if($key===FALSE)
+
+	if(($key===FALSE) || (time()-$timestamps[$key] > 200))
 		return FALSE;
 
 	$caps[$key]="";
+	$timestamps[$key]=0;
+
 	$CI->session->set_userdata("__captcha_array",implode(",", $caps));
+	$CI->session->set_userdata("__captcha_timestamps",implode(",", $timestamps));
 	
 	return TRUE;
 }
