@@ -65,7 +65,7 @@
   <![endif]-->
   
 </head>
-<body class="ltr" style="height:100%;">
+<body class="ltr customer-env" style="height:100%;">
   <div class="header">
 
     <div class="logo">

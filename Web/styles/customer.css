@@ -145,8 +145,6 @@ input[type="file"] > input[type="button"]::-moz-focus-inner {
 
 .header .logo a {
   display: inline-block;
-  max-width: 100%;
-  max-height: 130px;
   margin: 0; }
 
 body.ltr .header .logo a.logo-img, body.rtl .header .logo a.logo-text {
@@ -156,9 +154,14 @@ body.ltr .header .logo a.logo-text, body.rtl .header .logo a.logo-img {
   float: left; }
 
 .header .logo img {
-  max-height: 130px;
   max-width: 100%;
   margin: auto 0; }
+
+body.admin-env .header .logo img {
+  max-height: 130px; }
+
+body.customer-env .header .logo img {
+  max-height: 180px; }
 
 .top-menu {
   display: inline-block;
@@ -234,6 +237,9 @@ body.ltr .top-menu > ul > li, body.rtl .top-menu > ul > li {
   height: 100%;
   color: black; }
 
+@media (max-width: 1000px) {
+  body.customer-env .header .logo img {
+    height: 130px; } }
 @media (max-width: 600px) {
   .header {
     text-align: center;

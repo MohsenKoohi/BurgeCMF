@@ -65,7 +65,7 @@
   <![endif]-->
   
 </head>
-<body class="rtl" style="height:100%;">
+<body class="rtl customer-env" style="height:100%;">
   <div class="header">
 
     <div class="logo">

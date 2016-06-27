@@ -24,7 +24,7 @@
   <script src="{scripts_url}/admin_common.js"></script>
   <script src="{scripts_url}/scripts.js"></script>
 </head>
-<body class="rtl" style="height:100%;">
+<body class="rtl admin-env" style="height:100%;">
   <div class="header">
 
     <div class="logo">
