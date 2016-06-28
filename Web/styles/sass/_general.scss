@@ -101,13 +101,6 @@ select, input:not([type=radio])
 	width:80%;
 }
 
-input:not([type='file']):not([type='checkbox']):not([type='button']):not([type='submit']),textarea
-{
-	background-color: white;
-	border:1px solid gray;
-	border-radius: 4px;
-}
-
 input
 {
 	max-width: 100%;
