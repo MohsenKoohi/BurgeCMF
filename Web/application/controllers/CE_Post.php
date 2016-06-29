@@ -6,7 +6,10 @@ class CE_Post extends Burge_CMF_Controller {
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->model("post_manager_model");
+		$this->load->model(array(
+			"post_manager_model"
+			,"category_manager_model"
+		));
 	}
 
 	public function index($post_id,$post_name="")
@@ -17,10 +20,13 @@ class CE_Post extends Burge_CMF_Controller {
 			,"active"=>1
 			))[0];
 
-		$this->data['post_gallery']=$post_info['pc_gallery']['images'];
-		
 		if(!$post_info)
 			redirect(get_link("home_url"));
+
+		$this->data['post_gallery']=$post_info['pc_gallery']['images'];
+
+		$cat_ids=explode(',',$post_info['categories']);
+		$this->data['categories']=$this->category_manager_model->get_categories($cat_ids);
 
 		$post_link=get_customer_post_details_link($post_id,$post_info['pc_title']);
 		if($post_info['pc_title'] && $post_name)

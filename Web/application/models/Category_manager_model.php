@@ -157,6 +157,17 @@ class Category_manager_model extends CI_Model
 		return $cats;
 	}
 
+	public function get_categories($cat_ids)
+	{
+		$ret=array();
+
+		$all_cats=$this->get_all();
+		foreach($cat_ids as $cid)
+			$ret[]=$all_cats[$cid];
+
+		return $ret;
+	}
+
 
 	//creates the hierarchy of categories
 	//using get_all

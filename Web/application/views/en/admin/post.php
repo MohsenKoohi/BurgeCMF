@@ -17,7 +17,7 @@
 					<div class="row even-odd-bg" >
 						<div class="nine columns">
 							<span>
-								<?php echo $i++;?>)
+								<?php echo $post['post_id'];?>)
 								<?php 
 									if($post['pc_title']) 
 										echo $post['pc_title'];
