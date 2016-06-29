@@ -796,7 +796,7 @@ body.ltr .container.category .read-more {
   .post-cats a:before {
     content: "»";
     font-family: tahoma;
-    font-size: 20px;
+    font-size: 1.5em;
     height: 100%; }
 
 .post-content * {
