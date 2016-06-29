@@ -26,7 +26,7 @@ class CE_Post extends Burge_CMF_Controller {
 		$this->data['post_gallery']=$post_info['pc_gallery']['images'];
 
 		$cat_ids=explode(',',$post_info['categories']);
-		$this->data['categories']=$this->category_manager_model->get_categories($cat_ids);
+		$this->data['post_categories']=$this->category_manager_model->get_categories_short_desc($cat_ids,$this->selected_lang);
 
 		$post_link=get_customer_post_details_link($post_id,$post_info['pc_title']);
 		if($post_info['pc_title'] && $post_name)

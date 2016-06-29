@@ -1,3 +1,27 @@
+.post-cats
+{
+	margin-bottom:30px;
+
+	div
+	{
+		vertical-align: middle;
+	}
+	a
+	{
+		color:$secondary-color;
+		height:100%;
+		vertical-align: middle;
+	}
+
+	a:before
+	{
+		content: "»";
+		font-family: tahoma;
+		font-size:20px;
+		height:100%;
+	}
+}
+
 .post-content 
 {	* 
 	{
@@ -10,7 +34,6 @@
 		max-width: 100%;
 	}
 }
-
 
 .post-gallery
 {

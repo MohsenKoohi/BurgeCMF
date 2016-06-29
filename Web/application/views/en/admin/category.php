@@ -47,7 +47,7 @@
 			?>				
 				<div class="row even-odd-bg dont-magnify" >
 					<div class="two columns counter">
-						#<?php echo $i++;?>
+						#<?php echo $cat['id'];?>
 					</div>
 					<div class="nine columns">
 						<span class="cat-parent"><?php echo $par_name; ?></span>

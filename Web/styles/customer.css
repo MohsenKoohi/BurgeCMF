@@ -785,6 +785,20 @@ body.rtl .container.category .read-more {
 body.ltr .container.category .read-more {
   float: right; }
 
+.post-cats {
+  margin-bottom: 30px; }
+  .post-cats div {
+    vertical-align: middle; }
+  .post-cats a {
+    color: #C63672;
+    height: 100%;
+    vertical-align: middle; }
+  .post-cats a:before {
+    content: "»";
+    font-family: tahoma;
+    font-size: 20px;
+    height: 100%; }
+
 .post-content * {
   font-family: inherit; }
 .post-content img, .post-content video {

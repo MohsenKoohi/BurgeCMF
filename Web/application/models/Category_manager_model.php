@@ -157,13 +157,20 @@ class Category_manager_model extends CI_Model
 		return $cats;
 	}
 
-	public function get_categories($cat_ids)
+	//includes name, url, and image of the requested categories
+	public function get_categories_short_desc($cat_ids,$lang_id)
 	{
 		$ret=array();
 
 		$all_cats=$this->get_all();
 		foreach($cat_ids as $cid)
-			$ret[]=$all_cats[$cid];
+			if($cid)
+				$ret[]=array(
+					"name"=>$all_cats[$cid]['names'][$lang_id]
+					,"url"=>get_customer_category_details_link($cid,$all_cats[$cid]['urls'][$lang_id])
+					,"image"=>$all_cats[$cid]['images'][$lang_id]
+				);
+
 
 		return $ret;
 	}
