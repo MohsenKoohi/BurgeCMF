@@ -125,9 +125,9 @@ input[type="file"] > input[type="button"]::-moz-focus-inner {
   display: none; }
 
 .header {
-  display: inline-block;
+  display: block;
   line-height: 0;
-  margin: 0 2.5% 10px 2.5%;
+  margin: 0 auto 10px auto;
   border-bottom: 1px solid #398DBA;
   background: linear-gradient(to left, white, rgba(255, 255, 255, 0.3), white);
   white-space: nowrap;
