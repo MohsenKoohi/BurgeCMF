@@ -2,7 +2,7 @@
 
 $lang['contact_us']="Contact us";
 $lang['received']="Received";
-$lang['response']="Responsed";
+$lang['response']="Response";
 $lang['received_time']="Received time";
 $lang['response_time']="Responsed time";
 $lang['view']="View";
