@@ -1,7 +1,7 @@
 #[BurgeCMF](http://burge.ir/BurgeCMF)
-##	[An Open Source MVC Content Management Framework based on CodeIgniter](http://burge.ir/BurgeCMF)
+##	[An Open Source MVC Content Management Framework based on CodeIgniter](http://www.burge.ir/category-3/BurgeCMF)
 
-![BurgCMF Logo](http://burge.ir/BurgeCMF/logo-back-white.jpg)
+![BurgCMF Logo](http://www.burge.ir/upload/cat-3-BurgeCMF/logo_back_white.jpg)
 
 ##Features
 * Multi-language admin and customer environments
