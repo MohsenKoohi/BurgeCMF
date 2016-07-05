@@ -673,6 +673,20 @@ body.ltr .dash-ul li:before {
   color: #0C7B77;
   transition: color, .6s; }
 
+.main .container.dashboard .module {
+  height: 200px;
+  overflow: auto; }
+  @media (min-width: 600px) {
+    .main .container.dashboard .module {
+      width: calc(33.33% - 10px);
+      margin: 0 0 15px 0px; } }
+
+body.ltr .main .container.dashboard .module:not(:nth-child(3n + 4)) {
+  margin-right: 15px; }
+
+body.rtl .main .container.dashboard .module:not(:nth-child(3n + 4)) {
+  margin-left: 15px; }
+
 .general-buttons div, .general-buttons a {
   font-size: 1.2em; }
 
@@ -808,7 +822,7 @@ body.ltr .category-div li {
   font-size: 1.2em;
   border-radius: 5px; }
 
-@media (min-width: 550px) {
+@media (min-width: 600px) {
   .aclist > div.three.columns {
     width: calc(25% - 10px); }
 

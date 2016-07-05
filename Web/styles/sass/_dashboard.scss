@@ -8,8 +8,33 @@
 	color:$secondary-color;
 	transition: color, .6s;
 }
+
 .hov-col-changed:hover
 {
 	color:$primary-color;
 	transition: color, .6s;
+}
+
+.main .container.dashboard .module
+{
+	height:200px;
+	overflow: auto;
+
+	@media (min-width: 600px)
+	{
+		width:calc(33.33% - 10px);
+		margin:0 0 15px 0px;
+	}
+
+}
+
+body.ltr .main .container.dashboard .module:not(:nth-child(3n + 4))
+{
+	margin-right: 15px;
+}
+
+
+body.rtl .main .container.dashboard .module:not(:nth-child(3n + 4))
+{
+	margin-left: 15px;
 }

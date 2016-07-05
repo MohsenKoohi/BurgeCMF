@@ -67,8 +67,8 @@ body.rtl .column,body.rtl .columns
     padding: 0; }
 }
 
-/* For devices larger than 550px */
-@media (min-width: 550px) {
+/* For devices larger than 600px */
+@media (min-width: 600px) {
   .container
   {
     // width: 80%; 
@@ -196,7 +196,7 @@ h5 { font-size: 1.2em; line-height: 1.5;  }
 h6 { font-size: 1.1em; line-height: 1.6;  }
 
 /* Larger than phablet */
-@media (min-width: 550px) {
+@media (min-width: 600px) {
   h1 { font-size: 2.7em; }
   h2 { font-size: 2.2em; }
   h3 { font-size: 2.0em; }
@@ -382,7 +382,7 @@ there.
 }
 
 /* Larger than phablet (also point when grid becomes active) */
-@media (min-width: 550px)
+@media (min-width: 600px)
 {
 
 }

@@ -54,7 +54,7 @@
 					$.colorbox.remove();
 					$(".img-div").unbind("click");
 
-					if($(window).width() < 550)
+					if($(window).width() < 600)
 						$(".img-div").click(function(event)
 						{
 							window.open($(event.target).parent().attr("href"));
