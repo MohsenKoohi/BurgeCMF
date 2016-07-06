@@ -170,7 +170,7 @@ function lazyLoader()
     imageIndex++;
     if(imageIndex === images.length)
     {
-      setupMovingHeader();
+      setTimeout(setupMovingHeader,10);
       return;
     }
 
