@@ -64,8 +64,12 @@ function setupMovingHeader()
     var m_h=$(".message-main").outerHeight();    
     var height=Math.max(sm_h,m_h);
     $(".side-menu,.message-main").outerHeight(height);
+    
     if($(".message").length)
       height-=$(".message").outerHeight()+10;
+    var slider=$(".message-main > .container > .slider");
+    if(slider.length)
+      height-=slider.outerHeight()+10;
     $(".main").outerHeight(height);
   }
 
