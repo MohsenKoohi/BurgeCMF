@@ -28,6 +28,7 @@ class Category_manager_model extends CI_Model
 				`category_id` INT AUTO_INCREMENT
 				,`category_parent_id` INT DEFAULT 0
 				,`category_sort_order` INT DEFAULT 0
+				,`category_show_in_list` BIT(1) DEFAULT 1
 				,PRIMARY KEY (category_id)	
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8"
 		);
@@ -122,6 +123,7 @@ class Category_manager_model extends CI_Model
 				$cats[$cid]=array();
 
 				$cats[$cid]['id']=$cid;
+				$cats[$cid]['show_in_list']=$row['category_show_in_list'];
 				$cats[$cid]['parents']=array();
 				$cats[$cid]['parents'][0]=$row['category_parent_id'];
 				
@@ -340,12 +342,15 @@ class Category_manager_model extends CI_Model
 		$log_props=array();
 
 		$parent_id=$category_props['category_parent_id'];
+		$show_in_list=$category_props['category_show_in_list'];
 		$this->db
 			->set("category_parent_id",$parent_id)
+			->set("category_show_in_list",$show_in_list)
 			->where("category_id",$category_id)
 			->update($this->category_table_name);
 
 		$log_props["category_parent_id"]=$parent_id;
+		$log_props["category_show_in_list"]=$show_in_list;
 
 		foreach($category_props['descriptions'] as $category_description)
 		{

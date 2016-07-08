@@ -195,82 +195,92 @@
 
 								}
 							);
-
-							var activeLang;
-
-							function selectImage(lang)
-							{
-								var fileMan=$(".burgeFileMan");
-								if(!fileMan.length)
-									createFileMan();
-
-								fileMan.css("display","block");
-								setTimeout(function()
-								{
-									$(".burgeFileMan iframe")[0].focus();
-								},1000);
-
-								activeLang=lang;
-							}
-
-							function createFileMan()
-							{
-								var src="<?php echo get_link('admin_file_inline');?>";
-								src+="?parent_function=fileSelected";
-								$(document.body).append(
-									"<div class='burgeFileMan' onkeypress='checkExit(event);' tabindex='1' >"
-										+"<div class='bmain'>"
-										+	"<div class='bheader'>File Manager"
-										+		"<button class='close' onclick='closeFileMan()'>×</button>"
-										+ "</div>"
-										+	"<iframe src='"+src+"'></iframe>"
-										+"</div>"
-									+"</div>"
-								);
-							}
-
-							function checkExit(event)
-							{
-								if(event.keyCode == 27)
-									closeFileMan();
-								
-							}
-
-							function closeFileMan()
-							{
-								var fileMan=$(".burgeFileMan");
-								
-								fileMan.css("display","none");//.remove();	
-							}
-
-							function fileSelected(path)
-							{
-								$("#img-"+activeLang).prop("src",path);
-								$("input[name='"+activeLang+"[cd_image]']").val(path);
-								$("#del-img-"+activeLang).prop("checked",false);
-								lastImages[activeLang]="";
-								closeFileMan();
-							}
-
-							var lastImages=[];
-
-							function deleteImage(lang)
-							{
-								if(typeof(lastImages[lang])==="undefined" || lastImages[lang]=="")
-								{
-									lastImages[lang]=$("#img-"+lang).prop("src");
-									$("input[name='"+lang+"[cd_image]']").val("");
-									$("#img-"+lang).prop("src","{no_image_url}");
-								}
-								else
-								{
-									$("input[name='"+lang+"[cd_image]']").val(lastImages[lang]);
-									$("#img-"+lang).prop("src",lastImages[lang]);	
-									lastImages[lang]="";
-								}
-							}
 						</script>
 					</div>
+					<div class="row even-odd-bg">
+						<div class="three columns">
+							<span>{show_in_list_text}</span>
+						</div>
+						<div class="nine columns">
+							<input type="checkbox" class="graphical" name="category_show_in_list" 
+								<?php if($info[$selected_lang]['category_show_in_list']) echo 'checked';?>
+							/>
+						</div>
+					</div>
+					<script type="text/javascript">
+						var activeLang;
+
+						function selectImage(lang)
+						{
+							var fileMan=$(".burgeFileMan");
+							if(!fileMan.length)
+								createFileMan();
+
+							fileMan.css("display","block");
+							setTimeout(function()
+							{
+								$(".burgeFileMan iframe")[0].focus();
+							},1000);
+
+							activeLang=lang;
+						}
+
+						function createFileMan()
+						{
+							var src="<?php echo get_link('admin_file_inline');?>";
+							src+="?parent_function=fileSelected";
+							$(document.body).append(
+								"<div class='burgeFileMan' onkeypress='checkExit(event);' tabindex='1' >"
+									+"<div class='bmain'>"
+									+	"<div class='bheader'>File Manager"
+									+		"<button class='close' onclick='closeFileMan()'>×</button>"
+									+ "</div>"
+									+	"<iframe src='"+src+"'></iframe>"
+									+"</div>"
+								+"</div>"
+							);
+						}
+
+						function checkExit(event)
+						{
+							if(event.keyCode == 27)
+								closeFileMan();	
+						}
+
+						function closeFileMan()
+						{
+							var fileMan=$(".burgeFileMan");
+							
+							fileMan.css("display","none");//.remove();	
+						}
+
+						function fileSelected(path)
+						{
+							$("#img-"+activeLang).prop("src",path);
+							$("input[name='"+activeLang+"[cd_image]']").val(path);
+							$("#del-img-"+activeLang).prop("checked",false);
+							lastImages[activeLang]="";
+							closeFileMan();
+						}
+
+						var lastImages=[];
+
+						function deleteImage(lang)
+						{
+							if(typeof(lastImages[lang])==="undefined" || lastImages[lang]=="")
+							{
+								lastImages[lang]=$("#img-"+lang).prop("src");
+								$("input[name='"+lang+"[cd_image]']").val("");
+								$("#img-"+lang).prop("src","{no_image_url}");
+							}
+							else
+							{
+								$("input[name='"+lang+"[cd_image]']").val(lastImages[lang]);
+								$("#img-"+lang).prop("src",lastImages[lang]);	
+								lastImages[lang]="";
+							}
+						}
+					</script>
 					<br><br>
 					<div class="row">
 							<div class="four columns">&nbsp;</div>

@@ -26,3 +26,4 @@ $lang['root']="ریشه";
 $lang['are_you_sure_to_resort']="ترتیب جدید ثبت شود؟";
 $lang['submit_sort']="ثبت ترتیب جدید";
 $lang['category_sorted_successfully']="ترتیب جدید دسته‌ها با موفقیت ثبت شد.";
+$lang['show_in_list']="نمایش در لیست";

@@ -121,6 +121,9 @@
           <?php 
             foreach($categories as $cat)
             {
+              if(!$cat['show_in_list'])
+                continue;
+
               $id=$cat['id'];
               $name=$cat['names'][$selected_lang];
               $link=get_customer_category_details_link($id,$cat['urls'][$selected_lang]);
@@ -131,6 +134,9 @@
                 echo "<ul>\n";
                 foreach($cat['children'] as $child)
                 {
+                  if(!$child['show_in_list'])
+                    continue;
+                  
                   $id=$child['id'];
                   $name=$child['names'][$selected_lang];
                   $link=get_customer_category_details_link($id,$child['urls'][$selected_lang]);
