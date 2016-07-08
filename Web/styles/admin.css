@@ -783,7 +783,8 @@ body.ltr .category-div li {
     border-radius: 5px;
     padding: 10px; }
   .category-list .cat > div:hover {
-    cursor: move; }
+    cursor: move;
+    box-shadow: 2px 2px 5px #555; }
   .category-list .cat .id {
     color: #C63672; }
   .category-list .cat .cat-sign {

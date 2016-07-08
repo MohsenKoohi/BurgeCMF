@@ -80,6 +80,25 @@ class Category_manager_model extends CI_Model
 		return $ret;		
 	}
 
+	public function sort_categories($cat_ids)
+	{
+		$update_array=array();
+		$i=1;
+		foreach($cat_ids as $cat_id)
+			$update_array[]=array(
+				"category_id"=>$cat_id
+				,"category_sort_order"=>$i++
+			);
+
+		$this->db->update_batch($this->category_table_name,$update_array, "category_id");
+
+		$this->organize();
+		
+		$this->log_manager_model->info("CATEGORY_RESORT",array("category_ids"=>implode(",",$cat_ids)));	
+
+		return;
+	}
+
 	//this method is responsible for creating hierarchical structure of categories,
 	//so we don't need to run multiplt queries to retreive the structure from the database.
 	//it should be updated 

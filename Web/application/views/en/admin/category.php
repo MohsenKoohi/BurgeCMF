@@ -28,10 +28,9 @@
 								$par_names[]=$categories[$par_id]['names'][$selected_lang];
 						}
 						$par_names[]=" ";
-						//bprint_r($par_names);
 						$par_name=implode($next_category_sign_text, $par_names);	
 				?>				
-					<div class="cat columns">
+					<div class="cat columns" data-cat-id="<?php echo $cat['id'];?>" >
 						<div>
 							<div class="id">
 								#<?php echo $cat['id'];?>
@@ -56,12 +55,12 @@
 			</div>
 			<?php echo form_open(get_link("admin_category"),array("id"=>"resort")); ?>
 				<input type="hidden" name="post_type" value="resort"/>
-				<input type="hidden" name="sort" value=""/>
+				<input type="hidden" name="ids" value=""/>
 			</form>
 			<br><br>
 			<div class="row">
 				<div class="four columns">&nbsp;</div>
-				<div type="submit" class="button sub-primary button-type2 four columns" onclick="submitSort()">
+				<div class="button sub-primary button-type2 four columns" onclick="submitSort()">
 					{submit_sort_text}
 				</div>
 			</div>
@@ -76,6 +75,14 @@
 					if(!confirm("{are_you_sure_to_resort_text}"))
 						return;
 					
+					var ids=[];
+					$(".category-list .cat").each(function(index,el)
+					{
+						ids.push($(el).data("cat-id"));
+					});
+
+					$("form#resort input[name=ids]").val(ids.join(','));
+
 					$("form#resort").submit();
 				}
 

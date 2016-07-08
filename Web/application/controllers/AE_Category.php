@@ -16,6 +16,9 @@ class AE_Category extends Burge_CMF_Controller {
 		if($this->input->post("post_type")==="add_category")
 			return $this->add_category();
 
+		if($this->input->post("post_type")==="resort")
+			return $this->resort();
+
 		$this->data['message']=get_message();
 
 		$this->data['categories']=$this->category_manager_model->get_all();
@@ -25,6 +28,18 @@ class AE_Category extends Burge_CMF_Controller {
 		$this->send_admin_output("category");
 
 		return;
+	}
+
+	private function resort()
+	{
+		$ids=$this->input->post("ids");
+		$ids=explode(",",$ids);
+
+		$this->category_manager_model->sort_categories($ids);
+
+		set_message($this->lang->line("category_sorted_successfully"));
+
+		return redirect(get_link("admin_category"));
 	}
 
 	private function add_category($parent_id=0)

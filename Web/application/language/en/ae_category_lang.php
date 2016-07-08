@@ -23,3 +23,6 @@ $lang['deleted_successfully']="The category deleted successfully.";
 $lang['no_title']="No title";
 $lang['parent']="Parent";
 $lang['root']="Root";
+$lang['are_you_sure_to_resort']="Are you sure to submit this new sorting?";
+$lang['submit_sort']="Save Sorting";
+$lang['category_sorted_successfully']="New order of categories saved successfully.";
