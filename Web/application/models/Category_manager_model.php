@@ -27,6 +27,7 @@ class Category_manager_model extends CI_Model
 			"CREATE TABLE IF NOT EXISTS $tbl_name (
 				`category_id` INT AUTO_INCREMENT
 				,`category_parent_id` INT DEFAULT 0
+				,`category_sort_order` INT DEFAULT 0
 				,PRIMARY KEY (category_id)	
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8"
 		);
@@ -88,7 +89,7 @@ class Category_manager_model extends CI_Model
 			->select("*")
 			->from($this->category_table_name)
 			->join($this->category_description_table_name,"category_id = cd_category_id","left")
-			->order_by("category_id ASC, cd_lang_id ASC")
+			->order_by("category_sort_order ASC, category_id ASC, cd_lang_id ASC")
 			->get();
 
 		$rows=$result->result_array();

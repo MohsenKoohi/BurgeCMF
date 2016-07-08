@@ -21,3 +21,62 @@ body.ltr .category-div li
 {
 	border-left:1px dotted #555;
 }
+
+.category-list
+{
+	.cat
+	{
+		padding:5px;
+		width:33%;
+		> div
+		{
+			border:1px solid #ccc;
+			border-radius: 5px;
+			padding:10px;
+		}
+
+		> div:hover
+		{
+			cursor:move;
+		}
+
+		.id
+		{
+			color:$secondary-color;
+		}
+
+		.cat-sign
+		{
+			font-family: tahoma;	
+			color:$primary-color;
+		}
+
+		.name
+		{
+			font-size:1.3em;
+			text-align: center;
+			margin-top:20px;
+			padding:5px 0;
+			border-radius: 5px;
+			background-color: $primary-color;
+
+			a
+			{
+				color:white;
+			}
+		}
+
+		.parent
+		{
+			font-size: .8em;
+			height:20px;
+		}
+
+		.parent,.name
+		{
+			text-overflow: ellipsis;
+    		overflow: hidden;
+    		white-space: nowrap;
+		}
+	}
+}

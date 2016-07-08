@@ -775,6 +775,37 @@ body.rtl .category-div li {
 body.ltr .category-div li {
   border-left: 1px dotted #555; }
 
+.category-list .cat {
+  padding: 5px;
+  width: 33%; }
+  .category-list .cat > div {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px; }
+  .category-list .cat > div:hover {
+    cursor: move; }
+  .category-list .cat .id {
+    color: #C63672; }
+  .category-list .cat .cat-sign {
+    font-family: tahoma;
+    color: #0C7B77; }
+  .category-list .cat .name {
+    font-size: 1.3em;
+    text-align: center;
+    margin-top: 20px;
+    padding: 5px 0;
+    border-radius: 5px;
+    background-color: #0C7B77; }
+    .category-list .cat .name a {
+      color: white; }
+  .category-list .cat .parent {
+    font-size: .8em;
+    height: 20px; }
+  .category-list .cat .parent, .category-list .cat .name {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap; }
+
 .burgeFileMan {
   position: fixed;
   width: 100%;

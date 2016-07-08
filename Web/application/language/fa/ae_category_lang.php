@@ -23,3 +23,5 @@ $lang['deleted_successfully']="دسته موردنظر با موفقیت حذف 
 $lang['no_title']="بدون نام";
 $lang['parent']="دسته پدر";
 $lang['root']="ریشه";
+$lang['are_you_sure_to_resort']="ترتیب جدید ثبت شود؟";
+$lang['submit_sort']="ثبت ترتیب جدید";
