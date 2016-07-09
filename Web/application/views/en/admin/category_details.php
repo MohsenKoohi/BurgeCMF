@@ -13,6 +13,7 @@
 		<?php 
 			}else{ 
 		?>
+			<script src="{scripts_url}/tinymce/tinymce.min.js"></script>
 			<div class="container">
 				<div class="row general-buttons">
 					<div class="two columns half-col-margin button sub-primary button-type2" onclick="deleteCategory()">
@@ -23,7 +24,7 @@
 					</div>
 				</div>
 				<br><br>
-				<?php echo form_open(get_admin_category_details_link($category_id),array()); ?>
+				<?php echo form_open(get_admin_category_details_link($category_id),array("onsubmit"=>"return formSubmit();")); ?>
 					<input type="hidden" name="post_type" value="edit_category" />
 					
 					<div class="tab-container">
@@ -117,7 +118,7 @@
 											<span>{description_text}</span>
 										</div>
 										<div class="nine columns ">
-											<textarea class="full-width" rows="3"
+											<textarea class="full-width" rows="10"
 												name="<?php echo $lang;?>[cd_description]"
 											><?php echo $cd['cd_description']; ?></textarea>
 										</div>
@@ -315,6 +316,14 @@
 							$("#parent-category input[name=category][value="+parId+"]").trigger("change");
 						});
 
+						function formSubmit()
+						{
+							if(!confirm("{are_you_sure_to_submit_text}"))
+								return false;
+
+							return true;
+						}
+
 	              	function deleteCategory()
 						{
 							if(!confirm("{are_you_sure_to_delete_this_category_text}"))
@@ -328,6 +337,85 @@
 							$("form#delete input[name=post_type]").val("add_sub_category");
 							$("form#delete").submit();
 						}
+
+						$(window).load(initializeTextAreas);
+						var tmTextAreas=[];
+						<?php
+							foreach($all_langs as $lang => $value)
+								echo "\n".'tmTextAreas.push("textarea[name=\''.$lang.'[cd_description]\']");';
+						?>
+						var tineMCEFontFamilies=
+							"Mitra= b mitra, mitra;Yagut= b yagut, yagut; Titr= b titr, titr; Zar= b zar, zar; Koodak= b koodak, koodak;"+
+							+"Andale Mono=andale mono,times;"
+							+"Arial=arial,helvetica,sans-serif;"
+							+"Arial Black=arial black,avant garde;"
+							+"Book Antiqua=book antiqua,palatino;"
+							+"Comic Sans MS=comic sans ms,sans-serif;"
+							+"Courier New=courier new,courier;"
+							+"Georgia=georgia,palatino;"
+							+"Helvetica=helvetica;"
+							+"Impact=impact,chicago;"
+							+"Symbol=symbol;"
+							+"Tahoma=tahoma,arial,helvetica,sans-serif;"
+							+"Terminal=terminal,monaco;"
+							+"Times New Roman=times new roman,times;"
+							+"Trebuchet MS=trebuchet ms,geneva;"
+							+"Verdana=verdana,geneva;"
+							+"Webdings=webdings;"
+							+"Wingdings=wingdings,zapf dingbats";
+						var tinyMCEPlugins="directionality textcolor link image hr emoticons2 lineheight colorpicker media";
+						var tinyMCEToolbar=[
+						   "link image media hr bold italic underline strikethrough alignleft aligncenter alignright alignjustify styleselect formatselect fontselect fontsizeselect  emoticons2",
+						   "cut copy paste bullist numlist outdent indent forecolor backcolor removeformat  ltr rtl lineheightselect "
+						];
+
+						
+						function RoxyFileBrowser(field_name, url, type, win)
+						{
+							var roxyFileman ="<?php echo get_link('admin_file_inline');?>";
+
+							if (roxyFileman.indexOf("?") < 0) {     
+							 roxyFileman += "?type=" + type;   
+							}
+							else {
+							 roxyFileman += "&type=" + type;
+							}
+							roxyFileman += '&input=' + field_name + '&value=' + win.document.getElementById(field_name).value;
+							if(tinyMCE.activeEditor.settings.language){
+							 roxyFileman += '&langCode=' + tinyMCE.activeEditor.settings.language;
+							}
+							tinyMCE.activeEditor.windowManager.open({
+							  file: roxyFileman,
+							  title: 'Roxy Fileman',
+							  width: 850, 
+							  height: 650,
+							  resizable: "yes",
+							  plugins: "media",
+							  inline: "yes",
+							  close_previous: "no"  
+							}, {     window: win,     input: field_name    });
+						
+							return false; 
+						}
+
+						function initializeTextAreas()
+						{
+							for(i in tmTextAreas)
+			               tinymce.init({
+									selector: tmTextAreas[i]
+									,plugins: tinyMCEPlugins
+									,file_browser_callback: RoxyFileBrowser
+									//,width:"600"
+									,height:"600"
+									,convert_urls:false
+									,toolbar: tinyMCEToolbar
+									,font_formats:tineMCEFontFamilies
+									,media_live_embeds: true
+		               	});
+							
+							setTimeout(setupMovingHeader,1000);
+	              	}
+
 					</script>
 				</div>
 			</div>

@@ -102,6 +102,7 @@ class AE_Category extends Burge_CMF_Controller {
 		foreach($this->language->get_languages() as $lang=>$name)
 		{
 			$category_content=$this->input->post($lang);
+			$category_content['cd_description']=$_POST[$lang]['cd_description'];
 			$category_content['cd_lang_id']=$lang;
 
 			$props['descriptions'][]=$category_content;

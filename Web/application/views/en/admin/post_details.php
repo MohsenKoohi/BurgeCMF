@@ -543,12 +543,12 @@
               	}
 
               	function deletePost()
-						{
-							if(!confirm("{are_you_sure_to_delete_this_post_text}"))
-								return;
+					{
+						if(!confirm("{are_you_sure_to_delete_this_post_text}"))
+							return;
 
-							$("form#delete").submit();
-						}
+						$("form#delete").submit();
+					}
 					</script>
 				</div>
 			</div>
