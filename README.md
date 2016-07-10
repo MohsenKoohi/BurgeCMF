@@ -8,7 +8,7 @@
 * Multi-user admin environments with ability to set access level for each user
 * Default view files for different languages (Default lanaguages are Persian, and English) and different devices to support fast developing of new modules
 * Visiting counter module 
-* Log manager module with ability of tracking all events occured by users and visitors, and also reporting what has been happen
+* Log manager module with ability of tracking all events occured by users and visitors, and also reporting what has been happened
 * Posts and Categories modules, which creates a simple blogging system as default
 * File Manager
 
