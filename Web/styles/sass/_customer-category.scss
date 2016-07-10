@@ -51,8 +51,17 @@ body.ltr .post-date
 
 .container.category .post-short-desc
 {
-	text-align: justify;
 	color:black;
+}
+
+body.rtl .container.category .post-short-desc
+{
+	text-align: justify;
+
+	h1,h2,h3,h4,h5,h6
+	{
+		text-align: right;
+	}
 }
 
 .container.category .read-more

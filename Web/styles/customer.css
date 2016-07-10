@@ -773,8 +773,12 @@ body.ltr .post-date {
         max-height: 300px; } }
 
 .container.category .post-short-desc {
-  text-align: justify;
   color: black; }
+
+body.rtl .container.category .post-short-desc {
+  text-align: justify; }
+  body.rtl .container.category .post-short-desc h1, body.rtl .container.category .post-short-desc h2, body.rtl .container.category .post-short-desc h3, body.rtl .container.category .post-short-desc h4, body.rtl .container.category .post-short-desc h5, body.rtl .container.category .post-short-desc h6 {
+    text-align: right; }
 
 .container.category .read-more {
   color: #0C7B77;
