@@ -19,8 +19,8 @@ $(window).load(function()
     }
   });
 
-  setupMovingHeader();
-  $(window).on('resize',setupMovingHeader);
+  windowResizedDefault();
+  $(window).on('resize',windowResizedDefault);
 
   changeGraphicalCheckBoxes();
 
@@ -43,22 +43,20 @@ function setCheckBoxGraphical(el)
   var html='<div class="checkbox-holder">'+html+'<label><i></i></label></div>';
   $(el).replaceWith(html);  
 }
-    
-//no moving header
-function setupMovingHeader()
+
+function windowResizedDefault()
 {
   
-  var winHeight=$(window).height();
   var winWidth=$(window).width();
-  
-  $(".main").css("min-height",winHeight);
-  $(".message-main").css("height","auto");
+  var winHeight=$(window).height();
+
   $(".side-menu .mobile .click").unbind("click");
-  $(".main").css("height","auto");
+  $(".side-menu ul").removeClass("active");
+  $(".main").css("min-height",winHeight);
 
   if(winWidth<=600)
   {
-    $(".side-menu").css("min-height","none").css("height","auto");
+    $(".main").css("min-height");
     $(".side-menu .mobile .click").click(function()
       {
         $(".side-menu ul").toggleClass("active");
@@ -66,97 +64,13 @@ function setupMovingHeader()
   }
   else
   {
-    var sm_h=$(".side-menu").outerHeight();      
-    var m_h=$(".message-main").outerHeight();    
-    var height=Math.max(sm_h,m_h);
-    $(".side-menu,.message-main").outerHeight(height);
-    if($(".message").length)
-      height-=$(".message").outerHeight()+10; //10:margin-top
-    $(".main").outerHeight(height);
-  }
-
-  return;
-}
     
-//with moving header
-function setupMovingHeader_with_moving_header()
-{
-
-  $(".main").css("min-height",$(window).height());
-
-  var header=$(".side-menu");
-  if(!header.length)
-    return;
-
-  var movingHeader=$(".side-menu.moving");
-  if(!movingHeader.length)
-  {
-    movingHeader=$("<div class='side-menu moving'>"+header.html()+"</div>");
-    $(document.body).append(movingHeader);
-
-      $(".side-menu .mobile .click").click(function()
-      {
-        $(".side-menu ul").toggleClass("active");
-      });
   }
-  movingHeader.css("display","none");
-
-  setTimeout(function()
-  {
-    var right=Math.max(0,header.offset().left);
-    movingHeader.css({"right":right+"px"});
-  },5);
-
-
-  var jWin=$(window);
-  var winWidth=jWin.width();
-  var winHeight=jWin.height();
-  var docHeight=$("body").height(); 
-
-  jWin.unbind("scroll");
- 
-  $(".main").css("min-height",winHeight);
-  $(".main").outerHeight("auto");
-  $(".side-menu").css("min-height","auto");
-  $(".side-menu").outerHeight("auto");
-
-  if(winWidth<=600)
-    jWin.scroll(function()
-    { 
-      if(jWin.scrollTop()>300)
-      {
-
-        if(movingHeader.css("display")=="block")
-          return;
-
-        var right=Math.max(0,header.offset().left);
-
-        movingHeader.css({"display":"block","right":right+"px"});
-      }
-      else
-      {
-        movingHeader.css("display","none");
-      }
-    });
-  else
-  {
-    $(".side-menu").css("min-height",winHeight);
-
-    setTimeout(function()
-    {
-      var sm_h=$(".side-menu").outerHeight();      
-      var m_h=$(".main").outerHeight();  
-      $(".side-menu").outerHeight(Math.max(sm_h,m_h));
-      $(".main").outerHeight(Math.max(sm_h,m_h));
-    },5);
-  }
-
-  jWin.trigger("scroll");
 
   return;
 }
 
-setupMovingHeader();
+windowResizedDefault();
 
 /*!
  * jQuery Browser Plugin 0.0.8

@@ -68,24 +68,26 @@
   <div class="content">
     <div>
       <?php if(isset($user_logged_in) && $user_logged_in) { ?>
-        <div class="side-menu">
-          <div class="mobile">
-            <img src="{images_url}/logo-text.png"/>
-            <div class="click">
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
+        <div class="side-menu-container">
+          <div class="side-menu">
+            <div class="mobile">
+              <img src="{images_url}/logo-text.png"/>
+              <div class="click">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
             </div>
-          </div>
-           <ul class="side-menu-ul">
-            <?php 
-              if(isset($side_menu_modules))
-                foreach ($side_menu_modules as $mod) 
-                  echo "<li><a href='".$mod['link']."'>".$mod['name']."</a></li>\n";
-            ?>
-          </ul>
-        </div><?php } ?>
+             <ul class="side-menu-ul">
+              <?php 
+                if(isset($side_menu_modules))
+                  foreach ($side_menu_modules as $mod) 
+                    echo "<li><a href='".$mod['link']."'>".$mod['name']."</a></li>\n";
+              ?>
+            </ul>
+          </div><?php } ?>
+        </div>
 
       <div class="message-main">
         <?php if(isset($message) && strlen($message)>0)

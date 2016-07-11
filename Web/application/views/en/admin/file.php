@@ -12,8 +12,6 @@
 			$("#inline")
 				.prop("src","<?php echo get_link('admin_file_inline');?>")
 				.css("height",$(window).height()-100);
-
-			setTimeout(setupMovingHeader,500);
 		});
 	</script>
 </div>

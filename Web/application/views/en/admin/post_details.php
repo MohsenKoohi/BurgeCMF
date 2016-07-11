@@ -137,23 +137,6 @@
 
 									   e.preventDefault();
 									   
-									   <?php if(0) { ?>
-										   //since each tab has different height, 
-										   //we should reequalize  height of sidebar and main div.
-										   //may be a bad hack,
-										   //which should be corrected in future versions.
-										   //
-										   //what should we  do ?
-										   //we should allow developers to register a list of functions 
-										   //to be called on document\.ready event,
-										   //but each function has a priority, 
-										   //so we can sort their execution by that priority.
-										   //and this will solve the problem
-										   //for example in this situation, in each load, we should first equalize height of
-										   //all tabs, and then call setupMovingHeader 
-										   //in this way we don't need to call setupMovingHeader in each tab change event
-										<?php } ?>
-									   setupMovingHeader();
 									});
 								});
 							});
@@ -377,8 +360,6 @@
 						setCheckBoxGraphical($("input[type=checkbox]",html)[0]);
 
 						$(el).parent().before(html);
-
-						setupMovingHeader();
 					}
 					//end of gallery operations
 
@@ -538,8 +519,6 @@
 								,font_formats:tineMCEFontFamilies
 								,media_live_embeds: true
 	               	});
-						
-						setTimeout(setupMovingHeader,1000);
               	}
 
               	function deletePost()

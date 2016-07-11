@@ -43,7 +43,7 @@
 	font-size:1.2em;
 	display: inline-block;
 	vertical-align: top;
-	height: 100%;
+	height: auto;
 	padding:10px;
 	margin:0;
 	box-sizing:border-box;
@@ -53,26 +53,69 @@
 
 body.rtl .side-menu
 {
-	float:right;
 	background:linear-gradient(to left, #fff,#bbb);
 }
 body.ltr .side-menu
 {
-	float:left;
 	background:linear-gradient(to right, #fff,#bbb);
 }
 
 
 @media (min-width: 600px)
 {
-	body.ltr .side-menu:not(.moving)
+	body.ltr .side-menu
 	{
 		margin-right: 10px;	
 	}
 
-	body.rtl .side-menu:not(.moving)
+	body.rtl .side-menu
 	{
 		margin-left: 10px;	
+	}
+
+	.content > div
+	{
+		display: table;
+		width:100%;
+		height:100%;
+		
+		.side-menu-container
+		{
+			display:table-cell;
+			width:20%;
+			height: 100%;
+			vertical-align: top;
+
+			.side-menu
+			{
+				height:100%;
+				width: 100%;
+			}
+		}
+
+		.message-main
+		{
+			display: table-cell;
+			width:80%;
+			height:100%;
+			vertical-align: top;
+
+			.main
+			{
+				
+			}
+		}
+
+	}
+
+	body.ltr .side-menu-container
+	{
+		padding-right:10px
+	}
+
+	body.rtl .side-menu-container
+	{
+		padding-left:10px
 	}
 }
 
@@ -132,18 +175,12 @@ body.ltr .side-menu-ul a:hover
 	display: none;
 }
 
-
 @media (max-width: 600px)
 {
 	.message-main
 	{
 		display:block;
 		width:100%;
-	}
-
-	body.rtl .side-menu, body.ltr .side-menu
-	{
-		float:none;
 	}
 
 	body.rtl .side-menu,body.ltr .side-menu
@@ -153,32 +190,9 @@ body.ltr .side-menu-ul a:hover
 		padding: 0;
 		margin: 0 0 10px 0;
 		background:linear-gradient(to left,rgba(255,255,255,1), rgba(255,255,255,.3), rgba(255,255,255,1));
-		height:80px;
 		z-index: 10;
 		position: relative;
 		transition: background-color .3s;
-	}
-
-	.side-menu.moving
-	{
-		//background:linear-gradient(to left,rgba(255,255,255,1), rgba(80,80,80,.6), rgba(255,255,255,1));
-		width:95%;		
-		top:0;
-		position: fixed;
-		box-shadow: inset 0px -1px 1px #555;//,inset -1px -1px 2px #555;
-		border-radius: 0px;
-
-	}
-
-	.side-menu.moving:hover 
-	{
-		background-color: white;
-		transition: background-color .3s;
-	}
-
-	.side-menu.moving ul
-	{
-		margin-top: 0;
 	}
 
 	.side-menu .mobile
@@ -273,8 +287,8 @@ body.ltr .side-menu-ul a:hover
 	.side-menu ul.active
 	{
 		display: block;
-
 	}
+
 }
 
 .main h1,.main h3,.main h5

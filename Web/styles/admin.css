@@ -321,7 +321,7 @@ body.ltr .top-menu > ul > li, body.rtl .top-menu > ul > li {
   font-size: 1.2em;
   display: inline-block;
   vertical-align: top;
-  height: 100%;
+  height: auto;
   padding: 10px;
   margin: 0;
   box-sizing: border-box;
@@ -329,19 +329,41 @@ body.ltr .top-menu > ul > li, body.rtl .top-menu > ul > li {
   width: calc(20% - 10px); }
 
 body.rtl .side-menu {
-  float: right;
   background: linear-gradient(to left, #fff, #bbb); }
 
 body.ltr .side-menu {
-  float: left;
   background: linear-gradient(to right, #fff, #bbb); }
 
 @media (min-width: 600px) {
-  body.ltr .side-menu:not(.moving) {
+  body.ltr .side-menu {
     margin-right: 10px; }
 
-  body.rtl .side-menu:not(.moving) {
-    margin-left: 10px; } }
+  body.rtl .side-menu {
+    margin-left: 10px; }
+
+  .content > div {
+    display: table;
+    width: 100%;
+    height: 100%; }
+    .content > div .side-menu-container {
+      display: table-cell;
+      width: 20%;
+      height: 100%;
+      vertical-align: top; }
+      .content > div .side-menu-container .side-menu {
+        height: 100%;
+        width: 100%; }
+    .content > div .message-main {
+      display: table-cell;
+      width: 80%;
+      height: 100%;
+      vertical-align: top; }
+
+  body.ltr .side-menu-container {
+    padding-right: 10px; }
+
+  body.rtl .side-menu-container {
+    padding-left: 10px; } }
 .side-menu-ul, .side-menu ul {
   list-style: none; }
 
@@ -384,32 +406,14 @@ body.ltr .side-menu-ul a:hover {
     width: 100%; }
 
   body.rtl .side-menu, body.ltr .side-menu {
-    float: none; }
-
-  body.rtl .side-menu, body.ltr .side-menu {
     display: inline-block;
     width: 100%;
     padding: 0;
     margin: 0 0 10px 0;
     background: linear-gradient(to left, white, rgba(255, 255, 255, 0.3), white);
-    height: 80px;
     z-index: 10;
     position: relative;
     transition: background-color .3s; }
-
-  .side-menu.moving {
-    width: 95%;
-    top: 0;
-    position: fixed;
-    box-shadow: inset 0px -1px 1px #555;
-    border-radius: 0px; }
-
-  .side-menu.moving:hover {
-    background-color: white;
-    transition: background-color .3s; }
-
-  .side-menu.moving ul {
-    margin-top: 0; }
 
   .side-menu .mobile {
     vertical-align: middle;
