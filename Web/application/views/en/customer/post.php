@@ -17,8 +17,10 @@
 		<div class="post-date"><?php echo str_replace("-","/",$post_info['post_date']);?></div>
 		<div class="row">
 			<?php if($post_info['pc_image']) { ?>
-				<div class="post-img lazy-load" data-ll-type="background-image"
-				 data-ll-url="<?php echo $post_info['pc_image'];?>">
+				<div class="post-img">
+					<img class="lazy-load" data-ll-type="src"
+						data-ll-url="<?php echo $post_info['pc_image'];?>"
+					/>
 				</div>
 				<br><br>
 			<?php } ?>
