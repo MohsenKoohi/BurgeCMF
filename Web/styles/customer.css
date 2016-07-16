@@ -818,10 +818,16 @@ body.ltr .container.category .read-more {
   margin-top: 25px;
   padding: 25px 0;
   border-bottom: 1px dotted #ccc; }
-  .post-gallery > div {
+  .post-gallery .img-div {
     padding: 5px;
     line-height: 0;
     cursor: pointer; }
+  @media (max-width: 1000px) {
+    .post-gallery .img-div {
+      width: 50%; } }
+  @media (max-width: 600px) {
+    .post-gallery .img-div {
+      width: 100%; } }
   .post-gallery .img {
     width: 100%;
     height: 300px;

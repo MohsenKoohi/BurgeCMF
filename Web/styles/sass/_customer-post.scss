@@ -41,12 +41,29 @@
 	padding:25px 0;
 	border-bottom: 1px dotted #ccc;
 	
-	> div
+	.img-div
 	{
 		padding:5px; 
 		line-height: 0;
 		cursor: pointer
 	}
+
+	@media (max-width: 1000px)
+	{
+		.img-div
+		{
+			width:50%;
+		}	
+	}
+
+	@media (max-width: 600px)
+	{
+		.img-div
+		{
+			width:100%;
+		}
+	}
+
 	
 	.img
 	{
