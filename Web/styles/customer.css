@@ -315,6 +315,7 @@ body.ltr .top-menu > ul > li, body.rtl .top-menu > ul > li {
   margin-bottom: 10px; }
 
 .main {
+  height: 100%;
   background-color: white; }
 
 .side-menu {
