@@ -48,22 +48,13 @@
 		cursor: pointer
 	}
 
-	@media (max-width: 1000px)
+	@media (max-width: 1000px) and (min-width:600px)
 	{
 		.img-div
 		{
 			width:50%;
 		}	
 	}
-
-	@media (max-width: 600px)
-	{
-		.img-div
-		{
-			width:100%;
-		}
-	}
-
 	
 	.img
 	{
