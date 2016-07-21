@@ -779,6 +779,8 @@ body.ltr .post-date {
 
 .container.category .post-short-desc {
   color: black; }
+  .container.category .post-short-desc h1, .container.category .post-short-desc h2, .container.category .post-short-desc h3, .container.category .post-short-desc h4, .container.category .post-short-desc h5, .container.category .post-short-desc h6 {
+    margin-bottom: 0; }
 
 body.rtl .container.category .post-short-desc {
   text-align: justify; }
@@ -814,6 +816,8 @@ body.ltr .container.category .read-more {
 .post-content img, .post-content video {
   height: auto;
   max-width: 100%; }
+.post-content h1, .post-content h2, .post-content h3, .post-content h4, .post-content h5, .post-content h6 {
+  margin-bottom: 0; }
 
 .post-gallery {
   margin-top: 25px;
