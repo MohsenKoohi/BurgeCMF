@@ -153,7 +153,9 @@
 							?>
 								<div class="three columns lang-en">
 									<span><?php echo $key;?></span>
-									<label class="lang-en"><?php echo $value;?></label>
+									<label class="lang-en" data-value-type=<?php echo $key;?>>
+										<?php echo $value;?>
+									</label>
 								</div>
 							<?php } ?>				
 						</div>
@@ -171,6 +173,28 @@
 					$(el).prop("title",$(el).text());
 				}
 			);
+
+			$(".row.even-odd-bg div.three.columns label[data-value-type=ip]").mouseover(function(event)
+			{
+				var el=$(event.target);
+				if(el.data('ip-queried'))
+					return;
+
+				el.data('ip-queried',1);
+				url="http://ip-api.com/json/"+el.html();
+				$.get(url,function(info)
+				{
+					var newVal=el.html()
+						+"<br>"+info.country
+						+"<br>"+info.city
+						+"<br>"+info.isp
+						+"<br>"+info.as;
+					el.html(newVal);
+
+				});
+
+				return;
+			});
 		});
 	</script>
 </div>
