@@ -28,6 +28,7 @@ class Log_manager_model extends CI_Model
 		,"MODULE_UNINSTALL"		=>52
 		,"MODULE_ADD"				=>53
 		,"MODULE_ADD_NAME"		=>54
+		,"MODULE_RESORT"			=>55
 
 		,"ACCESS_ALLOW_USER"		=>81
 		,"ACCESS_UNSET_USER"		=>82

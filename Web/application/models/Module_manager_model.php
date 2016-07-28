@@ -88,6 +88,23 @@ class Module_manager_model extends CI_Model
 		return $results->result_array();
 	}
 
+	public function resort($module_ids)
+	{
+		$update_array=array();
+		$i=1;
+		foreach($module_ids as $module_id)
+			$update_array[]=array(
+				"module_id"=>$module_id
+				,"sort_order"=>$i++
+			);
+
+		$this->db->update_batch("module",$update_array, "module_id");
+		
+		$this->log_manager_model->info("MODULE_RESORT",array("module_ids"=>implode(",",$module_ids)));	
+
+		return;
+	}
+
 	//In next version we should allow for one module to have multiple items
 	//in side menu, or dashboard, thus we should set the name of method
 	//in addition to model, and separate it by "/", to allow the

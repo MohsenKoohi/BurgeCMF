@@ -30,7 +30,7 @@
 						$par_names[]=" ";
 						$par_name=implode($next_category_sign_text, $par_names);	
 				?>				
-					<div class="cat columns" data-cat-id="<?php echo $cat['id'];?>" >
+					<div class="three columns cat" data-cat-id="<?php echo $cat['id'];?>" >
 						<div>
 							<div class="id">
 								#<?php echo $cat['id'];?>
