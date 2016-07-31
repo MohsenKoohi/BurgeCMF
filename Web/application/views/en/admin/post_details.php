@@ -30,6 +30,12 @@
 						<div class="six columns">
 							<input type="text" class="full-width ltr" name="post_date" value="<?php echo $post_info['post_date'];?>" />
 						</div>
+						<div class="three columns">
+							<img 
+								class="icon update" src="{images_url}/update.png" 
+								onclick="$('[name=post_date]').val('{current_time}');"
+							/>
+						</div>
 					</div>
 					<div class="row even-odd-bg" >
 						<div class="three columns">

@@ -877,3 +877,8 @@ body.ltr .category-div li {
   background-position: center;
   background-color: white;
   cursor: pointer; }
+
+.icon {
+  height: 40px;
+  vertical-align: middle;
+  cursor: pointer; }
