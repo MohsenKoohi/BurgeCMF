@@ -344,15 +344,12 @@ body.ltr .side-menu {
 
   .content > div {
     display: table;
-    width: 100%;
-    height: 100%; }
+    width: 100%; }
     .content > div .side-menu-container {
       display: table-cell;
       width: 20%;
-      height: 100%;
       vertical-align: top; }
       .content > div .side-menu-container .side-menu {
-        height: 100%;
         width: 100%; }
     .content > div .message-main {
       display: table-cell;

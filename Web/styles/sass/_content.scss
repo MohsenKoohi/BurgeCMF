@@ -78,18 +78,15 @@ body.ltr .side-menu
 	{
 		display: table;
 		width:100%;
-		height:100%;
 		
 		.side-menu-container
 		{
 			display:table-cell;
 			width:20%;
-			height: 100%;
 			vertical-align: top;
 
 			.side-menu
 			{
-				height:100%;
 				width: 100%;
 			}
 		}
