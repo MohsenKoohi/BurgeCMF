@@ -17,9 +17,7 @@ body {
 
 .rtl {
   direction: rtl;
-  text-align: justify; }
-  .rtl h1, .rtl h2, .rtl h3, .rtl h4, .rtl h5, .rtl h6 {
-    text-align: right; }
+  text-align: right; }
 
 .fa {
   font-family: b koodak, koodak, tahoma; }
