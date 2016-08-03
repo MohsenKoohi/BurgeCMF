@@ -132,7 +132,6 @@ class Post_manager_model extends CI_Model
 		
 		$this->set_post_query_filter($filter);
 
-		$this->db->order_by("post_id DESC");
 		$results=$this->db->get();
 
 		$rows=$results->result_array();
@@ -175,7 +174,12 @@ class Post_manager_model extends CI_Model
 			$this->db->where("post_date <",$filter['post_date_le']);
 
 		if(isset($filter['order_by']))
-			$this->db->order_by($filter['order_by']);
+		{
+			if($filter['order_by']==="random")
+				$this->db->order_by("post_id","random");
+			else
+				$this->db->order_by($filter['order_by']);
+		}
 
 		if(isset($filter['start']))
 			$this->db->limit($filter['count'],$filter['start']);
