@@ -36,7 +36,10 @@ class CE_Post extends Burge_CMF_Controller {
 		$this->data['post_info']=$post_info;
 		if($post_info['pc_image'])
 			$this->data['page_main_image']=$post_info['pc_image'];
-
+		else
+			if($this->data['post_gallery'])
+				$this->data['page_main_image']=get_link("post_gallery_url").'/'.$this->data['post_gallery'][0]['image'];
+			
 		$this->data['message']=get_message();
 
 		$this->data['lang_pages']=get_lang_pages(get_customer_post_details_link($post_id,$post_info['pc_title'],TRUE));
