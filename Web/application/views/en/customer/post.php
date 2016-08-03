@@ -31,7 +31,11 @@
 			</div>
 		</div>
 		<div class="row post-gallery">
-			<?php foreach($post_gallery as $img) { ?>
+			<?php 
+				if($post_gallery)
+					foreach($post_gallery as $img)
+					{ 
+			?>
 				<div class="four columns img-div" title="<?php echo $img['text'];?>"  href="{post_gallery_url}/<?php echo $img['image'];?>" >
 					<div class="img lazy-load"  data-ll-url="{post_gallery_url}/<?php echo $img['image'];?>"
 					 data-ll-type="background-image" >
