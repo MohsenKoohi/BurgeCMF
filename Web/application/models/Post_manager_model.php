@@ -180,6 +180,8 @@ class Post_manager_model extends CI_Model
 			else
 				$this->db->order_by($filter['order_by']);
 		}
+		else
+			$this->db->order_by("post_id DESC");	
 
 		if(isset($filter['start']))
 			$this->db->limit($filter['count'],$filter['start']);
