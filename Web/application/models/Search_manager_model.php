@@ -40,7 +40,7 @@ class Search_manager_model extends CI_Model
 			if(!method_exists($model, "search_module"))
 				continue;
 
-			$results[$name]=$model->{"search_module"}($text, $search);
+			$results[$name]=$model->{"search_module"}($text, $filter);
 		}
 
 		return $results;
