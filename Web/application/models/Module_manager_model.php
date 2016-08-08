@@ -78,7 +78,7 @@ class Module_manager_model extends CI_Model
 
 	public function get_all_modules_info($lang)
 	{
-		$this->db->select("module.module_id, module_name");
+		$this->db->select("module.module_id, module_name, model_name");
 		$this->db->from("module_name");
 		$this->db->join("module","module.module_id = module_name.module_id","left");
 		$this->db->where("module_name.lang",$lang);
