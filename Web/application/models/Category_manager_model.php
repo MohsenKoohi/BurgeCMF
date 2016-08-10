@@ -103,7 +103,7 @@ class Category_manager_model extends CI_Model
 	//this method is responsible for creating hierarchical structure of categories,
 	//so we don't need to run multiplt queries to retreive the structure from the database.
 	//it should be updated 
-	private function organize()
+	public function organize()
 	{
 		$result=$this->db
 			->select("*")
@@ -140,6 +140,18 @@ class Category_manager_model extends CI_Model
 
 		$cats[0]=array("id"=>0,"names"=>"ROOT","parents"=>array(0),'children'=>array());
 
+		file_put_contents($this->organized_category_file_path, json_encode($cats));
+
+		return;
+	}
+
+	public function get_all()
+	{
+		if(!file_exists($this->organized_category_file_path))
+			$this->organize();
+
+		$cats=json_decode(file_get_contents($this->organized_category_file_path),TRUE);
+
 		foreach($cats as &$cat)
 		{
 			if(!$cat['id'])
@@ -160,21 +172,6 @@ class Category_manager_model extends CI_Model
 			}
 			while($parent['id']);
 		}
-
-		file_put_contents($this->organized_category_file_path, json_encode($cats));
-
-		//bprint_r($cats);
-		//exit();
-
-		return;
-	}
-
-	public function get_all()
-	{
-		if(!file_exists($this->organized_category_file_path))
-			$this->organize();
-
-		$cats=json_decode(file_get_contents($this->organized_category_file_path),TRUE);
 
 		return $cats;
 	}
@@ -199,7 +196,7 @@ class Category_manager_model extends CI_Model
 
 
 	//creates the hierarchy of categories
-	//using get_all
+	//uses get_all
 	//$type can be radio, or checkbox
 	//$lang is the language selected for the name of each category
 	//$ignore_ids are ids (and their children) which must not have radio or checkbox

@@ -28,3 +28,4 @@ $lang['submit_sort']="Save Sorting";
 $lang['category_sorted_successfully']="New order of categories saved successfully.";
 $lang['show_in_list']="Show in list";
 $lang['are_you_sure_to_submit']="Are you sure to submit changes?";
+$lang['categoies_organized_successfully']="Categories organized successfully.";

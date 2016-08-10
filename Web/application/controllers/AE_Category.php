@@ -30,6 +30,15 @@ class AE_Category extends Burge_CMF_Controller {
 		return;
 	}
 
+	public function organize()
+	{
+		$this->category_manager_model->organize();
+
+		set_message($this->lang->line("categoies_organized_successfully"));
+
+		return redirect(get_link("admin_category"));
+	}
+
 	private function resort()
 	{
 		$ids=$this->input->post("ids");
