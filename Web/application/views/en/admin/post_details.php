@@ -277,7 +277,8 @@
 														<input type='hidden' name='<?php echo $lang;?>[pc_gallery][old_images][]' value='<?php echo $index;?>'/>
 														<div class="five columns">
 															<a href="<?php echo $img_link; ?>" target="_blank">
-																<img src="<?php echo $img_link; ?>"/>
+																<img class="lazy-load" data-ll-type="src"
+																	data-ll-url="<?php echo $img_link; ?>"/>
 															</a>
 														</div>
 														<div class="six columns half-col-margin">
