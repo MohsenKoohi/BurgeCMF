@@ -30,8 +30,14 @@ $lang['description']="توضیح";
 $lang['watermark']="واترمارک";
 $lang['are_you_sure_to_submit']="تغییرات ذخیره شود؟";
 $lang['copy_from']="کپی از";
-$lang['']="";
-$lang['']="";
-$lang['']="";
+
+$lang['results']="نتایج";
+$lang['to']="تا";
+$lang['total_results']="تعداد کل";
+$lang['search_again']="جستجو";
+$lang['page']="صفحه";
+$lang['category']="دسته";
+$lang['start_date']="تاریخ شروع";
+$lang['end_date']="تاریخ پایان";
 $lang['']="";
 $lang['']="";
