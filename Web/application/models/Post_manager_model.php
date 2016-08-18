@@ -143,11 +143,11 @@ class Post_manager_model extends CI_Model
 
 	public function get_total($filter)
 	{
-		$this->db->select("COUNT(*) as count");
+		$this->db->select("COUNT( DISTINCT post_id ) as count");
 		$this->db->from($this->post_table_name);
 		$this->db->join($this->post_content_table_name,"post_id = pc_post_id","left");
 		$this->db->join($this->post_category_table_name,"post_id = pcat_post_id","left");
-			
+		
 		$this->set_post_query_filter($filter);
 		
 		$row=$this->db->get()->row_array();

@@ -48,6 +48,8 @@ class AE_Post extends Burge_CMF_Controller {
 				$page=(int)$this->input->get("page");
 
 			$start=($page-1)*$per_page;
+
+			$filters['group_by']="post_id";
 			$filters['start']=$start;
 			$filters['count']=$per_page;
 			
@@ -57,6 +59,7 @@ class AE_Post extends Burge_CMF_Controller {
 
 			unset($filters['start']);
 			unset($filters['count']);
+			unset($filters['group_by']);
 
 			$this->data['posts_current_page']=$page;
 			$this->data['posts_total_pages']=ceil($total/$per_page);
@@ -74,7 +77,6 @@ class AE_Post extends Burge_CMF_Controller {
 		}
 
 		unset($filters['lang']);
-		unset($filters['group_by']);
 			
 		$this->data['filter']=$filters;
 
@@ -84,7 +86,6 @@ class AE_Post extends Burge_CMF_Controller {
 	private function initialize_filters(&$filters)
 	{
 		$filters['lang']=$this->language->get();
-		$filters['group_by']="post_id";
 
 		if($this->input->get("title"))
 			$filters['title']=$this->input->get("title");
