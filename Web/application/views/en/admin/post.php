@@ -18,19 +18,19 @@
 				</div>
 				<div class="three columns half-col-margin">
 					<label>{start_date_text}</label>
-					<input name="start_date" type="text" class="full-width ltr" value=""/>
+					<input name="post_date_ge" type="text" class="full-width ltr" value=""/>
 				</div>
 				<div class="three columns half-col-margin">
 					<label>{end_date_text}</label>
-					<input name="end_date" type="text" class="full-width ltr" value=""/>
+					<input name="post_date_le" type="text" class="full-width ltr" value=""/>
 				</div>
 				<div class="three columns">
 					<label>{category_text}</label>
-					<select name="category_id" type="text" class="full-width lang-en">
-						<option value=""></option>
+					<select name="category_id" type="text" class="full-width">
+						<option value="">&nbsp;</option>
 						<?php
-							foreach($event_types as $name => $index)
-								echo "<option value='$name'>$name</option>\n";
+							foreach($categories as $category)
+								echo "<option value='".$category['id']."'>".$category['names'][$selected_lang]."</option>\n";
 						?>
 					</select>
 				</div>
@@ -128,23 +128,30 @@
 		</div>
 		<br>
 		<div class="container">
-			<?php $i=1;foreach($posts_info as $post) { ?>
-				<a target="_blank" href="<?php echo get_admin_post_details_link($post['post_id']);?>">
-					<div class="row even-odd-bg" >
-						<div class="nine columns">
-							<span>
-								<?php echo $post['post_id'];?>)
-								<?php 
-									if($post['pc_title']) 
-										echo $post['pc_title'];
-									else
-										echo $no_title_text;
-								?>
-							</span>
-						</div>
-					</div>
-				</a>
-			<?php } ?>
+			<?php 
+				$i=1;
+				if(isset($posts_info))
+					foreach($posts_info as $post)
+					{ 
+			?>
+						<a target="_blank" href="<?php echo get_admin_post_details_link($post['post_id']);?>">
+							<div class="row even-odd-bg" >
+								<div class="nine columns">
+									<span>
+										<?php echo $post['post_id'];?>)
+										<?php 
+											if($post['pc_title']) 
+												echo $post['pc_title'];
+											else
+												echo $no_title_text;
+										?>
+									</span>
+								</div>
+							</div>
+						</a>
+			<?php
+					}
+			?>
 		</div>
 
 	</div>

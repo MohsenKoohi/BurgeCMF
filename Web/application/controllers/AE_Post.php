@@ -21,6 +21,9 @@ class AE_Post extends Burge_CMF_Controller {
 		//we may have some messages that our post has been deleted successfully.
 		$this->data['message']=get_message();
 
+		$this->load->model("category_manager_model");
+		$this->data['categories']=$this->category_manager_model->get_all();
+
 		$this->data['raw_page_url']=get_link("admin_post");
 		$this->data['lang_pages']=get_lang_pages(get_link("admin_post",TRUE));
 		$this->data['header_title']=$this->lang->line("posts");
@@ -39,7 +42,7 @@ class AE_Post extends Burge_CMF_Controller {
 		$total=$this->post_manager_model->get_total($filters);
 		if($total)
 		{
-			$per_page=2;
+			$per_page=20;
 			$page=1;
 			if($this->input->get("page"))
 				$page=(int)$this->input->get("page");
@@ -83,11 +86,20 @@ class AE_Post extends Burge_CMF_Controller {
 		$filters['lang']=$this->language->get();
 		$filters['group_by']="post_id";
 
-		if($this->input->get("subject"))
-			$filters['subject']=$this->input->get("subject");
+		if($this->input->get("title"))
+			$filters['title']=$this->input->get("title");
+
+		if($this->input->get("post_date_le"))
+			$filters['post_date_le']=$this->input->get("post_date_le");
+
+		if($this->input->get("post_date_ge"))
+			$filters['post_date_ge']=$this->input->get("post_date_ge");
 
 		if($this->input->get("status"))
 			$filters['status']=$this->input->get("status");
+
+		if($this->input->get("category_id"))
+			$filters['category_id']=(int)$this->input->get("category_id");
 
 		persian_normalize($filters);
 

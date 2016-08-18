@@ -163,6 +163,13 @@ class Post_manager_model extends CI_Model
 		if(isset($filter['category_id']))
 			$this->db->where("pcat_category_id",$filter['category_id']);
 
+		if(isset($filter['title']))
+		{
+			$title=trim($filter['title']);
+			$title="%".str_replace(" ","%",$title)."%";
+			$this->db->where("( `pc_title` LIKE '$title')");
+		}
+
 		if(isset($filter['active']))
 			$this->db->where(array(
 				"post_active"=>$filter['active']
@@ -170,7 +177,10 @@ class Post_manager_model extends CI_Model
 			));
 
 		if(isset($filter['post_date_le']))
-			$this->db->where("post_date <",$filter['post_date_le']);
+			$this->db->where("post_date <=",$filter['post_date_le']);
+
+		if(isset($filter['post_date_ge']))
+			$this->db->where("post_date >=",$filter['post_date_ge']);
 
 		if(isset($filter['order_by']))
 		{
