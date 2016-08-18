@@ -90,13 +90,23 @@ class AE_Post extends Burge_CMF_Controller {
 			$filters['title']=$this->input->get("title");
 
 		if($this->input->get("post_date_le"))
-			$filters['post_date_le']=$this->input->get("post_date_le");
+		{	
+			$le=$this->input->get("post_date_le");
+			if(sizeof(explode(" ",$le))==1)
+				$le.=" 23:59:59";
+
+			$filters['post_date_le']=$le;
+		}
 
 		if($this->input->get("post_date_ge"))
-			$filters['post_date_ge']=$this->input->get("post_date_ge");
+		{
+			$ge=$this->input->get("post_date_ge");
+			if(sizeof(explode(" ",$ge))==1)
+				$ge.=" 00:00:00";
 
-		if($this->input->get("status"))
-			$filters['status']=$this->input->get("status");
+			$filters['post_date_ge']=$ge;
+		}
+			
 
 		if($this->input->get("category_id"))
 			$filters['category_id']=(int)$this->input->get("category_id");

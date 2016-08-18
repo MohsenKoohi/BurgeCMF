@@ -31,8 +31,14 @@ $lang['description']="Description";
 $lang['watermark']="Watermark";
 $lang['are_you_sure_to_submit']="Are you sure?";
 $lang['copy_from']="Copy from";
-$lang['']="";
-$lang['']="";
-$lang['']="";
+
+$lang['results']="Results";
+$lang['to']="to";
+$lang['total_results']="Total";
+$lang['search_again']="Search";
+$lang['page']="Page";
+$lang['category']="Category";
+$lang['start_date']="Start Time";
+$lang['end_date']="End Time";
 $lang['']="";
 $lang['']="";
