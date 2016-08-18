@@ -148,7 +148,6 @@ class Post_manager_model extends CI_Model
 		$this->db->join($this->post_content_table_name,"post_id = pc_post_id","left");
 		$this->db->join($this->post_category_table_name,"post_id = pcat_post_id","left");
 			
-		$filter['count']=1;
 		$this->set_post_query_filter($filter);
 		
 		$row=$this->db->get()->row_array();
@@ -186,9 +185,8 @@ class Post_manager_model extends CI_Model
 		if(isset($filter['start']))
 			$this->db->limit($filter['count'],$filter['start']);
 
-		if(!isset($filter['count']))
-			if(isset($filter['lang']) || isset($filter['category_id']))
-				$this->db->group_by("post_id");
+		if(isset($filter['group_by']))
+			$this->db->group_by($filter['group_by']);
 	
 		return;
 	}

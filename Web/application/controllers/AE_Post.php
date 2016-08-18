@@ -20,6 +20,8 @@ class AE_Post extends Burge_CMF_Controller {
 
 		//we may have some messages that our post has been deleted successfully.
 		$this->data['message']=get_message();
+
+		$this->data['raw_page_url']=get_link("admin_post");
 		$this->data['lang_pages']=get_lang_pages(get_link("admin_post",TRUE));
 		$this->data['header_title']=$this->lang->line("posts");
 
@@ -31,9 +33,63 @@ class AE_Post extends Burge_CMF_Controller {
 	private function set_posts_info()
 	{
 		$filters=array();
-		$filters['lang']=$this->language->get();
 
-		$this->data['posts_info']=$this->post_manager_model->get_posts($filters);
+		$this->initialize_filters($filters);
+
+		$total=$this->post_manager_model->get_total($filters);
+		if($total)
+		{
+			$per_page=2;
+			$page=1;
+			if($this->input->get("page"))
+				$page=(int)$this->input->get("page");
+
+			$start=($page-1)*$per_page;
+			$filters['start']=$start;
+			$filters['count']=$per_page;
+			
+			$this->data['posts_info']=$this->post_manager_model->get_posts($filters);
+			
+			$end=$start+sizeof($this->data['posts_info'])-1;
+
+			unset($filters['start']);
+			unset($filters['count']);
+
+			$this->data['posts_current_page']=$page;
+			$this->data['posts_total_pages']=ceil($total/$per_page);
+			$this->data['posts_total']=$total;
+			$this->data['posts_start']=$start+1;
+			$this->data['posts_end']=$end+1;		
+		}
+		else
+		{
+			$this->data['posts_current_page']=0;
+			$this->data['posts_total_pages']=0;
+			$this->data['posts_total']=$total;
+			$this->data['posts_start']=0;
+			$this->data['posts_end']=0;
+		}
+
+		unset($filters['lang']);
+		unset($filters['group_by']);
+			
+		$this->data['filter']=$filters;
+
+		return;
+	}
+
+	private function initialize_filters(&$filters)
+	{
+		$filters['lang']=$this->language->get();
+		$filters['group_by']="post_id";
+
+		if($this->input->get("subject"))
+			$filters['subject']=$this->input->get("subject");
+
+		if($this->input->get("status"))
+			$filters['status']=$this->input->get("status");
+
+		persian_normalize($filters);
 
 		return;
 	}
