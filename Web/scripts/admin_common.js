@@ -51,6 +51,7 @@ function windowResizedDefault()
   var winWidth=$(window).width();
   var winHeight=$(window).height();
 
+  $(".side-menu").css("min-height","auto");
   $(".side-menu .mobile .click").unbind("click");
   $(".side-menu ul").removeClass("active");
   $(".main").css("min-height",winHeight);
@@ -65,7 +66,7 @@ function windowResizedDefault()
   }
   else
   {
-    
+    $(".side-menu").css("min-height",winHeight);    
   }
 
   return;
