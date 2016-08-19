@@ -107,9 +107,8 @@ class AE_Post extends Burge_CMF_Controller {
 
 			$filters['post_date_ge']=$ge;
 		}
-			
 
-		if($this->input->get("category_id"))
+		if($this->input->get("category_id")!==NULL)
 			$filters['category_id']=(int)$this->input->get("category_id");
 
 		persian_normalize($filters);

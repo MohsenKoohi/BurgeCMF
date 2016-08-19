@@ -30,7 +30,10 @@
 						<option value="">&nbsp;</option>
 						<?php
 							foreach($categories as $category)
-								echo "<option value='".$category['id']."'>".$category['names'][$selected_lang]."</option>\n";
+								if($category['id'])
+									echo "<option value='".$category['id']."'>".$category['names'][$selected_lang]."</option>\n";
+								else
+									echo "<option value='".$category['id']."'>".$root_text."</option>\n";
 						?>
 					</select>
 				</div>
