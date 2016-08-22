@@ -16,6 +16,13 @@
 			<script src="{scripts_url}/tinymce/tinymce.min.js"></script>
 			<div class="container">
 				<div class="row general-buttons">
+					<a href="{customer_link}" class="two columns " target="_blank">
+						<div class="full-width button sub-primary button-type1">
+							{customer_link_text}
+						</div>
+					</a>
+				</div>
+				<div class="row general-buttons">
 					<div class="two columns button sub-primary button-type2" onclick="deletePost()">
 						{delete_post_text}
 					</div>

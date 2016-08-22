@@ -39,5 +39,6 @@ $lang['page']="صفحه";
 $lang['category']="دسته";
 $lang['start_date']="زمان شروع";
 $lang['end_date']="زمان پایان";
-$lang['']="";
+
+$lang['customer_link']="صفحه مشتری";
 $lang['']="";

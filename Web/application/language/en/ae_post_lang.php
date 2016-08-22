@@ -40,5 +40,6 @@ $lang['page']="Page";
 $lang['category']="Category";
 $lang['start_date']="Start Time";
 $lang['end_date']="End Time";
-$lang['']="";
+
+$lang['customer_link']="Customer Link";
 $lang['']="";

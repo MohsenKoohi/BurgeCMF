@@ -152,11 +152,12 @@ class AE_Post extends Burge_CMF_Controller {
 				,"user_name"=>$post_info[0]['user_name']
 				,"user_id"=>$post_info[0]['user_id']
 				,"categories"=>$post_info[0]['categories']
-				,"post_title"=>$this->data['post_contents'][$this->language->get()]['pc_title']
+				,"post_title"=>$this->data['post_contents'][$this->selected_lang]['pc_title']
 			);
 		else
 			$this->data['post_info']=array();
 
+		$this->data['customer_link']=get_customer_post_details_link($post_id,"");
 		$this->data['current_time']=get_current_time();
 		$this->load->model("category_manager_model");
 		$this->data['categories']=$this->category_manager_model->get_hierarchy("checkbox",$this->selected_lang);
