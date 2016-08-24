@@ -54,6 +54,12 @@ class CE_Category extends Burge_CMF_Controller {
 		$filter['order_by']="post_date DESC";
 
 		$this->data['posts']=$this->post_manager_model->get_posts($filter);
+		foreach($this->data['posts'] as &$post_info)
+		{
+			if(!$post_info['pc_image'])
+				if($post_info['pc_gallery'])
+					$post_info['pc_image']=get_link("post_gallery_url").'/'.$post_info['pc_gallery']['images'][0]['image'];
+		}
 
 		if($page>1)
 			$this->data['header_prev_url']=get_customer_category_details_link($category_id,$category_info['cd_url'],$page-1);
