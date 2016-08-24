@@ -111,7 +111,7 @@ class Access_manager_model extends CI_Model
 		$log_context=array("module"=>$module);
 		$result=FALSE;
 
-		if(!$user || ($module==="login"))
+		if("login" === $module)
 		{
 			$result=TRUE;
 			$log_context['has_access']=TRUE;
