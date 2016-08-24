@@ -291,7 +291,7 @@ class Log_manager_model extends CI_Model
 		$context["event_id"]=$this->event_types[$event_type];
 
 		$CI=&get_instance();
-		if(isset($CI->in_admin_env) && $CI->in_admin_env)
+		if(isset($CI->in_admin_env) && $CI->in_admin_env && $CI->user)
 		{
 			$context["active_user_id"]=$CI->user->get_id();
 			//$context["active_user_code"]=$CI->user->get_id();

@@ -74,7 +74,8 @@ class Burge_CMF_Controller extends CI_Controller{
 			$this->data['selected_lang']=$this->selected_lang;
 			$this->data['all_langs']=$this->all_langs;
 
-			$this->data['user_logged_in']=TRUE;
+			if($this->user)
+				$this->data['user_logged_in']=TRUE;
 		}
 		else
 		{
@@ -109,7 +110,10 @@ class Burge_CMF_Controller extends CI_Controller{
 		//loading side menu items
 		$this->load->model("module_manager_model");
 		
-		$modules=$this->module_manager_model->get_user_modules_names($this->user->get_id());
+		if($this->user)
+			$modules=$this->module_manager_model->get_user_modules_names($this->user->get_id());
+		else
+			$modules=array();
 
 		//some modules may have a number or text which may change in different times
 		//and like the user knows it changes. for example for messages module

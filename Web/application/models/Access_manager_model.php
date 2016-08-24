@@ -111,27 +111,33 @@ class Access_manager_model extends CI_Model
 		$log_context=array("module"=>$module);
 		$result=FALSE;
 
-		if($user)
+		if(!$user || ($module==="login"))
 		{
-			$log_context['user_id']=$user->get_id();
-			
-			//check access to module
-			$query_result=$this->db->get_where($this->access_table_name,array("user_id"=>$user->get_id(),"module_id"=>$module));
-			if($query_result->num_rows() == 1)
-			{
-				//$log_context['user_email']=$user->get_email();
-				$log_context['user_name']=$user->get_name();
-				$log_context['user_code']=$user->get_code();
-
-				$log_context['has_access']=TRUE;
-
-				$result=TRUE;
-			}
-			else
-				$log_context['has_access']=FALSE;
+			$result=TRUE;
+			$log_context['has_access']=TRUE;
 		}
 		else
-			$log_context['user_id']=-1;
+			if($user)
+			{
+				$log_context['user_id']=$user->get_id();
+				
+				//check access to module
+				$query_result=$this->db->get_where($this->access_table_name,array("user_id"=>$user->get_id(),"module_id"=>$module));
+				if($query_result->num_rows() == 1)
+				{
+					//$log_context['user_email']=$user->get_email();
+					$log_context['user_name']=$user->get_name();
+					$log_context['user_code']=$user->get_code();
+
+					$log_context['has_access']=TRUE;
+
+					$result=TRUE;
+				}
+				else
+					$log_context['has_access']=FALSE;
+			}
+			else
+				$log_context['user_id']=-1;
 
 		$log_context['result']=(int)$result;
 

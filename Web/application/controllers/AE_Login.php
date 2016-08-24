@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class AE_Login extends CI_Controller {
+class AE_Login extends Burge_CMF_Controller {
 
 	function __construct()
 	{
@@ -47,27 +47,16 @@ class AE_Login extends CI_Controller {
 				$message=$this->lang->line("fill_all_fields");
 		}
 
-		
-		$data=get_initialized_data();
-		
-		$data['lang_pages']=get_lang_pages(get_link("admin_login",TRUE));
-
 		if(isset($message))
-			$data['message']=$message;
+			$this->data['message']=$message;
 		else
-			$data['message']=get_message();
+			$this->data['message']=get_message();
 		
-		$data['header_title']=$this->lang->line("login");
-		foreach($this->lang->language as $index => $val)
-			$data[$index."_text"]=$val;
-	
-		$data['captcha']=get_captcha();
+		$this->data['lang_pages']=get_lang_pages(get_link("admin_login",TRUE));
+		$this->data['header_title']=$this->lang->line("login");
+		$this->data['captcha']=get_captcha();
 		
-		$tpl_dir=get_template_dir($lang);
-		$this->load->library('parser');
-		$this->parser->parse($tpl_dir.'/admin/header',$data);
-		$this->parser->parse($tpl_dir.'/admin/login',$data);
-		$this->parser->parse($tpl_dir.'/admin/footer',$data);			
+		$this->send_admin_output("login");
 
 		return;	 
 	}
