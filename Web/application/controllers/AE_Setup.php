@@ -22,8 +22,8 @@ class AE_Setup extends CI_Controller {
 
 		foreach($dirs as $dir)
 		{
-			$result=$this->make_dir_and_check_permission($dir);
-			switch ($result) {
+			$sub_result=$this->make_dir_and_check_permission($dir);
+			switch ($sub_result) {
 				case 2:
 					echo "Okay, ".$dir." exists and is writable<br>";
 					break;
