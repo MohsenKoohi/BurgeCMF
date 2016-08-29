@@ -60,8 +60,8 @@ $route[ADMIN_URL_FOLDER."/constant"]			="AE_Constant";
 
 $route[ADMIN_URL_FOLDER."/post"]					="AE_Post";
 $route[ADMIN_URL_FOLDER."/post/(\d+)"]			="AE_Post/details/$1";
-$route["post-(\d+)/?"]								="CE_Post/index/$1";
-$route["post-(\d+)/([^\/]*)/?"]					="CE_Post/index/$1/$2";
+$route["post-(\d+)/([^\/]+)/?"]					="CE_Post/index/$1/$2";
+$route["post-(\d+)/([^\/]+)/([^\/]*)/?"]		="CE_Post/index/$1/$2/$3";
 
 $route[ADMIN_URL_FOLDER."/file"]					="AE_File";
 $route[ADMIN_URL_FOLDER."/file/inline"]		="AE_File/inline";

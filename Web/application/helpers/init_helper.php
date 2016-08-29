@@ -41,7 +41,7 @@ function &get_links($just_common=FALSE)
 			
 			,'admin_post'									=> ADMIN_SURL_LANG."/post"
 			,'admin_post_details_format'				=> ADMIN_SURL_LANG."/post/post_id"
-			,'customer_post_details_format'			=> HOME_URL_LANG."/post-post_id/post_name"
+			,'customer_post_details_format'			=> HOME_URL_LANG."/post-post_id/post_hash/post_name"
 
 			,'admin_file'									=> ADMIN_SURL_LANG."/file"
 			,'admin_file_inline'							=> ADMIN_SURL_LANG."/file/inline"
@@ -97,14 +97,19 @@ function get_admin_post_details_link($post_id,$do_not_set_lang=FALSE)
 	return str_replace("post_id",$post_id,get_link("admin_post_details_format",$do_not_set_lang));	
 }
 
-function get_customer_post_details_link($post_id,$post_name,$do_not_set_lang=FALSE)
+function get_customer_post_details_link($post_id,$post_name,$post_date,$do_not_set_lang=FALSE)
 {
 	$post_name=linkenize($post_name);
 	return str_replace(
-		array("post_id","post_name")
-		,array($post_id,$post_name)
+		array("post_id","post_name","post_hash")
+		,array($post_id,$post_name,get_customer_post_link_hash($post_date))
 		,get_link("customer_post_details_format",$do_not_set_lang)
 	);	
+}
+
+function get_customer_post_link_hash($post_date)
+{
+	return substr(sha1($post_date),0,7);
 }
 
 function get_admin_category_details_link($category_id,$do_not_set_lang=FALSE)
