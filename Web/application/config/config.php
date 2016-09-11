@@ -207,7 +207,10 @@ $config['directory_trigger'] = 'd';
 | your log files will fill up very fast.
 |
 */
-$config['log_threshold'] = 4;
+if(ENVIRONMENT==='development')
+	$config['log_threshold'] = 4;
+else
+	$config['log_threshold'] = 1;
 
 /*
 |--------------------------------------------------------------------------
