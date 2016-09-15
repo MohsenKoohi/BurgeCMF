@@ -400,10 +400,13 @@ function validate_mobile(&$mobile)
 	return true;
 }
 
-function get_random_word($length)
+function get_random_word($length,$upper_case=FALSE)
 {
-	//$pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-	$pool = '123456789ABCDEFGHIJLMNPQRST';
+	if($upper_case)
+		$pool = '123456789ABCDEFGHIJLMNPQRST';
+	else
+		$pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	
 
 	$str = '';
 	for ($i = 0; $i < $length; $i++)
@@ -421,7 +424,7 @@ function get_captcha($length=0)
 	if(!$length)
 		$length=rand(4,5);
 	$vals = array(
-    'word' => get_random_word($length),
+    'word' => get_random_word($length,TRUE),
     'img_path' => CAPTCHA_DIR."/",
     'img_url' => CAPTCHA_URL."/",
     'font_path' => HOME_DIR.'/system/fonts/f'.rand(3,4).'.ttf',

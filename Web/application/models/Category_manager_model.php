@@ -27,6 +27,7 @@ class Category_manager_model extends CI_Model
 			"CREATE TABLE IF NOT EXISTS $tbl_name (
 				`category_id` INT AUTO_INCREMENT
 				,`category_parent_id` INT DEFAULT 0
+				,`category_hash` CHAR(8) DEFAULT NULL
 				,`category_sort_order` INT DEFAULT 0
 				,`category_show_in_list` BIT(1) DEFAULT 1
 				,PRIMARY KEY (category_id)	
@@ -100,11 +101,48 @@ class Category_manager_model extends CI_Model
 		return;
 	}
 
+	private function set_hash()
+	{
+		$cats=$this->db
+			->select("category_id")
+			->from($this->category_table_name)
+			->where("ISNULL(category_hash)",TRUE)
+			->get()
+			->result_array();
+
+		if(!$cats)
+			return;
+
+		$logs=array();
+		$update_array=array();
+
+		foreach($cats as $cat)
+		{
+			$id=$cat['category_id'];
+			$hash=get_random_word(8);
+
+			$update_array[]=array(
+				"category_id"=>$id
+				,"category_hash"=>$hash
+			);
+
+			$logs["cat_".$id]=$hash;
+		}
+
+		$this->db->update_batch($this->category_table_name,$update_array, "category_id");
+
+		$this->log_manager_model->info("CATEGORY_HASH_UPDATE",$logs);	
+
+		exit();
+	}
+
 	//this method is responsible for creating hierarchical structure of categories,
 	//so we don't need to run multiplt queries to retreive the structure from the database.
 	//it should be updated 
 	public function organize()
 	{
+		$this->set_hash();
+		
 		$result=$this->db
 			->select("*")
 			->from($this->category_table_name)
