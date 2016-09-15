@@ -5,6 +5,7 @@ class Category_manager_model extends CI_Model
 	private $category_table_name="category";
 	private $category_description_table_name="category_description";
 	private $organized_category_file_path;
+	private $hash_size=8;
 
 	private $category_description_writable_props=array(
 		'cd_name','cd_url','cd_description','cd_image','cd_meta_keywords','cd_meta_description'
@@ -23,11 +24,13 @@ class Category_manager_model extends CI_Model
 	public function install()
 	{
 		$tbl_name=$this->db->dbprefix($this->category_table_name); 
+		$hash_size=$this->hash_size;
+
 		$this->db->query(
 			"CREATE TABLE IF NOT EXISTS $tbl_name (
 				`category_id` INT AUTO_INCREMENT
 				,`category_parent_id` INT DEFAULT 0
-				,`category_hash` CHAR(8) DEFAULT NULL
+				,`category_hash` CHAR($hash_size) DEFAULT NULL
 				,`category_sort_order` INT DEFAULT 0
 				,`category_show_in_list` BIT(1) DEFAULT 1
 				,PRIMARY KEY (category_id)	
@@ -111,7 +114,7 @@ class Category_manager_model extends CI_Model
 			->result_array();
 
 		if(!$cats)
-			return;
+			return FALSE;
 
 		$logs=array();
 		$update_array=array();
@@ -119,7 +122,7 @@ class Category_manager_model extends CI_Model
 		foreach($cats as $cat)
 		{
 			$id=$cat['category_id'];
-			$hash=get_random_word(8);
+			$hash=get_random_word($this->hash_size);
 
 			$update_array[]=array(
 				"category_id"=>$id
@@ -133,7 +136,7 @@ class Category_manager_model extends CI_Model
 
 		$this->log_manager_model->info("CATEGORY_HASH_UPDATE",$logs);	
 
-		exit();
+		return TRUE;
 	}
 
 	//this method is responsible for creating hierarchical structure of categories,
@@ -162,6 +165,7 @@ class Category_manager_model extends CI_Model
 
 				$cats[$cid]['id']=$cid;
 				$cats[$cid]['show_in_list']=$row['category_show_in_list'];
+				$cats[$cid]['hash']=$row['category_hash'];
 				$cats[$cid]['parents']=array();
 				$cats[$cid]['parents'][0]=$row['category_parent_id'];
 				
@@ -319,7 +323,10 @@ class Category_manager_model extends CI_Model
 
 	public function add($parent_id)
 	{
-		$this->db->insert($this->category_table_name,array("category_parent_id"=>$parent_id));
+		$this->db->insert($this->category_table_name,array(
+			"category_parent_id"=>$parent_id
+			,"category_hash"=>get_random_word($this->hash_size)
+		));
 		
 		$category_id=$this->db->insert_id();
 
