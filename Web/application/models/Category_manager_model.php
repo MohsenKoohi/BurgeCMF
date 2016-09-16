@@ -228,7 +228,7 @@ class Category_manager_model extends CI_Model
 			if($cid)
 				$ret[]=array(
 					"name"=>$all_cats[$cid]['names'][$lang_id]
-					,"url"=>get_customer_category_details_link($cid,$all_cats[$cid]['urls'][$lang_id])
+					,"url"=>get_customer_category_details_link($cid,$all_cats[$cid]['hash'],$all_cats[$cid]['urls'][$lang_id])
 					,"image"=>$all_cats[$cid]['images'][$lang_id]
 				);
 
