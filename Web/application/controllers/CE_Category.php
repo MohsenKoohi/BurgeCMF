@@ -9,15 +9,15 @@ class CE_Category extends Burge_CMF_Controller {
 		$this->load->model("category_manager_model");
 	}
 
-	public function index($category_id,$category_name="",$page=1)
+	public function index($category_id,$category_hash,$category_name="",$page=1)
 	{	
 		$category_info=$this->category_manager_model->get_info((int)$category_id,$this->selected_lang);
-		if(!$category_info)
+		if(!$category_info || ($category_info['category_hash']!== $category_hash))
 			redirect(get_link("home_url"));
 
-		$category_link=get_customer_category_details_link($category_id,$category_info['cd_url'],$page);
+		$category_link=get_customer_category_details_link($category_id,$category_info['category_hash'],$category_info['cd_url'],$page);
 		if($category_info['cd_url'])
-			if(get_customer_category_details_link($category_id,urldecode($category_name),$page) !== $category_link)
+			if(get_customer_category_details_link($category_id,$category_hash,urldecode($category_name),$page) !== $category_link)
 				redirect($category_link,"location",301);
 
 		//$this->lang->load('ce_category',$this->selected_lang);	
@@ -42,12 +42,12 @@ class CE_Category extends Burge_CMF_Controller {
 		$this->data['total_pages']=$total_pages;
 
 		if($total_pages>0 && $page>$total_pages)
-			redirect(get_customer_category_details_link($category_id,$category_info['cd_url'],$total_pages));
+			redirect(get_customer_category_details_link($category_id,$category_hash,$category_info['cd_url'],$total_pages));
 		if($page<1)
-			redirect(get_customer_category_details_link($category_id,$category_info['cd_url']));
+			redirect(get_customer_category_details_link($category_id,$category_hash,$category_info['cd_url']));
 
 		$this->data['current_page']=$page;
-		$this->data['pages_format']=get_customer_category_details_link($category_id,$category_info['cd_url'],"page_number");
+		$this->data['pages_format']=get_customer_category_details_link($category_id,$category_hash,$category_info['cd_url'],"page_number");
 
 		$filter['start']=$per_page*($page-1);
 		$filter['count']=$per_page;
@@ -62,11 +62,11 @@ class CE_Category extends Burge_CMF_Controller {
 		}
 
 		if($page>1)
-			$this->data['header_prev_url']=get_customer_category_details_link($category_id,$category_info['cd_url'],$page-1);
+			$this->data['header_prev_url']=get_customer_category_details_link($category_id,$category_hash,$category_info['cd_url'],$page-1);
 		if($page<$total_pages)
-			$this->data['header_next_url']=get_customer_category_details_link($category_id,$category_info['cd_url'],$page+1);
+			$this->data['header_next_url']=get_customer_category_details_link($category_id,$category_hash,$category_info['cd_url'],$page+1);
 
-		$this->data['lang_pages']=get_lang_pages(get_customer_category_details_link($category_id,$category_info['cd_url'],$page,TRUE));
+		$this->data['lang_pages']=get_lang_pages(get_customer_category_details_link($category_id,$category_hash,$category_info['cd_url'],$page,TRUE));
 		
 		$this->data['header_title']=$category_info['cd_name'].$this->lang->line("header_separator").$this->data['header_title'];
 		$this->data['header_meta_description']=$category_info['cd_meta_description'];

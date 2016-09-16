@@ -48,7 +48,7 @@ function &get_links($just_common=FALSE)
 			
 			,'admin_category'								=> ADMIN_SURL_LANG."/category"
 			,'admin_category_details_format'			=> ADMIN_SURL_LANG."/category/category_id"
-			,'customer_category_details_format'		=> HOME_URL_LANG."/category-category_id/category_name/category_page"
+			,'customer_category_details_format'		=> HOME_URL_LANG."/category-category_id/category_hash/category_name/category_page"
 
 			,'admin_contact_us'									=> ADMIN_SURL_LANG."/contact_us"
 			,'admin_contact_us_send_new'						=> ADMIN_SURL_LANG."/contact_us/send_new"
@@ -117,10 +117,10 @@ function get_admin_category_details_link($category_id,$do_not_set_lang=FALSE)
 	return str_replace("category_id",$category_id,get_link("admin_category_details_format",$do_not_set_lang));	
 }
 
-function get_customer_category_details_link($category_id,$category_name,$page=1,$do_not_set_lang=FALSE)
+function get_customer_category_details_link($category_id,$category_hash,$category_name,$page=1,$do_not_set_lang=FALSE)
 {
-	$search=array("category_id","category_name");
-	$replace=array($category_id,$category_name);
+	$search=array("category_id","category_name","category_hash");
+	$replace=array($category_id,$category_name,$category_hash);
 	if($page==1)
 	{
 		$search[]="/category_page";

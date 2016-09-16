@@ -71,9 +71,9 @@ $route[ADMIN_URL_FOLDER."/file/([^\/]+)"]		="AE_File/action/$1";
 $route[ADMIN_URL_FOLDER."/category"]			="AE_Category";
 $route[ADMIN_URL_FOLDER."/category/organize"]="AE_Category/organize";
 $route[ADMIN_URL_FOLDER."/category/(\d+)"]	="AE_Category/details/$1";
-$route["category-(\d+)/?"]							="CE_Category/index/$1";
-$route["category-(\d+)/([^\/]*)/?"]				="CE_Category/index/$1/$2";
-$route["category-(\d+)/([^\/]*)/(\d+)"]		="CE_Category/index/$1/$2/$3";
+$route["category-(\d+)/([^\/]+)/?"]							="CE_Category/index/$1/$2";
+$route["category-(\d+)/([^\/]+)/([^\/]*)/?"]				="CE_Category/index/$1/$2/$3";
+$route["category-(\d+)/([^\/]+)/([^\/]*)/(\d+)"]		="CE_Category/index/$1/$2/$3/$4";
 
 $route[ADMIN_URL_FOLDER."/contact_us"]				="AE_Contact_Us";
 $route[ADMIN_URL_FOLDER."/contact_us/send_new"]	="AE_Contact_Us/send_new";
