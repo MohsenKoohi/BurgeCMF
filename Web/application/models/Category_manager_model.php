@@ -144,7 +144,7 @@ class Category_manager_model extends CI_Model
 	//it should be updated 
 	public function organize()
 	{
-		$this->set_hash();
+		//$this->set_hash();
 		
 		$result=$this->db
 			->select("*")
