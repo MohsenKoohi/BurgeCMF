@@ -22,6 +22,8 @@ class Burge_CMF_Controller extends CI_Controller{
 	protected $data;
 	public $in_admin_env=FALSE;
 
+	private $view_directories;
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -64,6 +66,8 @@ class Burge_CMF_Controller extends CI_Controller{
 		$this->default_lang=Language::get_default_language();
 		$this->all_langs=Language::get_languages();
 
+		$this->set_view_directories();
+
 		if($this->in_admin_env)
 		{
 			//setting initial common data for the admin env
@@ -98,6 +102,19 @@ class Burge_CMF_Controller extends CI_Controller{
 			$this->data['header_meta_keywords']=$this->lang->line("header_meta_keywords");
 		}
 		
+		return;
+	}
+
+	private function set_view_directories()
+	{
+		$this->view_directories=array();
+
+		if(!isset($this->selected_lang['en']))
+			$this->view_directories[]="en";
+
+		foreach($this->all_langs as $lang => $value)
+			$this->view_directories[]=$lang;
+
 		return;
 	}
 
@@ -154,9 +171,9 @@ class Burge_CMF_Controller extends CI_Controller{
 		if(file_exists($view_folder.$path.".php"))
 		 	$ret=$path;
 		else
-			foreach($this->all_langs as $lang=>$value)
+			foreach($this->view_directories as $dir)
 			{
-			 	$path=$lang."/admin/".$file_name;
+			 	$path=$dir."/admin/".$file_name;
 				if(file_exists($view_folder.$path.".php"))
 				{
 					$ret=$path;
@@ -191,9 +208,9 @@ class Burge_CMF_Controller extends CI_Controller{
 		if(file_exists($view_folder.$path.".php"))
 		 	$ret=$path;
 		else
-			foreach($this->all_langs as $lang=>$value)
+			foreach($this->view_directories as $dir)
 			{
-			 	$path=$lang."/customer/".$file_name;
+			 	$path=$dir."/customer/".$file_name;
 				if(file_exists($view_folder.$path.".php"))
 				{
 					$ret=$path;
