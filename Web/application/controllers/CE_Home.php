@@ -25,6 +25,13 @@ class CE_Home extends Burge_CMF_Controller {
 			,"order_by"=>"post_date DESC"
 		));
 
+		foreach($this->data['posts'] as &$post_info)
+		{
+			if(!$post_info['pc_image'])
+				if($post_info['pc_gallery'])
+					$post_info['pc_image']=get_link("post_gallery_url").'/'.$post_info['pc_gallery']['images'][0]['image'];
+		}
+
 		$this->data['lang_pages']=get_lang_pages(get_link("home_url",TRUE));
 		
 		$this->data['header_title']=$this->lang->line("header_title").$this->lang->line("header_separator").$this->data['header_title'];
