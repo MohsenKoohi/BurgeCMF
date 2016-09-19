@@ -23,9 +23,11 @@
 					</a>
 				</div>
 				<div class="row general-buttons">
-					<div class="two columns button sub-primary button-type2" onclick="deletePost()">
-						{delete_post_text}
-					</div>
+					<a href=""  class="two columns"  onclick="deletePost()">
+						<div class="full-width button sub-primary button-type2">
+							{delete_post_text}
+						</div>
+					</a>
 				</div>
 				<br>
 				<?php echo form_open_multipart(get_admin_post_details_link($post_id),array("onsubmit"=>"return formSubmit();")); ?>
