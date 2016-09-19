@@ -144,7 +144,9 @@ class AE_Post extends Burge_CMF_Controller {
 					$this->data['post_contents'][$lang]=$pi;
 					break;
 				}
+
 		if($post_info)
+		{
 			$this->data['post_info']=array(
 				"post_date"=>str_replace("-","/",$post_info[0]['post_date'])
 				,"post_allow_comment"=>$post_info[0]['post_allow_comment']
@@ -154,10 +156,14 @@ class AE_Post extends Burge_CMF_Controller {
 				,"categories"=>$post_info[0]['categories']
 				,"post_title"=>$this->data['post_contents'][$this->selected_lang]['pc_title']
 			);
+			$this->data['customer_link']=get_customer_post_details_link($post_id,"",$post_info[0]['post_date']);
+		}
 		else
+		{
 			$this->data['post_info']=array();
-
-		$this->data['customer_link']=get_customer_post_details_link($post_id,"",$post_info[0]['post_date']);
+			$this->data['customer_link']="";
+		}
+		
 		$this->data['current_time']=get_current_time();
 		$this->load->model("category_manager_model");
 		$this->data['categories']=$this->category_manager_model->get_hierarchy("checkbox",$this->selected_lang);
