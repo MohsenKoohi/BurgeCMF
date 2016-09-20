@@ -29,7 +29,11 @@ class CE_Home extends Burge_CMF_Controller {
 		{
 			if(!$post_info['pc_image'])
 				if($post_info['pc_gallery'])
-					$post_info['pc_image']=get_link("post_gallery_url").'/'.$post_info['pc_gallery']['images'][0]['image'];
+				{
+					foreach($post_info['pc_gallery']['images'] as $img)
+						break;
+					$post_info['pc_image']=get_link("post_gallery_url").'/'.$img['image'];
+				}
 		}
 
 		$this->data['lang_pages']=get_lang_pages(get_link("home_url",TRUE));
