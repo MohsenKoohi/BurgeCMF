@@ -18,7 +18,7 @@
 .post-date
 {
 	display:block;
-	color:#0C7B77;
+	color:$primary-color;
 	direction: ltr;
 	margin-top: -30px;
 }
@@ -71,7 +71,7 @@ body.rtl .container.category .post-short-desc
 
 .container.category .read-more
 {
-	color:#0C7B77;
+	color:$primary-color;
 	font-size:1.2em;
 }
 
