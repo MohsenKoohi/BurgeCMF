@@ -170,25 +170,27 @@
 											/>
 										</div>
 									</div>
-									<div class="row even-odd-bg">
-										<div class="three columns">
-											<span>{copy_from_text}</span>
-										</div>
-										<div class="six columns">
-											<select class="full-width" name="<?php echo $lang;?>[copy]">
-												<option value="">{please_select_text}</option>
-												<?php 
-													foreach($all_langs as $slang=>$value)
-													{
-														if($slang === $lang)
-															continue;
+									<?php if(sizeof($all_langs)>1) { ?>
+										<div class="row even-odd-bg">
+											<div class="three columns">
+												<span>{copy_from_text}</span>
+											</div>
+											<div class="six columns">
+												<select class="full-width" name="<?php echo $lang;?>[copy]">
+													<option value="">{please_select_text}</option>
+													<?php 
+														foreach($all_langs as $slang=>$value)
+														{
+															if($slang === $lang)
+																continue;
 
-														echo "<option value='$slang'>".${"lang_".$slang."_name_text"}."</option>";
-													}
-												?>
-											</select>
+															echo "<option value='$slang'>".${"lang_".$slang."_name_text"}."</option>";
+														}
+													?>
+												</select>
+											</div>
 										</div>
-									</div>
+									<?php } ?>
 									<div class="row even-odd-bg" >
 										<div class="three columns">
 											<span>{title_text}</span>
