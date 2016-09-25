@@ -79,11 +79,13 @@ class AE_Constant extends Burge_CMF_Controller {
 			$value_string="value_".$key;
 			$post_value=$this->input->post($value_string);
 			$value=trim($post_value);
-			if($value)
-			{
-				$this->constant_manager_model->set($key,$value);
-				$res=TRUE;		
-			}			
+			if(!$value)
+				$value=false;
+
+
+			$this->constant_manager_model->set($key,$value);
+			$res=TRUE;		
+			
 		}
 
 		if($res)

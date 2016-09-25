@@ -355,15 +355,18 @@ function bprint_r($var)
 	return;
 }
 
-function validate_persian_date(&$date)
+function validate_persian_date(&$date_main)
 {
-	$date=explode("/",$date);
+	$date=explode("/",$date_main);
 	if(sizeof($date)!=3)
 		return false;
 
 	foreach ($date as &$value)
 		$value=intval(trim($value));
 	
+	if($date[0]<100)
+		$date[0]+=1300;
+
 	if($date[0]>1500 || $date[0]<1300)
 		return false;
 
@@ -379,7 +382,7 @@ function validate_persian_date(&$date)
 	if($date[2]<10)
 		$date[2]="0".$date[2];
 
-	$date=implode("/", $date);
+	$date_main=implode("/", $date);
 
 	return true;
 }
