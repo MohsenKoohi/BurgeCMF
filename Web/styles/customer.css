@@ -696,6 +696,7 @@ div.results-count {
       list-style: none;
       display: inline; }
     .tab-container .tabs a {
+      font-weight: bold;
       font-size: 1.2em;
       padding: 10px 20px;
       display: inline-block;

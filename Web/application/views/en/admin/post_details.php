@@ -23,7 +23,7 @@
 					</a>
 				</div>
 				<div class="row general-buttons">
-					<a href=""  class="two columns"  onclick="deletePost()">
+					<a  class="two columns"  onclick="deletePost()">
 						<div class="full-width button sub-primary button-type2">
 							{delete_post_text}
 						</div>
