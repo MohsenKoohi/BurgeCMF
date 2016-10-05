@@ -8,6 +8,7 @@
 
 		.row.even-odd-bg div label
 		{
+			color:black;
 			overflow:hidden;
 			text-overflow: ellipsis;
 		}
