@@ -53,7 +53,7 @@ function windowResizedDefault()
 
   $(".side-menu").css("min-height","auto");
   $(".side-menu .mobile .click").unbind("click");
-  $(".side-menu ul").removeClass("active");
+
   $(".main").css("min-height",winHeight);
 
   if(winWidth<=600)
