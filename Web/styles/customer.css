@@ -372,7 +372,8 @@ body.ltr .side-menu {
   display: inline-block;
   width: 100%;
   color: white;
-  border-radius: 10px; }
+  border-radius: 10px;
+  font-weight: bold; }
 
 body.rtl .side-menu-ul a {
   background: linear-gradient(to left, #0C7B77, #eee); }
