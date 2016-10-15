@@ -15,6 +15,11 @@ body {
   direction: ltr;
   text-align: left; }
 
+.ltr-inb {
+  direction: ltr;
+  text-align: left;
+  display: inline-block; }
+
 .rtl {
   direction: rtl;
   text-align: right; }
