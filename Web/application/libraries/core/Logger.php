@@ -616,13 +616,15 @@ class Logger extends AbstractLogger
     }
 
     private function clear_index($text)
-    {   
+    {
+        $text=preg_replace('/[\\\\]/','\\\\\\\\',$text);           
         $text=preg_replace('/[\\\'\"]+/', "", $text);
         return preg_replace("/\s+/", "_", trim($text));
     }
 
     private function clear_value($text)
     {
+        $text=preg_replace('/[\\\\]/','\\\\\\\\',$text);
         $text=preg_replace('/[\\\'\"]+/', "", $text);
         return preg_replace("/\s+/", " ", trim($text));   
     }
