@@ -25,13 +25,13 @@ body {
   text-align: right; }
 
 .fa {
-  font-family: b koodak, koodak, tahoma; }
+  font-family: b yagut, yagut, tahoma; }
 
 .en {
   font-family: Times New Roman, Arial; }
 
 .lang-fa {
-  font-family: b koodak, koodak, tahoma;
+  font-family: b yagut, yagut, tahoma;
   direction: rtl;
   text-align: justify; }
 
@@ -486,6 +486,9 @@ body.ltr .side-menu-ul a:hover {
 
   .side-menu ul.active {
     display: block; } }
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold; }
+
 .main h1, .main h3, .main h5 {
   color: #0C7B77; }
 
