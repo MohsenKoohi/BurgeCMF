@@ -16,9 +16,18 @@
 			<script src="{scripts_url}/tinymce/tinymce.min.js"></script>
 			<div class="container">
 				<div class="row general-buttons">
-					<div class="two columns half-col-margin button sub-primary button-type2" onclick="deleteCategory()">
+					<div class="two columns button sub-primary button-primary"
+						onclick="window.open('<?php echo get_customer_category_details_link($category_id,$info[$selected_lang]['category_hash'],'');?>','_blank');"
+					>
+						{customer_page_text}
+					</div>
+				</div>
+				<div class="row general-buttons">
+					<div class="two columns button sub-primary button-type2" onclick="deleteCategory()">
 						{delete_category_text}
 					</div>
+				</div>
+				<div class="row general-buttons">
 					<div class="two columns button sub-primary button-type1" onclick="addSubCategory()">
 						{add_sub_category_text}
 					</div>
@@ -182,11 +191,31 @@
 					</div>
 					<div class="row even-odd-bg">
 						<div class="three columns">
+							<span>{hash_value_text}</span>
+						</div>
+						<div class="nine columns">
+							<input type="text" class="ltr en full-width" name="category_hash" 
+								value="<?php echo $info[$selected_lang]['category_hash']?>"
+							/>
+						</div>
+					</div>
+					<div class="row even-odd-bg">
+						<div class="three columns">
 							<span>{show_in_list_text}</span>
 						</div>
 						<div class="nine columns">
 							<input type="checkbox" class="graphical" name="category_show_in_list" 
 								<?php if($info[$selected_lang]['category_show_in_list']) echo 'checked';?>
+							/>
+						</div>
+					</div>
+					<div class="row even-odd-bg">
+						<div class="three columns">
+							<span>{hidden_text}</span>
+						</div>
+						<div class="nine columns">
+							<input type="checkbox" class="graphical" name="category_is_hidden" 
+								<?php if($info[$selected_lang]['category_is_hidden']) echo 'checked';?>
 							/>
 						</div>
 					</div>

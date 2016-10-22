@@ -29,3 +29,6 @@ $lang['category_sorted_successfully']="ترتیب جدید دسته‌ها با 
 $lang['show_in_list']="نمایش در لیست";
 $lang['are_you_sure_to_submit']="تغییرات ذخیره شود؟";
 $lang['categoies_organized_successfully']="دسته‌ها با موفقیت سازماندهی شدند.";
+$lang['hidden']="پنهان";
+$lang['hash_value']="مقدار درهم";
+$lang['customer_page']="صفحه مشتری";

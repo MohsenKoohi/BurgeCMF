@@ -4,7 +4,10 @@
 <div class="main">
 	<div class="container">
 		<div class="row post-cats">
-			<?php foreach($post_categories as $cat) { ?>
+			<?php foreach($post_categories as $cat) { 
+				if($cat['is_hidden'])
+					continue;
+			?>
 				<div class="">
 					<a href="<?php echo $cat['url'];?>">
 						<?php echo $cat['name'];?>

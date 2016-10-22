@@ -107,6 +107,8 @@ class AE_Category extends Burge_CMF_Controller {
 
 		$props['category_parent_id']=$this->input->post("category_parent_id");
 		$props['category_show_in_list']=($this->input->post("category_show_in_list")==="on");
+		$props['category_is_hidden']=($this->input->post("category_is_hidden")==="on");
+		$props['category_hash']=$this->input->post("category_hash");
 
 		foreach($this->language->get_languages() as $lang=>$name)
 		{

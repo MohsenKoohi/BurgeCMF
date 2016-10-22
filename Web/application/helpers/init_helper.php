@@ -119,6 +119,8 @@ function get_admin_category_details_link($category_id,$do_not_set_lang=FALSE)
 
 function get_customer_category_details_link($category_id,$category_hash,$category_name,$page=1,$do_not_set_lang=FALSE)
 {
+	$category_name=linkenize($category_name);
+
 	$search=array("category_id","category_name","category_hash");
 	$replace=array($category_id,$category_name,$category_hash);
 	if($page==1)
@@ -228,7 +230,7 @@ function get_lang_pages($pattern)
 }
 
 function linkenize($name){
-  $pattern_page = explode(' ',"+ , ' \" & ! ? : ; # ~ = / $ £ ^ ( ) _ < > ؟ » « ) ( ْ ٌ ٍ ً ُ ِ َ ّ ] [ } { ؛ ٔ ٓ ، × ٪ ﷼ ٫ ÷ |");
+  $pattern_page = explode(' ',"+ , ' \\ \" & ! ? : ; # ~ = / $ £ ^ ( ) _ < > ؟ » « ) ( ْ ٌ ٍ ً ُ ِ َ ّ ] [ } { ؛ ٔ ٓ ، × ٪ ﷼ ٫ ÷ |");
   $name=str_replace($pattern_page,'', $name);
   $name=trim(preg_replace('/[\s-]+/', '-',$name));
   $link=str_replace(" ","-",$name);

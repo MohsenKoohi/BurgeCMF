@@ -33,6 +33,7 @@ class Category_manager_model extends CI_Model
 				,`category_hash` CHAR($hash_size) DEFAULT NULL
 				,`category_sort_order` INT DEFAULT 0
 				,`category_show_in_list` BIT(1) DEFAULT 1
+				,`category_is_hidden` BIT(1) DEFAULT 0
 				,PRIMARY KEY (category_id)	
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8"
 		);
@@ -104,7 +105,7 @@ class Category_manager_model extends CI_Model
 		return;
 	}
 
-	private function set_hash()
+	private function set_random_hash()
 	{
 		$cats=$this->db
 			->select("category_id")
@@ -144,7 +145,7 @@ class Category_manager_model extends CI_Model
 	//it should be updated 
 	public function organize()
 	{
-		//$this->set_hash();
+		//$this->set_random_hash();
 		
 		$result=$this->db
 			->select("*")
@@ -165,6 +166,7 @@ class Category_manager_model extends CI_Model
 
 				$cats[$cid]['id']=$cid;
 				$cats[$cid]['show_in_list']=$row['category_show_in_list'];
+				$cats[$cid]['is_hidden']=$row['category_is_hidden'];
 				$cats[$cid]['hash']=$row['category_hash'];
 				$cats[$cid]['parents']=array();
 				$cats[$cid]['parents'][0]=$row['category_parent_id'];
@@ -230,6 +232,7 @@ class Category_manager_model extends CI_Model
 					"name"=>$all_cats[$cid]['names'][$lang_id]
 					,"url"=>get_customer_category_details_link($cid,$all_cats[$cid]['hash'],$all_cats[$cid]['urls'][$lang_id])
 					,"image"=>$all_cats[$cid]['images'][$lang_id]
+					,"is_hidden"=>$all_cats[$cid]['is_hidden']
 				);
 
 
@@ -385,14 +388,21 @@ class Category_manager_model extends CI_Model
 
 		$parent_id=$category_props['category_parent_id'];
 		$show_in_list=$category_props['category_show_in_list'];
+		$is_hidden=$category_props['category_is_hidden'];
+		$hash=$category_props['category_hash'];
+
 		$this->db
 			->set("category_parent_id",$parent_id)
 			->set("category_show_in_list",$show_in_list)
+			->set("category_is_hidden",$is_hidden)
+			->set("category_hash",$hash)
 			->where("category_id",$category_id)
 			->update($this->category_table_name);
 
 		$log_props["category_parent_id"]=$parent_id;
 		$log_props["category_show_in_list"]=$show_in_list;
+		$log_props["category_is_hidden"]=$is_hidden;
+		$log_props["category_hash"]=$hash;
 
 		foreach($category_props['descriptions'] as $category_description)
 		{
