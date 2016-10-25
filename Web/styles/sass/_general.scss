@@ -17,20 +17,32 @@ body
 .ltr
 {
 	direction:ltr;
-	text-align: left;
 }
 
 .ltr-inb
 {
 	direction: ltr;
-	text-align:left;
 	display: inline-block;
 }
 
 .rtl
 {
 	direction:rtl;
+}
+
+.align-left
+{
+	text-align: left;
+}
+
+.align-right
+{
 	text-align: right;
+}
+
+.align-justify
+{
+	text-align: justify
 }
 
 .fa

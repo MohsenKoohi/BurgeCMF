@@ -12,17 +12,23 @@ body {
   background-repeat: no-repeat; }
 
 .ltr {
-  direction: ltr;
-  text-align: left; }
+  direction: ltr; }
 
 .ltr-inb {
   direction: ltr;
-  text-align: left;
   display: inline-block; }
 
 .rtl {
-  direction: rtl;
+  direction: rtl; }
+
+.align-left {
+  text-align: left; }
+
+.align-right {
   text-align: right; }
+
+.align-justify {
+  text-align: justify; }
 
 .fa {
   font-family: b yagut, yagut, tahoma; }

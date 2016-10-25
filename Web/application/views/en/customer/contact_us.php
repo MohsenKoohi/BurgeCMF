@@ -17,7 +17,7 @@
 						<label>{email_text}</label>
 					</div>
 					<div class="nine columns">
-						<input name="email" type="email" class="full-width eng ltr"/>
+						<input name="email" type="email" class="full-width lang-en ltr"/>
 					</div>
 				</div>
 				<?php if(isset($department)) { ?>
