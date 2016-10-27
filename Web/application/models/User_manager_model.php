@@ -59,7 +59,7 @@ class User_manager_model extends CI_Model
 			->select("user_id, user_name, user_code")
 			->from("user");
 
-		if($filter['name'])
+		if(isset($filter['name']))
 			$this->db->where("user_name LIKE '%".str_replace(' ', '%', $filter['name'])."%'");
 
 		if(isset($filter['start']) && isset($filter['length']))
