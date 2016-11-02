@@ -53,7 +53,7 @@ class User_manager_model extends CI_Model
 		return;
 	}
 
-	public function get_users($filter)
+	public function get_users($filter=array())
 	{
 		$this->db
 			->select("user_id, user_name, user_code")
