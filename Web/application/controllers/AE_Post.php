@@ -191,7 +191,10 @@ class AE_Post extends Burge_CMF_Controller {
 		$post_props=array();
 		$post_props['categories']=$this->input->post("categories");
 
-		$post_props['post_date']=$this->input->post('post_date');
+		$post_props['post_date']=persian_normalize($this->input->post('post_date'));
+		if( DATE_FUNCTION === 'jdate')
+			validate_persian_date_time($post_props['post_date']);
+		
 		$post_props['post_active']=(int)($this->input->post('post_active') === "on");
 		$post_props['post_allow_comment']=(int)($this->input->post('post_allow_comment') === "on");
 		
