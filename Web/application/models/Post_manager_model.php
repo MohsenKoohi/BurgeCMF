@@ -115,11 +115,11 @@ class Post_manager_model extends CI_Model
 
 		$post_contents=array();
 		foreach($this->language->get_languages() as $index=>$lang)
-			$post_content[]=array(
+			$post_contents[]=array(
 				"pc_post_id"=>$new_post_id
 				,"pc_lang_id"=>$index
 			);
-		$this->db->insert_batch($this->post_content_table_name,$post_content);
+		$this->db->insert_batch($this->post_content_table_name,$post_contents);
 
 		return $new_post_id;
 	}
