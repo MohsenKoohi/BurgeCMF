@@ -302,4 +302,9 @@ class Log_manager_model extends CI_Model
 
 		$this->logger->log($level,$event_type,$context);
 	}
+
+	public function get_visitor_id()
+	{
+		return $this->logger->getVisitorId();
+	}
 }

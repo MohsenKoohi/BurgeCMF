@@ -424,7 +424,7 @@ class Logger extends AbstractLogger
         $this->visitorId=$id;
     }
 
-    private function getVisitorId()
+    public function getVisitorId()
     {
         return $this->visitorId;
     }
