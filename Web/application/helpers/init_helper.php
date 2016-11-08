@@ -359,6 +359,12 @@ function bprint_r($var)
 
 function validate_persian_date_time(&$date_time)
 {
+	$parts=explode(" ", $date_time);
+	if(sizeof($parts)==0)
+		return false;
+	if(sizeof($parts)==1)
+		$date_time.=" 00:00:00";
+	
 	list($date,$time)=explode(" ", $date_time);
 	$ret=validate_persian_date($date);
 	$date_time=$date." ".$time;

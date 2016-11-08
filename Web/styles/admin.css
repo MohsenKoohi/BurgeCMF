@@ -14,7 +14,7 @@ body {
 .ltr {
   direction: ltr; }
 
-.ltr-inb {
+.ltr-inb, .date {
   direction: ltr;
   display: inline-block; }
 
@@ -871,7 +871,6 @@ body.ltr .category-div li {
   color: white;
   margin: 5px;
   padding: 5px 10px;
-  font-weight: bold;
   font-size: 1.2em;
   border-radius: 5px; }
 
