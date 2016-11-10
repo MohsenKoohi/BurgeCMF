@@ -225,7 +225,7 @@ class AE_File extends Burge_CMF_Controller {
 		}
 
 		$this->log("FILE_FILE_UPLOAD",NULL,implode("<br>", $fileNames));
-		bprint_r($fileNames);
+		//bprint_r($fileNames);
 
 		return;
 	}

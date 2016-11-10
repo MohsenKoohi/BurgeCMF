@@ -16,5 +16,6 @@ class Burge_CMF_Security extends CI_Security
         list($no,$yes)=explode(MAIN_ADDRESS."/", $address);
 
         header('Location: '.HOME_URL.'/retry?prev='.$yes, TRUE, 302);
+        exit();
     }
 }
