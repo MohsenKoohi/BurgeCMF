@@ -177,10 +177,10 @@ class Post_manager_model extends CI_Model
 			));
 
 		if(isset($filter['post_date_le']))
-			$this->db->where("post_date <=",$filter['post_date_le']);
+			$this->db->where("post_date <=",str_replace("/","-",$filter['post_date_le']));
 
 		if(isset($filter['post_date_ge']))
-			$this->db->where("post_date >=",$filter['post_date_ge']);
+			$this->db->where("post_date >=",str_replace("/","-",$filter['post_date_ge']));
 
 		if(isset($filter['order_by']))
 		{
