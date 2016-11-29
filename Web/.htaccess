@@ -9,6 +9,13 @@ ExpiresByType application/javascript "now plus 1 months"
 ExpiresByType application/x-javascript "now plus 1 months"
 ExpiresByType text/javascript "now plus 1 months"
 ExpiresByType text/css "now plus 1 months"
+ExpiresByType audio/mpeg "access plus 1 months"
+ExpiresByType audio/wav "access plus 1 months"
+ExpiresByType audio/wave "access plus 1 months"
+ExpiresByType audio/x-wav "access plus 1 months"
+ExpiresByType audio/x-pn-wav	"access plus 1 months"
+ExpiresByType video/mp4 "access plus 1 months"
+
 #ExpiresDefault "access plus 1 days"
 
 Options -Indexes 
