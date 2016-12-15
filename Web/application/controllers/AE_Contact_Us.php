@@ -183,7 +183,7 @@ class AE_Contact_Us extends Burge_CMF_Controller {
 		{
 			$receivers=$this->input->post("receivers");
 			$subject=$this->input->post("subject");
-			$content=$this->input->post("content");
+			$content=nl2br($this->input->post("content"));
 			$lang=$this->input->post("language");
 
 			if($receivers && $subject && $content)
