@@ -21,13 +21,23 @@ class User_manager_model extends CI_Model
 		$user_table=$this->db->dbprefix('user'); 
 		$this->db->query(
 			"CREATE TABLE IF NOT EXISTS $user_table (
-				`user_id` int AUTO_INCREMENT NOT NULL,
-				`user_email` char(100) NOT NULL UNIQUE,
-				`user_name` char(100),
-				`user_code` char(20),
-				`user_pass` char(32) DEFAULT NULL,
-				`user_salt` char(32) NOT NULL,
-				PRIMARY KEY (user_id)	
+				`user_id` INT AUTO_INCREMENT NOT NULL
+				,`user_email` CHAR(100) NOT NULL UNIQUE
+				,`user_name` CHAR(100)
+				,`user_code` CHAR(20)
+				,`user_group_id` INT DEFAULT 0
+				,`user_pass` CHAR(32) DEFAULT NULL
+				,`user_salt` CHAR(32) NOT NULL
+				,PRIMARY KEY (user_id)	
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8"
+		);
+
+		$user_group_table=$this->db->dbprefix('user_group'); 
+		$this->db->query(
+			"CREATE TABLE IF NOT EXISTS $user_group_table (
+				`ug_id` INT AUTO_INCREMENT NOT NULL
+				,`ug_name` CHAR(100) NOT NULL 
+				,PRIMARY KEY (ug_id)	
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8"
 		);
 
