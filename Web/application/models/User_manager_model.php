@@ -3,9 +3,14 @@ class User_manager_model extends CI_Model
 {
 	private $user_info=NULL;
 	private $user_info_initialized=FALSE;
-	private $user_props_can_be_written=array("user_email","user_name","user_code","user_pass");
-	private $user_props_can_be_read=array("user_id","user_email","user_name","user_code");
-	private $user_props_can_be_modified_directly=array("user_name","user_code");
+	private $user_props_can_be_written=array("user_email","user_name","user_code","user_pass","user_group_id");
+	private $user_props_can_be_read=array("user_id","user_email","user_name","user_code","user_group_id");
+	private $user_props_can_be_modified_directly=array("user_name","user_code","user_group_id");
+
+	private $ug_props_can_be_written=array("ug_name");
+	private $ug_props_can_be_read=array("ug_id","ug_name");
+	private $ug_props_can_be_modified_directly=array("ug_name");
+
 
 	public function __construct()
 	{
@@ -110,6 +115,16 @@ class User_manager_model extends CI_Model
 		return $results->result_array();
 	}
 
+	public function get_all_user_groups()
+	{
+		return $this->db
+			->select($this->ug_props_can_be_read)
+			->from("user_group")
+			->order_by("ug_id","ASC")
+			->get()
+			->result_array();
+	}
+
 	public function add_if_not_exist($user_props)
 	{
 		$props=select_allowed_elements($user_props,$this->user_props_can_be_written);
@@ -140,6 +155,17 @@ class User_manager_model extends CI_Model
 		return FALSE;
 	}
 
+	public function add_user_group($ug_props)
+	{
+		$props=select_allowed_elements($ug_props,$this->ug_props_can_be_written);
+
+		$this->db->insert("user_group",$props);
+
+		$this->log_manager_model->info("USER_GROUP_ADD",$props);
+
+		return TRUE;
+	}
+
 	public function delete_user($user_id,$user_email)
 	{
 		//there is a note here
@@ -159,6 +185,25 @@ class User_manager_model extends CI_Model
 		$this->log_manager_model->info("USER_DELETE",array(
 			"user_id"=>$user_id
 			,"user_email"=>$user_email		
+		));
+
+		return;
+	}
+
+	public function delete_user_group($ug_id)
+	{
+		$this->db->where(array("ug_id"=>$ug_id));
+		$this->db->delete("user_group");
+
+		$this->db->set("user_group_id",0);
+		$this->db->where("user_group_id",$ug_id);
+		$this->db->update('user');
+
+		//$this->load->model("access_manager_model");
+		//$this->access_manager_model->unset_user_access($user_id);
+
+		$this->log_manager_model->info("USER_GROUP_DELETE",array(
+			"ug_id"=>$ug_id
 		));
 
 		return;
@@ -213,6 +258,22 @@ class User_manager_model extends CI_Model
 		$props['user_id']=$user_id;
 		
 		$this->log_manager_model->info("USER_CHANGE_PROPS",$props);
+
+		return TRUE;		
+	}
+
+	public function change_user_group_props($ug_id,$ug_props)
+	{
+		$props=select_allowed_elements($ug_props,$this->ug_props_can_be_modified_directly);
+		
+		$this->db->set($props);
+		$this->db->where("ug_id",$ug_id);
+		$this->db->limit(1);
+		$this->db->update('user_group');
+
+		$props['ug_id']=$ug_id;
+		
+		$this->log_manager_model->info("USER_GROUP_CHANGE_PROPS",$props);
 
 		return TRUE;		
 	}

@@ -41,6 +41,10 @@ class Log_manager_model extends CI_Model
 		,"USER_LOGIN"				=>104
 		,"USER_LOGOUT"				=>105
 		,"USER_CHANGE_PROPS"		=>106
+		,"USER_GROUP_ADD"				=>107
+		,"USER_GROUP_DELETE"			=>108
+		,"USER_GROUP_CHANGE_PROPS"	=>109
+		
 
 		,"CONSTANT_SET"			=>131
 		,"CONSTANT_UNSET"			=>132		
