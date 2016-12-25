@@ -40,13 +40,14 @@
 							</div>
 							<div class="name">
 								<a target="_blank" href="<?php echo get_admin_category_details_link($cat['id']);?>">
-									<?php 
-										if($cat['names'][$selected_lang]) 
-											echo $cat['names'][$selected_lang];
-										else
-											echo $no_title_text;
-									?>
-								
+									<b>
+										<?php 
+											if($cat['names'][$selected_lang]) 
+												echo $cat['names'][$selected_lang];
+											else
+												echo $no_title_text;
+										?>
+									</b>
 								</a>
 							</div>
 						</div>
