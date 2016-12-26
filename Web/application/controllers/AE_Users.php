@@ -87,7 +87,7 @@ class AE_Users extends Burge_CMF_Controller {
 			set_message($this->lang->line("fill_all_fields"));
 		else
 		{
-			$res=$this->user_manager_model->add_if_not_exist(array(
+			$user_id=$this->user_manager_model->add_if_not_exist(array(
 				"user_name"			=> $user_name
 				,"user_email"		=> $user_email
 				,"user_code"		=> $user_code
@@ -95,7 +95,7 @@ class AE_Users extends Burge_CMF_Controller {
 				,"user_group_id"	=> $user_group_id
 			));
 
-			if(!$res)
+			if($user_id)
 			{
 				set_message($this->lang->line("added_successfully"));
 				$result=TRUE;
@@ -104,7 +104,10 @@ class AE_Users extends Burge_CMF_Controller {
 				set_message($this->lang->line("repeated_email"));
 		}
 
-		return redirect(get_link("admin_user")); 
+		if($result)
+			return redirect(get_admin_user_details_link($user_id));
+		else
+			return redirect(get_link("admin_user")."#add_user"); 
 	}
 
 	private function modify_user($user_id)

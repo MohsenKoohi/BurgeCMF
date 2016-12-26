@@ -148,7 +148,7 @@ class User_manager_model extends CI_Model
 			"user_email"=>$email
 			,"result"=>0
 			));
-			return TRUE;
+			return FALSE;
 		}
 
 		$salt=random_string("alnum",32);
@@ -156,13 +156,14 @@ class User_manager_model extends CI_Model
 		$props['user_pass']=$this->getPass($props['user_pass'],$salt);
 		$this->db->insert("user",$props);
 
-		$props['user_id']=$this->db->insert_id();
+		$user_id=$this->db->insert_id();
+		$props['user_id']=$user_id;
 		$props['result']=1;
 		unset($props['user_pass'],$props['user_salt']);
 
 		$this->log_manager_model->info("USER_ADD",$props);
 
-		return FALSE;
+		return $user_id;
 	}
 
 	public function add_user_group($ug_props)
