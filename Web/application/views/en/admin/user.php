@@ -234,10 +234,5 @@
 				</form>
 			</div>
 		</div>
-
-		<div class="container separated">
-			
-		</div>
-
 	</div>
 </div>
