@@ -109,10 +109,20 @@ class User_manager_model extends CI_Model
 	{
 		$this->db->select($this->user_props_can_be_read);
 		$this->db->from("user");
-		$this->db->order_by("user_id","DESC");
+		$this->db->order_by("user_id","ASC");
 		$results=$this->db->get();
 
 		return $results->result_array();
+	}
+
+	public function get_user($user_id)
+	{
+		$this->db->select($this->user_props_can_be_read);
+		$this->db->from("user");
+		$this->db->where("user_id",(int)$user_id);
+		$results=$this->db->get();
+
+		return $results->row_array();
 	}
 
 	public function get_all_user_groups()
@@ -166,7 +176,7 @@ class User_manager_model extends CI_Model
 		return TRUE;
 	}
 
-	public function delete_user($user_id,$user_email)
+	public function delete_user($user_id)
 	{
 		//there is a note here
 		//when you delete a user, if he has been logged into the system befor his deletion
@@ -175,16 +185,14 @@ class User_manager_model extends CI_Model
 		//who checks all accesses and after deletion,
 		//even previous pages can't post new info to the system.
 
-		$this->db->where(array("user_id"=>$user_id,"user_email"=>$user_email));
+		$this->db->where(array("user_id"=>$user_id));
 		$this->db->delete("user");
 
 		$this->load->model("access_manager_model");
 		$this->access_manager_model->unset_user_access($user_id);
-
 		
 		$this->log_manager_model->info("USER_DELETE",array(
 			"user_id"=>$user_id
-			,"user_email"=>$user_email		
 		));
 
 		return;

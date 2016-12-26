@@ -47,7 +47,8 @@ if(ENVIRONMENT==='development')
 
 $route[ADMIN_URL_FOLDER]							="AE_Dashboard";
 $route[ADMIN_URL_FOLDER."/dashboard"]			="AE_Dashboard";
-$route[ADMIN_URL_FOLDER."/user"]					="AE_Users";
+$route[ADMIN_URL_FOLDER."/user"]					="AE_Users/index/0";
+$route[ADMIN_URL_FOLDER."/user/(\d+)"]			="AE_Users/index/$1";
 $route[ADMIN_URL_FOLDER."/user/search/(.*)"]	="AE_Users/search/$1";
 $route[ADMIN_URL_FOLDER."/login"]				="AE_Login";
 $route[ADMIN_URL_FOLDER."/change_pass"]		="AE_Change_Pass";

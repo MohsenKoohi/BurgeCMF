@@ -33,6 +33,7 @@ function &get_links($just_common=FALSE)
 			,'admin_change_pass'		=> ADMIN_SURL_LANG."/change_pass"
 			,'admin_access'			=> ADMIN_SURL_LANG."/access"
 			,'admin_user'				=> ADMIN_SURL_LANG."/user"
+			,'admin_user_details'	=> ADMIN_SURL_LANG."/user/user_id"
 			,'admin_user_search'		=> ADMIN_SURL_LANG."/user/search"
 			,'admin_module'			=> ADMIN_SURL_LANG."/module"
 			,'admin_hit_counter'		=> ADMIN_SURL_LANG."/hit_counter"
@@ -152,6 +153,11 @@ function get_post_gallery_image_path($img)
 function get_post_gallery_image_url($img)
 {
 	return POST_GALLERY_URL."/".$img;
+}
+
+function get_admin_user_details_link($user_id,$do_not_set_lang=FALSE)
+{
+	return str_replace("user_id",$user_id,get_link("admin_user_details",$do_not_set_lang));	
 }
 
 
