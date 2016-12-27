@@ -125,6 +125,16 @@ class User_manager_model extends CI_Model
 		return $results->row_array();
 	}
 
+	public function get_user_group($ug_id)
+	{
+		$this->db->select($this->ug_props_can_be_read);
+		$this->db->from("user_group");
+		$this->db->where("ug_id",(int)$ug_id);
+		$results=$this->db->get();
+
+		return $results->row_array();
+	}
+
 	public function get_all_user_groups()
 	{
 		return $this->db
@@ -190,7 +200,7 @@ class User_manager_model extends CI_Model
 		$this->db->delete("user");
 
 		$this->load->model("access_manager_model");
-		$this->access_manager_model->unset_user_access($user_id);
+		$this->access_manager_model->unset_all_modules(-$user_id);
 		
 		$this->log_manager_model->info("USER_DELETE",array(
 			"user_id"=>$user_id
@@ -208,8 +218,8 @@ class User_manager_model extends CI_Model
 		$this->db->where("user_group_id",$ug_id);
 		$this->db->update('user');
 
-		//$this->load->model("access_manager_model");
-		//$this->access_manager_model->unset_user_access($user_id);
+		$this->load->model("access_manager_model");
+		$this->access_manager_model->unset_all_modules($ug_id);
 
 		$this->log_manager_model->info("USER_GROUP_DELETE",array(
 			"ug_id"=>$ug_id

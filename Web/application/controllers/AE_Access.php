@@ -10,21 +10,33 @@ class AE_Access extends Burge_CMF_Controller {
 
 	public function index($access_id)
 	{
-		$access_id=(int)$access_id;
-		$this->data['access_id']=$access_id;
-
-		$this->data['access_type']="";
-		if($access_id>0)
-			$this->data['access_type']="user_group";
-			
-		if($access_id<0)
-			$this->data['access_type']="user";
-					
 		$this->load->model(array(
 			"access_manager_model"
 			,"user_manager_model"
 			,"module_manager_model"
 		));
+
+		$access_id=(int)$access_id;
+		$this->data['access_id']=$access_id;
+
+		$this->data['access_type']="";
+		if($access_id>0)
+		{
+			$user_group_info=$this->user_manager_model->get_user_group($access_id);
+			if(!$user_group_info)
+				return redirect(get_link("admin_access"));
+
+			$this->data['access_type']="user_group";	
+		}
+			
+		if($access_id<0)
+		{
+			$user_info=$this->user_manager_model->get_user(-$access_id);
+			if(!$user_info)
+				return redirect(get_link("admin_access"));	
+
+			$this->data['access_type']="user";
+		}
 
 		$this->lang->load('ae_access',$this->selected_lang);
 
@@ -57,13 +69,12 @@ class AE_Access extends Burge_CMF_Controller {
 		if(!$access_id)
 		{
 			set_message($this->lang->line("select_user"));
-			redirect(get_link("admin_access"));
-			return;
+			return redirect(get_link("admin_access"));
 		}
 
 		$module_ids=$this->input->post("module_ids");
 
-		$this->access_manager_model->set_allowed_modules($access_id, $module_ids);
+		$this->access_manager_model->set_modules($access_id, $module_ids);
 
 		set_message($this->lang->line("changed_successfully"));
 		redirect(get_admin_access_details_link($access_id));

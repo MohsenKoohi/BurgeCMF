@@ -110,8 +110,7 @@ class Access_manager_model extends CI_Model
 		return explode(",", $result['module_ids']);
 	}
 
-	//this method adds access to an array of modules for a user
-	public function set_allowed_modules($access_id,$module_ids)
+	public function unset_all_modules($access_id)
 	{
 		if(!$access_id)
 			return;
@@ -123,6 +122,15 @@ class Access_manager_model extends CI_Model
 		$this->log_manager_model->info("ACCESS_UNSET",array(
 			"access_id"=>$access_id
 		));
+	}
+
+	//this method adds access to an array of modules for a user
+	public function set_modules($access_id,$module_ids)
+	{
+		if(!$access_id)
+			return;
+
+		$this->unset_all_modules($access_id);
 
 		if(!$module_ids || !sizeof($module_ids))
 			return;
