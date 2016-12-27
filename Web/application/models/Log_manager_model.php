@@ -30,9 +30,8 @@ class Log_manager_model extends CI_Model
 		,"MODULE_ADD_NAME"		=>54
 		,"MODULE_RESORT"			=>55
 
-		,"ACCESS_ALLOW_USER"		=>81
-		,"ACCESS_UNSET_USER"		=>82
-		,"ACCESS_UNSET_MODULE"	=>83
+		,"ACCESS_SET"				=>81
+		,"ACCESS_UNSET"			=>82
 		,"ACCESS_CHECK"			=>84
 
 		,"USER_ADD"					=>101

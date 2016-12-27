@@ -32,6 +32,7 @@ function &get_links($just_common=FALSE)
 			,'admin_dashboard'		=> ADMIN_SURL_LANG."/dashboard"
 			,'admin_change_pass'		=> ADMIN_SURL_LANG."/change_pass"
 			,'admin_access'			=> ADMIN_SURL_LANG."/access"
+			,'admin_access_details'	=> ADMIN_SURL_LANG."/access/access_id"
 			,'admin_user'				=> ADMIN_SURL_LANG."/user"
 			,'admin_user_details'	=> ADMIN_SURL_LANG."/user/user_id"
 			,'admin_user_search'		=> ADMIN_SURL_LANG."/user/search"
@@ -155,11 +156,15 @@ function get_post_gallery_image_url($img)
 	return POST_GALLERY_URL."/".$img;
 }
 
+function get_admin_access_details_link($access_id,$do_not_set_lang=FALSE)
+{
+	return str_replace("access_id",$access_id,get_link("admin_access_details",$do_not_set_lang));	
+}
+
 function get_admin_user_details_link($user_id,$do_not_set_lang=FALSE)
 {
 	return str_replace("user_id",$user_id,get_link("admin_user_details",$do_not_set_lang));	
 }
-
 
 //we have created an initialization for data array sent to parser
 //so if we wanted to add an index, we can do it without changing all controller. 

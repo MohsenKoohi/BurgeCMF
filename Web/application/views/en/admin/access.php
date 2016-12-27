@@ -4,7 +4,7 @@
 
 		<div class="row">
 			<div class="three columns">
-				<select name="acccess_type" onchange="typeChanged(this);" class="full-width">
+				<select name="access_type" onchange="typeChanged(this);" class="full-width">
 					<option value="user">{user_text}</option>
 					<option value="user_group">{user_group_text}</option>
 				</select>
@@ -15,7 +15,7 @@
 			</div>
 
 			<div class="four columns">
-				<select name="users" onchange="" class="full-width">
+				<select name="users" class="full-width" onchange="locationChanged(this);">
 					<option value="">&nbsp;</option>
 					<?php
 						foreach($users_info as $u)
@@ -28,7 +28,7 @@
 			</div>
 
 			<div class="four columns">
-				<select name="user_groups" onchange="" class="full-width">
+				<select name="user_groups" class="full-width" onchange="locationChanged(this);">
 					<option value="">&nbsp;</option>
 					<?php
 						foreach($user_groups_info as $g)
@@ -45,10 +45,22 @@
 					$("select[name="+$(el).val()+"s]").show();
 				}
 
+				var changeLocation="<?php echo get_admin_access_details_link('access_id');?>";
+
+				function locationChanged(el)
+				{
+					var val=$(el).val();
+					if(val)
+						document.location=changeLocation.replace("access_id",val);
+				}
+
 				$(window).load(
 					function()
 					{
-						$("select[name=acccess_type]").trigger("change");
+						if("{access_type}")
+							$("select[name=access_type]").val("{access_type}");
+						$("select[name=access_type]").trigger("change");
+						$("select[name=user_groups],select[name=users]").val("{access_id}");
 					}
 				);
 			</script>
@@ -90,35 +102,39 @@
 			</script>
 			
 			<div class="tab" id="modules">
+				<h2>{modules_text}</h2>
+				<?php 
+					if($access_id)
+					{
+				?>
+						<?php echo form_open($form_submit_link); ?>
+							<input type="hidden" name="post_type" value="set_modules_access" />
+
+							<?php foreach($modules_info as $module){ ?>
+								<div class="row even-odd-bg">
+									<div class="three columns">
+										<span><?php echo $module['module_name']?></span>
+									</div>
+									<div class="three columns">
+										<input type='checkbox' class='graphical' name='module_ids[]'
+											value='<?php echo $module['module_id'];?>' 
+											<?php if(in_array($module['module_id'],$modules_have_access_to)) echo 'checked'; ?>
+										/>
+									</div>
+								</div>
+							<?php } ?>
+							<br><br>
+							<div class="row">
+									<div class="four columns">&nbsp;</div>
+									<input type="submit" class=" button-primary four columns" value="{submit_text}"/>
+							</div>
+						</form>
+				<?php 
+					}
+				?>
 			</div>
 		</div>
 
-		<div class="container separated user-div" style="display:none">
-			<h2>{acess_level_for_a_user_text}</h2>		
-			<?php echo form_open(get_link("admin_access"),array("onsubmit"=>"return userFormSubmitted()")); ?>
-				<input type="hidden" name="post_type" value="user_access" />
-				<div class="row">
-					<div class="three columns"><label>{user_name_text}</label></div>
-					<div class="three columns">
-						<select class="full-width ltr eng" name="user_id">
-							<option value="">{select_text}</option>
-							<?php 
-								foreach ($users_info as $user)
-								{
-									echo "<option value='".$user['user_id']."'>".$user['user_email']."</option>";
-								}
-							?>
-						</select>
-					</div>
-				</div>
-				
-				<br><br>
-				<div class="row">
-						<div class="four columns">&nbsp;</div>
-						<input type="submit" class=" button-primary four columns" value="{submit_text}"/>
-				</div>				
-			</form>
-		</div>
 
 
 

@@ -9,5 +9,10 @@ $lang['module_name']="Module";
 $lang['select_user']="Please select a user.";
 $lang['changed_successfully']="Modifications have been done successfully.";
 $lang['select_module']="Please select a module.";
+
+$lang['modules']="Modules";
+$lang['user_group']="User group";
+$lang['user']="User";
+
 $lang['']="";
 $lang['']="";
