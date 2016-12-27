@@ -1,4 +1,4 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+ <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class AE_Access extends Burge_CMF_Controller {
 
@@ -8,16 +8,23 @@ class AE_Access extends Burge_CMF_Controller {
 
 	}
 
-	public function index()
+	public function index($id)
 	{
-		$this->load->model("access_manager_model");
-		$this->load->model("user_manager_model");
-		$this->load->model("module_manager_model");
+		$id=(int)$id;
+		
+		$this->load->model(array(
+			"access_manager_model"
+			,"user_manager_model"
+			,"module_manager_model"
+		));
 
 		$this->lang->load('ae_access',$this->selected_lang);
 
 		$this->data['message']=get_message();
 		$this->data['users_info']=$this->user_manager_model->get_all_users_info();
+		$this->data['user_groups_info']=$this->user_manager_model->get_all_user_groups();
+
+
 		$this->data['modules_info']=$this->module_manager_model->get_all_modules_info($this->selected_lang);
 		
 		if($this->input->post())

@@ -9,3 +9,7 @@ $lang['module_name']="ماژول";
 $lang['select_user']="لطفا یک کاربر انتخاب فرمایید.";
 $lang['changed_successfully']="تغییرات با موفقیت اعمال شد.";
 $lang['select_module']="لطفا یک ماژول انتخاب نمایید.";
+
+$lang['modules']="ماژول‌ها";
+$lang['user_group']="گروه کاربری";
+$lang['user']="کاربر";
