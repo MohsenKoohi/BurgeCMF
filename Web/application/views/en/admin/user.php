@@ -43,7 +43,7 @@
 			<div class="tab" id="users_list">
 				<h2>{users_list_text}</h2>		
 				<div class="row" style="">
-					<div class="three columns">
+					<div class="three columns" style="font-size:1.3em;font-weight:bold">
 						{user_text}
 					</div>
 					<div class="six columns">

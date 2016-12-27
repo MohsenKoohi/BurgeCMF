@@ -41,8 +41,6 @@ class Access_manager_model extends CI_Model
 	//checks if a user has access to a module
 	public function check_access($module,&$user)
 	{
-		return true;
-
 		$log_context=array("module"=>$module);
 		$result=FALSE;
 
@@ -54,15 +52,25 @@ class Access_manager_model extends CI_Model
 		else
 			if($user)
 			{
-				$log_context['user_id']=$user->get_id();
+				$user_id=$user->get_id();
+				$group_id=$user->get_group_id();
+
+				$log_context['user_id']=$user_id;
 				
 				//check access to module
-				$query_result=$this->db->get_where($this->access_table_name,array("user_id"=>$user->get_id(),"module_id"=>$module));
+				$query_result=$this->db
+					->from($this->access_table_name)
+					->where("module_id",$module)
+					->where("( ( user_group_id = -$user_id ) || ( user_group_id = $group_id ) )")
+					->group_by("module_id")
+					->get();
+
 				if($query_result->num_rows() == 1)
 				{
 					//$log_context['user_email']=$user->get_email();
 					$log_context['user_name']=$user->get_name();
 					$log_context['user_code']=$user->get_code();
+					$log_context['user_group_id']=$group_id;
 
 					$log_context['has_access']=TRUE;
 
@@ -82,17 +90,25 @@ class Access_manager_model extends CI_Model
 	}
 
 	//returns an array of all modules a user has access to
-	public function get_user_modules($user_id)
+	public function get_user_modules($user)
 	{
 		$ret=array();
-		if(!$user_id)
+		if(!$user)
 			return $ret;
 
-		$result=$this->db->get_where($this->access_table_name,array("user_group_id"=>$user_id));
-		foreach($result->result_array() as $row)
-			$ret[]=$row["module_id"];
+		$user_id=$user->get_id();
+		$group_id=$user->get_group_id();
 
-		return $ret;
+		$result=$this->db
+			->select("GROUP_CONCAT(module_id) as module_ids")
+			->from($this->access_table_name)
+			->where("( ( user_group_id = -$user_id ) || ( user_group_id = $group_id ) )")
+			->get()
+			->row_array();
+
+		$module_ids=explode(",", $result['module_ids']);
+
+		return $module_ids;		
 	}
 
 	public function get_modules($access_id)

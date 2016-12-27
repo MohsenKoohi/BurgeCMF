@@ -16,7 +16,7 @@ class AE_Dashboard extends Burge_CMF_Controller {
 
 		$this->data['modules']=array();
 
-		$modules=$this->module_manager_model->get_user_modules_names($user_info->get_id());
+		$modules=$this->module_manager_model->get_user_modules_names($user_info);
 		foreach ($modules as $module)
 		{
 			$name=$module['name'];
