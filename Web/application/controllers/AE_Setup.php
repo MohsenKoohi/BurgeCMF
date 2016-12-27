@@ -102,7 +102,7 @@ class AE_Setup extends CI_Controller {
 		foreach($modules_info as $md)
 			$modules[]=$md['module_id'];
 		$this->load->model("access_manager_model");
-		$this->access_manager_model->set_allowed_modules_for_user($user->get_id(),$modules);
+		$this->access_manager_model->set_modules(-$user->get_id(),$modules);
 
 		return;
 	}
