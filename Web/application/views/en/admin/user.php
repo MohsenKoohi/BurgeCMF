@@ -44,7 +44,7 @@
 				<h2>{users_list_text}</h2>		
 				<div class="row" style="">
 					<div class="three columns">
-						<b>{user_text}</b>
+						{user_text}
 					</div>
 					<div class="six columns">
 						<select class="full-width" 
@@ -81,15 +81,15 @@
 						
 						<div class="row even-odd-bg" >
 							<div class="three columns">
-								{email_text}
+								<span>{email_text}</span>
 							</div>
 							<div class="six columns">
-								<?php echo $user_info['user_email'];?>
+								<span><?php echo $user_info['user_email'];?></span>
 							</div>
 						</div>
 						<div class="row even-odd-bg" >
 							<div class="three columns">
-								{new_password_text}
+								<span>{new_password_text}</span>
 							</div>
 							<div class="six columns">
 								<input name="password" type="password" class="ltr eng full-width"/>
@@ -97,7 +97,7 @@
 						</div>
 						<div class="row even-odd-bg" >
 							<div class="three columns">
-								{name_text}
+								<span>{name_text}</span>
 							</div>
 							<div class="six columns">
 								<input value="<?php echo $user_info['user_name']?>" name="name"  class="full-width"/>
@@ -105,7 +105,7 @@
 						</div>
 						<div class="row even-odd-bg" >
 							<div class="three columns">
-								{code_text}
+								<span>{code_text}</span>
 							</div>
 							<div class="six columns">
 								<input value="<?php echo $user_info['user_code']?>" name="code"  class="full-width"/>
@@ -113,7 +113,7 @@
 						</div>
 						<div class="row even-odd-bg" >
 							<div class="three columns">
-								{user_group_text}
+								<span>{user_group_text}</span>
 							</div>
 							<div class="six columns">
 								<select type="text" name="group_id" class="full-width">
@@ -132,7 +132,7 @@
 						</div>
 						<div class="row even-odd-bg" >
 							<div class="three columns">
-								{delete_text}
+								<span>{delete_text}</span>
 							</div>
 							<div class="six columns">
 								<input name="delete" type="checkbox" class="graphical" />

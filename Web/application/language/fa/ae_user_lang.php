@@ -21,5 +21,5 @@ $lang['user_group']="گروه کاربری";
 $lang['user']="کاربر";
 $lang['user_deleted_successfully']="کاربر مورد نظر با موفقیت حذف شد.";
 $lang['user_password_changed_successfully']="رمز جدید با موفقیت ثبت شد.";
-$lang['']="";
+$lang['user_groups']="گروه های کاربری";
 $lang['']="";

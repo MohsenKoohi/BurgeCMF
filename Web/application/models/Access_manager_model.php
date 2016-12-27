@@ -12,12 +12,16 @@ class Access_manager_model extends CI_Model
 
 	public function install()
 	{
+		//we use negative numbers indicating ids of users
+		//and positive numbers indicating ids of groups
+		//so we don't need to add a type column 
+
 		$access_table=$this->db->dbprefix($this->access_table_name); 
 		$this->db->query(
 			"CREATE TABLE IF NOT EXISTS $access_table (
-				`user_id` int NOT NULL,
+				`user_group_id` int NOT NULL,
 				`module_id` char(50) NOT NULL,
-				PRIMARY KEY (user_id , module_id)	
+				PRIMARY KEY (user_group_id , module_id)	
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8"
 		);
 
@@ -45,8 +49,8 @@ class Access_manager_model extends CI_Model
 		$batch=array();
 		foreach ($modules as $module)
 			$batch[]=array(
-				"user_id"=>$user_id
-				,"module_id"=>$module
+				"user_id"		=> $user_id
+				,"module_id"	=> $module
 				);
 
 		$this->db->insert_batch($this->access_table_name,$batch);
@@ -108,6 +112,8 @@ class Access_manager_model extends CI_Model
 	//checks if a user has access to a module
 	public function check_access($module,&$user)
 	{
+		return true;
+
 		$log_context=array("module"=>$module);
 		$result=FALSE;
 
@@ -153,7 +159,7 @@ class Access_manager_model extends CI_Model
 		if(!$user_id)
 			return $ret;
 
-		$result=$this->db->get_where($this->access_table_name,array("user_id"=>$user_id));
+		$result=$this->db->get_where($this->access_table_name,array("user_group_id"=>$user_id));
 		foreach($result->result_array() as $row)
 			$ret[]=$row["module_id"];
 

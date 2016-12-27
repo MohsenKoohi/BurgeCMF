@@ -438,6 +438,7 @@ class User_manager_model extends CI_Model
 		$data=array();
 		$data['users']=$this->get_all_users_info();
 		$data['total_text']=$CI->lang->line("total");
+		$data['user_groups']=$this->get_all_user_groups();
 		
 		$CI->load->library('parser');
 		$ret=$CI->parser->parse($CI->get_admin_view_file("user_dashboard"),$data,TRUE);

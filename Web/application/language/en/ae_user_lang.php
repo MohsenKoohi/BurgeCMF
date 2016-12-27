@@ -21,5 +21,6 @@ $lang['user_group']="User group";
 $lang['user']="User";
 $lang['user_deleted_successfully']="User deleted successfully.";
 $lang['user_password_changed_successfully']="User's password changesd successfully.";
+$lang['user_groups']="User groups";
 $lang['']="";
 $lang['']="";
