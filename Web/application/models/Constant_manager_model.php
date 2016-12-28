@@ -79,4 +79,13 @@ class Constant_manager_model extends CI_Model
 		return FALSE;
 	}
 
+	public function get_array($keys)
+	{
+		return $this->db
+			->from($this->constant_table_name)
+			->where_in("constant_key",$keys)
+			->get()
+			->result_array();
+	}
+
 }
