@@ -182,9 +182,11 @@ class User_manager_model extends CI_Model
 
 		$this->db->insert("user_group",$props);
 
+		$user_group_id=$this->db->insert_id();
+		$props['new_user_group_id']=$user_group_id;
 		$this->log_manager_model->info("USER_GROUP_ADD",$props);
 
-		return TRUE;
+		return $user_group_id;
 	}
 
 	public function delete_user($user_id)
