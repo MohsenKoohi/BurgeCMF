@@ -13,81 +13,82 @@
 			</div>
 		</div>
 		<br><br>
-		<div class="container category-list">
-			<div class="row" >
-				<?php 
-					foreach($categories as $cat) { 
-						//don't show root category
-						if(!$cat['id'])
-							continue;
-						$par_names=array();
-						for($j=sizeof($cat['parents'])-1;$j>=0;$j--)
-						{
-							$par_id=$cat['parents'][$j];
-							if($par_id)
-								$par_names[]=$categories[$par_id]['names'][$selected_lang];
-						}
-						$par_names[]=" ";
-						$par_name=implode($next_category_sign_text, $par_names);	
-				?>				
-					<div class="three columns cat" data-cat-id="<?php echo $cat['id'];?>" >
-						<div>
-							<div class="id">
-								#<?php echo $cat['id'];?>
-							</div>
-							<div class="parent">
-								&nbsp;<?php echo $par_name; ?>
-							</div>
-							<div class="name">
-								<a target="_blank" href="<?php echo get_admin_category_details_link($cat['id']);?>">
-									<b>
-										<?php 
-											if($cat['names'][$selected_lang]) 
-												echo $cat['names'][$selected_lang];
-											else
-												echo $no_title_text;
-										?>
-									</b>
-								</a>
+		<?php if(sizeof($categories)>1){ ?>
+			<div class="container category-list">
+				<div class="row" >
+					<?php 
+						foreach($categories as $cat) { 
+							//don't show root category
+							if(!$cat['id'])
+								continue;
+							$par_names=array();
+							for($j=sizeof($cat['parents'])-1;$j>=0;$j--)
+							{
+								$par_id=$cat['parents'][$j];
+								if($par_id)
+									$par_names[]=$categories[$par_id]['names'][$selected_lang];
+							}
+							$par_names[]=" ";
+							$par_name=implode($next_category_sign_text, $par_names);	
+					?>				
+						<div class="three columns cat" data-cat-id="<?php echo $cat['id'];?>" >
+							<div>
+								<div class="id">
+									#<?php echo $cat['id'];?>
+								</div>
+								<div class="parent">
+									&nbsp;<?php echo $par_name; ?>
+								</div>
+								<div class="name">
+									<a target="_blank" href="<?php echo get_admin_category_details_link($cat['id']);?>">
+										<b>
+											<?php 
+												if($cat['names'][$selected_lang]) 
+													echo $cat['names'][$selected_lang];
+												else
+													echo $no_title_text;
+											?>
+										</b>
+									</a>
+								</div>
 							</div>
 						</div>
-					</div>
-				<?php } ?>
-			</div>
-			<?php echo form_open(get_link("admin_category"),array("id"=>"resort")); ?>
-				<input type="hidden" name="post_type" value="resort"/>
-				<input type="hidden" name="ids" value=""/>
-			</form>
-			<br><br>
-			<div class="row">
-				<div class="four columns">&nbsp;</div>
-				<div class="button sub-primary button-type2 four columns" onclick="submitSort()">
-					{submit_sort_text}
+					<?php } ?>
 				</div>
-			</div>
-			<script type="text/javascript">
-				$(window).load(function()
-				{
-					$( ".category-list .row" ).sortable();
-				})
-
-				function submitSort()
-				{
-					if(!confirm("{are_you_sure_to_resort_text}"))
-						return;
-					
-					var ids=[];
-					$(".category-list .cat").each(function(index,el)
+				<?php echo form_open(get_link("admin_category"),array("id"=>"resort")); ?>
+					<input type="hidden" name="post_type" value="resort"/>
+					<input type="hidden" name="ids" value=""/>
+				</form>
+				<br><br>
+				<div class="row">
+					<div class="four columns">&nbsp;</div>
+					<div class="button sub-primary button-type2 four columns" onclick="submitSort()">
+						{submit_sort_text}
+					</div>
+				</div>
+				<script type="text/javascript">
+					$(window).load(function()
 					{
-						ids.push($(el).data("cat-id"));
-					});
+						$( ".category-list .row" ).sortable();
+					})
 
-					$("form#resort input[name=ids]").val(ids.join(','));
+					function submitSort()
+					{
+						if(!confirm("{are_you_sure_to_resort_text}"))
+							return;
+						
+						var ids=[];
+						$(".category-list .cat").each(function(index,el)
+						{
+							ids.push($(el).data("cat-id"));
+						});
 
-					$("form#resort").submit();
-				}
+						$("form#resort input[name=ids]").val(ids.join(','));
 
-			</script>
-		</div>
+						$("form#resort").submit();
+					}
+				</script>
+			</div>
+		<?php } ?>
 	</div>
 </div>
