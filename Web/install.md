@@ -28,6 +28,5 @@ CREATE TABLE IF NOT EXISTS `burge_cmf_sessions` (
 
 ##After Developing
 * Change ENVIRONMENT constant to 'production';
-* Change $config['log_threshold'] from 4 to 1;
 * Enjoy using your app;
 
