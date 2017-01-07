@@ -34,6 +34,7 @@ define("DATE_FUNCTION","jdate");
 
 
 define("DEFAULT_TIMEZONE","Asia/Tehran");
+date_default_timezone_set(DEFAULT_TIMEZONE);
 
 
 //session expiration for admin users in seconds
