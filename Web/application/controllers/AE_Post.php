@@ -179,6 +179,14 @@ class AE_Post extends Burge_CMF_Controller {
 
 	private function delete_post($post_id)
 	{
+		$props=$this->post_manager_model->get_post($post_id);
+		foreach($props as $p)
+		{
+			$gallery=$p['pc_gallery']['images'];
+			foreach($gallery as $i)
+				unlink(get_post_gallery_image_path($i['image']));
+		}
+		
 		$this->post_manager_model->delete_post($post_id);
 
 		set_message($this->lang->line('post_deleted_successfully'));
