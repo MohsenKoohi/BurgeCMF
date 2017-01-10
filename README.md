@@ -5,7 +5,7 @@
 
 ##Features
 * Multi-language admin and customer environments
-* Multi-user admin environments with ability to set access level for each user
+* Multi-user admin environments with ability to set access level for each user, and also to create user groups and manage access level using user groups
 * Default view files for different languages (Default lanaguages are Persian, and English) and different devices to support fast developing of new modules
 * Module manager
 * Visiting counter module 
