@@ -18,18 +18,7 @@
 			<?php if($total_pages>1) { ?>
 				&nbsp;<br>
 				<div class="three columns results-page-select">
-					<select class="full-width" onchange="document.location=$(this).val();">
-						<?php 
-							for($i=1;$i<=$total_pages;$i++)
-							{
-								$sel="";
-								if($i==$current_page)
-									$sel="selected";
-								$link=str_replace("page_number",$i,$pages_format);
-								echo "<option $sel value='$link'>$page_text $i</option>\n";
-							}
-						?>
-					</select>
+					{pagination}
 				</div>
 			<?php }?>
 		</div>

@@ -904,6 +904,67 @@ function burge_cmf_watermark(
 	return $result;
 }
 
+/* 
+$settings is an array of
+- total_pages 
+- current_page
+- base_url
+- page_text //translation of Page
+*/
+
+function get_select_pagination($settings)
+{
+	$ret="<select class='full-width' onchange='document.location=$(this).val();'>";
+
+	$page_text=$settings['page_text'];
+	for($i=1;$i<=$settings['total_pages'];$i++)
+	{
+		$sel="";
+		if($i==$settings['current_page'])
+			$sel="selected";
+		$link=str_replace("page_number",$i,$settings['base_url']);
+		$ret.="<option $sel value='$link'>$page_text $i</option>\n";
+	}
+	$ret.="</select>";
+
+	return $ret;
+}
+
+function get_link_pagination($settings)
+{
+	$CI=&get_instance();
+
+	$CI->load->library('pagination');
+	$config=array(
+		'base_url'					=> $settings['base_url']
+		,'total_rows'				=> $settings['total_pages']
+		,'per_page'					=> 1
+		,'cur_page'					=> $settings['current_page']
+		,'num_links'				=> 2
+		,'data_page_attr'			=> 'page'
+		,'use_page_numbers'		=> TRUE
+		,'page_query_string'		=> TRUE
+		,'first_link'				=> '&#171;'
+		,'last_link'				=> '&#187;'
+		,'next_link'				=> '&#8250;'
+		,'prev_link'				=> '&#8249;'
+		,'query_string_segment'	=> 'page'
+		,'prev_tag_open'			=> "<span class='ntag'>"
+		,'prev_tag_close'			=> "</span>"
+		,'next_tag_open'			=> "<span class='ptag'>"
+		,'next_tag_close'			=> "</span>"
+		,'first_tag_open'			=> "<span class='ftag'>"
+		,'first_tag_close'		=> "</span>"
+		,'last_tag_open'			=> "<span class='ltag'>"
+		,'last_tag_close'			=> "</span>"
+		,'cur_tag_open'			=> "<span class='ctag'><a>"
+		,'cur_tag_close'			=> "</span></a>"
+	);
+	$CI->pagination->initialize($config);
+	
+	return $CI->pagination->create_links();
+}
+
 function burge_cmf_send_mail($receiver,$subject,$message)
 {
 	$CI=&get_instance();

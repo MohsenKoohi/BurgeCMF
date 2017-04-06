@@ -30,7 +30,7 @@ class CE_Category extends Burge_CMF_Controller {
 
 		$this->load->model("post_manager_model");
 
-		$per_page=20;
+		$per_page=1;
 		$filter=array(
 			"lang"=>$this->selected_lang
 			,"category_id"=>$category_id
@@ -47,7 +47,19 @@ class CE_Category extends Burge_CMF_Controller {
 			redirect(get_customer_category_details_link($category_id,$category_hash,$category_info['cd_url']));
 
 		$this->data['current_page']=$page;
-		$this->data['pages_format']=get_customer_category_details_link($category_id,$category_hash,$category_info['cd_url'],"page_number");
+		$base_url=get_customer_category_details_link($category_id,$category_hash,$category_info['cd_url'],"page_number");
+		
+		$pagination_settings=array(
+			"current_page"		=> $page
+			,"total_pages"		=> $total_pages
+			,"base_url"			=> $base_url
+			,"page_text"		=> $this->lang->line("page")
+		);
+		$this->data['pagination']=get_select_pagination($pagination_settings);
+
+		//$pagination_settings['base_url']=
+		//$this->data['pagination']=get_link_pagination($pagination_settings);
+
 
 		$filter['start']=$per_page*($page-1);
 		$filter['count']=$per_page;
