@@ -15,6 +15,9 @@ class CE_Category extends Burge_CMF_Controller {
 		if(!$category_info || ($category_info['category_hash']!== $category_hash))
 			redirect(get_link("home_url"));
 
+		if($this->input->get("page"))
+			$page=(int)$this->input->get("page");
+
 		$category_link=get_customer_category_details_link($category_id,$category_info['category_hash'],$category_info['cd_url'],$page);
 		if($category_info['cd_url'])
 			if(get_customer_category_details_link($category_id,$category_hash,urldecode($category_name),$page) !== $category_link)
@@ -55,11 +58,10 @@ class CE_Category extends Burge_CMF_Controller {
 			,"base_url"			=> $base_url
 			,"page_text"		=> $this->lang->line("page")
 		);
-		$this->data['pagination']=get_select_pagination($pagination_settings);
+		//$this->data['pagination']=get_select_pagination($pagination_settings);
 
-		//$pagination_settings['base_url']=
-		//$this->data['pagination']=get_link_pagination($pagination_settings);
-
+		$pagination_settings['base_url']=get_customer_category_details_link($category_id,$category_hash,$category_info['cd_url'],"");
+		$this->data['pagination']=get_link_pagination($pagination_settings);
 
 		$filter['start']=$per_page*($page-1);
 		$filter['count']=$per_page;

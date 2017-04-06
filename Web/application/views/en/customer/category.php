@@ -17,7 +17,7 @@
 			</div>
 			<?php if($total_pages>1) { ?>
 				&nbsp;<br>
-				<div class="three columns results-page-select">
+				<div class="three columns results-page-select link-pagination">
 					{pagination}
 				</div>
 			<?php }?>

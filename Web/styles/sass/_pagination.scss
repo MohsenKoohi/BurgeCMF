@@ -1,0 +1,44 @@
+div.link-pagination
+{
+    direction:ltr;
+
+    a
+    {
+        display: inline-block;
+        width:34px;
+        height:34px;
+        text-align: center; 
+        margin:2px;
+        border-radius:50%;
+        background: $primary-color;
+        color:white;
+        font-weight: bold;
+        font-size: 1.5em;
+        transition: background .3s
+    }
+
+    a:hover
+    ,.ctag a
+    {
+        color:white !important;
+        background: $secondary-color;
+        transition: background .3s
+    }
+
+    .ctag a
+    {
+        cursor: default;
+    }
+
+
+    .ntag a
+    ,.ptag a
+    ,.ftag a
+    ,.ltag a
+    {
+        //padding-top:5px;
+        //font-family: tahoma;
+        //font-weight: bold;
+        //line-height: 1em
+    }
+}

@@ -896,3 +896,25 @@ body.ltr .category-div li {
   height: 40px;
   vertical-align: middle;
   cursor: pointer; }
+
+div.link-pagination {
+  direction: ltr; }
+  div.link-pagination a {
+    display: inline-block;
+    width: 34px;
+    height: 34px;
+    text-align: center;
+    margin: 2px;
+    border-radius: 50%;
+    background: #0C7B77;
+    color: white;
+    font-weight: bold;
+    font-size: 1.5em;
+    transition: background 0.3s; }
+  div.link-pagination a:hover
+  , div.link-pagination .ctag a {
+    color: white !important;
+    background: #C63672;
+    transition: background 0.3s; }
+  div.link-pagination .ctag a {
+    cursor: default; }
