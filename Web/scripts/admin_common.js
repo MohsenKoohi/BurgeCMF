@@ -1,5 +1,20 @@
-//trim for IE<=8
+function correctPersianDigits(val)
+{
+  var a=['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
+  var b='';
+  for(var j=0; j<val.length;j++)
+  {
+    var c=a.indexOf(val[j]);
+    if(c>=0)
+      b+=''+c;
+    else
+      b+=val[j];
+  }
+  
+  return b;
+}
 
+//trim for IE<=8
 if(typeof String.prototype.trim !== 'function')
 {
   String.prototype.trim = function()
