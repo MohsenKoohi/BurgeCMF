@@ -33,7 +33,7 @@ class CE_Category extends Burge_CMF_Controller {
 
 		$this->load->model("post_manager_model");
 
-		$per_page=1;
+		$per_page=20;
 		$filter=array(
 			"lang"=>$this->selected_lang
 			,"category_id"=>$category_id
