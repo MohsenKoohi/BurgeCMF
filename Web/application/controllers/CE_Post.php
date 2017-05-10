@@ -43,6 +43,7 @@ class CE_Post extends Burge_CMF_Controller {
 				foreach($this->data['post_gallery'] as $img)
 					break;
 				$this->data['page_main_image']=get_link("post_gallery_url").'/'.$img['image'];
+				$this->data['post_info']['pc_image']=$this->data['page_main_image'];
 			}
 			
 		$this->data['message']=get_message();
