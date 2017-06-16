@@ -316,7 +316,11 @@ input[type="button"].button-primary:focus */{
   transition: background-color .3s,color .3s;
 }
 
-.button-type2
+.button.button-type2
+, button.button-type2
+, input[type="submit"].button-type2
+, input[type="reset"].button-type2
+, input[type="button"].button-type2
 {
   background-color: #73012F;
   border-color:#73012F;
@@ -326,14 +330,23 @@ input[type="button"].button-primary:focus */{
   border-radius: 4px;
 }
 
-.button-type2:hover
+.button.button-type2:hover
+, button.button-type2:hover
+, input[type="submit"].button-type2:hover
+, input[type="reset"].button-type2:hover
+, input[type="button"].button-type2:hover
 {
   color:white;
   background-color: #A40344;
   border-color:#73012F;
   transition:background-color .3s;
 }
-.button-type1
+
+.button.button-type1
+, button.button-type1
+, input[type="submit"].button-type1
+, input[type="reset"].button-type1
+, input[type="button"].button-type1
 {
   background-color: #137013;
   border-color: #137013;
@@ -343,7 +356,11 @@ input[type="button"].button-primary:focus */{
   border-radius: 4px;
 }
 
-.button-type1:hover
+.button.button-type1:hover
+, button.button-type1:hover
+, input[type="submit"].button-type1:hover
+, input[type="reset"].button-type1:hover
+, input[type="button"].button-type1:hover
 {
   color:white;
   border-color: #137013;
