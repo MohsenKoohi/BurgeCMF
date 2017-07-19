@@ -302,14 +302,18 @@ class Category_manager_model extends CI_Model
 		return $ret;
 	}
 	
-
-	public function get_info($category_id,$lang_id=NULL)
+	public function get_info($category_id_name,$lang_id=NULL)
 	{
 		$this->db
 			->select("*")
 			->from($this->category_table_name)
-			->join($this->category_description_table_name,"category_id = cd_category_id","LEFT")
-			->where("category_id",(int)$category_id);
+			->join($this->category_description_table_name,"category_id = cd_category_id","LEFT");
+
+
+		if(is_numeric($category_id_name))
+			$this->db->where("category_id",(int)$category_id_name);
+		else
+			$this->db->where("cd_name",$category_id_name);
 
 		if($lang_id)
 			$this->db->where("cd_lang_id",$lang_id);
@@ -322,7 +326,7 @@ class Category_manager_model extends CI_Model
 			return $result[0];
 
 		return $result;
-	}
+	}	
 
 	public function add($parent_id)
 	{
