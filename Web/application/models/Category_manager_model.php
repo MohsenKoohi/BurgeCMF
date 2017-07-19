@@ -302,6 +302,7 @@ class Category_manager_model extends CI_Model
 		return $ret;
 	}
 	
+
 	public function get_info($category_id_name,$lang_id=NULL)
 	{
 		$this->db
@@ -322,11 +323,11 @@ class Category_manager_model extends CI_Model
 			->get()
 			->result_array();
 
-		if($lang_id)
+		if($result && $lang_id)
 			return $result[0];
 
 		return $result;
-	}	
+	}
 
 	public function add($parent_id)
 	{
