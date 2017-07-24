@@ -1,4 +1,3 @@
-
 <?php
 class Hit_counter_model extends CI_Model
 {
