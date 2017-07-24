@@ -2,12 +2,9 @@
 <html dir="ltr" lang="en">
 <head>
 	<meta charset="UTF-8" />
-	<meta name="description" content="{header_description}"/>
-	<meta name="keywords" content="{header_keywords}"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1, user-scalable=yes">
+	<meta name="viewport" content="width=device-width,initial-scale=1, user-scalable=yes">
 	<title>{header_title}</title>
-  <link rel="canonical" href="{header_canonical_url}"/>
-	<link rel="shortcut icon" href="{images_url}/favicon.png"/> 
+  <link rel="shortcut icon" href="{images_url}/favicon.png"/> 
 
   <link rel="stylesheet" type="text/css" href="{styles_url}/skeleton.css" />  
   <link rel="stylesheet" type="text/css" href="{styles_url}/style-ltr.css" />  
