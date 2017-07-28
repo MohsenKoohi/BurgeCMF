@@ -37,8 +37,8 @@ class AE_Constant extends Burge_CMF_Controller {
 	private function add_constant()
 	{
 		$key=$this->input->post("key");
-		$key=preg_replace("/\s+/", "_",trim($key));
-		$value=$this->input->post("value");
+		$key=preg_replace("/\s+/", "_",persian_normalize(trim($key)));
+		$value=persian_normalize($this->input->post("value"));
 		
 		if(!$key || !$value)
 			$this->data['message']=$this->lang->line("fill_all_fields");
@@ -78,14 +78,12 @@ class AE_Constant extends Burge_CMF_Controller {
 
 			$value_string="value_".$key;
 			$post_value=$this->input->post($value_string);
-			$value=trim($post_value);
+			$value=persian_normalize(trim($post_value));
 			if(!$value)
 				$value=false;
 
-
 			$this->constant_manager_model->set($key,$value);
-			$res=TRUE;		
-			
+			$res=TRUE;			
 		}
 
 		if($res)
