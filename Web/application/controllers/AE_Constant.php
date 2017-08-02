@@ -77,8 +77,8 @@ class AE_Constant extends Burge_CMF_Controller {
 				continue;
 
 			$value_string="value_".$key;
-			$post_value=$this->input->post($value_string);
-			$value=persian_normalize(trim($post_value));
+			$post_value=trim($this->input->post($value_string));
+			$value=persian_normalize($post_value);
 			if(!$value)
 				$value=false;
 
