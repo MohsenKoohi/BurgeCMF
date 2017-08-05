@@ -53,6 +53,6 @@ class CE_Home extends Burge_CMF_Controller {
 
 	public function redirect()
 	{
-		return redirect(get_link("home_url"));
+		return redirect(get_link("home_url")."#");
 	}
 }
