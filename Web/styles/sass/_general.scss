@@ -210,3 +210,21 @@ input[type="file"] > input[type="button"]::-moz-focus-inner
 {
 	display: none;
 }
+
+.primary-color
+{
+	color:$primary-color;
+}
+
+.secondary-color
+{
+	color: $secondary-color;
+}
+
+.comment,.even-odd-bg .comment
+{
+	color:$secondary-color;
+	font-size: .9em;
+	text-align: justify;
+	font-weight: 500;
+}

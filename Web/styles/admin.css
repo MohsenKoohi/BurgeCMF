@@ -138,6 +138,18 @@ input[type="file"] > input[type="button"]::-moz-focus-inner {
 .no-display {
   display: none; }
 
+.primary-color {
+  color: #0C7B77; }
+
+.secondary-color {
+  color: #C63672; }
+
+.comment, .even-odd-bg .comment {
+  color: #C63672;
+  font-size: .9em;
+  text-align: justify;
+  font-weight: 500; }
+
 .header {
   display: block;
   line-height: 0;
