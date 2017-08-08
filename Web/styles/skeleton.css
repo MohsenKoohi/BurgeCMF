@@ -326,7 +326,6 @@ input[type="button"].button-primary:focus */{
   border-color:#73012F;
   color:white;
   transition:background-color .3s;
-  padding:2px 5px;
   border-radius: 4px;
 }
 
@@ -352,7 +351,6 @@ input[type="button"].button-primary:focus */{
   border-color: #137013;
   color:white;
   transition:background-color .3s;
-  padding:2px 5px;
   border-radius: 4px;
 }
 
