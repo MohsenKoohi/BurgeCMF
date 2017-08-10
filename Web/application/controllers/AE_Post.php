@@ -183,8 +183,9 @@ class AE_Post extends Burge_CMF_Controller {
 		foreach($props as $p)
 		{
 			$gallery=$p['pc_gallery']['images'];
-			foreach($gallery as $i)
-				unlink(get_post_gallery_image_path($i['image']));
+			if($gallery)
+				foreach($gallery as $i)
+					unlink(get_post_gallery_image_path($i['image']));
 		}
 		
 		$this->post_manager_model->delete_post($post_id);
