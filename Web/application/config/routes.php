@@ -82,6 +82,8 @@ $route[ADMIN_URL_FOLDER."/contact_us/send_new"]	="AE_Contact_Us/send_new";
 $route[ADMIN_URL_FOLDER."/contact_us/(\d+)"]		="AE_Contact_Us/details/$1";
 $route["contact_us"]										="CE_Contact_Us";
 
+$route[ADMIN_URL_FOLDER."/footer_link"]			="AE_Footer_Link";
+
 $route["retry"]="retry";
 $route["watermark"]="CE_Watermark";
 

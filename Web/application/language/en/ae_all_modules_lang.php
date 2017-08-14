@@ -13,3 +13,4 @@ $lang['constant']="Constant Values";
 $lang['file']="Files";
 $lang['category']="Categories";
 $lang['contact_us']="Contact us";
+$lang['footer_link']="Footer Links";
