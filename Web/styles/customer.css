@@ -299,7 +299,7 @@ body.ltr .top-menu > ul > li, body.rtl .top-menu > ul > li {
     height: 40px; } }
 .footer {
   opacity: .5;
-  background: linear-gradient(to top, #aaa, #eee);
+  background: linear-gradient(to left, white, rgba(255, 255, 255, 0.3), white);
   margin: 10px 2.5% 0px 2.5%;
   padding: 10px; }
   .footer ul {
