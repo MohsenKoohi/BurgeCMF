@@ -298,22 +298,42 @@ body.ltr .top-menu > ul > li, body.rtl .top-menu > ul > li {
     width: 40px;
     height: 40px; } }
 .footer {
-  text-align: center;
+  opacity: .5;
+  background: linear-gradient(to top, #aaa, #eee);
   margin: 10px 2.5% 0px 2.5%;
-  padding: 0; }
+  padding: 10px; }
+  .footer ul {
+    list-style: none;
+    width: 100%; }
+  .footer li {
+    vertical-align: top; }
+  .footer > ul > li {
+    padding: 5px;
+    display: inline-block;
+    width: 25%; }
+    .footer > ul > li > a {
+      display: block;
+      font-weight: bold;
+      font-size: 1.2em;
+      margin-bottom: 20px; }
+    .footer > ul > li a {
+      color: black; }
 
-.footer img {
-  border-radius: 10px;
-  width: 100%;
-  max-width: 200px;
-  transition: background-color .3s, opacity .3s;
-  opacity: .5; }
+.footer:hover {
+  opacity: 1; }
 
-.footer:hover img {
-  background-color: white;
-  opacity: 1;
-  transition: background-color .3s,opacity .3s; }
-
+@media (max-width: 600px) {
+  .footer > ul > li {
+    display: inline-block;
+    width: 100%; }
+    .footer > ul > li > a {
+      text-align: center;
+      display: block;
+      font-weight: bold;
+      font-size: 1.2em;
+      margin-bottom: 20px; }
+    .footer > ul > li a {
+      color: black; } }
 .content {
   white-space: nowrap;
   margin-bottom: 0; }

@@ -63,11 +63,16 @@ class Footer_link_manager_model extends CI_Model
 		return $new_post_id;
 	}
 
-	public function get_links()
+	public function get_links($lang_id=NULL)
 	{
-		$result=$this->db
+		$this->db
 			->select("*")
-			->from($this->footer_link_table_name)
+			->from($this->footer_link_table_name);
+
+		if(0 && $lang_id)
+			$this->db->where("fl_lang_id", $lang_id);
+
+		$result=$this->db
 			->order_by("fl_id")
 			->get()
 			->result_array();

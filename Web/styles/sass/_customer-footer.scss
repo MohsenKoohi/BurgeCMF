@@ -1,0 +1,80 @@
+.footer
+{
+	opacity: .5;
+	background:linear-gradient(to top, #aaa, #eee);
+	margin:10px 2.5% 0px 2.5%;
+	padding:10px;
+
+	ul
+	{
+		list-style: none;
+		width: 100%;
+	}
+
+	li
+	{
+		vertical-align: top;
+	}
+
+	> ul
+	{
+
+		> li
+		{
+			padding:5px;
+			display: inline-block;
+			width: 25%;
+
+			> a
+			{
+				display: block;
+				font-weight: bold;
+				font-size: 1.2em;
+				margin-bottom: 20px;
+			}
+
+			a
+			{
+				color: black;
+			}
+		}
+
+	}
+}
+
+.footer:hover
+{
+	opacity: 1;
+}
+
+@media (max-width: 600px)
+{
+	.footer
+	{
+		> ul
+		{
+
+			> li
+			{
+				display: inline-block;
+				width: 100%;
+
+				> a
+				{
+					text-align: center;
+					display: block;
+					font-weight: bold;
+					font-size: 1.2em;
+					margin-bottom: 20px;
+				}
+
+				a
+				{
+					color: black;
+				}
+			}
+
+		}
+	}
+
+}

@@ -6,6 +6,10 @@
 			{
 				margin-bottom: 10px;
 			}
+			h2
+			{
+				margin-bottom: 0;
+			}
 		</style>		
 		<div class="container">
 			<?php echo form_open(""); ?>
@@ -20,6 +24,12 @@
 				?>
 							<div class='row even-odd-bg'>
 								<h2>{set_text} <?php echo $scount++;?></h2>
+								<div class='row'>
+									<input type='button' class='anti-float two columns button button-primary sub-primary button-type2' value='{delete_set_text}'
+										onclick='$(this).parent().parent().remove();'
+									/>
+								</div>
+								<br><br>
 								<input type='hidden' value='0' name='links[<?php echo $id;?>][parent_id]'/>
 								<div class='three columns'>
 									{title_text}
@@ -103,6 +113,11 @@
 					var html= ""
 						+"<div class='row even-odd-bg'>"
 							+"<h2>{set_text}</h2>"
+							+"<div class='row'>"
+									+"<input type='button' class='anti-float two columns button button-primary sub-primary button-type2' value='{delete_set_text}'"
+										+"onclick='$(this).parent().parent().remove();'/>"
+							+"</div>"
+							+"<br><br>"
 							+"<input type='hidden' value='0' name='links["+lastId+"][parent_id]'/>"
 							+"<div class='three columns'>"
 								+"{title_text}"
