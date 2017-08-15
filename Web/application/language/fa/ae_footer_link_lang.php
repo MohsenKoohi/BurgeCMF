@@ -8,6 +8,6 @@ $lang['add_new_row']="سطر جدید";
 $lang['delete']="حذف";
 $lang['set']="مجموعه";
 $lang['add_new_set']="مجموعه جدید";
-$lang['']="";
+$lang['set_successfully']="تغییرات با موفقیت ثبت شد.";
 $lang['']="";
 

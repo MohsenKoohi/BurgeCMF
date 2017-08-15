@@ -99,8 +99,19 @@ class Footer_link_manager_model extends CI_Model
 
 		}
 
-		//bprint_r($ret);
+		//bprint_r($ret);exit
 
 		return $ret;
+	}
+
+	public function set_links($ins)
+	{
+		$this->db
+			->where("fl_id >=",0)
+			->delete($this->footer_link_table_name);
+
+		$this->db->insert_batch($this->footer_link_table_name, $ins);
+		
+		return;
 	}
 }
