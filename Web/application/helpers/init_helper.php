@@ -24,7 +24,7 @@ function &get_links($just_common=FALSE)
 		);
 
 		$LINKS=array_merge($LINKS_COMMON, array(
-			'admin_url'					=> ADMIN_URL_LANG
+			'admin_url'					=> ADMIN_SURL_LANG
 			,'admin_surl'				=> ADMIN_SURL_LANG
 			,'admin_no_access'		=>	HOME_URL_LANG
 			,'admin_login'				=> ADMIN_SURL_LANG."/login"

@@ -56,6 +56,9 @@ class Burge_CMF_Controller extends CI_Controller{
 				return;
 			}
 
+			if(HTTPS_AVAILABLE && !isset($_SERVER['HTTPS']))
+				return redirect(get_link('admin_login'));
+
 			//Now we are sure the user has been logged
 			//Do every general work here
 			

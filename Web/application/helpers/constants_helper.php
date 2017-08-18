@@ -45,10 +45,19 @@ define("USER_SESSION_EXPIRATION",30*60);
 ////////////////////////////////////////////////
 ////////////////////////////////////////////////
 
+define('HTTPS_AVAILABLE', FALSE);
+
 //http server
-define ('HOME_URL' ,"http://".MAIN_ADDRESS);
+if(HTTPS_AVAILABLE && isset($_SERVER['HTTPS']))
+	define ('HOME_URL' ,"https://".MAIN_ADDRESS);
+else
+	define ('HOME_URL' ,"http://".MAIN_ADDRESS);
+
 //https server
-define ('HOME_SURL',"http://".MAIN_ADDRESS);
+if(HTTPS_AVAILABLE)
+	define ('HOME_SURL',"https://".MAIN_ADDRESS);
+else
+	define ('HOME_SURL',"http://".MAIN_ADDRESS);
 
 define ('URL_LANGUAGE_PATTERN',"{language}");
 
