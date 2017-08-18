@@ -115,7 +115,8 @@ class Footer_link_manager_model extends CI_Model
 			->where("fl_id >=",0)
 			->delete($this->footer_link_table_name);
 
-		$this->db->insert_batch($this->footer_link_table_name, $ins);
+		if($ins)
+			$this->db->insert_batch($this->footer_link_table_name, $ins);
 		
 		return;
 	}

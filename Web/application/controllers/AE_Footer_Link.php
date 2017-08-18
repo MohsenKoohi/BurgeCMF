@@ -82,13 +82,14 @@ class AE_Footer_Link extends Burge_CMF_Controller {
 		$ins=array();
 		$links=$this->input->post("links");
 
-		foreach($links as $id => $l)
-			$ins[]=array(
-				'fl_id'				=> $id
-				,'fl_parent_id'	=> $l['parent_id']
-				,'fl_title'			=> $l['title']
-				,'fl_link'			=> $l['link']
-			);
+		if($links)
+			foreach($links as $id => $l)
+				$ins[]=array(
+					'fl_id'				=> $id
+					,'fl_parent_id'	=> $l['parent_id']
+					,'fl_title'			=> $l['title']
+					,'fl_link'			=> $l['link']
+				);
 
 		$this->footer_link_manager_model->set_links($ins);
 
