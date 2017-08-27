@@ -140,7 +140,7 @@
                     
                     $id=$child['id'];
                     $name=$child['names'][$selected_lang];
-                    $link=get_customer_category_details_link($id,$cat['hash'],$child['urls'][$selected_lang]);
+                    $link=get_customer_category_details_link($id,$child['hash'],$child['urls'][$selected_lang]);
                     echo "<li><a href='$link'>$name</a>\n";
                   }
                   echo "</ul>\n";
