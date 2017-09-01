@@ -15,7 +15,10 @@ class Module_manager_model extends CI_Model
 			"CREATE TABLE IF NOT EXISTS $module_table (
 				`module_id` char(50) NOT NULL
 				,`sort_order` int DEFAULT 0
-				,`model_name` char(100)
+					,`model_name` char(100)
+					,`cron_period` INT DEFAULT 0
+					,`cron_last_execution` DATETIME DEFAULT  NULL
+					,`cron_priority` INT DEFAULT 0
 				,PRIMARY KEY (module_id)	
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8"
 		);
