@@ -15,10 +15,10 @@ class Module_manager_model extends CI_Model
 			"CREATE TABLE IF NOT EXISTS $module_table (
 				`module_id` char(50) NOT NULL
 				,`sort_order` int DEFAULT 0
-					,`model_name` char(100)
-					,`cron_period` INT DEFAULT 0
-					,`cron_last_execution` DATETIME DEFAULT  NULL
-					,`cron_priority` INT DEFAULT 0
+				,`model_name` char(100)
+				,`cron_period` INT DEFAULT 0
+				,`cron_last_execution` DATETIME DEFAULT  NULL
+				,`cron_priority` INT DEFAULT 0
 				,PRIMARY KEY (module_id)	
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8"
 		);
@@ -45,6 +45,41 @@ class Module_manager_model extends CI_Model
 
 	public function uninstall()
 	{
+
+		return;
+	}
+
+	//assigns period in minutes
+	//assigns more priority with a lager number
+	public function set_cron($module_id, $period, $priority)
+	{
+		$this->db
+			->set("cron_period", (int)$period)
+			->set("cron_priority", (int)$priority)
+			->where("module_id", $module_id)
+			->update("module");
+
+		return;
+	}
+
+	public function get_cron_modules()
+	{
+		return $this->db
+			->select("*, ADDTIME( cron_last_execution , CONCAT('0 00:',cron_period,':00')) as eet")
+			->from("module")
+			->where("cron_period > 0")
+			->where(" ( ISNULL (cron_last_execution) OR  ADDTIME( cron_last_execution , CONCAT('0 00:',cron_period,':00') ) < NOW() ) ",NULL,FALSE)
+			->order_by("cron_priority DESC")
+			->get()
+			->result_array();
+	}
+
+	public function set_cron_execution($module_id)
+	{
+		$this->db
+			->set("cron_last_execution","NOW()",FALSE)
+			->where("module_id", $module_id)
+			->update("module");
 
 		return;
 	}
