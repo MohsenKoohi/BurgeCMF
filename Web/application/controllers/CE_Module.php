@@ -18,7 +18,7 @@ class CE_Module extends Burge_CMF_Controller {
 		//http://localhost/Web/BurgeCMF/Web/cron?pw=$(echo `date +"%Y/%m/%d %H:%M:%S"`"LKJADS(uadsf"|sha1sum)
 		//which LKJADS(uadsf is your $input_pass_hash
 
-		if(FALSE)
+		if(TRUE)
 		{
 			$get_pass=$this->input->get("pw");
 			$get_pass=trim($get_pass," -");

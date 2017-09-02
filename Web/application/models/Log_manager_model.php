@@ -29,6 +29,8 @@ class Log_manager_model extends CI_Model
 		,"MODULE_ADD"				=>53
 		,"MODULE_ADD_NAME"		=>54
 		,"MODULE_RESORT"			=>55
+		,"MODULE_CRON_UPDATE"	=>56
+		,"MODULE_CRON_EXECUTE"	=>57
 
 		,"ACCESS_SET"				=>81
 		,"ACCESS_UNSET"			=>82

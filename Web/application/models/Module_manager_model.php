@@ -59,6 +59,12 @@ class Module_manager_model extends CI_Model
 			->where("module_id", $module_id)
 			->update("module");
 
+		$this->log_manager_model->info("MODULE_CRON_UPDATE",array(
+			"module"		=> $module_id
+			,"period"	=> $period
+			,"priority"	=> $priority	
+		));
+
 		return;
 	}
 
@@ -80,6 +86,10 @@ class Module_manager_model extends CI_Model
 			->set("cron_last_execution","NOW()",FALSE)
 			->where("module_id", $module_id)
 			->update("module");
+
+		$this->log_manager_model->info("MODULE_CRON_EXECUTE",array(
+			"module"		=> $module_id
+		));
 
 		return;
 	}

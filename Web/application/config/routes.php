@@ -57,7 +57,7 @@ $route[ADMIN_URL_FOLDER."/access"]				="AE_Access/index/0";
 $route[ADMIN_URL_FOLDER."/access/(\-?\d+)"]	="AE_Access/index/$1";
 
 $route[ADMIN_URL_FOLDER."/module"]				="AE_Module";
-$route["bcron_1388"]									="CE_Module/cron";
+//$route["bcron_1388"]									="CE_Module/cron";
 
 $route[ADMIN_URL_FOLDER."/hit_counter"]		="AE_Hit_Counter";
 $route[ADMIN_URL_FOLDER."/log"]					="AE_Log";
