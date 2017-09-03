@@ -36,33 +36,6 @@ class Footer_link_manager_model extends CI_Model
 		return;
 	}
 	
-	public function add_post()
-	{
-		$user=$this->user_manager_model->get_user_info();
-
-		$props=array(
-			"post_date"=>get_current_time()
-			,"post_creator_uid"=>$user->get_id()
-		);
-
-		$this->db->insert($this->post_table_name,$props);
-		
-		$new_post_id=$this->db->insert_id();
-		$props['post_id']=$new_post_id;
-
-		$this->log_manager_model->info("POST_ADD",$props);	
-
-		$post_contents=array();
-		foreach($this->language->get_languages() as $index=>$lang)
-			$post_contents[]=array(
-				"pc_post_id"=>$new_post_id
-				,"pc_lang_id"=>$index
-			);
-		$this->db->insert_batch($this->post_content_table_name,$post_contents);
-
-		return $new_post_id;
-	}
-
 	public function get_links($lang_id=NULL)
 	{
 		$this->db
