@@ -3,7 +3,7 @@
 
 ![BurgCMF Logo](http://burge.pro/upload/cat-3-BurgeCMF/logo_back_white.jpg)
 
-##Features
+## Features
 * Multi-language admin and customer environments
 * Multi-user admin environments with ability to set access level for each user, and also to create user groups and manage access level using user groups
 * Default view files for different languages (Default lanaguages are Persian, and English) and different devices to support fast developing of new modules
@@ -15,13 +15,13 @@
 * Each module can define a cron method, which is called by the cron job periodically
 
 
-##Installation
+## Installation
 Review Web/install.md
 
-##Documentation
+## Documentation
 Review Web/functions.md 
 
-##Third Party Resources
+## Third Party Resources
 * CI
 * KLogger
 * Skeleton 
@@ -32,6 +32,6 @@ Review Web/functions.md
 * RoxyFileMan 
 * SASS
 
-##License
+## License
 * GNU GPL2
 * Review LICENSE file
