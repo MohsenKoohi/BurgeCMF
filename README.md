@@ -7,11 +7,13 @@
 * Multi-language admin and customer environments
 * Multi-user admin environments with ability to set access level for each user, and also to create user groups and manage access level using user groups
 * Default view files for different languages (Default lanaguages are Persian, and English) and different devices to support fast developing of new modules
-* Module manager
+* Module manager 
 * Visiting counter module 
 * Log manager module with ability of tracking all events occured by users and visitors, and also reporting what has been happened
 * Posts and Categories modules, which creates a simple blogging system as default
 * File Manager
+* Each module can define a cron method, which is called by the cron job periodically
+
 
 ##Installation
 Review Web/install.md
