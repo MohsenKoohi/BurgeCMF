@@ -13,7 +13,7 @@
 * Posts and Categories modules, which creates a simple blogging system as default
 * File Manager
 * Each module can define a cron method, which is called by the cron job periodically
-
+* Footer link manager to mange which items be shown in the footer
 
 ## Installation
 Review Web/install.md
