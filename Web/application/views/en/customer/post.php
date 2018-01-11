@@ -97,6 +97,7 @@
 				<h3>{add_comment_text}</h3>
 
 				<?php echo form_open(""); ?>
+					<input type='hidden' name='post_type' value='add_comment'/>
 					<div class='row even-odd-bg'>
 						<div class='three columns'>
 							<span>{name_text}</span>

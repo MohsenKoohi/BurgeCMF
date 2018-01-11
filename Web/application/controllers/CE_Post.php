@@ -34,6 +34,10 @@ class CE_Post extends Burge_CMF_Controller {
 			if(get_customer_post_details_link($post_id,urldecode($post_name),$post_info['post_date']) !== $post_link)
 				redirect($post_link,"location",301);
 
+		if($post_info['post_allow_comment'])
+			if($this->input->post("post_type") == 'add_comment')
+				return $this->add_comment($post_id);
+
 		$this->data['post_info']=$post_info;
 		if($post_info['pc_image'])
 			$this->data['page_main_image']=$post_info['pc_image'];
@@ -74,5 +78,10 @@ class CE_Post extends Burge_CMF_Controller {
 		$this->send_customer_output("post");
 
 		return;
+	}
+
+	private function add_comment($post_id)
+	{
+		
 	}
 }
