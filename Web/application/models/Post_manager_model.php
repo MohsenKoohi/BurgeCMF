@@ -384,6 +384,11 @@ class Post_manager_model extends CI_Model
 
 	}
 
+	public function get_comments_statuses()
+	{
+		return $this->post_comment_statuses;
+	}
+
 	public function get_comments($post_id)
 	{
 		return $this->db
@@ -419,5 +424,37 @@ class Post_manager_model extends CI_Model
 		$this->log_manager_model->info("POST_COMMENT_ADD", $props);
 
 		return $pcom_id;
+	}
+
+	public function update_comments($post_id, $comment_updates, $deleted_comment_ids)
+	{
+		if($comment_updates)		
+		{
+			$this->db
+				->where("pcom_post_id" , $post_id)
+				->update_batch($this->post_comment_table_name, $comment_updates, "pcom_id");
+
+			foreach($comment_updates as $c)
+			{
+				$c['pcom_post_id']=$post_id;
+				$this->log_manager_model->info("POST_COMMENT_CHANGE", $c);
+			}
+		}
+
+		if($deleted_comment_ids)
+		{
+			$this->db
+				->where("pcom_post_id", $post_id)
+				->where_in("pcom_id",$deleted_comment_ids)
+				->delete($this->post_comment_table_name);
+
+			$props=array(
+				"pcom_post_id"	=> $post_id
+				,"pcom_ids"		=> implode(",", $deleted_comment_ids)
+			);
+			$this->log_manager_model->info("POST_COMMENT_DELETE", $props);
+		}
+
+		return;
 	}
 }

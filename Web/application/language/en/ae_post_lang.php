@@ -43,3 +43,10 @@ $lang['end_date']="End Time";
 
 $lang['customer_link']="Customer Link";
 $lang['']="";
+$lang['post_comment_status_not_verified']="Not verified";
+$lang['post_comment_status_verified']="Verified";
+$lang['post_comment_status_waiting']="Waiting";
+$lang['name']="Name";
+$lang['status']="Status";
+$lang['comment']="Comment";
+$lang['comments']="Comments";

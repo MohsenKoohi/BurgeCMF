@@ -157,6 +157,9 @@ class AE_Post extends Burge_CMF_Controller {
 				,"post_title"=>$this->data['post_contents'][$this->selected_lang]['pc_title']
 			);
 			$this->data['customer_link']=get_customer_post_details_link($post_id,"",$post_info[0]['post_date']);
+
+			$this->data['comments']=$this->post_manager_model->get_comments($post_id);
+			$this->data['comments_statuses']=$this->post_manager_model->get_comments_statuses();
 		}
 		else
 		{
@@ -235,8 +238,26 @@ class AE_Post extends Burge_CMF_Controller {
 			$post_content_props[$lang]['pc_lang_id']=$lang;
 		}
 
-
 		$this->post_manager_model->set_post_props($post_id,$post_props,$post_content_props);
+
+		$comment_updates=array();
+		$deleted_comment_ids=$this->input->post("deleted_comment_ids");
+		$texts=$this->input->post("pcom_text");
+		$statuses=$this->input->post("pcom_status");
+		foreach($this->input->post("pcom_ids") as $pcom_id)
+		{
+
+			if($deleted_comment_ids && in_array($pcom_id, $deleted_comment_ids))
+				continue;
+
+			$comment_updates[]=array(
+				"pcom_id"			=> $pcom_id
+				,"pcom_status"		=> $statuses[$pcom_id]
+				,"pcom_text"		=> $texts[$pcom_id]
+			);
+		}
+
+		$this->post_manager_model->update_comments($post_id, $comment_updates, $deleted_comment_ids);
 		
 		set_message($this->lang->line("changes_saved_successfully"));
 

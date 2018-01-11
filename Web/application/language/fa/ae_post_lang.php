@@ -41,4 +41,13 @@ $lang['start_date']="زمان شروع";
 $lang['end_date']="زمان پایان";
 
 $lang['customer_link']="صفحه مشتری";
+$lang['post_comment_status_not_verified']="تایید نشده";
+$lang['post_comment_status_verified']="تایید شده";
+$lang['post_comment_status_waiting']="منتظر تایید";
+$lang['name']="نام";
+$lang['status']="وضعیت";
+$lang['comment']="دیدگاه";
+$lang['comments']="دیدگاه‌ها";
+$lang['']="";
+$lang['']="";
 $lang['']="";
