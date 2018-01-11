@@ -45,6 +45,21 @@ class CE_Post extends Burge_CMF_Controller {
 				$this->data['page_main_image']=get_link("post_gallery_url").'/'.$img['image'];
 				$this->data['post_info']['pc_image']=$this->data['page_main_image'];
 			}
+
+		if($post_info['post_allow_comment'])
+		{
+			$comments=$this->post_manager_model->get_comments($post_id);
+			if($this->post_manager_model->show_post_comment_after_verification())
+				foreach($commments as $index => $comment)
+					if($comment['pcom_status'] != 'verified')
+						unset($comments[$index]);
+			else
+				foreach($commments as $index => $comment)
+					if($comment['pcom_status'] == 'not_verified')
+						unset($comments[$index]);
+
+			$this->data['comments']=$comments;
+		}
 			
 		$this->data['message']=get_message();
 

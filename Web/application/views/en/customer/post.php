@@ -82,5 +82,46 @@
 				}
 			</script>
 		</div>
+
+		<?php if($post_info['post_allow_comment']){ ?>
+			<div class='row comments'>
+				<?php 
+					foreach($comments as $c)
+					{
+
+					}
+				?>
+			</div>
+
+			<div class='row'>
+				<h3>{add_comment_text}</h3>
+
+				<?php echo form_open(""); ?>
+					<div class='row even-odd-bg'>
+						<div class='three columns'>
+							<span>{name_text}</span>
+						</div>
+						<div class="eight columns">
+							<input type='text' name='name' value='' class='full-width'/>
+						</div>
+					</div>
+
+					<div class='row even-odd-bg'>
+						<div class='three columns'>
+							<span>{comment_text}</span>
+						</div>
+						<div class="eight columns">
+							<textarea name='text' class='full-width' rows='4'></textarea>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="four columns">&nbsp;</div>
+						<input type="submit" class=" button-sub-primary button-type1 four columns" value="{submit_text}"/>
+					</div>
+
+				<?php echo form_close();?>
+			</div>
+		<?php } ?>
 	</div>
 </div>
