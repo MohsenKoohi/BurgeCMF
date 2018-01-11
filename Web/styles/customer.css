@@ -586,6 +586,9 @@ body.rtl .even-odd-bg > div {
 .row.even-odd-bg:nth-child(2n+2) .counter {
   color: #C63672; }
 
+.comments .even-odd-bg {
+  margin: 3px 0; }
+
 .checkbox-holder {
   vertical-align: middle;
   position: relative;

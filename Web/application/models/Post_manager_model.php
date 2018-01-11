@@ -400,4 +400,24 @@ class Post_manager_model extends CI_Model
 		$this->load->model("constant_manager_model");
 		return $this->constant_manager_model->get("show_post_comment_after_verification");
 	}
+
+	public function add_comment($post_id, $in_props)
+	{
+		$props=array(
+			"pcom_post_id"				=> $post_id
+			,"pcom_visitor_name"		=> $in_props['name']
+			,"pcom_visitor_ip"		=> $in_props['ip']
+			,"pcom_text"				=> $in_props['text']
+			,"pcom_date"				=> get_current_time()
+		);
+
+		$this->db->insert($this->post_comment_table_name, $props);
+
+		$pcom_id=$this->db->insert_id();
+
+		$props['pcom_id']=$pcom_id;
+		$this->log_manager_model->info("POST_COMMENT_ADD", $props);
+
+		return $pcom_id;
+	}
 }

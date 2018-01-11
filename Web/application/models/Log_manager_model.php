@@ -53,6 +53,9 @@ class Log_manager_model extends CI_Model
 		,"POST_ADD"					=>161
 		,"POST_CHANGE"				=>162
 		,"POST_DELETE"				=>163
+		,"POST_COMMENT_ADD"		=>164
+		,"POST_COMMENT_CHANGE"	=>165
+		,"POST_COMMENT_DELETE"	=>166
 		
 		,"FILE_DIR_CREATE"		=>201
 		,"FILE_DIR_DELETE"		=>202

@@ -85,14 +85,19 @@
 
 		<?php if($post_info['post_allow_comment']){ ?>
 			<div class='row comments'>
+				<h2>{comments_text}</h2>
 				<?php 
 					foreach($comments as $c)
 					{
-
+						echo "<div class='row even-odd-bg'>";
+						echo "<b>".$c['pcom_visitor_name']."</b>";
+						echo "<span class='date anti-float'>".$c['pcom_date']."</span><br><br>";
+						echo nl2br($c['pcom_text']);
+						echo "</div>";
 					}
 				?>
 			</div>
-
+			<br><br>
 			<div class='row'>
 				<h3>{add_comment_text}</h3>
 

@@ -24,6 +24,10 @@ class CE_Post extends Burge_CMF_Controller {
 		if(!$post_info || !($post_hash === get_customer_post_link_hash($post_info['post_date'])))
 			redirect(get_link("home_url"));
 
+		if($post_info['post_allow_comment'])
+			if($this->input->post("post_type") == 'add_comment')
+				return $this->add_comment($post_id, $post_info);
+
 		$this->data['post_gallery']=$post_info['pc_gallery']['images'];
 
 		$cat_ids=explode(',',$post_info['categories']);
@@ -33,10 +37,6 @@ class CE_Post extends Burge_CMF_Controller {
 		if($post_info['pc_title'] && $post_name)
 			if(get_customer_post_details_link($post_id,urldecode($post_name),$post_info['post_date']) !== $post_link)
 				redirect($post_link,"location",301);
-
-		if($post_info['post_allow_comment'])
-			if($this->input->post("post_type") == 'add_comment')
-				return $this->add_comment($post_id);
 
 		$this->data['post_info']=$post_info;
 		if($post_info['pc_image'])
@@ -80,8 +80,28 @@ class CE_Post extends Burge_CMF_Controller {
 		return;
 	}
 
-	private function add_comment($post_id)
+	private function add_comment($post_id, $post_info)
 	{
+		$page_link=get_customer_post_details_link($post_id,$post_info['pc_title'],$post_info['post_date']);
+
+		$text=trim($this->input->post("text"));
+		$name=trim($this->input->post("name"));
+		if(!$text || !$name)
+		{
+			set_message($this->lang->line("please_fill_all_fields"));
+			return redirect($page_link);
+		}
+
+		$ip=$this->input->ip_address();
+
+		$this->post_manager_model->add_comment($post_id, array(
+			"name"		=> $name
+			,"text"		=> $text
+			,"ip"			=> $ip
+		));
+
+		set_message($this->lang->line("your_comment_submitted_successfully"));
 		
+		return redirect($page_link);
 	}
 }
