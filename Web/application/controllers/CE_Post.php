@@ -14,6 +14,7 @@ class CE_Post extends Burge_CMF_Controller {
 
 	public function index($post_id,$post_hash,$post_name="")
 	{	
+		$post_id=(int)$post_id;
 		$post_info_array=$this->post_manager_model->get_post((int)$post_id,array(
 			"lang"=> $this->selected_lang
 			,"post_date_le"=>get_current_time()
@@ -52,7 +53,7 @@ class CE_Post extends Burge_CMF_Controller {
 
 		if($post_info['post_allow_comment'])
 		{
-			$comments=$this->post_manager_model->get_comments($post_id);
+			$comments=$this->post_manager_model->get_comments(array("comment_post"=>$post_id));
 			if($this->post_manager_model->show_post_comment_after_verification())
 				foreach($commments as $index => $comment)
 					if($comment['pcom_status'] != 'verified')

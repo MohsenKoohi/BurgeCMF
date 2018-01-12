@@ -48,6 +48,11 @@ $lang['name']="نام";
 $lang['status']="وضعیت";
 $lang['comment']="دیدگاه";
 $lang['comments']="دیدگاه‌ها";
-$lang['']="";
-$lang['']="";
-$lang['']="";
+
+$lang['active_posts']="پست های فعال";
+$lang['total_posts']="پست ها";
+$lang['not_verified_comments']="دیدگاه‌های تاییدنشده";
+$lang['verified_comments']="دیدگاه‌های تاییدشده ";
+$lang['waiting_comments']="دیدگاه‌های جدید";
+$lang['post']="پست";
+$lang['writer_name']="نام نویسنده";

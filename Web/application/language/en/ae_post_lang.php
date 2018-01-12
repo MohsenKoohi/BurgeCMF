@@ -50,3 +50,11 @@ $lang['name']="Name";
 $lang['status']="Status";
 $lang['comment']="Comment";
 $lang['comments']="Comments";
+
+$lang['active_posts']="Active Posts";
+$lang['total_posts']="Total Posts";
+$lang['not_verified_comments']="Not Verified Comments";
+$lang['verified_comments']="Verified Comments";
+$lang['waiting_comments']="New Comments";
+$lang['post']="Post";
+$lang['writer_name']="Writer's Name";

@@ -16,13 +16,23 @@ class AE_Post extends Burge_CMF_Controller {
 		if($this->input->post("post_type")==="add_post")
 			return $this->add_post();
 
+		if($this->input->post("post_type")==="edit_comments")
+		{
+		 	$this->edit_comments();
+		 	set_message($this->lang->line("changes_saved_successfully"));
+			return redirect(get_link("admin_post")."#comments");
+		}
+
 		$this->set_posts_info();
+		$this->set_comments_info();
 
 		//we may have some messages that our post has been deleted successfully.
 		$this->data['message']=get_message();
 
 		$this->load->model("category_manager_model");
 		$this->data['categories']=$this->category_manager_model->get_all();
+
+		$this->data['comments_statuses']=$this->post_manager_model->get_comments_statuses();
 
 		$this->data['raw_page_url']=get_link("admin_post");
 		$this->data['lang_pages']=get_lang_pages(get_link("admin_post",TRUE));
@@ -31,6 +41,92 @@ class AE_Post extends Burge_CMF_Controller {
 		$this->send_admin_output("post");
 
 		return;	 
+	}
+
+	private function set_comments_info()
+	{
+		$filters=array();
+
+		$this->initialize_comments_filters($filters);
+
+		$total=$this->post_manager_model->get_total_comments($filters);
+		if($total)
+		{
+			$per_page=20;
+			$page=1;
+			if($this->input->get("page"))
+				$page=(int)$this->input->get("page");
+
+			$start=($page-1)*$per_page;
+
+			$filters['group_by']="post_id";
+			$filters['start']=$start;
+			$filters['count']=$per_page;
+			
+			$this->data['comments_info']=$this->post_manager_model->get_comments($filters);
+			
+			$end=$start+sizeof($this->data['comments_info'])-1;
+
+			unset($filters['start']);
+			unset($filters['count']);
+			unset($filters['group_by']);
+
+			$this->data['comments_current_page']=$page;
+			$this->data['comments_total_pages']=ceil($total/$per_page);
+			$this->data['comments_total']=$total;
+			$this->data['comments_start']=$start+1;
+			$this->data['comments_end']=$end+1;		
+		}
+		else
+		{
+			$this->data['comments_info']=array();
+			$this->data['comments_current_page']=0;
+			$this->data['comments_total_pages']=0;
+			$this->data['comments_total']=$total;
+			$this->data['comments_start']=0;
+			$this->data['comments_end']=0;
+		}
+			
+		$this->data['comments_filter']=$filters;
+
+		return;
+	}
+
+	private function initialize_comments_filters(&$filters)
+	{
+		if($this->input->get("comment_post"))
+			$filters['comment_post']=$this->input->get("comment_post");
+
+		if($this->input->get("comment_writer_name"))
+			$filters['comment_writer_name']=$this->input->get("comment_writer_name");
+
+		if($this->input->get("comment_status"))
+			$filters['comment_status']=$this->input->get("comment_status");
+
+		if($this->input->get("comment_ip"))
+			$filters['comment_ip']=$this->input->get("comment_ip");
+
+		if($this->input->get("comment_date_le"))
+		{	
+			$le=$this->input->get("comment_date_le");
+			if(sizeof(explode(" ",$le))==1)
+				$le.=" 23:59:59";
+
+			$filters['comment_date_le']=$le;
+		}
+
+		if($this->input->get("comment_date_ge"))
+		{
+			$ge=$this->input->get("comment_date_ge");
+			if(sizeof(explode(" ",$ge))==1)
+				$ge.=" 00:00:00";
+
+			$filters['comment_date_ge']=$ge;
+		}
+
+		persian_normalize($filters);
+
+		return;
 	}	
 
 	private function set_posts_info()
@@ -125,6 +221,8 @@ class AE_Post extends Burge_CMF_Controller {
 
 	public function details($post_id)
 	{
+		$post_id=(int)$post_id;
+
 		if($this->input->post("post_type")==="edit_post")
 			return $this->edit_post($post_id);
 
@@ -158,7 +256,7 @@ class AE_Post extends Burge_CMF_Controller {
 			);
 			$this->data['customer_link']=get_customer_post_details_link($post_id,"",$post_info[0]['post_date']);
 
-			$this->data['comments']=$this->post_manager_model->get_comments($post_id);
+			$this->data['comments']=$this->post_manager_model->get_comments(array("comment_post"=>$post_id));
 			$this->data['comments_statuses']=$this->post_manager_model->get_comments_statuses();
 		}
 		else
@@ -240,6 +338,17 @@ class AE_Post extends Burge_CMF_Controller {
 
 		$this->post_manager_model->set_post_props($post_id,$post_props,$post_content_props);
 
+		$this->edit_comments();
+		
+		set_message($this->lang->line("changes_saved_successfully"));
+
+		redirect(get_admin_post_details_link($post_id));
+
+		return;
+	}
+
+	private function edit_comments()
+	{
 		$comment_updates=array();
 		$deleted_comment_ids=$this->input->post("deleted_comment_ids");
 		$texts=$this->input->post("pcom_text");
@@ -257,12 +366,8 @@ class AE_Post extends Burge_CMF_Controller {
 			);
 		}
 
-		$this->post_manager_model->update_comments($post_id, $comment_updates, $deleted_comment_ids);
-		
-		set_message($this->lang->line("changes_saved_successfully"));
-
-		redirect(get_admin_post_details_link($post_id));
-
+		$this->post_manager_model->update_comments($comment_updates, $deleted_comment_ids);
+			
 		return;
 	}
 

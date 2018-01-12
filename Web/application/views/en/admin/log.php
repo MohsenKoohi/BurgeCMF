@@ -182,17 +182,33 @@
 					return;
 
 				el.data('ip-queried',1);
-				url="http://ip-api.com/json/"+el.html();
-				$.get(url,function(info)
-				{
-					var newVal=el.html()
-						+"<br>"+info.country
-						+"<br>"+info.city
-						+"<br>"+info.isp
-						+"<br>"+info.as;
-					el.html(newVal);
 
-				});
+				if(location.protocol == 'https:')
+				{
+					url="https://ipapi.co/"+el.html()+"/json";
+					$.get(url,function(info)
+					{
+						var newVal=el.html()
+							+"<br>"+info.country_name
+							+"<br>"+info.region+"-"+info.city
+							+"<br>"+info.org
+							+"<br>"+info.asn;
+						el.html(newVal);
+					});
+				}
+				else
+				{
+					url="http://ip-api.com/json/"+el.html();
+					$.get(url,function(info)
+					{
+						var newVal=el.html()
+							+"<br>"+info.country
+							+"<br>"+info.regionName+"-"+info.city
+							+"<br>"+info.org
+							+"<br>"+info.as;
+						el.html(newVal);
+					});
+				}
 
 				return;
 			});

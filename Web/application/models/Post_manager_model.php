@@ -114,11 +114,15 @@ class Post_manager_model extends CI_Model
 	private function get_statistics()
 	{
 		$tb=$this->db->dbprefix($this->post_table_name);
+		$ctb=$this->db->dbprefix($this->post_comment_table_name);
 
 		return $this->db->query("
 			SELECT 
-				(SELECT COUNT(*) FROM $tb) as total, 
-				(SELECT COUNT(*) FROM $tb WHERE post_active) as active
+				(SELECT COUNT(*) FROM $tb) as total
+				,(SELECT COUNT(*) FROM $tb WHERE post_active) as active
+				,(SELECT COUNT(*) FROM $ctb WHERE pcom_status = 'verified') as verified_comments
+				,(SELECT COUNT(*) FROM $ctb WHERE pcom_status = 'not_verified') as not_verified_comments
+				,(SELECT COUNT(*) FROM $ctb WHERE pcom_status = 'waiting') as waiting_comments
 			")->row_array();
 	}
 
@@ -389,16 +393,83 @@ class Post_manager_model extends CI_Model
 		return $this->post_comment_statuses;
 	}
 
-	public function get_comments($post_id)
+	public function get_comments($filter)
 	{
-		return $this->db
-			->select("*")
-			->from($this->post_comment_table_name)
-			->where("pcom_post_id", $post_id)
-			->order_by("pcom_post_id ASC")
-			->get()
-			->result_array();
+		$this->db->from($this->post_comment_table_name);
+		$this->db->join($this->post_table_name,"post_id = pcom_post_id","left");
+		$this->db->join($this->post_content_table_name,"pcom_post_id = pc_post_id AND pc_lang_id = '".$this->selected_lang."' ","left");
+		
+		$this->set_comments_query_filter($filter);
+
+		$results=$this->db->get();
+
+		$rows=$results->result_array();
+		
+		return $rows;
 	}
+
+	public function get_total_comments($filter)
+	{
+		$this->db->select("COUNT( DISTINCT pcom_id ) as count");
+		$this->db->from($this->post_comment_table_name);
+		$this->db->join($this->post_table_name,"post_id = pcom_post_id","left");
+		$this->db->join($this->post_content_table_name,"pcom_post_id = pc_post_id AND pc_lang_id = '".$this->selected_lang."' ","left");
+		
+		$this->set_comments_query_filter($filter);
+		
+		$row=$this->db->get()->row_array();
+
+		return $row['count'];
+	}
+
+	private function set_comments_query_filter($filter)
+	{
+		if(isset($filter['comment_post']))
+		{
+			if((int)$filter['comment_post'])
+				$this->db->where("pcom_post_id",(int)$filter['comment_post']);
+			elseif(is_string($filter['comment_post']))
+			{
+				if(strpos($filter['comment_post'], ",")!==FALSE)
+					$this->db->where_in("pcom_post_id", explode(",", $filter['comment_post']));				
+				else
+				{
+					$title=trim($filter['comment_post']);
+					$title="%".str_replace(" ","%",$title)."%";
+					$this->db->where("( `pc_title` LIKE '$title')");
+				}
+			}
+		}
+
+		if(isset($filter['comment_writer_name']))
+		{
+			$name=trim($filter['comment_writer_name']);
+			$name="%".str_replace(" ","%",$name)."%";
+			$this->db->where("( `pcom_visitor_name` LIKE '$name')");
+		}
+
+		if(isset($filter['comment_status']))
+			$this->db->where("pcom_status", $filter['comment_status']);
+
+		if(isset($filter['comment_ip']))
+		{
+			$ip=trim($filter['comment_ip']);
+			$ip="%".str_replace(" ","%",$ip)."%";
+			$this->db->where("( `pcom_visitor_ip` LIKE '$ip')");
+		}
+
+		if(isset($filter['comment_date_le']))
+			$this->db->where("pcom_date <=",str_replace("/","-",$filter['comment_date_le']));
+
+		if(isset($filter['comment_date_ge']))
+			$this->db->where("pcom_date >=",str_replace("/","-",$filter['comment_date_ge']));
+
+		if(isset($filter['start']))
+			$this->db->limit($filter['count'],$filter['start']);
+
+		return;
+	}
+
 
 	public function show_post_comment_after_verification()
 	{
@@ -426,31 +497,25 @@ class Post_manager_model extends CI_Model
 		return $pcom_id;
 	}
 
-	public function update_comments($post_id, $comment_updates, $deleted_comment_ids)
+	public function update_comments($comment_updates, $deleted_comment_ids)
 	{
 		if($comment_updates)		
 		{
 			$this->db
-				->where("pcom_post_id" , $post_id)
 				->update_batch($this->post_comment_table_name, $comment_updates, "pcom_id");
 
 			foreach($comment_updates as $c)
-			{
-				$c['pcom_post_id']=$post_id;
 				$this->log_manager_model->info("POST_COMMENT_CHANGE", $c);
-			}
 		}
 
 		if($deleted_comment_ids)
 		{
 			$this->db
-				->where("pcom_post_id", $post_id)
 				->where_in("pcom_id",$deleted_comment_ids)
 				->delete($this->post_comment_table_name);
 
 			$props=array(
-				"pcom_post_id"	=> $post_id
-				,"pcom_ids"		=> implode(",", $deleted_comment_ids)
+				"pcom_ids"		=> implode(",", $deleted_comment_ids)
 			);
 			$this->log_manager_model->info("POST_COMMENT_DELETE", $props);
 		}
