@@ -464,6 +464,11 @@ class Post_manager_model extends CI_Model
 		if(isset($filter['comment_date_ge']))
 			$this->db->where("pcom_date >=",str_replace("/","-",$filter['comment_date_ge']));
 
+		if(isset($filter['order_by']))
+			$this->db->order_by($filter['order_by']);
+		else
+			$this->db->order_by("pcom_id ASC");
+
 		if(isset($filter['start']))
 			$this->db->limit($filter['count'],$filter['start']);
 

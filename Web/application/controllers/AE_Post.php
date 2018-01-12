@@ -59,7 +59,7 @@ class AE_Post extends Burge_CMF_Controller {
 
 			$start=($page-1)*$per_page;
 
-			$filters['group_by']="post_id";
+			$filters['order_by']="pcom_id DESC";
 			$filters['start']=$start;
 			$filters['count']=$per_page;
 			
@@ -69,7 +69,7 @@ class AE_Post extends Burge_CMF_Controller {
 
 			unset($filters['start']);
 			unset($filters['count']);
-			unset($filters['group_by']);
+			unset($filters['order_by']);
 
 			$this->data['comments_current_page']=$page;
 			$this->data['comments_total_pages']=ceil($total/$per_page);
@@ -256,7 +256,10 @@ class AE_Post extends Burge_CMF_Controller {
 			);
 			$this->data['customer_link']=get_customer_post_details_link($post_id,"",$post_info[0]['post_date']);
 
-			$this->data['comments']=$this->post_manager_model->get_comments(array("comment_post"=>$post_id));
+			$this->data['comments']=$this->post_manager_model->get_comments(array(
+				"comment_post"	=> $post_id
+				,"order_by"		=> "pcom_id DESC"
+			));
 			$this->data['comments_statuses']=$this->post_manager_model->get_comments_statuses();
 		}
 		else
