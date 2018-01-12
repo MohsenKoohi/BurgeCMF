@@ -334,11 +334,16 @@
 					<?php foreach($comments_info as $c){ ?>
 						<div class='row even-odd-bg'>
 							<input type='hidden' name='pcom_ids[]' value='<?php echo $c['pcom_id'];?>'/>
+
+							<div class='three columns'>
+								<label>{post_text}</label>
+								<?php echo $c['pcom_post_id']." - ".$c['pc_title'];?>
+							</div>
+
 							<div class='three columns'>
 								<label>{name_text}</label>
 								<?php echo $c['pcom_visitor_name'];?>
 							</div>
-
 
 							<div class='three columns'>
 								<label>IP</label>
@@ -348,6 +353,12 @@
 							<div class='three columns'>
 								<label>{date_text}</label>
 								<span class='date'><?php echo $c['pcom_date'];?></span>
+							</div>
+
+							<div class='six columns'>
+								<label>{comment_text}</label>
+								<textarea class='full-width' name='pcom_text[<?php echo $c['pcom_id'];?>]' rows=4
+									><?php echo $c['pcom_text'];?></textarea>
 							</div>
 
 							<div class='three columns'>
@@ -366,12 +377,6 @@
 								</select>
 							</div>
 
-							<div class='nine columns'>
-								<label>{comment_text}</label>
-								<textarea class='full-width' name='pcom_text[<?php echo $c['pcom_id'];?>]' rows=4
-									><?php echo $c['pcom_text'];?></textarea>
-							</div>
-
 							<div class='three columns'>
 								<label>{delete_text}</label>
 								<input type='checkbox' class='graphical' name="deleted_comment_ids[]" 
@@ -384,7 +389,48 @@
 					<div class="row">
 						<div class="four columns">&nbsp;</div>
 						<input type="submit" class="button-primary four columns" value="{submit_text}"/>
-					</div>				
+					</div>			
+
+					<script type="text/javascript">
+						$(".ip").mouseover(function(event)
+						{
+							var el=$(event.target);
+							if(el.data('ip-queried'))
+								return;
+
+							el.data('ip-queried',1);
+
+							if(location.protocol == 'https:')
+							{
+								url="http://ipapi.co/"+el.html()+"/json";
+								$.get(url,function(info)
+								{
+									var newVal=el.html()
+										+"<br>"+info.country_name
+										+"<br>"+info.region+"-"+info.city
+										+"<br>"+info.org
+										+"<br>"+info.asn;
+									el.html(newVal);
+								});
+							}
+							else
+							{
+								url="http://ip-api.com/json/"+el.html();
+								$.get(url,function(info)
+								{
+									var newVal=el.html()
+										+"<br>"+info.country
+										+"<br>"+info.regionName+"-"+info.city
+										+"<br>"+info.org
+										+"<br>"+info.as;
+									el.html(newVal);
+								});
+							}
+
+							return;
+						});
+
+					</script>	
 				<?php echo form_close();?>
 
 				</div>

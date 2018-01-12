@@ -55,11 +55,13 @@ class CE_Post extends Burge_CMF_Controller {
 		{
 			$comments=$this->post_manager_model->get_comments(array("comment_post"=>$post_id));
 			if($this->post_manager_model->show_post_comment_after_verification())
-				foreach($commments as $index => $comment)
+			{
+				foreach($comments as $index => $comment)
 					if($comment['pcom_status'] != 'verified')
 						unset($comments[$index]);
+			}
 			else
-				foreach($commments as $index => $comment)
+				foreach($comments as $index => $comment)
 					if($comment['pcom_status'] == 'not_verified')
 						unset($comments[$index]);
 
