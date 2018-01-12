@@ -159,7 +159,10 @@ class Log_manager_model extends CI_Model
    		for($i=sizeof($res)-1;$i>=0;$i--)
    		{
    			if(isset($filters['event']))
-   				if($res[$i]->event_name != $filters['event'])
+   				if(
+   					$res[$i]->event_name != $filters['event'] 
+   					&& (isset($res[$i]->declared_event_name) && $res[$i]->declared_event_name != $filters['event'])
+   				)
    					continue;
 
    			if(isset($visitor_id_pattern))
