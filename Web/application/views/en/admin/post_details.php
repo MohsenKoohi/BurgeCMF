@@ -343,7 +343,7 @@
 
 										<div class='three columns'>
 											<label>IP</label>
-											<span class='lang-en ip'><?php echo $c['pcom_visitor_ip'];?></span>
+											<span class='lang-en ip ltr-inb'><?php echo $c['pcom_visitor_ip'];?></span>
 										</div>
 
 										<div class='three columns'>
@@ -613,7 +613,7 @@
 
 						if(location.protocol == 'https:')
 						{
-							url="http://ipapi.co/"+el.html()+"/json";
+							url="https://ipapi.co/"+el.html()+"/json";
 							$.get(url,function(info)
 							{
 								var newVal=el.html()
