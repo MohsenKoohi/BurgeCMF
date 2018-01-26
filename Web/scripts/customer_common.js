@@ -112,10 +112,7 @@ function lazyLoader()
 
     el=$(images[imageIndex]);
     url=el.data('ll-url');
-    if(location.protocol=='https:')
-      url=url.replace("http://","https://");
-    else
-      url=url.replace("https://","http://");
+    url=url.replace(/https?\:\/\//g,'//'););
 
     $.get(url, function()
     {
