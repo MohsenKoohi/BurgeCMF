@@ -88,7 +88,7 @@ class CE_Post extends Burge_CMF_Controller {
 		$page_link=get_customer_post_details_link($post_id,$post_info['pc_title'],$post_info['post_date']);
 
 		$text=trim(strip_tags($this->input->post("text")));
-		$name=trim(strip_tags(($this->input->post("name")));
+		$name=trim(strip_tags($this->input->post("name")));
 		if(!$text || !$name)
 		{
 			set_message($this->lang->line("please_fill_all_fields"));
