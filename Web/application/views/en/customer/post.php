@@ -121,6 +121,15 @@
 						</div>
 					</div>
 
+					<div class='row even-odd-bg'>
+						<div class='three columns'>
+							<?php echo $captcha;?>
+						</div>
+						<div class="eight columns">
+							<input type='text' name='captcha' value='' class='full-width date lang-en'/>
+						</div>
+					</div>
+
 					<div class="row">
 						<div class="four columns">&nbsp;</div>
 						<input type="submit" class=" button-sub-primary button-type1 four columns" value="{submit_text}"/>

@@ -69,6 +69,7 @@ class CE_Post extends Burge_CMF_Controller {
 		}
 			
 		$this->data['message']=get_message();
+		$this->data['captcha']=get_captcha();
 
 		$this->data['lang_pages']=get_lang_pages(get_customer_post_details_link($post_id,"",$post_info['post_date'],TRUE));
 		
@@ -86,6 +87,13 @@ class CE_Post extends Burge_CMF_Controller {
 	private function add_comment($post_id, $post_info)
 	{
 		$page_link=get_customer_post_details_link($post_id,$post_info['pc_title'],$post_info['post_date']);
+		
+		if(!verify_captcha($this->input->post("captcha")))
+		{
+			$this->lang->load('error',$this->selected_lang);
+			set_message($this->lang->line("captcha"));
+			return redirect($page_link);
+		}
 
 		$text=trim(strip_tags($this->input->post("text")));
 		$name=trim(strip_tags($this->input->post("name")));

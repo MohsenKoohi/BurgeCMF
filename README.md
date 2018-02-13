@@ -14,6 +14,7 @@
 * File Manager
 * Each module can define a cron method, which is called by the cron job periodically
 * Footer link manager to mange which items be shown in the footer
+* Comments for posts
 
 ## Installation
 Review Web/install.md
