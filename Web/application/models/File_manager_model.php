@@ -12,6 +12,16 @@ class File_manager_model extends CI_Model
 
 	public function install()
 	{
+		$this->load->helper("init");
+		$cdp_message="";
+		$result=check_directory_permission(UPLOAD_DIR, $cdp_message);
+		echo $cdp_message;
+		if(!$result)
+		{
+			echo "<h2>Please check the errors, and try again.";
+			exit;
+		}
+
 		$this->load->model("module_manager_model");
 
 		$this->module_manager_model->add_module("file","file_manager");

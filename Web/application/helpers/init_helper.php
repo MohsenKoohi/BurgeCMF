@@ -974,6 +974,38 @@ function get_link_pagination($settings)
 	return $CI->pagination->create_links();
 }
 
+function check_directory_permission($dir, &$result_message=NULL)
+{
+	
+	$sub_result=make_dir_and_check_permission($dir);
+	switch ($sub_result) {
+		case 2:
+			if($result_message !== NULL)
+				$result_message= "Okay, ".$dir." exists and is writable<br>";
+			return TRUE;
+		
+		case 1:
+			if($result_message !== NULL)
+				$result_message="Okay, ".$dir." made and is writable<br>";
+			return TRUE;
+
+		case -1:
+			if($result_message !== NULL)
+				$result_message="Error, ".$dir." exists but isn't writable, please check the permission<br>";
+			return FALSE;
+
+		case -2:
+			if($result_message !== NULL)
+				$result_message="Error, ".$dir." can't be created, please check the permission of its parent<br>";
+			return FALSE;
+	}
+
+	if($result_message !== NULL)
+		$result_message="Undefined";
+	return FALSE;
+}
+
+
 function burge_cmf_send_mail($receiver,$subject,$message)
 {
 	$CI=&get_instance();

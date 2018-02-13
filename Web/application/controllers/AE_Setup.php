@@ -1,47 +1,32 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class AE_Setup extends CI_Controller {
-
+class AE_Setup extends CI_Controller
+{
 	function __construct()
 	{
-		//check directories permssion
-		$this->check_directories_permission();
-
 		parent::__construct();
 
 		if(ENVIRONMENT!=='development')
 			redirect(get_link("admin_no_access"));
+
+		//check directories permssion
+		$this->check_directories_permission();
+
 	}
 
-	function check_directories_permission()
+	private function check_directories_permission()
 	{
+		$this->load->helper("init");
 		file_put_contents(IMAGES_DIR."/.htaccess", " Options -Indexes ");
 		
-		$dirs=array(LOG_DIR, CAPTCHA_DIR, POST_GALLERY_DIR, UPLOAD_DIR,CATEGORY_CACHE_DIR);
+		$dirs=array(CAPTCHA_DIR);
 		$result=TRUE;
 
 		foreach($dirs as $dir)
 		{
-			$sub_result=$this->make_dir_and_check_permission($dir);
-			switch ($sub_result) {
-				case 2:
-					echo "Okay, ".$dir." exists and is writable<br>";
-					break;
-				
-				case 1:
-					echo "Okay, ".$dir." made and is writable<br>";
-					break;
-
-				case -1:
-					echo "Error, ".$dir." exists but isn't writable, please check the permission<br>";
-					$result=FALSE;
-					break;
-
-				case -2:
-					echo "Error, ".$dir." can't be created, please check the permission of its parent<br>";
-					$result=FALSE;
-					break;	
-			}
+			$cdp_message="";
+			$result= $result && check_directory_permission($dir, $cdp_message);
+			echo $cdp_message;
 		}
 
 		if(!$result)
@@ -125,26 +110,4 @@ class AE_Setup extends CI_Controller {
 
 		return;
 	}
-
-	//returns 2=> exists and writable
-	//returns 1=> made and writable
-	//returns -1=> exists and not writable
-	//returns -2=> doesn't not exist and can't be made
-
-	private function make_dir_and_check_permission($dir)
-	{
-		if(file_exists($dir))
-		{
-			if(is_writable($dir))
-				return 2;
-			else
-				return -1;
-		}
-		else
-			if(!@mkdir($dir,0777))
-				return -2;
-			
-		return 1;
-	}
-
 }
