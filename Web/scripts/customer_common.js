@@ -112,7 +112,7 @@ function lazyLoader()
 
     el=$(images[imageIndex]);
     url=el.data('ll-url');
-    url=url.replace(/https?\:\/\//g,'//'););
+    url=url.replace(/https?\:\/\//g,'//');
 
     $.get(url, function()
     {
