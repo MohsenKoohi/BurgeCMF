@@ -15,6 +15,7 @@
 * Each module can define a cron method, which is called by the cron job periodically
 * Footer link manager to mange which items be shown in the footer
 * Comments for posts
+* 2d logging system, which provides logging of different events for different modules whithout implementing specific logging 
 
 ## Installation
 Review Web/install.md
