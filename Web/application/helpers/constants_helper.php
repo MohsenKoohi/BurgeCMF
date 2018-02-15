@@ -73,6 +73,7 @@ define ('ADMIN_SURL_LANG' ,HOME_SURL_LANG."/".ADMIN_URL_FOLDER);
 define ('HOME_DIR',getcwd());
 
 define ('LOG_DIR',HOME_DIR."/application/logs/burge_cmf");
+define ('LOG_2D_PARENT_DIR',HOME_DIR."/application/logs");
 define ('LOGS_PREFIX','bcmf-log-');
 
 define ('COOKIE_PREFIX','sMDFJrwfs8923fda');

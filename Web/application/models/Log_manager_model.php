@@ -82,6 +82,10 @@ class Log_manager_model extends CI_Model
 
 	);
 
+	// 2d logging constants
+	private $log_2d_major_ids=array();
+	private $log_2d_file_extension = 'txt';
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -197,8 +201,7 @@ class Log_manager_model extends CI_Model
    {
    	$CI=&get_instance();
      	$event_props=array(
-      	"ip"			=> $_SERVER['REMOTE_ADDR']
-      	,"url"		=> $CI->uri->uri_string
+      	"url"		=> $CI->uri->uri_string
       );
       if(isset($_SERVER['HTTP_USER_AGENT']))
       	$event_props["user_agent"]=$_SERVER['HTTP_USER_AGENT'];
@@ -214,12 +217,20 @@ class Log_manager_model extends CI_Model
 	{
 		$this->load->helper("init");
 		$cdp_message="";
-		$result=check_directory_permission(LOG_DIR, $cdp_message);
-		echo $cdp_message;
-		if(!$result)
+
+		$dirs=array(LOG_DIR);
+		foreach($this->log_2d_major_ids as $mid)
+			$dirs[]=LOG_2D_PARENT_DIR."/".$mid;
+
+		foreach($dirs as $dir)
 		{
-			echo "<h2>Please check the errors, and try again.";
-			exit;
+			$result=check_directory_permission($dir, $cdp_message);
+			echo $cdp_message;
+			if(!$result)
+			{
+				echo "<h2>Please check the errors, and try again.";
+				exit;
+			}
 		}
 
 		$this->load->model("module_manager_model");
@@ -306,6 +317,7 @@ class Log_manager_model extends CI_Model
 		if(!isset($this->event_types[$event_type]))
 			$event_type="UNKOWN";
 
+		$context["ip"]=$this->input->ip_address();      	
 		$context["event_name"]=$message;
 		$context["event_id"]=$this->event_types[$event_type];
 
@@ -325,4 +337,154 @@ class Log_manager_model extends CI_Model
 	{
 		return $this->logger->getVisitorId();
 	}
+
+	////////////////////////////////////////////////////////////////////////////
+	// 2d logging
+
+	//$major_id : the name of module/agent requires log for its events, for example, customer/journal/..
+	//$minor_id : the id of that module/agent member, for example: customer_id/journal_id/...
+	//$log_type_index : type of log as an integer
+	//$desc: a index=>val array to be logged
+
+	//The module which uses log_2d is responsible to manage type_indexes
+	//It's an integer which is used to store and retrieve log
+	public function log_2d($major_id, $minor_id, $log_type_index, $desc)
+	{
+		if(!in_array($major_id, $this->log_2d_major_ids))
+			return FALSE;
+
+		$CI=&get_instance();
+		if(isset($CI->in_admin_env) && $CI->in_admin_env)
+		{
+			$desc["active_user_id"]=$CI->user->get_id();
+			$desc["active_user_code"]=$CI->user->get_code();
+			$desc["active_user_name"]=$CI->user->get_name();
+		}	
+
+		$desc['visitor_ip']=$this->input->ip_address();	
+		$desc['visitor_id']=$this->log_manager_model->get_visitor_id();
+		$ua=$this->input->user_agent();
+		if($ua)
+      	$desc["visitor_user_agent"]=$ua;
+		
+		$log_path=$this->get_log_2d_path($major_id, $minor_id, $log_type_index);
+
+		$string='{"log_type_index":"'.$log_type_index.'"';
+
+		foreach($desc as $index=>$val)
+		{
+			$index=trim($index);
+			$index=preg_replace('/[\\\'\"]+/', "", $index);
+			$index=preg_replace('/\s+/', "_", $index);
+
+			$val=trim($val);
+			$val=preg_replace('/[\\\'\"]+/', "", $val);
+			$val=preg_replace('/\s+/', " ", $val);
+			
+			$string.=',"'.$index.'":"'.$val.'"';
+		}
+		$string.="}";
+
+		file_put_contents($log_path, $string);
+		
+		return;
+	}
+
+	//it returns an array with two index, 'results' which specifies  logs
+	//and total which indicates the total number of logs 
+	public function get_logs_2d($major_id, $minor_id,$filter=array())
+	{
+		if(!in_array($major_id, $this->log_2d_major_ids))
+			return FALSE;
+
+		$dir=$this->get_log_2d_minor_id_directory($major_id, $minor_id);
+		$file_names=scandir($dir, SCANDIR_SORT_DESCENDING);
+
+		$logs=array();
+		$count=-1;
+		$start=0;
+		if(isset($filter['start']))
+			$start=(int)$filter['start'];
+		$length=sizeof($file_names);
+		if(isset($filter['length']))
+			$length=(int)$filter['length'];
+
+		foreach($file_names as $fn)
+		{
+			if(!preg_match("/^log-/", $fn))
+				continue;
+
+			$tmp=explode(".", $fn);
+			list($date_time,$log_type)=explode("#",$tmp[0]);
+			list($date,$time)=explode(",",$date_time);
+			$time=str_replace("-", ":", $time);
+			$date=str_replace(array("log-","-"), array("","/"), $date);
+			$date_time=$date." ".$time;
+
+			//now we have timestamp and log_type of this log
+			//and we can filter logs we don't want here;
+			if(isset($filter['log_types']))
+				if(!in_array($log_type ,$filter['log_types']))
+					continue;
+
+			$count++;
+			if($count < $start)
+				continue;
+			if($count >= ($start+$length))
+				continue;
+
+			//reading log
+			$log=json_decode(file_get_contents($dir."/".$fn), TRUE);
+			if($log)
+				$log['timestamp']=$date_time;
+			$logs[]=$log;
+		}
+
+		$total=$count+1;
+
+		return  array(
+			"results"	=> $logs
+			,"total"		=> $total
+		);
+	}
+
+	private function get_log_2d_path($major_id, $minor_id, $log_type_index)
+	{
+		$dir=$this->get_log_2d_minor_id_directory($major_id, $minor_id);
+		
+		$dtf=DATE_FUNCTION;
+
+		$s=0;
+		do	
+		{
+			$dt=$dtf("Y-m-d,H-i-s",time()+$s);	
+			
+			$ext=$this->log_2d_file_extension;
+			$tp=sprintf("%04d",$log_type_index);
+
+			$log_path=$dir."/log-".$dt."#".$tp.".".$ext;
+			$s+=1;
+		}while(file_exists($log_path));
+		
+		return $log_path;
+	}
+
+	private function get_log_2d_minor_id_directory($major_id, $minor_id)
+	{
+		$dir=LOG_2D_PARENT_DIR."/".$major_id;
+
+		$dir1=(int)($minor_id/1000);
+		$dir2=$minor_id % 1000;
+		
+		$path1=$dir."/".$dir1;
+		if(!file_exists($path1))
+			mkdir($path1,0777);
+
+		$path2=$dir."/".$dir1."/".$dir2;
+		if(!file_exists($path2))
+			mkdir($path2,0777);
+
+		return $path2;
+	}
+
 }

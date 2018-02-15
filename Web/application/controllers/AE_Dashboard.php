@@ -9,7 +9,6 @@ class AE_Dashboard extends Burge_CMF_Controller {
 
 	public function index()
 	{	
-
 		$this->load->model("user_manager_model");
 		$this->load->model("module_manager_model");
 		$user_info=& $this->user_manager_model->get_user_info();
