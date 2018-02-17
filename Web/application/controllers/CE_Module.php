@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class CE_Module extends Burge_CMF_Controller {
-	protected $hit_level=1;
+	protected $hit_level=-1;
 
 	private $input_pass_hash = "LKJADS(uadsf";
 	private $cron_max_execution_time = 120; 		//in seconds
