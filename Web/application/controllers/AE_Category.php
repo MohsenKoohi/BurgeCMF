@@ -34,7 +34,7 @@ class AE_Category extends Burge_CMF_Controller {
 	{
 		$this->category_manager_model->organize();
 
-		set_message($this->lang->line("categoies_organized_successfully"));
+		set_message($this->lang->line("categories_organized_successfully"));
 
 		return redirect(get_link("admin_category"));
 	}
