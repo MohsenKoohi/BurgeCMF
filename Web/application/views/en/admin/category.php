@@ -13,7 +13,7 @@
 			</div>
 		</div>
 		<br><br>
-		<?php if(sizeof($categories)>1){ ?>
+		<?php if(sizeof($categories)>=1){ ?>
 			<div class="container category-list">
 				<div class="row" >
 					<?php 
