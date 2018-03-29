@@ -1,3 +1,7 @@
+#RewriteCond %{HTTP_HOST} .
+#RewriteCond %{HTTP_HOST} ^www\. [NC]
+#RewriteRule ^ http%{ENV:protossl}://burge\.pro%{REQUEST_URI} [QSA,L,R=301]
+
 ExpiresActive On
 ExpiresByType image/gif "access plus 1 months"
 ExpiresByType image/jpg "access plus 1 months"
@@ -18,8 +22,11 @@ ExpiresByType video/mp4 "access plus 1 months"
 
 #ExpiresDefault "access plus 1 days"
 
+DirectoryIndex index.php
+
 Options -Indexes 
 
 RewriteEngine on
 RewriteCond $1 !^(index\.php|images|scripts|styles|upload|robots\.txt)
-RewriteRule ^(.*)$ index.php/$1 [L]
+RewriteRule ^(.*)$ index.php?/$1 [L,QSA]
+
