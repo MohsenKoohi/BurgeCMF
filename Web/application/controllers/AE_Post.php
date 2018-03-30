@@ -356,18 +356,20 @@ class AE_Post extends Burge_CMF_Controller {
 		$deleted_comment_ids=$this->input->post("deleted_comment_ids");
 		$texts=$this->input->post("pcom_text");
 		$statuses=$this->input->post("pcom_status");
-		foreach($this->input->post("pcom_ids") as $pcom_id)
-		{
 
-			if($deleted_comment_ids && in_array($pcom_id, $deleted_comment_ids))
-				continue;
+		if($this->input->post("pcom_ids"))
+			foreach($this->input->post("pcom_ids") as $pcom_id)
+			{
 
-			$comment_updates[]=array(
-				"pcom_id"			=> $pcom_id
-				,"pcom_status"		=> $statuses[$pcom_id]
-				,"pcom_text"		=> $texts[$pcom_id]
-			);
-		}
+				if($deleted_comment_ids && in_array($pcom_id, $deleted_comment_ids))
+					continue;
+
+				$comment_updates[]=array(
+					"pcom_id"			=> $pcom_id
+					,"pcom_status"		=> $statuses[$pcom_id]
+					,"pcom_text"		=> $texts[$pcom_id]
+				);
+			}
 
 		$this->post_manager_model->update_comments($comment_updates, $deleted_comment_ids);
 			
