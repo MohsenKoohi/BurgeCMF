@@ -40,6 +40,29 @@ $(window).load(function()
   changeGraphicalCheckBoxes();
 
   lazyLoader();
+
+  //Google Analytics
+  var loc=document.location.pathname;
+  if(0)
+    if(
+      (loc == '/')
+      || loc.startsWith("/post-")
+      || loc.startsWith("/product-")
+      || loc.startsWith("/category-")
+      || loc.startsWith("/pcategory-")
+    )
+      setTimeout(function(){
+        $(document.body).append($("<script src='https://www.googletagmanager.com/gtag/js?id=GAID'></script>"));
+        setTimeout(function()
+        {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'GAID');
+        },3000);
+
+      },5000);
+
 });
 
 function changeGraphicalCheckBoxes()
