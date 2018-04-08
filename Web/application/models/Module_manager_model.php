@@ -71,10 +71,10 @@ class Module_manager_model extends CI_Model
 	public function get_cron_modules()
 	{
 		return $this->db
-			->select("*, ADDTIME( cron_last_execution , CONCAT('0 00:',cron_period,':00')) as eet")
+			->select("*, ADDTIME( cron_last_execution , SEC_TO_TIME(60*cron_period) ) as eet")
 			->from("module")
 			->where("cron_period > 0")
-			->where(" ( ISNULL (cron_last_execution) OR  ADDTIME( cron_last_execution , CONCAT('0 00:',cron_period,':00') ) < NOW() ) ",NULL,FALSE)
+			->where(" ( ISNULL (cron_last_execution) OR  ADDTIME( cron_last_execution , SEC_TO_TIME(60*cron_period) ) < NOW() ) ",NULL,FALSE)
 			->order_by("cron_priority DESC")
 			->get()
 			->result_array();
