@@ -754,7 +754,8 @@ div.results-count {
     margin: 5px 5px 0px 5px; }
     .tab-container .tabs li {
       list-style: none;
-      display: inline; }
+      display: inline-block;
+      margin-top: 5px; }
     .tab-container .tabs a {
       font-weight: bold;
       font-size: 1.2em;
