@@ -20,6 +20,7 @@ class AE_Footer_Link extends Burge_CMF_Controller {
 
 		$this->data['message']=get_message();
 		$this->data['links']=$this->footer_link_manager_model->get_links();
+		$this->data['page_link']=get_link("admin_footer_link");
 
 		$this->data['raw_page_url']=get_link("admin_footer_link");
 		$this->data['lang_pages']=get_lang_pages(get_link("admin_footer_link",TRUE));
@@ -32,14 +33,20 @@ class AE_Footer_Link extends Burge_CMF_Controller {
 
 	private function set_footer()
 	{
+		$all_lang_flinks=$this->footer_link_manager_model->get_links();
 		foreach($this->language->get_languages() as $lang_id => $lang_name)
 		{
+			if(!isset($all_lang_flinks[$lang_id]))
+				continue;
+
+			$links=$all_lang_flinks[$lang_id];
+
 			$footer_view_file=HOME_DIR."/application/views/".$lang_id."/customer/footer_tpl.php";
 			if(!file_exists($footer_view_file))
 				continue;
 
 			$content=file_get_contents($footer_view_file);
-			$links=$this->footer_link_manager_model->get_links($lang_id);
+			
 			$footer_part=$this->create_footer_part($links);
 			$content=str_replace("{footer_template_place}", $footer_part, $content);
 
@@ -86,6 +93,7 @@ class AE_Footer_Link extends Burge_CMF_Controller {
 			foreach($links as $id => $l)
 				$ins[]=array(
 					'fl_id'				=> $id
+					,'fl_lang_id'		=> $l['lang_id']
 					,'fl_parent_id'	=> $l['parent_id']
 					,'fl_title'			=> $l['title']
 					,'fl_link'			=> $l['link']

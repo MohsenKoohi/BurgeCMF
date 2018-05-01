@@ -16,6 +16,7 @@ class Footer_link_manager_model extends CI_Model
 		$this->db->query(
 			"CREATE TABLE IF NOT EXISTS $tbl (
 				`fl_id` INT  NOT NULL AUTO_INCREMENT
+				,`fl_lang_id` CHAR(2)
 				,`fl_parent_id` INT
 				,`fl_title` VARCHAR(511)
 				,`fl_link` VARCHAR(2047)
@@ -42,7 +43,7 @@ class Footer_link_manager_model extends CI_Model
 			->select("*")
 			->from($this->footer_link_table_name);
 
-		if(0 && $lang_id)
+		if($lang_id)
 			$this->db->where("fl_lang_id", $lang_id);
 
 		$result=$this->db
@@ -53,31 +54,30 @@ class Footer_link_manager_model extends CI_Model
 		$ret=array();
 		foreach($result as $r)
 		{
+			$lang_id=$r['fl_lang_id'];
+			if(!isset($ret[$lang_id]))
+				$ret[$lang_id]=array();
+
 			$parent_id=$r['fl_parent_id'];
-			if(!isset($ret[$parent_id]))
-				$ret[$parent_id]=array(
+			if(!isset($ret[$lang_id][$parent_id]))
+				$ret[$lang_id][$parent_id]=array(
 					'title'			=> ''
 					,'link'			=> ''
 					,'children'		=> array()
 				);
-			$parent_node=&$ret[$parent_id];
+			$parent_node=&$ret[$lang_id][$parent_id];
 
 			$id=$r['fl_id'];
-			if(!isset($ret[$id]))
-				$ret[$id]=array(
-					'title'			=> ''
-					,'link'			=> ''
-					,'children'		=> array()
-				);
-			$node=&$ret[$id];
+			$ret[$lang_id][$id]=array(
+				'title'			=> $r['fl_title']
+				,'link'			=> $r['fl_link']
+				,'children'		=> array()
+			);
 
-			$node['title']=$r['fl_title'];
-			$node['link']=$r['fl_link'];
-			$parent_node['children'][$id]=&$node;
-
+			$parent_node['children'][$id]=&$ret[$lang_id][$id];
 		}
 
-		//bprint_r($ret);exit
+		//bprint_r($ret);exit;
 
 		return $ret;
 	}
