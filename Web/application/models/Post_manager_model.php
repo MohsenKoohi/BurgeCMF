@@ -40,7 +40,7 @@ class Post_manager_model extends CI_Model
 		$this->db->query(
 			"CREATE TABLE IF NOT EXISTS $post_table (
 				`post_id` INT  NOT NULL AUTO_INCREMENT
-				,`post_date` DATETIME  
+				,`post_date` CHAR(20)  
 				,`post_creator_uid` INT NOT NULL DEFAULT 0
 				,`post_active` TINYINT NOT NULL DEFAULT 0
 				,`post_allow_comment` TINYINT NOT NULL DEFAULT 0
