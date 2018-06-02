@@ -1032,9 +1032,21 @@ function burge_cmf_send_mail($receiver,$subject,$message)
 
 function j2gdate($g)
 {
+	$g=str_replace("-","/",$g);
 	list($d,$t)=explode(" ", $g);
 	list($y,$m,$d)=explode("/", $d);
 	list($y, $m, $d)=jalali_to_gregorian($y, $m, $d);
 
 	return sprintf("%s/%02d/%02d ", $y, $m, $d).$t;
+}
+
+function g2jdate($g)
+{
+	$g=str_replace("-","/",$g);
+	list($d,$t)=explode(" ", $g);
+	list($y,$m,$d)=explode("/", $d);
+	list($y, $m, $d)=gregorian_to_jalali($y, $m, $d);
+
+	return sprintf("%s/%02d/%02d ", $y, $m, $d).$t;
+
 }
