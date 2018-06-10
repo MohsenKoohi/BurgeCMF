@@ -32,11 +32,14 @@
         $langs=array_keys($lang_pages);
         $lang=$langs[0];
         echo '<link rel="alternate" hreflang="x-default" href="'.$lang_pages[$lang]['link'].'" />'."\n";
+
       }
     }
   ?>
 
   <link rel="shortcut icon" href="{images_url}/favicon.png"/> 
+  <link rel="apple-touch-icon-precomposed" sizes="64x64" href="{images_url}/favicon.png" />
+  <link rel="apple-touch-icon" sizes="64x64" href="{images_url}/favicon.png" />
 
   <link rel="stylesheet" type="text/css" href="{styles_url}/skeleton.css" /> 
   <link rel="stylesheet" type="text/css" href="{styles_url}/style-ltr.css" />   

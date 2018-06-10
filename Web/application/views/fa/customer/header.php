@@ -37,6 +37,9 @@
   ?>
 
 	<link rel="shortcut icon" href="{images_url}/favicon.png"/> 
+  <link rel="apple-touch-icon-precomposed" sizes="64x64" href="{images_url}/favicon.png" />
+  <link rel="apple-touch-icon" sizes="64x64" href="{images_url}/favicon.png" />
+
 
   <link rel="stylesheet" type="text/css" href="{styles_url}/skeleton.css" />  
   <link rel="stylesheet" type="text/css" href="{styles_url}/style-rtl.css" />  
