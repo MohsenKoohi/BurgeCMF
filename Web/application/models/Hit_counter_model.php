@@ -134,9 +134,18 @@ class Hit_counter_model extends CI_Model
 		$data['total_text']=$CI->lang->line("total_visit");
 
 		$counts=$this->get_all_counts();
-		$data['total_count']=$counts[0]['total_count'];
-		$data['year_count']=$counts[0]['year_count'];
-		$data['month_count']=$counts[0]['month_count'];
+		if($counts)
+		{
+			$data['total_count']=$counts[0]['total_count'];
+			$data['year_count']=$counts[0]['year_count'];
+			$data['month_count']=$counts[0]['month_count'];
+		}
+		else
+		{
+			$data['total_count']=0;
+			$data['year_count']=0;
+			$data['month_count']=0;	
+		}
 		
 		$CI->load->library('parser');
 		$ret=$CI->parser->parse($CI->get_admin_view_file("hit_counter_dashboard"),$data,TRUE);
